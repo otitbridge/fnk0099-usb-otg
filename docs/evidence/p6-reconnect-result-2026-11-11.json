@@ -1,0 +1,46 @@
+{
+  "date_jst": "2026-11-11",
+  "result": "functional_pass_3_of_3",
+  "firmware_reference": "p5-fix-firmware-2026-11-11.json",
+  "trials": [
+    {
+      "address": 3,
+      "result": "passed",
+      "report_masks": [
+        "000",
+        "080",
+        "000",
+        "001",
+        "000"
+      ]
+    },
+    {
+      "address": 4,
+      "result": "passed",
+      "report_masks": [
+        "000",
+        "080",
+        "000",
+        "001",
+        "000"
+      ]
+    },
+    {
+      "address": 5,
+      "result": "passed",
+      "report_masks": [
+        "000",
+        "080",
+        "000",
+        "001",
+        "000"
+      ]
+    }
+  ],
+  "connected_free_heap_bytes": 360668,
+  "observed_limitations": [
+    "EP command error at unplug persists",
+    "One unplug also logged Enqueue URB error and invalid_report; mask remained zero; subsequent reconnect/input succeeded"
+  ],
+  "pending": "Host restart repeatability"
+}

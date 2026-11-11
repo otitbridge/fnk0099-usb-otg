@@ -1,0 +1,34 @@
+{
+  "date_jst": "2026-11-11",
+  "phase": "P3",
+  "result": "passed",
+  "base_commit": "9cb49b4",
+  "source_state": "uncommitted P3 implementation; source hashes below",
+  "firmware_sha256": "2f330ba53da9d0e545a8cd98b527ce67da84f36bd4f532234aa707836dd10ef4",
+  "firmware_bytes": 269664,
+  "observed": {
+    "vid_pid": "1209:D004",
+    "speed": "low",
+    "keyboard_interface": 1,
+    "keyboard_endpoint": "0x82",
+    "transfer_type": "interrupt IN",
+    "max_packet_size": 8,
+    "interval_ms": 10,
+    "set_protocol_boot": "ESP_OK",
+    "set_idle_0": "ESP_OK",
+    "keyboard_start": "ESP_OK",
+    "initial_raw_report": "00 00 00 00 00 00 00 00",
+    "initial_mask": "0x000"
+  },
+  "host_tests": "12 mappings, simultaneous input, partial/full release, malformed reports passed",
+  "pending": "P4 physical 12-button test and P5 hold/disconnect tests",
+  "source_sha256": {
+    "src/main.c": "7d38b886db5ae6668bfb2c6fb38784143c6f1bf8f265a490984e1e1d999ee8e3",
+    "src/sfc_report.h": "2e9042b05b70d4268dc879c16017177cc413f96415ee38e57a07b80cbfefe140",
+    "src/CMakeLists.txt": "e1b33960bfac73b3498cc0aff879a1c4083e39b24780a4c2abc050c0dc85c636",
+    "src/idf_component.yml": "c63fe5b3b4d40756d534f51f6464b607aef8529119cc9cf348dcf916b5eef73d",
+    "platformio.ini": "41a276ffbaba84e492e7bb64410e84d9431b7587e071dc8fbc1d939e9e328dfd",
+    "sdkconfig.defaults": "16d6d3b4ed9d7fb659e0b94252746b18098d0f2a006fc8777ca7a31931e526f8",
+    "dependencies.lock": "5d98a6037d7a9661339ef2f3b98130e74aeb15514018794aef745b3df5cab06b"
+  }
+}

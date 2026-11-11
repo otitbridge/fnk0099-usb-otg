@@ -1,0 +1,6 @@
+{
+  "result": "disconnect mask clearing passed; reconnect failed",
+  "observed": "mask 0x080 -> 0 at disconnect; driver invalid handle/close errors; no subsequent enumeration or button events",
+  "cause_analysis": "usb_host_hid 1.0.1 disconnect loop expects interface removal within callback; application deferred close to input task, allowing driver loop to close/remove interface first. Fix candidate: close synchronously in disconnected callback, queue only state reset notification.",
+  "firmware_reference": "p3-result-2026-11-11.json"
+}

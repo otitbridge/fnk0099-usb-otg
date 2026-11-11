@@ -1,0 +1,101 @@
+{
+  "date_jst": "2026-11-11",
+  "phase": "P4",
+  "result": "passed",
+  "firmware_reference": "p3-result-2026-11-11.json",
+  "user_report": "12 buttons completed",
+  "observed": "All 12 expected single-button masks in order, each followed by zero; raw usages agree.",
+  "buttons": [
+    {
+      "button": "B",
+      "mask": "0x001",
+      "press_ms": 63591,
+      "release_ms": 63871,
+      "duration_ms": 280
+    },
+    {
+      "button": "Y",
+      "mask": "0x002",
+      "press_ms": 64171,
+      "release_ms": 64421,
+      "duration_ms": 250
+    },
+    {
+      "button": "SELECT",
+      "mask": "0x004",
+      "press_ms": 65181,
+      "release_ms": 65471,
+      "duration_ms": 290
+    },
+    {
+      "button": "START",
+      "mask": "0x008",
+      "press_ms": 65851,
+      "release_ms": 66071,
+      "duration_ms": 220
+    },
+    {
+      "button": "UP",
+      "mask": "0x010",
+      "press_ms": 66331,
+      "release_ms": 66571,
+      "duration_ms": 240
+    },
+    {
+      "button": "DOWN",
+      "mask": "0x020",
+      "press_ms": 66891,
+      "release_ms": 67121,
+      "duration_ms": 230
+    },
+    {
+      "button": "LEFT",
+      "mask": "0x040",
+      "press_ms": 67331,
+      "release_ms": 67631,
+      "duration_ms": 300
+    },
+    {
+      "button": "RIGHT",
+      "mask": "0x080",
+      "press_ms": 67881,
+      "release_ms": 68131,
+      "duration_ms": 250
+    },
+    {
+      "button": "A",
+      "mask": "0x100",
+      "press_ms": 68691,
+      "release_ms": 68951,
+      "duration_ms": 260
+    },
+    {
+      "button": "X",
+      "mask": "0x200",
+      "press_ms": 69461,
+      "release_ms": 69721,
+      "duration_ms": 260
+    },
+    {
+      "button": "L",
+      "mask": "0x400",
+      "press_ms": 70681,
+      "release_ms": 70931,
+      "duration_ms": 250
+    },
+    {
+      "button": "R",
+      "mask": "0x800",
+      "press_ms": 71231,
+      "release_ms": 71461,
+      "duration_ms": 230
+    }
+  ],
+  "note": "Observed holds were 220–300 ms, sufficient for single-button identification; long holds not tested here.",
+  "pending": [
+    "P5 long hold",
+    "P5 simultaneous and partial release",
+    "P5 disconnect clearing",
+    "P6 repeatability"
+  ]
+}

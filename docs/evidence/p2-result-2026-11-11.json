@@ -1,0 +1,38 @@
+{
+  "date_jst": "2026-11-11",
+  "phase": "P2",
+  "result": "direct_connection_hid_detection_passed",
+  "firmware_commit": "9cb49b4",
+  "firmware_role": "P1 startup probe; reports HID connections, does not start input",
+  "user_report": {
+    "cable": "AT-PDCASTCC08",
+    "connection": "SFC connected directly to FNK0099 USB-OTG following instructions; UART remains connected to Mac"
+  },
+  "observed": {
+    "usb_address": 1,
+    "interfaces": [
+      {
+        "number": 0,
+        "protocol": 2,
+        "meaning": "mouse"
+      },
+      {
+        "number": 1,
+        "protocol": 1,
+        "meaning": "keyboard"
+      }
+    ],
+    "host_heartbeat_continues_after_connection": true
+  },
+  "interpretation": "Direct connection reached USB enumeration and HID interface detection. No added supply or hub requested/used in test procedure. This is not electrical compliance or VBUS measurement evidence.",
+  "log_note": "Unexpected device is P1 application wording for detected connections, not an enumeration failure.",
+  "not_yet_verified": [
+    "VID/PID",
+    "endpoint descriptors",
+    "HID class requests",
+    "raw keyboard reports",
+    "12 button states",
+    "VBUS voltage and CC circuit"
+  ],
+  "log": "p2-direct-uart-2026-11-11.log"
+}

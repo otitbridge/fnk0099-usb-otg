@@ -1,0 +1,42 @@
+{
+  "date_jst": "2026-11-11",
+  "result": "passed_3_of_3",
+  "firmware_reference": "p5-fix-firmware-2026-11-11.json",
+  "method": "User pressed FNK0099 RESET with both USB connections retained and buttons released",
+  "trials": [
+    {
+      "trial": 1,
+      "result": "passed",
+      "report_masks": [
+        "000",
+        "080",
+        "000",
+        "001",
+        "000"
+      ]
+    },
+    {
+      "trial": 2,
+      "result": "passed",
+      "report_masks": [
+        "000",
+        "080",
+        "000",
+        "001",
+        "000"
+      ]
+    },
+    {
+      "trial": 3,
+      "result": "passed",
+      "report_masks": [
+        "000",
+        "080",
+        "000",
+        "001",
+        "000"
+      ]
+    }
+  ],
+  "limitations": "RESET tested, not cold power cycle. EP/URB unplug diagnostics remain unresolved."
+}

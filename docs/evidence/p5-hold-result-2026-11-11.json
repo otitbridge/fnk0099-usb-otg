@@ -1,0 +1,19 @@
+{
+  "date_jst": "2026-11-11",
+  "phase": "P5 hold and partial release",
+  "result": "passed",
+  "firmware_reference": "p3-result-2026-11-11.json",
+  "observed_durations": {
+    "left_ms": 32810,
+    "right_ms": 36090,
+    "right_y_b_ms": 5180,
+    "right_y_after_b_release_ms": 6770
+  },
+  "acceptance": "Left/right each at least 30 seconds; no intervening release or diagonal reports; right+Y persists after B release; final zero.",
+  "note": "35 seconds was the operation target; left measured 32.81 seconds and satisfies the 30-second acceptance threshold. Identical reports are suppressed; durations are state-transition intervals.",
+  "pending": [
+    "disconnect clearing",
+    "reconnection",
+    "P6 repeatability"
+  ]
+}

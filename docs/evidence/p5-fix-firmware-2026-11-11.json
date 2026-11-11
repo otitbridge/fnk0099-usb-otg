@@ -1,0 +1,6 @@
+{
+  "status": "uploaded, initial enumeration and zero report passed; disconnect retry pending",
+  "firmware_sha256": "64f86eb6d0d5f073731303a982c96c2b1ba6ba6d2234d290d93e9e4024949d66",
+  "main_sha256": "176c80730fbaf6a9cdefd48a33fd2ed1d77a07c3b6759ae36d74875cd33bdec6",
+  "fix": "Close HID interface inside disconnect callback before returning to usb_host_hid 1.0.1; queue application state-clear notification only."
+}

@@ -1,0 +1,16 @@
+{
+  "result": "functional_pass",
+  "firmware_reference": "p5-fix-firmware-2026-11-11.json",
+  "observed": {
+    "right_hold_before_disconnect_ms": 3850,
+    "disconnect_clears_mask": true,
+    "interface_close": "ESP_OK",
+    "reconnected_address": 2,
+    "right_press_release": true,
+    "b_press_release": true,
+    "final_mask": "0x000",
+    "connected_free_heap_before_after": 360668
+  },
+  "remaining_log_message": "USB HOST: EP command error: ESP_ERR_INVALID_STATE at physical disconnect; still present. Cause not established; did not prevent cleanup/re-enumeration/input in this trial.",
+  "pending": "P6 repeated reconnect and host restart"
+}
