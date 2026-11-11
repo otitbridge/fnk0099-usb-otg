@@ -1,98 +1,60 @@
-# FNK0099 USB Host検証
+# FNK0099 USB Host — SFCコントローラー入力
 
-Freenove FNK0099（ESP32-S3-WROOM Board Lite）から、UIAPduino内蔵SFCコントローラーをUSB HIDキーボードとして読み取る独立プロジェクトです。
+Freenove FNK0099（ESP32-S3-WROOM Board Lite）で、[UIAPduino内蔵SFCコントローラー](https://github.com/otitbridge/snes-controller-uiapduino)のUSB HIDキーボード入力を受信し、12ボタンの状態をUARTへ出力するファームウェアです。
 
-**P1：Host単体起動確認は実機で合格しました（2026-11-11）。** [結果](docs/evidence/p1-result-2026-11-11.json)・[UARTログ](docs/evidence/p1-uart-2026-11-11.log)を保存しています。40秒の記録中に35秒間隔分の稼働ログを確認し、再起動・panic・watchdogは観測されませんでした。
+既設USB-OTG端子へのUSB-C直結で動作確認済みです。追加給電・USBハブ・基板改造は使用していません。エミュレーターや無線送信機能は含みません。
 
-現在の実装は **P3/P4：記述子照合・キーボード受信** です。1209:D004のキーボードIF1だけを開始し、8バイトレポートを12ボタンのマスクへ変換します。同一レポートの繰り返し出力は省略し、切断・受信エラー時はマスクを全解放します。無変化時間だけでキーを解放する処理はありません。
+## 接続構成
 
-## 構成と確認状況
-
-| 項目 | 根拠・状態 |
-|---|---|
-| FNK0099 Rev 1.1、N16R8 | ユーザーが実物表記を確認 |
-| ESP32-S3、16MB Flash、8MB PSRAM | esptoolによる実機照合済み。チップrevision v0.2は基板Revとは別 |
-| Mac接続 | USB-UARTのみ。115200 baudで起動ログ受信済み |
-| OTG | AT-PDCASTCC08でSFCを直結。USBアドレス1にマウスIF0・キーボードIF1を検出 |
-| C-C直結 | P2でUSB列挙・HIDインターフェース検出に成功。VBUS電圧・CC回路は未測定・未確認 |
-| PSRAM | P1では使用しない |
-
-## ビルド・書き込み
-
-PlatformIO Coreを用います。プラットフォーム6.12.0、ESP-IDF 5.5.0、HIDドライバー1.0.1を固定しています。引き継ぎ書で参照したESP-IDF公式例は5.5.2ですが、既存PlatformIOとの対応を優先して5.5.0で検証します。
-
-```sh
-pio run -e fnk0099-host
-pio device list
-pio run -e fnk0099-host -t upload --upload-port <USB-UARTポート>
-pio device monitor --port <USB-UARTポート> --baud 115200
+```mermaid
+flowchart LR
+    PC["Mac / 開発・ログ用PC"] -->|"USB-UART：給電・書き込み・ログ"| HOST["FNK0099 / USB Host"]
+    HOST -->|"USB-OTG：USB-C直結"| PAD["UIAPduino内蔵SFCコントローラー"]
 ```
 
-`esp32-s3-devkitc-1`はビルド用の汎用定義として使い、Flash容量を16MBに上書きします。FNK0099と同じ基板という意味ではありません。USBコンソールは使わずUART0を使用します。
+| 必要なもの | 動作確認した構成 |
+|---|---|
+| Hostボード | FNK0099 Rev 1.1、N16R8（16MB Flash / 8MB PSRAM） |
+| コントローラー | UIAPduino V1.4、USBキーボード版 v1.0.0（SELECT→Tab） |
+| OTG側ケーブル | AT-PDCASTCC08、コントローラーに内蔵 |
+| 開発環境 | Mac、PlatformIO Core、USB-UART通信ケーブル |
 
-P1の合格条件は `usb_host_install: ESP_OK`、`hid_host_install: ESP_OK; HOST_READY` と、30秒以上の継続した `alive` 出力です。再起動ループ・panic・watchdogがないことも確認します。
+PSRAMは現行ファームでは使用しません。別の基板Rev・ケーブル・OSでの動作は個別に確認してください。
 
-## P2：直結確認
+## 使い方
 
-2026-11-11、ユーザーがAT-PDCASTCC08でSFCコントローラーを既設OTGへ直結し、UARTでマウスIF0（protocol=2）・キーボードIF1（protocol=1）の検出と、その後のHost稼働継続を確認しました。[結果](docs/evidence/p2-result-2026-11-11.json)・[UARTログ](docs/evidence/p2-direct-uart-2026-11-11.log)。
+1. FNK0099の**USB-UART端子**を開発PCにつなぎます。
+2. [ビルド・書き込み手順](docs/build.md)に従ってファームを書き込み、115200 baudでUARTを開きます。
+3. SFCの全ボタンを離し、ケーブルをFNK0099の**USB-OTG端子**へ直接接続します。
+4. `1209:d004`、`keyboard start: ESP_OK`、`SFC mask` のログを確認します。
 
-ログの `Unexpected device` はP1実装が機器接続を通知する文言で、列挙失敗を示しません。このP2時点ではVID/PIDやエンドポイント照合、入力受信は未実施でした。
+次は右＋BからBだけを離した場合の出力形式例です。時刻と他のログは省略しています。
 
-## P3：記述子・初期レポート
+```text
+RAW: 00 00 1d 4f 00 00 00 00
+SFC mask=0x081 changed=0x081 reason=report
+RAW: 00 00 4f 00 00 00 00 00
+SFC mask=0x080 changed=0x001 reason=report
+```
 
-2026-11-11、VID:PID=1209:D004、Low-Speed、キーボードIF1・EP82（Interrupt IN、8バイト、10ms）を実機で照合しました。SET_PROTOCOL(BOOT)・SET_IDLE(0)・受信開始はすべてESP_OKで、全解放の8バイトレポートを受信しました。[結果](docs/evidence/p3-result-2026-11-11.json)・[ログ](docs/evidence/p3-enumeration-2026-11-11.log)。
+マスクのbit 0〜11は **B・Y・SELECT・START・上・下・左・右・A・X・L・R** に対応し、押下中が1です。`changed` は前回との差分（XOR）です。同一レポートの繰り返し出力は省略します。
 
-ホスト上の変換テストは `cc -Wall -Wextra -Werror tests/test_report.c -o /tmp/fnk-report-test` でビルドし、生成したテストを実行できます。12ボタン対応、同時入力、部分・全解放、不正レポートを検査します。これは実機ボタン試験とは区別します。
+## 確認済みの動作と制約
 
-## P4：12ボタン単独入力
+12ボタン、左右30秒以上の保持、3入力同時押しと部分解放、切断時の全解放、再接続3回、RESET再起動3回を確認済みです。給電を切って戻す試験とHost側USB-Cの反転も確認しています。詳細な条件は[検証結果](docs/validation.md)をご覧ください。
 
-全12ボタンを指定順に識別し、各押下後に全解放へ戻ることをUARTで確認しました。実測押下時間は220〜300msで、長押し試験とは区別します。[結果](docs/evidence/p4-result-2026-11-11.json)・[ログ](docs/evidence/p4-buttons-2026-11-11.log)。
+- 受信対象は `1209:D004` のキーボードIF1です。汎用ゲームパッド用ではありません。
+- 元のキーボード版は最大6入力です。送られていない7個目以降の入力は復元できません。
+- 抜去時のEP／URBログは**軽微（暫定）**。原因未確定ですが、修正後の試験では再接続・入力復帰を確認しています。
+- **30分連続稼働試験は保留・未完了**です。
 
-## P5：長押し・部分解放
+[既知の制約・問題の切り分け](docs/known-issues.md)に、未確認項目と重要度を見直す条件をまとめています。
 
-左32.81秒、右36.09秒の保持と解放を確認しました（合格基準は各30秒以上）。右＋Y＋Bを5.18秒保持し、Bだけ離した後も右＋Yが6.77秒継続、最後に全解放へ戻りました。[結果](docs/evidence/p5-hold-result-2026-11-11.json)・[ログ](docs/evidence/p5-hold-2026-11-11.log)。
+## 関連資料
 
-初回の切断試験ではマスクの全解放は成功しましたが、HID後処理エラーにより再接続を認識できませんでした。[失敗記録](docs/evidence/p5-disconnect-failed-2026-11-11.json)。切断コールバック内でインターフェースを閉じるよう修正し、書き込みと初期認識を確認済みです。修正後の再試験では、切断時の全解放、インターフェースclose=ESP_OK、再列挙、右・Bの押下と解放に成功しました。[再試験結果](docs/evidence/p5-disconnect-retry-2026-11-11.json)。抜去時の `EP command error: ESP_ERR_INVALID_STATE` は残っていますが、この試験では復帰を妨げませんでした。発生原因は未確定として記録します。
-
-## P6：再接続の繰り返し
-
-全解放での抜き差し3回すべてで、再認識・右とBの押下と解放に成功しました。接続中の空きヒープは各回360,668バイトでした。[結果](docs/evidence/p6-reconnect-result-2026-11-11.json)。抜去時のEPエラーは継続し、1回はURBエラーと不正レポートのログも出ましたが、マスクは0のまま、次の接続・入力は成功しました。
-
-## P6：Host再起動と確認範囲
-
-P6のRESET再起動3回はすべて成功しました。毎回Host初期化・SFC再認識・右とBの押下と解放を確認し、この3回にはエラーログはありません。[結果](docs/evidence/p6-restart-result-2026-11-11.json)・[ログ](docs/evidence/p6-restart-2026-11-11.log)。
-
-今回のP1〜P6の実施した機能試験は成功しました。切断処理修正後の最終版でも、12ボタン・長押し・同時押しの回帰試験を完了しました（詳細は以下）。抜去時のEP／URB診断ログの原因は未確定です。USB-C両端の全組合せ・長時間耐久・接続時のボタン保持・電圧測定は未確認です。
-
-## 修正版の回帰確認
-
-コミット `6cca133` の実装と一致する書き込み済みファームで、12ボタンすべての押下・解放、左56.34秒・右30.55秒の保持、右＋Y＋Bを5.38秒、B解放後の右＋Yを3.06秒、最後の全解放を確認しました。左の初回28.73秒は基準未達として残し、再試験で30秒以上を確認しています。回帰試験中にエラーログはありませんでした。[結果](docs/evidence/regression-final-2026-11-11.json)・[ログ](docs/evidence/regression-final-2026-11-11.log)。
-
-## 電源断後の復帰
-
-SFCのOTG接続を保持し、USB-UARTの給電を抜いて戻す試験1回で、Host起動・SFC再認識・右とBの押下と解放に成功しました。UARTの消失から再オープンまで約13.98秒でした。[結果](docs/evidence/cold-start-2026-11-11.json)・[ログ](docs/evidence/cold-start-2026-11-11.log)。電圧は未測定で、UART再オープン時のリセット線の影響も分離していないため、この記録環境での復帰確認として扱います。
-
-## USB-Cプラグの向き
-
-AT-PDCASTCC08のFNK0099側プラグを180度反転しても、SFC再認識・右とBの押下と解放に成功しました。内部側プラグの向きは固定のため、確認範囲はHost側の両向きです。[結果](docs/evidence/usb-c-orientation-2026-11-11.json)・[ログ](docs/evidence/usb-c-orientation-2026-11-11.log)。
-
-## 30分連続稼働試験（保留）
-
-ユーザーの意向により保留しました。記録は停止済みで、合格・完了には数えません。[保留記録](docs/evidence/endurance-deferred-2026-11-11.json)。再開時は新たに30分以上の記録を取得します。
-
-## 残るEP／URBログの重要度
-
-**軽微（暫定）** と評価します。修正後に残るログはUSB抜去時に観測され、切断時の全解放、再接続3回、RESET再起動3回で操作復帰を確認しています。修正後の試験では入力残留・クラッシュ・復帰不能は確認していません。原因が解明済み、または無害と保証されたという意味ではありません。
-
-修正前の「再接続できない問題」は重大な機能不具合として区別します。通常接続中にもログが発生する、入力停止・入力残留・クラッシュ・復帰不能を伴う場合は、重大へ評価を見直します。
-
-電源やCCを原因と決めつけず、Host起動→デバイス起動→列挙→クラス要求→入力受信の順で切り分けます。既存UIAPduinoプロジェクトは変更しません。
-
-## 根拠資料
-
-- [検証計画・引き継ぎ書](FNK0099_USB_Host_Handoff_v02_retry.md)
-- [Freenove FNK0099公式資料](https://docs.freenove.com/projects/fnk0099/en/latest/)
-- [ESP-IDF公式HID Host例（v5.5.2）](https://github.com/espressif/esp-idf/tree/v5.5.2/examples/peripherals/usb/host/hid)
-- [ESP-IDF 5.5 USB Host API](https://docs.espressif.com/projects/esp-idf/en/v5.5/esp32s3/api-reference/peripherals/usb_host.html)
-
-引き継ぎ書のケーブル表記「セリア、AT-PDCASTCC08」は既存資料の型番情報と混在しています。AT-PDCASTCC08とセリアEM-69Aは区別し、今回のP2ではAT-PDCASTCC08を使用したとユーザーが確認しました。
+- [ビルド・書き込み・ログ取得](docs/build.md)
+- [検証結果と試験経緯](docs/validation.md)
+- [既知の制約・問題の切り分け](docs/known-issues.md)
+- [証跡一覧](docs/evidence/README.md)
+- [初期調査・検証計画](FNK0099_USB_Host_Handoff_v02_retry.md)（実機試験前の資料）
+- [Freenove公式資料](https://docs.freenove.com/projects/fnk0099/en/latest/)

@@ -1,5 +1,7 @@
 # FNK0099 × UIAPduino内蔵SFCコントローラー USB Host検証 — Codex引き継ぎ書
 
+> この文書は実機試験前の初期計画です。現在の動作確認結果・制約は[README](README.md)と[検証結果](docs/validation.md)を参照してください。
+
 - 文書版：v0.2
 - 作成日：2026-11-11（日本時間）
 - 対象：Freenove **FNK0099 / ESP32-S3-WROOM Board Lite** をUSB Hostとして使い、**UIAPduino内蔵SFCコントローラー**を読み取る
