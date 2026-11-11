@@ -56,5 +56,5 @@ SFC mask=0x080 changed=0x001 reason=report
 - [検証結果と試験経緯](docs/validation.md)
 - [既知の制約・問題の切り分け](docs/known-issues.md)
 - [証跡一覧](docs/evidence/README.md)
-- [初期調査・検証計画](FNK0099_USB_Host_Handoff_v02_retry.md)（実機試験前の資料）
+- [事前調査と設計方針](docs/design-notes.md)
 - [Freenove公式資料](https://docs.freenove.com/projects/fnk0099/en/latest/)
