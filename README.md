@@ -1,5 +1,9 @@
 # FNK0099 USB Host — SFCコントローラー入力
 
+**Freenove FNK0099 USB-C OTG host tested — no additional power supply or hardware modifications required.**
+
+Tested with a UIAPduino-based SNES controller acting as a USB HID keyboard. The FNK0099 was powered through its USB-UART port, with the controller connected directly to its USB-OTG port via a USB-C cable.
+
 Freenove FNK0099（ESP32-S3-WROOM Board Lite）で、[UIAPduino内蔵SFCコントローラー](https://github.com/otitbridge/snes-controller-uiapduino)のUSB HIDキーボード入力を受信し、12ボタンの状態をUARTへ出力するファームウェアです。
 
 既設USB-OTG端子へのUSB-C直結で動作確認済みです。追加給電・USBハブ・基板改造は使用していません。エミュレーターや無線送信機能は含みません。
