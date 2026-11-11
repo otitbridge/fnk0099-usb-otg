@@ -1,0 +1,8 @@
+{
+  "result": "passed_one_trial",
+  "firmware_reference": "p5-fix-firmware-2026-11-11.json",
+  "user_report": "Power-disconnection procedure completed; SFC OTG retained, UART power removed and restored, no other supply requested",
+  "uart_unavailable_interval_seconds": 13.984,
+  "observed": "UART disappeared/reappeared; boot, host initialization, 1209:D004 enumeration, zero/right/zero/B/zero reports succeeded",
+  "limitations": "No electrical voltage measurement. UART reopening may affect reset lines; confirms recovery in this monitored setup, not independent unattended cold-start timing."
+}

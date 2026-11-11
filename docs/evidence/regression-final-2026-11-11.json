@@ -1,0 +1,14 @@
+{
+  "date_jst": "2026-11-11",
+  "result": "passed",
+  "source_commit": "6cca133",
+  "firmware_reference": "p5-fix-firmware-2026-11-11.json",
+  "buttons": "12/12 pressed and released in order",
+  "left_retry_ms": 56340,
+  "right_ms": 30550,
+  "right_y_b_ms": 5380,
+  "right_y_after_b_release_ms": 3060,
+  "final_mask": "0x000",
+  "error_logs_observed": false,
+  "note": "Left first attempt 28.73s was below the 30s criterion; repeated successfully. Unchanged reports are suppressed; durations reflect mask transition intervals. No firmware change during regression."
+}

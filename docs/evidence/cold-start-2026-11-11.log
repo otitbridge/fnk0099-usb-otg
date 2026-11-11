@@ -1,0 +1,188 @@
+
+[CAPTURE] UART opened monotonic=2278698.580
+ESP-ROM:esp32s3-20210327
+Build:Mar 27 2021
+rst:0x1 (POWERON),boot:0x8 (SPI_FAST_FLASH_BOOT)
+SPIWP:0xee
+mode:DIO, clock div:1
+load:0x3fce2820,len:0x159c
+load:0x403c8700,len:0xd24
+load:0x403cb700,len:0x2f48
+entry 0x403c891c
+I (24) boot: ESP-IDF 5.5.0 2nd stage bootloader
+I (25) boot: compile time Nov 11 2026 22:59:50
+I (25) boot: Multicore bootloader
+I (25) boot: chip revision: v0.2
+I (28) boot: efuse block revision: v1.4
+I (31) boot.esp32s3: Boot SPI Speed : 80MHz
+I (35) boot.esp32s3: SPI Mode       : DIO
+I (39) boot.esp32s3: SPI Flash Size : 16MB
+I (43) boot: Enabling RNG early entropy source...
+I (47) boot: Partition Table:
+I (50) boot: ## Label            Usage          Type ST Offset   Length
+I (56) boot:  0 nvs              WiFi data        01 02 00009000 00006000
+I (63) boot:  1 phy_init         RF data          01 01 0000f000 00001000
+I (69) boot:  2 factory          factory app      00 00 00010000 00100000
+I (76) boot: End of partition table
+I (79) esp_image: segment 0: paddr=00010020 vaddr=3c030020 size=0e6d8h ( 59096) map
+I (97) esp_image: segment 1: paddr=0001e700 vaddr=3fc92c00 size=01918h (  6424) load
+I (98) esp_image: segment 2: paddr=00020020 vaddr=42000020 size=21f94h (139156) map
+I (126) esp_image: segment 3: paddr=00041fbc vaddr=3fc94518 size=011d4h (  4564) load
+I (127) esp_image: segment 4: paddr=00043198 vaddr=40374000 size=0ebbch ( 60348) load
+I (143) esp_image: segment 5: paddr=00051d5c vaddr=600fe000 size=00020h (    32) load
+I (149) boot: Loaded app from partition at offset 0x10000
+I (149) boot: Disabling RNG early entropy source...
+I (160) cpu_start: Multicore app
+I (169) cpu_start: Pro cpu start user code
+I (169) cpu_start: cpu freq: 160000000 Hz
+I (170) app_init: Application information:
+I (170) app_init: Project name:     fnk0099_host_probe
+I (174) app_init: App version:      9cb49b4-dirty
+I (179) app_init: Compile time:     Nov 11 2026 22:59:32
+I (184) app_init: ELF file SHA256:  962b8a939...
+I (188) app_init: ESP-IDF:          5.5.0
+I (192) efuse_init: Min chip rev:     v0.0
+I (196) efuse_init: Max chip rev:     v0.99
+I (200) efuse_init: Chip rev:         v0.2
+I (204) heap_init: Initializing. RAM available for dynamic allocation:
+I (210) heap_init: At 3FC95FD0 len 00053740 (333 KiB): RAM
+I (215) heap_init: At 3FCE9710 len 00005724 (21 KiB): RAM
+I (220) heap_init: At 3FCF0000 len 00008000 (32 KiB): DRAM
+I (225) heap_init: At 600FE020 len 00001FC8 (7 KiB): RTCRAM
+I (232) spi_flash: detected chip: generic
+I (234) spi_flash: flash io: dio
+I (238) sleep_gpio: Configure to isolate all GPIO pins in sleep state
+I (244) sleep_gpio: Enable automatic switching of GPIO sleep configuration
+I (251) main_task: Started on CPU0
+I (261) main_task: Calling app_main()
+I (261) HOST: FNK0099 Rev1.1 N16R8; P3/P4 keyboard probe; IDF 5.5.0
+I (291) HOST: usb_host_install: ESP_OK
+I (291) HOST: hid_host_install: ESP_OK; HOST_READY
+I (291) HOST: alive uptime_ms=55 free_heap=364532
+I (671) HOST: DEVICE address=1 VID:PID=1209:d004
+I (671) DEVICE_DESC: 12 01 10 01 00 00 00 08 09 12 04 d0 01 00 01 02
+I (671) DEVICE_DESC: 03 01
+I (671) HOST: speed=LOW (1.5Mbps)
+I (681) CONFIG_DESC: 09 02 3b 00 02 01 00 80 64 09 04 00 00 01 03 01
+I (681) CONFIG_DESC: 02 00 09 21 10 01 00 01 22 34 00 07 05 81 03 04
+I (691) CONFIG_DESC: 00 0a 09 04 01 00 01 03 01 01 00 09 21 10 01 00
+I (701) CONFIG_DESC: 01 22 45 00 07 05 82 03 08 00 0a
+I (701) HOST: INTERFACE number=0 alt=0 class=3 subclass=1 protocol=2
+I (711) HOST: ENDPOINT interface=0 address=0x81 attributes=0x03 mps=4 interval=10
+I (711) HOST: INTERFACE number=1 alt=0 class=3 subclass=1 protocol=1
+I (721) HOST: ENDPOINT interface=1 address=0x82 attributes=0x03 mps=8 interval=10
+I (731) HOST: HID VID:PID=1209:d004 interface=0 subclass=1 protocol=2
+I (731) HOST: HID VID:PID=1209:d004 interface=1 subclass=1 protocol=1
+I (741) HOST: keyboard open: ESP_OK
+I (741) HOST: SFC mask=0x000 changed=0x000 reason=connect
+I (731) HOST: descriptor observer close: ESP_OK
+I (751) HOST: SET_PROTOCOL(BOOT): ESP_OK
+I (761) HOST: SET_IDLE(0): ESP_OK
+I (761) HOST: keyboard start: ESP_OK
+I (771) RAW: 00 00 00 00 00 00 00 00
+I (771) HOST: SFC mask=0x000 changed=0x000 reason=report
+I (5291) HOST: alive uptime_ms=5054 free_heap=360668
+I (10291) HOST: alive uptime_ms=10054 free_heap=360668
+I (15291) HOST: alive uptime_ms=15054 free_heap=360668
+I (20291) HOST: alive uptime_ms=20054 free_heap=360668
+I (25291) HOST: alive uptime_ms=25054 free_heap=360668
+
+[CAPTURE] UART unavailable monotonic=2278726.409
+
+[CAPTURE] UART opened monotonic=2278740.393
+ESP-ROM:esp32s3-20210327
+Build:Mar 27 2021
+rst:0x1 (POWERON),boot:0x8 (SPI_FAST_FLASH_BOOT)
+SPIWP:0xee
+mode:DIO, clock div:1
+load:0x3fce2820,len:0x159c
+load:0x403c8700,len:0xd24
+load:0x403cb700,len:0x2f48
+entry 0x403c891c
+I (24) boot: ESP-IDF 5.5.0 2nd stage bootloader
+I (25) boot: compile time Nov 11 2026 22:59:50
+I (25) boot: Multicore bootloader
+I (25) boot: chip revision: v0.2
+I (28) boot: efuse block revision: v1.4
+I (31) boot.esp32s3: Boot SPI Speed : 80MHz
+I (35) boot.esp32s3: SPI Mode       : DIO
+I (39) boot.esp32s3: SPI Flash Size : 16MB
+I (43) boot: Enabling RNG early entropy source...
+I (47) boot: Partition Table:
+I (50) boot: ## Label            Usage          Type ST Offset   Length
+I (56) boot:  0 nvs              WiFi data        01 02 00009000 00006000
+I (63) boot:  1 phy_init         RF data          01 01 0000f000 00001000
+I (69) boot:  2 factory          factory app      00 00 00010000 00100000
+I (76) boot: End of partition table
+I (79) esp_image: segment 0: paddr=00010020 vaddr=3c030020 size=0e6d8h ( 59096) map
+I (97) esp_image: segment 1: paddr=0001e700 vaddr=3fc92c00 size=01918h (  6424) load
+I (98) esp_image: segment 2: paddr=00020020 vaddr=42000020 size=21f94h (139156) map
+I (126) esp_image: segment 3: paddr=00041fbc vaddr=3fc94518 size=011d4h (  4564) load
+I (127) esp_image: segment 4: paddr=00043198 vaddr=40374000 size=0ebbch ( 60348) load
+I (143) esp_image: segment 5: paddr=00051d5c vaddr=600fe000 size=00020h (    32) load
+I (149) boot: Loaded app from partition at offset 0x10000
+I (149) boot: Disabling RNG early entropy source...
+I (160) cpu_start: Multicore app
+I (169) cpu_start: Pro cpu start user code
+I (169) cpu_start: cpu freq: 160000000 Hz
+I (170) app_init: Application information:
+I (170) app_init: Project name:     fnk0099_host_probe
+I (174) app_init: App version:      9cb49b4-dirty
+I (179) app_init: Compile time:     Nov 11 2026 22:59:32
+I (184) app_init: ELF file SHA256:  962b8a939...
+I (188) app_init: ESP-IDF:          5.5.0
+I (192) efuse_init: Min chip rev:     v0.0
+I (196) efuse_init: Max chip rev:     v0.99
+I (200) efuse_init: Chip rev:         v0.2
+I (204) heap_init: Initializing. RAM available for dynamic allocation:
+I (210) heap_init: At 3FC95FD0 len 00053740 (333 KiB): RAM
+I (215) heap_init: At 3FCE9710 len 00005724 (21 KiB): RAM
+I (220) heap_init: At 3FCF0000 len 00008000 (32 KiB): DRAM
+I (225) heap_init: At 600FE020 len 00001FC8 (7 KiB): RTCRAM
+I (232) spi_flash: detected chip: generic
+I (234) spi_flash: flash io: dio
+I (238) sleep_gpio: Configure to isolate all GPIO pins in sleep state
+I (244) sleep_gpio: Enable automatic switching of GPIO sleep configuration
+I (251) main_task: Started on CPU0
+I (261) main_task: Calling app_main()
+I (261) HOST: FNK0099 Rev1.1 N16R8; P3/P4 keyboard probe; IDF 5.5.0
+I (291) HOST: usb_host_install: ESP_OK
+I (291) HOST: hid_host_install: ESP_OK; HOST_READY
+I (291) HOST: alive uptime_ms=55 free_heap=364532
+I (671) HOST: DEVICE address=1 VID:PID=1209:d004
+I (671) DEVICE_DESC: 12 01 10 01 00 00 00 08 09 12 04 d0 01 00 01 02
+I (671) DEVICE_DESC: 03 01
+I (671) HOST: speed=LOW (1.5Mbps)
+I (681) CONFIG_DESC: 09 02 3b 00 02 01 00 80 64 09 04 00 00 01 03 01
+I (681) CONFIG_DESC: 02 00 09 21 10 01 00 01 22 34 00 07 05 81 03 04
+I (691) CONFIG_DESC: 00 0a 09 04 01 00 01 03 01 01 00 09 21 10 01 00
+I (701) CONFIG_DESC: 01 22 45 00 07 05 82 03 08 00 0a
+I (701) HOST: INTERFACE number=0 alt=0 class=3 subclass=1 protocol=2
+I (711) HOST: ENDPOINT interface=0 address=0x81 attributes=0x03 mps=4 interval=10
+I (711) HOST: INTERFACE number=1 alt=0 class=3 subclass=1 protocol=1
+I (721) HOST: ENDPOINT interface=1 address=0x82 attributes=0x03 mps=8 interval=10
+I (731) HOST: HID VID:PID=1209:d004 interface=0 subclass=1 protocol=2
+I (731) HOST: HID VID:PID=1209:d004 interface=1 subclass=1 protocol=1
+I (741) HOST: keyboard open: ESP_OK
+I (741) HOST: SFC mask=0x000 changed=0x000 reason=connect
+I (731) HOST: descriptor observer close: ESP_OK
+I (751) HOST: SET_PROTOCOL(BOOT): ESP_OK
+I (761) HOST: SET_IDLE(0): ESP_OK
+I (761) HOST: keyboard start: ESP_OK
+I (761) RAW: 00 00 00 00 00 00 00 00
+I (771) HOST: SFC mask=0x000 changed=0x000 reason=report
+I (5291) HOST: alive uptime_ms=5054 free_heap=360668
+I (8111) RAW: 00 00 4f 00 00 00 00 00
+I (8111) HOST: SFC mask=0x080 changed=0x080 reason=report
+I (8411) RAW: 00 00 00 00 00 00 00 00
+I (8411) HOST: SFC mask=0x000 changed=0x080 reason=report
+I (8761) RAW: 00 00 1d 00 00 00 00 00
+I (8761) HOST: SFC mask=0x001 changed=0x001 reason=report
+I (9061) RAW: 00 00 00 00 00 00 00 00
+I (9061) HOST: SFC mask=0x000 changed=0x001 reason=report
+I (10291) HOST: alive uptime_ms=10054 free_heap=360668
+I (15291) HOST: alive uptime_ms=15054 free_heap=360668
+I (20291) HOST: alive uptime_ms=20054 free_heap=360668
+I (25291) HOST: alive uptime_ms=25054 free_heap=360668
+I (30291) HOST: alive uptime_ms=30054 free_heap=360668
+I (35291) HOST: alive uptime_ms=35054 free_heap=360668

@@ -1,0 +1,8 @@
+{
+  "status": "deferred_by_user",
+  "result": "not_completed_not_passed",
+  "planned_duration_seconds": 1800,
+  "firmware_reference": "p5-fix-firmware-2026-11-11.json",
+  "last_observed_uptime_ms": 50054,
+  "note": "Capture stopped at user request. Partial log retained only; not evidence of completed 30-minute endurance test."
+}

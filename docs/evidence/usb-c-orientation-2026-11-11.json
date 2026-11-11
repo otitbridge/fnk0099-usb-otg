@@ -1,0 +1,9 @@
+{
+  "result": "passed",
+  "firmware_reference": "p5-fix-firmware-2026-11-11.json",
+  "cable": "AT-PDCASTCC08",
+  "user_report": "FNK0099 OTG plug rotated 180 degrees; controller-internal end unchanged",
+  "observed": "1209:D004 re-enumerated; right and B press/release passed; final mask zero",
+  "scope": "Both orientations at host end with device-side orientation fixed; not all four end-to-end combinations",
+  "known_log": "EP command error on unplug; close and reconnect successful"
+}

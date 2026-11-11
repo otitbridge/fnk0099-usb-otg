@@ -1,0 +1,24 @@
+{
+  "result": "passed_12_of_12",
+  "firmware_reference": "p5-fix-firmware-2026-11-11.json",
+  "source_commit": "6cca133",
+  "press_durations_ms": [
+    220,
+    230,
+    210,
+    210,
+    170,
+    170,
+    180,
+    200,
+    230,
+    210,
+    210,
+    180
+  ],
+  "final_mask": "0x000",
+  "pending": [
+    "long holds",
+    "simultaneous input and partial release"
+  ]
+}

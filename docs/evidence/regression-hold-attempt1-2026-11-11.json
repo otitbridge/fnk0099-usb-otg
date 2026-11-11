@@ -1,0 +1,12 @@
+{
+  "firmware_reference": "p5-fix-firmware-2026-11-11.json",
+  "durations": {
+    "left_ms": 28730,
+    "right_ms": 30550,
+    "right_y_b_ms": 5380,
+    "right_y_after_b_release_ms": 3060
+  },
+  "result": "partial: right >=30s and simultaneous/partial/full release passed; left duration below 30s",
+  "pending": "Repeat left hold >=30 seconds",
+  "note": "No intermediate release observed. Left trial duration short, not an observed firmware failure."
+}

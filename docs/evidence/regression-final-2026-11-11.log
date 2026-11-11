@@ -1,0 +1,213 @@
+ESP-ROM:esp32s3-20210327
+Build:Mar 27 2021
+rst:0x1 (POWERON),boot:0x8 (SPI_FAST_FLASH_BOOT)
+SPIWP:0xee
+mode:DIO, clock div:1
+load:0x3fce2820,len:0x159c
+load:0x403c8700,len:0xd24
+load:0x403cb700,len:0x2f48
+entry 0x403c891c
+I (24) boot: ESP-IDF 5.5.0 2nd stage bootloader
+I (25) boot: compile time Nov 11 2026 22:59:50
+I (25) boot: Multicore bootloader
+I (25) boot: chip revision: v0.2
+I (28) boot: efuse block revision: v1.4
+I (31) boot.esp32s3: Boot SPI Speed : 80MHz
+I (35) boot.esp32s3: SPI Mode       : DIO
+I (39) boot.esp32s3: SPI Flash Size : 16MB
+I (43) boot: Enabling RNG early entropy source...
+I (47) boot: Partition Table:
+I (50) boot: ## Label            Usage          Type ST Offset   Length
+I (56) boot:  0 nvs              WiFi data        01 02 00009000 00006000
+I (63) boot:  1 phy_init         RF data          01 01 0000f000 00001000
+I (69) boot:  2 factory          factory app      00 00 00010000 00100000
+I (76) boot: End of partition table
+I (79) esp_image: segment 0: paddr=00010020 vaddr=3c030020 size=0e6d8h ( 59096) map
+I (97) esp_image: segment 1: paddr=0001e700 vaddr=3fc92c00 size=01918h (  6424) load
+I (98) esp_image: segment 2: paddr=00020020 vaddr=42000020 size=21f94h (139156) map
+I (126) esp_image: segment 3: paddr=00041fbc vaddr=3fc94518 size=011d4h (  4564) load
+I (127) esp_image: segment 4: paddr=00043198 vaddr=40374000 size=0ebbch ( 60348) load
+I (143) esp_image: segment 5: paddr=00051d5c vaddr=600fe000 size=00020h (    32) load
+I (149) boot: Loaded app from partition at offset 0x10000
+I (149) boot: Disabling RNG early entropy source...
+I (160) cpu_start: Multicore app
+I (169) cpu_start: Pro cpu start user code
+I (169) cpu_start: cpu freq: 160000000 Hz
+I (170) app_init: Application information:
+I (170) app_init: Project name:     fnk0099_host_probe
+I (174) app_init: App version:      9cb49b4-dirty
+I (179) app_init: Compile time:     Nov 11 2026 22:59:32
+I (184) app_init: ELF file SHA256:  962b8a939...
+I (188) app_init: ESP-IDF:          5.5.0
+I (192) efuse_init: Min chip rev:     v0.0
+I (196) efuse_init: Max chip rev:     v0.99
+I (200) efuse_init: Chip rev:         v0.2
+I (204) heap_init: Initializing. RAM available for dynamic allocation:
+I (210) heap_init: At 3FC95FD0 len 00053740 (333 KiB): RAM
+I (215) heap_init: At 3FCE9710 len 00005724 (21 KiB): RAM
+I (220) heap_init: At 3FCF0000 len 00008000 (32 KiB): DRAM
+I (225) heap_init: At 600FE020 len 00001FC8 (7 KiB): RTCRAM
+I (232) spi_flash: detected chip: generic
+I (234) spi_flash: flash io: dio
+I (238) sleep_gpio: Configure to isolate all GPIO pins in sleep state
+I (244) sleep_gpio: Enable automatic switching of GPIO sleep configuration
+I (251) main_task: Started on CPU0
+I (261) main_task: Calling app_main()
+I (261) HOST: FNK0099 Rev1.1 N16R8; P3/P4 keyboard probe; IDF 5.5.0
+I (291) HOST: usb_host_install: ESP_OK
+I (291) HOST: hid_host_install: ESP_OK; HOST_READY
+I (291) HOST: alive uptime_ms=55 free_heap=364532
+I (671) HOST: DEVICE address=1 VID:PID=1209:d004
+I (671) DEVICE_DESC: 12 01 10 01 00 00 00 08 09 12 04 d0 01 00 01 02
+I (671) DEVICE_DESC: 03 01
+I (671) HOST: speed=LOW (1.5Mbps)
+I (681) CONFIG_DESC: 09 02 3b 00 02 01 00 80 64 09 04 00 00 01 03 01
+I (681) CONFIG_DESC: 02 00 09 21 10 01 00 01 22 34 00 07 05 81 03 04
+I (691) CONFIG_DESC: 00 0a 09 04 01 00 01 03 01 01 00 09 21 10 01 00
+I (701) CONFIG_DESC: 01 22 45 00 07 05 82 03 08 00 0a
+I (701) HOST: INTERFACE number=0 alt=0 class=3 subclass=1 protocol=2
+I (711) HOST: ENDPOINT interface=0 address=0x81 attributes=0x03 mps=4 interval=10
+I (711) HOST: INTERFACE number=1 alt=0 class=3 subclass=1 protocol=1
+I (721) HOST: ENDPOINT interface=1 address=0x82 attributes=0x03 mps=8 interval=10
+I (731) HOST: HID VID:PID=1209:d004 interface=0 subclass=1 protocol=2
+I (731) HOST: HID VID:PID=1209:d004 interface=1 subclass=1 protocol=1
+I (741) HOST: keyboard open: ESP_OK
+I (741) HOST: SFC mask=0x000 changed=0x000 reason=connect
+I (731) HOST: descriptor observer close: ESP_OK
+I (751) HOST: SET_PROTOCOL(BOOT): ESP_OK
+I (761) HOST: SET_IDLE(0): ESP_OK
+I (761) HOST: keyboard start: ESP_OK
+I (761) RAW: 00 00 00 00 00 00 00 00
+I (771) HOST: SFC mask=0x000 changed=0x000 reason=report
+I (5291) HOST: alive uptime_ms=5054 free_heap=360668
+I (10291) HOST: alive uptime_ms=10054 free_heap=360668
+I (13811) RAW: 00 00 1d 00 00 00 00 00
+I (13811) HOST: SFC mask=0x001 changed=0x001 reason=report
+I (14031) RAW: 00 00 00 00 00 00 00 00
+I (14031) HOST: SFC mask=0x000 changed=0x001 reason=report
+I (14451) RAW: 00 00 04 00 00 00 00 00
+I (14451) HOST: SFC mask=0x002 changed=0x002 reason=report
+I (14681) RAW: 00 00 00 00 00 00 00 00
+I (14681) HOST: SFC mask=0x000 changed=0x002 reason=report
+I (15001) RAW: 00 00 2b 00 00 00 00 00
+I (15001) HOST: SFC mask=0x004 changed=0x004 reason=report
+I (15211) RAW: 00 00 00 00 00 00 00 00
+I (15211) HOST: SFC mask=0x000 changed=0x004 reason=report
+I (15291) HOST: alive uptime_ms=15054 free_heap=360668
+I (15601) RAW: 00 00 28 00 00 00 00 00
+I (15601) HOST: SFC mask=0x008 changed=0x008 reason=report
+I (15811) RAW: 00 00 00 00 00 00 00 00
+I (15811) HOST: SFC mask=0x000 changed=0x008 reason=report
+I (16131) RAW: 00 00 52 00 00 00 00 00
+I (16131) HOST: SFC mask=0x010 changed=0x010 reason=report
+I (16301) RAW: 00 00 00 00 00 00 00 00
+I (16301) HOST: SFC mask=0x000 changed=0x010 reason=report
+I (16531) RAW: 00 00 51 00 00 00 00 00
+I (16531) HOST: SFC mask=0x020 changed=0x020 reason=report
+I (16701) RAW: 00 00 00 00 00 00 00 00
+I (16701) HOST: SFC mask=0x000 changed=0x020 reason=report
+I (16871) RAW: 00 00 50 00 00 00 00 00
+I (16871) HOST: SFC mask=0x040 changed=0x040 reason=report
+I (17051) RAW: 00 00 00 00 00 00 00 00
+I (17051) HOST: SFC mask=0x000 changed=0x040 reason=report
+I (17291) RAW: 00 00 4f 00 00 00 00 00
+I (17291) HOST: SFC mask=0x080 changed=0x080 reason=report
+I (17491) RAW: 00 00 00 00 00 00 00 00
+I (17491) HOST: SFC mask=0x000 changed=0x080 reason=report
+I (18451) RAW: 00 00 1b 00 00 00 00 00
+I (18451) HOST: SFC mask=0x100 changed=0x100 reason=report
+I (18681) RAW: 00 00 00 00 00 00 00 00
+I (18681) HOST: SFC mask=0x000 changed=0x100 reason=report
+I (19001) RAW: 00 00 16 00 00 00 00 00
+I (19001) HOST: SFC mask=0x200 changed=0x200 reason=report
+I (19211) RAW: 00 00 00 00 00 00 00 00
+I (19211) HOST: SFC mask=0x000 changed=0x200 reason=report
+I (19531) RAW: 00 00 14 00 00 00 00 00
+I (19531) HOST: SFC mask=0x400 changed=0x400 reason=report
+I (19741) RAW: 00 00 00 00 00 00 00 00
+I (19741) HOST: SFC mask=0x000 changed=0x400 reason=report
+I (19961) RAW: 00 00 1a 00 00 00 00 00
+I (19961) HOST: SFC mask=0x800 changed=0x800 reason=report
+I (20141) RAW: 00 00 00 00 00 00 00 00
+I (20141) HOST: SFC mask=0x000 changed=0x800 reason=report
+I (20291) HOST: alive uptime_ms=20054 free_heap=360668
+I (25291) HOST: alive uptime_ms=25054 free_heap=360668
+I (30291) HOST: alive uptime_ms=30054 free_heap=360668
+I (35291) HOST: alive uptime_ms=35054 free_heap=360668
+I (40291) HOST: alive uptime_ms=40054 free_heap=360668
+I (45291) HOST: alive uptime_ms=45054 free_heap=360668
+I (50291) HOST: alive uptime_ms=50054 free_heap=360668
+I (55291) HOST: alive uptime_ms=55054 free_heap=360668
+I (60291) HOST: alive uptime_ms=60054 free_heap=360668
+I (65291) HOST: alive uptime_ms=65054 free_heap=360668
+I (70291) HOST: alive uptime_ms=70054 free_heap=360668
+I (75291) HOST: alive uptime_ms=75054 free_heap=360668
+I (80291) HOST: alive uptime_ms=80054 free_heap=360668
+I (85291) HOST: alive uptime_ms=85054 free_heap=360668
+I (90291) HOST: alive uptime_ms=90054 free_heap=360668
+I (95291) HOST: alive uptime_ms=95054 free_heap=360668
+I (100291) HOST: alive uptime_ms=100054 free_heap=360668
+I (105291) HOST: alive uptime_ms=105054 free_heap=360668
+I (105621) RAW: 00 00 50 00 00 00 00 00
+I (105621) HOST: SFC mask=0x040 changed=0x040 reason=report
+I (110291) HOST: alive uptime_ms=110054 free_heap=360668
+I (115291) HOST: alive uptime_ms=115054 free_heap=360668
+I (120291) HOST: alive uptime_ms=120054 free_heap=360668
+I (125291) HOST: alive uptime_ms=125054 free_heap=360668
+I (130291) HOST: alive uptime_ms=130054 free_heap=360668
+I (134351) RAW: 00 00 00 00 00 00 00 00
+I (134351) HOST: SFC mask=0x000 changed=0x040 reason=report
+I (135291) HOST: alive uptime_ms=135054 free_heap=360668
+I (135811) RAW: 00 00 4f 00 00 00 00 00
+I (135811) HOST: SFC mask=0x080 changed=0x080 reason=report
+I (140291) HOST: alive uptime_ms=140054 free_heap=360668
+I (145291) HOST: alive uptime_ms=145054 free_heap=360668
+I (150291) HOST: alive uptime_ms=150054 free_heap=360668
+I (155291) HOST: alive uptime_ms=155054 free_heap=360668
+I (160291) HOST: alive uptime_ms=160054 free_heap=360668
+I (165291) HOST: alive uptime_ms=165054 free_heap=360668
+I (166361) RAW: 00 00 00 00 00 00 00 00
+I (166361) HOST: SFC mask=0x000 changed=0x080 reason=report
+I (168781) RAW: 00 00 4f 00 00 00 00 00
+I (168781) HOST: SFC mask=0x080 changed=0x080 reason=report
+I (169441) RAW: 00 00 04 4f 00 00 00 00
+I (169441) HOST: SFC mask=0x082 changed=0x002 reason=report
+I (170161) RAW: 00 00 1d 04 4f 00 00 00
+I (170161) HOST: SFC mask=0x083 changed=0x001 reason=report
+I (170291) HOST: alive uptime_ms=170054 free_heap=360668
+I (175291) HOST: alive uptime_ms=175054 free_heap=360668
+I (175541) RAW: 00 00 04 4f 00 00 00 00
+I (175541) HOST: SFC mask=0x082 changed=0x001 reason=report
+I (178601) RAW: 00 00 4f 00 00 00 00 00
+I (178601) HOST: SFC mask=0x080 changed=0x002 reason=report
+I (178611) RAW: 00 00 00 00 00 00 00 00
+I (178611) HOST: SFC mask=0x000 changed=0x080 reason=report
+I (180291) HOST: alive uptime_ms=180054 free_heap=360668
+I (185291) HOST: alive uptime_ms=185054 free_heap=360668
+I (190291) HOST: alive uptime_ms=190054 free_heap=360668
+I (195291) HOST: alive uptime_ms=195054 free_heap=360668
+I (200291) HOST: alive uptime_ms=200054 free_heap=360668
+I (205291) HOST: alive uptime_ms=205054 free_heap=360668
+I (210291) HOST: alive uptime_ms=210054 free_heap=360668
+I (215291) HOST: alive uptime_ms=215054 free_heap=360668
+I (220291) HOST: alive uptime_ms=220054 free_heap=360668
+I (225291) HOST: alive uptime_ms=225054 free_heap=360668
+I (225771) RAW: 00 00 50 00 00 00 00 00
+I (225771) HOST: SFC mask=0x040 changed=0x040 reason=report
+I (230291) HOST: alive uptime_ms=230054 free_heap=360668
+I (235291) HOST: alive uptime_ms=235054 free_heap=360668
+I (240291) HOST: alive uptime_ms=240054 free_heap=360668
+I (245291) HOST: alive uptime_ms=245054 free_heap=360668
+I (250291) HOST: alive uptime_ms=250054 free_heap=360668
+I (255291) HOST: alive uptime_ms=255054 free_heap=360668
+I (260291) HOST: alive uptime_ms=260054 free_heap=360668
+I (265291) HOST: alive uptime_ms=265054 free_heap=360668
+I (270291) HOST: alive uptime_ms=270054 free_heap=360668
+I (275291) HOST: alive uptime_ms=275054 free_heap=360668
+I (280291) HOST: alive uptime_ms=280054 free_heap=360668
+I (282111) RAW: 00 00 00 00 00 00 00 00
+I (282111) HOST: SFC mask=0x000 changed=0x040 reason=report
+I (285291) HOST: alive uptime_ms=285054 free_heap=360668
+I (290291) HOST: alive uptime_ms=290054 free_heap=360668
+I (295291) HOST: alive uptime_ms=295054 free_heap=360668
+I (300291) HOST: alive uptime_ms=300054 free_heap=360668
