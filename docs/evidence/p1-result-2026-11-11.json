@@ -1,0 +1,60 @@
+{
+  "date_jst": "2026-11-11",
+  "phase": "P1",
+  "result": "passed",
+  "board": {
+    "model": "Freenove FNK0099 Board Lite",
+    "board_revision": "1.1 (user report)",
+    "module": "N16R8 (user report)",
+    "chip_revision": "v0.2 (esptool)",
+    "flash_bytes": 16777216,
+    "psram_mb_reported_by_esptool": 8,
+    "psram_enabled_in_firmware": false
+  },
+  "connection": {
+    "host_pc": "Mac",
+    "uart_usb_vid_pid": "1A86:55D3",
+    "baud": 115200,
+    "otg": "disconnected (user report)"
+  },
+  "software": {
+    "platformio_platform": "espressif32@6.12.0",
+    "esp_idf": "5.5.0",
+    "usb_host_hid": "1.0.1",
+    "reference_example_idf": "5.5.2"
+  },
+  "firmware": {
+    "bytes": 260112,
+    "sha256": "f4d388337de0c4ade8008b0b5294c050a8663b65e28963b311a26b9179c39df8"
+  },
+  "verification": {
+    "build": "success",
+    "upload": "success; esptool hash verified",
+    "usb_host_install": "ESP_OK",
+    "hid_host_install": "ESP_OK",
+    "capture_duration_seconds": 40,
+    "heartbeat_span_ms": 35000,
+    "heartbeat_count": 8,
+    "free_heap_bytes": [
+      376632
+    ],
+    "panic_or_watchdog_observed": false
+  },
+  "source_sha256": {
+    "src/main.c": "a2373e48704990eca7fb8a6ec253b10a2ae0e2178c52278d0fc4d885648f6420",
+    "src/CMakeLists.txt": "e1b33960bfac73b3498cc0aff879a1c4083e39b24780a4c2abc050c0dc85c636",
+    "src/idf_component.yml": "c63fe5b3b4d40756d534f51f6464b607aef8529119cc9cf348dcf916b5eef73d",
+    "CMakeLists.txt": "c810991575b79b8ec52544f7c72d39e20d792e65ddf5b179ca939003b4fec18e",
+    "platformio.ini": "41a276ffbaba84e492e7bb64410e84d9431b7587e071dc8fbc1d939e9e328dfd",
+    "sdkconfig.defaults": "16d6d3b4ed9d7fb659e0b94252746b18098d0f2a006fc8777ca7a31931e526f8",
+    "dependencies.lock": "5d98a6037d7a9661339ef2f3b98130e74aeb15514018794aef745b3df5cab06b"
+  },
+  "not_verified": [
+    "OTG VBUS/CC",
+    "C-C device enumeration",
+    "UIAPduino HID reception",
+    "12-button decoding",
+    "PSRAM runtime test"
+  ],
+  "log_redaction": "Local home/project paths, UART identifier, MAC removed from saved build/upload/device-ID logs."
+}

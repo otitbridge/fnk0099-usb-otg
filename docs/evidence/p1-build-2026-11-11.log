@@ -1,0 +1,1498 @@
+Processing fnk0099-host (platform: espressif32@6.12.0; board: esp32-s3-devkitc-1; framework: espidf)
+--------------------------------------------------------------------------------
+Tool Manager: Installing platformio/toolchain-riscv32-esp @ 14.2.0+20241119
+Downloading 0% 10% 20% 30% 40% 50% 60% 70% 80% 90% 100%
+Unpacking 0% 10% 20% 30% 40% 50% 60% 70% 80% 90% 100%
+Tool Manager: toolchain-riscv32-esp@14.2.0+20241119 has been installed!
+Tool Manager: Installing platformio/toolchain-xtensa-esp-elf @ 14.2.0+20241119
+Downloading 0% 10% 20% 30% 40% 50% 60% 70% 80% 90% 100%
+Unpacking 0% 10% 20% 30% 40% 50% 60% 70% 80% 90% 100%
+Tool Manager: toolchain-xtensa-esp-elf@14.2.0+20241119 has been installed!
+Tool Manager: Installing platformio/toolchain-esp32ulp @ ~1.23800.0
+Downloading 0% 10% 20% 30% 40% 50% 60% 70% 80% 90% 100%
+Unpacking 0% 10% 20% 30% 40% 50% 60% 70% 80% 90% 100%
+Tool Manager: toolchain-esp32ulp@1.23800.240113 has been installed!
+Tool Manager: Installing espressif/tool-xtensa-esp-elf-gdb @ ~12.1.0
+Downloading 0% 10% 20% 30% 40% 50% 60% 70% 80% 90% 100%
+Unpacking 0% 10% 20% 30% 40% 50% 60% 70% 80% 90% 100%
+Tool Manager: tool-xtensa-esp-elf-gdb@12.1.0+20221002 has been installed!
+Tool Manager: Installing espressif/tool-riscv32-esp-elf-gdb @ ~12.1.0
+Downloading 0% 10% 20% 30% 40% 50% 60% 70% 80% 90% 100%
+Unpacking 0% 10% 20% 30% 40% 50% 60% 70% 80% 90% 100%
+Tool Manager: tool-riscv32-esp-elf-gdb@12.1.0+20221002 has been installed!
+Tool Manager: Installing platformio/tool-cmake @ ~3.30.0
+Downloading 0% 10% 20% 30% 40% 50% 60% 70% 80% 90% 100%
+Unpacking 0% 10% 20% 30% 40% 50% 60% 70% 80% 90% 100%
+Tool Manager: tool-cmake@3.30.2 has been installed!
+Tool Manager: Installing platformio/tool-ninja @ ^1.7.0
+Downloading 0% 10% 20% 30% 40% 50% 60% 70% 80% 90% 100%
+Unpacking 0% 10% 20%
+Tool Manager: tool-ninja@1.13.2 has been installed!
+Tool Manager: Installing platformio/tool-esp-rom-elfs @ 0.0.1+20241011
+Downloading 0% 10% 20% 30% 40% 50% 60% 70% 80% 90% 100%
+Unpacking 0% 10% 20% 30% 40% 50% 60% 70% 80% 90% 100%
+Tool Manager: tool-esp-rom-elfs@0.0.1+20241011 has been installed!
+Verbose mode can be enabled via `-v, --verbose` option
+CONFIGURATION: https://docs.platformio.org/page/boards/espressif32/esp32-s3-devkitc-1.html
+PLATFORM: Espressif 32 (6.12.0) > Espressif ESP32-S3-DevKitC-1-N8 (8 MB QD, No PSRAM)
+HARDWARE: ESP32S3 240MHz, 320KB RAM, 8MB Flash
+DEBUG: Current (esp-builtin) On-board (esp-builtin) External (cmsis-dap, esp-bridge, esp-prog, iot-bus-jtag, jlink, minimodule, olimex-arm-usb-ocd, olimex-arm-usb-ocd-h, olimex-arm-usb-tiny-h, olimex-jtag-tiny, tumpa)
+PACKAGES:
+ - framework-espidf @ 3.50500.0 (5.5.0)
+ - tool-cmake @ 3.30.2
+ - tool-esp-rom-elfs @ 0.0.1+20241011
+ - tool-esptoolpy @ 2.40900.250804 (4.9.0)
+ - tool-ninja @ 1.13.2
+ - tool-riscv32-esp-elf-gdb @ 12.1.0+20221002
+ - tool-xtensa-esp-elf-gdb @ 12.1.0+20221002
+ - toolchain-esp32ulp @ 1.23800.240113 (2.38.0)
+ - toolchain-riscv32-esp @ 14.2.0+20241119
+ - toolchain-xtensa-esp-elf @ 14.2.0+20241119
+Creating a new virtual environment for IDF Python dependencies
+Installing ESP-IDF's Python dependencies
+Collecting urllib3<2
+  Obtaining dependency information for urllib3<2 from https://files.pythonhosted.org/packages/33/cf/8435d5a7159e2a9c83a95896ed596f68cf798005fe107cc655b5c5c14704/urllib3-1.26.20-py2.py3-none-any.whl.metadata
+  Downloading urllib3-1.26.20-py2.py3-none-any.whl.metadata (50 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 50.1/50.1 kB 2.4 MB/s eta 0:00:00
+Collecting cryptography~=44.0.0
+  Obtaining dependency information for cryptography~=44.0.0 from https://files.pythonhosted.org/packages/34/a3/ad08e0bcc34ad436013458d7528e83ac29910943cea42ad7dd4141a27bbb/cryptography-44.0.3-cp39-abi3-macosx_10_9_universal2.whl.metadata
+  Downloading cryptography-44.0.3-cp39-abi3-macosx_10_9_universal2.whl.metadata (5.7 kB)
+Collecting pyparsing<4,>=3.1.0
+  Obtaining dependency information for pyparsing<4,>=3.1.0 from https://files.pythonhosted.org/packages/38/bb/d215ee7c73b61497b28a5503f9f53523f294fcc936762b7caf90e0c1c2b5/pyparsing-3.3.3-py3-none-any.whl.metadata
+  Downloading pyparsing-3.3.3-py3-none-any.whl.metadata (5.9 kB)
+Collecting idf-component-manager~=2.2
+  Obtaining dependency information for idf-component-manager~=2.2 from https://files.pythonhosted.org/packages/ab/d3/6286330276703a6096f26a440aa1fc480949a31a097babb6f7ff8ef98fdf/idf_component_manager-2.5.2-py3-none-any.whl.metadata
+  Downloading idf_component_manager-2.5.2-py3-none-any.whl.metadata (9.6 kB)
+Collecting esp-idf-kconfig~=2.5.0
+  Obtaining dependency information for esp-idf-kconfig~=2.5.0 from https://files.pythonhosted.org/packages/64/75/838e8a83de80477504b297dec0c10e0815eb13dc7a2330f23ce15e0cd331/esp_idf_kconfig-2.5.4-py3-none-any.whl.metadata
+  Downloading esp_idf_kconfig-2.5.4-py3-none-any.whl.metadata (15 kB)
+Collecting chardet<4,>=3.0.2
+  Obtaining dependency information for chardet<4,>=3.0.2 from https://files.pythonhosted.org/packages/bc/a9/01ffebfb562e4274b6487b4bb1ddec7ca55ec7510b22e4c51f14098443b8/chardet-3.0.4-py2.py3-none-any.whl.metadata
+  Downloading chardet-3.0.4-py2.py3-none-any.whl.metadata (3.2 kB)
+Collecting cffi>=1.12 (from cryptography~=44.0.0)
+  Obtaining dependency information for cffi>=1.12 from https://files.pythonhosted.org/packages/cd/95/31b535a9f0220ae9f357de4a08d57ce89cb417653c2fd9f075f50822a388/cffi-2.1.1-cp311-cp311-macosx_11_0_arm64.whl.metadata
+  Downloading cffi-2.1.1-cp311-cp311-macosx_11_0_arm64.whl.metadata (2.5 kB)
+Collecting psutil (from idf-component-manager~=2.2)
+  Obtaining dependency information for psutil from https://files.pythonhosted.org/packages/80/c4/f5af4c1ca8c1eeb2e92ccca14ce8effdeec651d5ab6053c589b074eda6e1/psutil-7.2.2-cp36-abi3-macosx_11_0_arm64.whl.metadata
+  Downloading psutil-7.2.2-cp36-abi3-macosx_11_0_arm64.whl.metadata (22 kB)
+Collecting click (from idf-component-manager~=2.2)
+  Obtaining dependency information for click from https://files.pythonhosted.org/packages/31/7d/164b7ffc8624fe9efb4221bf9af485d5c1e41b9ae118045d2b6dc5457d8b/click-8.5.1-py3-none-any.whl.metadata
+  Downloading click-8.5.1-py3-none-any.whl.metadata (2.6 kB)
+Collecting colorama (from idf-component-manager~=2.2)
+  Obtaining dependency information for colorama from https://files.pythonhosted.org/packages/d1/d6/3965ed04c63042e047cb6a3e6ed1a63a35087b6a609aa3a15ed8ac56c221/colorama-0.4.6-py2.py3-none-any.whl.metadata
+  Downloading colorama-0.4.6-py2.py3-none-any.whl.metadata (17 kB)
+Collecting ruamel.yaml (from idf-component-manager~=2.2)
+  Obtaining dependency information for ruamel.yaml from https://files.pythonhosted.org/packages/b8/0c/51f6841f1d84f404f92463fc2b1ba0da357ca1e3db6b7fbda26956c3b82a/ruamel_yaml-0.19.1-py3-none-any.whl.metadata
+  Downloading ruamel_yaml-0.19.1-py3-none-any.whl.metadata (16 kB)
+Collecting requests (from idf-component-manager~=2.2)
+  Obtaining dependency information for requests from https://files.pythonhosted.org/packages/a0/f4/c67b0b3f1b9245e8d266f0f112c500d50e5b4e83cb6f3b71b6528104182a/requests-2.34.2-py3-none-any.whl.metadata
+  Downloading requests-2.34.2-py3-none-any.whl.metadata (4.8 kB)
+Collecting requests-file (from idf-component-manager~=2.2)
+  Obtaining dependency information for requests-file from https://files.pythonhosted.org/packages/e1/d5/de8f089119205a09da657ed4784c584ede8381a0ce6821212a6d4ca47054/requests_file-3.0.1-py2.py3-none-any.whl.metadata
+  Downloading requests_file-3.0.1-py2.py3-none-any.whl.metadata (1.7 kB)
+Collecting requests-toolbelt (from idf-component-manager~=2.2)
+  Obtaining dependency information for requests-toolbelt from https://files.pythonhosted.org/packages/3f/51/d4db610ef29373b879047326cbf6fa98b6c1969d6f6dc423279de2b1be2c/requests_toolbelt-1.0.0-py2.py3-none-any.whl.metadata
+  Downloading requests_toolbelt-1.0.0-py2.py3-none-any.whl.metadata (14 kB)
+Collecting tqdm (from idf-component-manager~=2.2)
+  Obtaining dependency information for tqdm from https://files.pythonhosted.org/packages/a7/03/921a3d3c75785aca9ebfbfcabfbc3a1be12e2ab5265deb026d55a5a3f83e/tqdm-4.70.1-py3-none-any.whl.metadata
+  Downloading tqdm-4.70.1-py3-none-any.whl.metadata (57 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 57.4/57.4 kB 6.4 MB/s eta 0:00:00
+Collecting jsonref (from idf-component-manager~=2.2)
+  Obtaining dependency information for jsonref from https://files.pythonhosted.org/packages/0c/ec/e1db9922bceb168197a558a2b8c03a7963f1afe93517ddd3cf99f202f996/jsonref-1.1.0-py3-none-any.whl.metadata
+  Downloading jsonref-1.1.0-py3-none-any.whl.metadata (2.7 kB)
+Collecting pydantic!=2.12.0 (from idf-component-manager~=2.2)
+  Obtaining dependency information for pydantic!=2.12.0 from https://files.pythonhosted.org/packages/72/b8/b864503789ef5c58597d2a7b4adbee62c26440ab1e682581fc6838df8947/pydantic-2.14.3-py3-none-any.whl.metadata
+  Downloading pydantic-2.14.3-py3-none-any.whl.metadata (141 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 141.5/141.5 kB 6.6 MB/s eta 0:00:00
+Collecting pydantic-core (from idf-component-manager~=2.2)
+  Obtaining dependency information for pydantic-core from https://files.pythonhosted.org/packages/a3/f1/438de1fb99d717dcc6521922478dc16ef7b757302d4fc1f7faba3aaeac09/pydantic_core-2.50.4-cp311-cp311-macosx_11_0_arm64.whl.metadata
+  Downloading pydantic_core-2.50.4-cp311-cp311-macosx_11_0_arm64.whl.metadata (6.6 kB)
+Collecting pydantic-settings (from idf-component-manager~=2.2)
+  Obtaining dependency information for pydantic-settings from https://files.pythonhosted.org/packages/39/88/4131c51ff87b7cd7f82a1194d0c0a2b7ca68c72d9da04c3b7e69ab91a79f/pydantic_settings-2.16.2-py3-none-any.whl.metadata
+  Downloading pydantic_settings-2.16.2-py3-none-any.whl.metadata (4.0 kB)
+Collecting pathvalidate (from idf-component-manager~=2.2)
+  Obtaining dependency information for pathvalidate from https://files.pythonhosted.org/packages/9a/70/875f4a23bfc4731703a5835487d0d2fb999031bd415e7d17c0ae615c18b7/pathvalidate-3.3.1-py3-none-any.whl.metadata
+  Downloading pathvalidate-3.3.1-py3-none-any.whl.metadata (12 kB)
+Collecting typing-extensions (from idf-component-manager~=2.2)
+  Obtaining dependency information for typing-extensions from https://files.pythonhosted.org/packages/49/d3/b8441a820a491ddfc024b0b0cf0393375b75ea13866d9c66727e54c2fc80/typing_extensions-4.16.0-py3-none-any.whl.metadata
+  Downloading typing_extensions-4.16.0-py3-none-any.whl.metadata (3.3 kB)
+Collecting truststore (from idf-component-manager~=2.2)
+  Obtaining dependency information for truststore from https://files.pythonhosted.org/packages/51/e9/3a7820be2bb0fe53b6bc9c3be26d3d1158004e4c3ab953aa6840b955b1e9/truststore-0.10.5-py3-none-any.whl.metadata
+  Downloading truststore-0.10.5-py3-none-any.whl.metadata (4.5 kB)
+Collecting pycparser (from cffi>=1.12->cryptography~=44.0.0)
+  Obtaining dependency information for pycparser from https://files.pythonhosted.org/packages/b6/ae/315bbeee126a769cbde43cf4908acb4b40408d8bf8bbf334dd7368d8dadf/pycparser-3.12-py3-none-any.whl.metadata
+  Downloading pycparser-3.12-py3-none-any.whl.metadata (9.7 kB)
+Collecting annotated-types>=0.6.0 (from pydantic!=2.12.0->idf-component-manager~=2.2)
+  Obtaining dependency information for annotated-types>=0.6.0 from https://files.pythonhosted.org/packages/99/91/8acff4f5e50511b911bbccb72b8628a49c68ce14148cd9f6431094859a90/annotated_types-0.8.0-py3-none-any.whl.metadata
+  Downloading annotated_types-0.8.0-py3-none-any.whl.metadata (15 kB)
+Collecting typing-inspection>=0.4.4 (from pydantic!=2.12.0->idf-component-manager~=2.2)
+  Obtaining dependency information for typing-inspection>=0.4.4 from https://files.pythonhosted.org/packages/de/0c/ea2544850a7c135e15033a5c7a8e7211136184b7ae63e2239d557c2b3019/typing_inspection-0.4.5-py3-none-any.whl.metadata
+  Downloading typing_inspection-0.4.5-py3-none-any.whl.metadata (2.6 kB)
+Collecting python-dotenv>=1.2.2 (from pydantic-settings->idf-component-manager~=2.2)
+  Obtaining dependency information for python-dotenv>=1.2.2 from https://files.pythonhosted.org/packages/60/d1/38f3a3405989a89ac18390803e70c6ad7c7760da4f9b83cbeca0c44a0c72/python_dotenv-1.2.4-py3-none-any.whl.metadata
+  Downloading python_dotenv-1.2.4-py3-none-any.whl.metadata (29 kB)
+Collecting charset_normalizer<4,>=2 (from requests->idf-component-manager~=2.2)
+  Obtaining dependency information for charset_normalizer<4,>=2 from https://files.pythonhosted.org/packages/22/67/6a0b94a7960d5e1b5eacd2fb529f3fccc47db4644f7f0a7cfdcfc3be578a/charset_normalizer-3.5.2-cp311-cp311-macosx_10_9_universal2.whl.metadata
+  Downloading charset_normalizer-3.5.2-cp311-cp311-macosx_10_9_universal2.whl.metadata (46 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 46.4/46.4 kB 3.6 MB/s eta 0:00:00
+Collecting idna<4,>=2.5 (from requests->idf-component-manager~=2.2)
+  Obtaining dependency information for idna<4,>=2.5 from https://files.pythonhosted.org/packages/58/a2/bb081bab032533a855d44de1d56f8e8426114ff1ba5d1f07a438a0a654f8/idna-3.20-py3-none-any.whl.metadata
+  Downloading idna-3.20-py3-none-any.whl.metadata (7.2 kB)
+Collecting certifi>=2023.5.7 (from requests->idf-component-manager~=2.2)
+  Obtaining dependency information for certifi>=2023.5.7 from https://files.pythonhosted.org/packages/32/d1/a3652fe2c19134d0d15922177821d863cbd7e842d53a21bbe7e8e3a1b5ac/certifi-2026.10.23-py3-none-any.whl.metadata
+  Downloading certifi-2026.10.23-py3-none-any.whl.metadata (2.5 kB)
+Downloading urllib3-1.26.20-py2.py3-none-any.whl (144 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 144.2/144.2 kB 13.9 MB/s eta 0:00:00
+Downloading cryptography-44.0.3-cp39-abi3-macosx_10_9_universal2.whl (6.7 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 6.7/6.7 MB 17.0 MB/s eta 0:00:00
+Downloading pyparsing-3.3.3-py3-none-any.whl (126 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 126.4/126.4 kB 12.1 MB/s eta 0:00:00
+Downloading idf_component_manager-2.5.2-py3-none-any.whl (184 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 184.7/184.7 kB 21.3 MB/s eta 0:00:00
+Downloading esp_idf_kconfig-2.5.4-py3-none-any.whl (146 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 146.6/146.6 kB 22.0 MB/s eta 0:00:00
+Downloading chardet-3.0.4-py2.py3-none-any.whl (133 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 133.4/133.4 kB 12.0 MB/s eta 0:00:00
+Downloading cffi-2.1.1-cp311-cp311-macosx_11_0_arm64.whl (184 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 184.2/184.2 kB 15.4 MB/s eta 0:00:00
+Downloading pydantic-2.14.3-py3-none-any.whl (494 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 494.1/494.1 kB 38.1 MB/s eta 0:00:00
+Downloading pydantic_core-2.50.4-cp311-cp311-macosx_11_0_arm64.whl (2.1 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.1/2.1 MB 60.8 MB/s eta 0:00:00
+Downloading typing_extensions-4.16.0-py3-none-any.whl (45 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 45.6/45.6 kB 5.0 MB/s eta 0:00:00
+Downloading click-8.5.1-py3-none-any.whl (126 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 126.2/126.2 kB 5.0 MB/s eta 0:00:00
+Downloading colorama-0.4.6-py2.py3-none-any.whl (25 kB)
+Downloading jsonref-1.1.0-py3-none-any.whl (9.4 kB)
+Downloading pathvalidate-3.3.1-py3-none-any.whl (24 kB)
+Downloading psutil-7.2.2-cp36-abi3-macosx_11_0_arm64.whl (129 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 129.9/129.9 kB 12.8 MB/s eta 0:00:00
+Downloading pydantic_settings-2.16.2-py3-none-any.whl (81 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 82.0/82.0 kB 6.9 MB/s eta 0:00:00
+Downloading requests-2.34.2-py3-none-any.whl (73 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 73.1/73.1 kB 6.4 MB/s eta 0:00:00
+Downloading requests_file-3.0.1-py2.py3-none-any.whl (4.5 kB)
+Downloading requests_toolbelt-1.0.0-py2.py3-none-any.whl (54 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 54.5/54.5 kB 4.0 MB/s eta 0:00:00
+Downloading ruamel_yaml-0.19.1-py3-none-any.whl (118 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 118.1/118.1 kB 8.0 MB/s eta 0:00:00
+Downloading tqdm-4.70.1-py3-none-any.whl (80 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 80.2/80.2 kB 5.2 MB/s eta 0:00:00
+Downloading truststore-0.10.5-py3-none-any.whl (19 kB)
+Downloading annotated_types-0.8.0-py3-none-any.whl (13 kB)
+Downloading certifi-2026.10.23-py3-none-any.whl (135 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 135.1/135.1 kB 15.6 MB/s eta 0:00:00
+Downloading charset_normalizer-3.5.2-cp311-cp311-macosx_10_9_universal2.whl (370 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 370.6/370.6 kB 39.2 MB/s eta 0:00:00
+Using cached idna-3.20-py3-none-any.whl (69 kB)
+Downloading python_dotenv-1.2.4-py3-none-any.whl (23 kB)
+Downloading typing_inspection-0.4.5-py3-none-any.whl (14 kB)
+Downloading pycparser-3.12-py3-none-any.whl (62 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 62.6/62.6 kB 5.8 MB/s eta 0:00:00
+Installing collected packages: chardet, urllib3, typing-extensions, truststore, tqdm, ruamel.yaml, python-dotenv, pyparsing, pycparser, psutil, pathvalidate, jsonref, idna, esp-idf-kconfig, colorama, click, charset_normalizer, certifi, annotated-types, typing-inspection, requests, pydantic-core, cffi, requests-toolbelt, requests-file, pydantic, cryptography, pydantic-settings, idf-component-manager
+Successfully installed annotated-types-0.8.0 certifi-2026.10.23 cffi-2.1.1 chardet-3.0.4 charset_normalizer-3.5.2 click-8.5.1 colorama-0.4.6 cryptography-44.0.3 esp-idf-kconfig-2.5.4 idf-component-manager-2.5.2 idna-3.20 jsonref-1.1.0 pathvalidate-3.3.1 psutil-7.2.2 pycparser-3.12 pydantic-2.14.3 pydantic-core-2.50.4 pydantic-settings-2.16.2 pyparsing-3.3.3 python-dotenv-1.2.4 requests-2.34.2 requests-file-3.0.1 requests-toolbelt-1.0.0 ruamel.yaml-0.19.1 tqdm-4.70.1 truststore-0.10.5 typing-extensions-4.16.0 typing-inspection-0.4.5 urllib3-1.26.20
+
+[notice] A new release of pip is available: 23.2.1 -> 26.3
+[notice] To update, run: <HOME>/.platformio/penv/.espidf-5.5.0/bin/python -m pip install --upgrade pip
+Reading CMake configuration...
+Generating assembly for certificate bundle...
+LDF: Library Dependency Finder -> https://bit.ly/configure-pio-ldf
+LDF Modes: Finder ~ chain, Compatibility ~ soft
+Found 0 compatible libraries
+Scanning dependencies...
+No dependencies
+Building in release mode
+Compiling .pio/build/fnk0099-host/src/main.c.o
+Generating LD script .pio/build/fnk0099-host/esp-idf/esp_system/ld/memory.ld.in
+Generating LD script .pio/build/fnk0099-host/esp-idf/esp_system/ld/sections.ld.in
+Compiling .pio/build/fnk0099-host/app_trace/app_trace.c.o
+Compiling .pio/build/fnk0099-host/app_trace/app_trace_util.c.o
+Compiling .pio/build/fnk0099-host/app_trace/host_file_io.c.o
+Generating LD script .pio/build/fnk0099-host/memory.ld
+Compiling .pio/build/fnk0099-host/app_trace/port/port_uart.c.o
+Compiling .pio/build/fnk0099-host/app_update/esp_ota_ops.c.o
+Compiling .pio/build/fnk0099-host/app_update/esp_ota_app_desc.c.o
+Compiling .pio/build/fnk0099-host/bootloader_support/src/bootloader_common.c.o
+Archiving .pio/build/fnk0099-host/esp-idf/app_trace/libapp_trace.a
+Compiling .pio/build/fnk0099-host/bootloader_support/src/bootloader_common_loader.c.o
+Compiling .pio/build/fnk0099-host/bootloader_support/src/bootloader_clock_init.c.o
+Compiling .pio/build/fnk0099-host/bootloader_support/src/bootloader_mem.c.o
+Compiling .pio/build/fnk0099-host/bootloader_support/src/bootloader_random.c.o
+Compiling .pio/build/fnk0099-host/bootloader_support/src/bootloader_efuse.c.o
+Compiling .pio/build/fnk0099-host/bootloader_support/src/flash_encrypt.c.o
+Archiving .pio/build/fnk0099-host/esp-idf/app_update/libapp_update.a
+Compiling .pio/build/fnk0099-host/bootloader_support/src/secure_boot.c.o
+Compiling .pio/build/fnk0099-host/bootloader_support/src/bootloader_random_esp32s3.c.o
+Compiling .pio/build/fnk0099-host/bootloader_support/bootloader_flash/src/bootloader_flash.c.o
+Compiling .pio/build/fnk0099-host/bootloader_support/bootloader_flash/src/flash_qio_mode.c.o
+Compiling .pio/build/fnk0099-host/bootloader_support/bootloader_flash/src/bootloader_flash_config_esp32s3.c.o
+Compiling .pio/build/fnk0099-host/bootloader_support/src/bootloader_utility.c.o
+Compiling .pio/build/fnk0099-host/bootloader_support/src/flash_partitions.c.o
+Compiling .pio/build/fnk0099-host/bootloader_support/src/esp_image_format.c.o
+Compiling .pio/build/fnk0099-host/bootloader_support/src/bootloader_sha.c.o
+Compiling .pio/build/fnk0099-host/bootloader_support/src/esp32s3/secure_boot_secure_features.c.o
+Compiling .pio/build/fnk0099-host/cmock/CMock/src/cmock.c.o
+Compiling .pio/build/fnk0099-host/console/commands.c.o
+Compiling .pio/build/fnk0099-host/console/esp_console_common.c.o
+Indexing .pio/build/fnk0099-host/esp-idf/app_update/libapp_update.a
+Indexing .pio/build/fnk0099-host/esp-idf/app_trace/libapp_trace.a
+Compiling .pio/build/fnk0099-host/console/esp_console_repl_internal.c.o
+Archiving .pio/build/fnk0099-host/esp-idf/cmock/libcmock.a
+Compiling .pio/build/fnk0099-host/console/split_argv.c.o
+Archiving .pio/build/fnk0099-host/esp-idf/bootloader_support/libbootloader_support.a
+Indexing .pio/build/fnk0099-host/esp-idf/cmock/libcmock.a
+Compiling .pio/build/fnk0099-host/console/linenoise/linenoise.c.o
+Compiling .pio/build/fnk0099-host/console/esp_console_repl_chip.c.o
+Indexing .pio/build/fnk0099-host/esp-idf/bootloader_support/libbootloader_support.a
+Compiling .pio/build/fnk0099-host/console/argtable3/arg_cmd.c.o
+Compiling .pio/build/fnk0099-host/console/argtable3/arg_date.c.o
+Compiling .pio/build/fnk0099-host/console/argtable3/arg_dbl.c.o
+Compiling .pio/build/fnk0099-host/console/argtable3/arg_dstr.c.o
+Compiling .pio/build/fnk0099-host/console/argtable3/arg_end.c.o
+Compiling .pio/build/fnk0099-host/console/argtable3/arg_file.c.o
+Compiling .pio/build/fnk0099-host/console/argtable3/arg_hashtable.c.o
+Compiling .pio/build/fnk0099-host/console/argtable3/arg_int.c.o
+Compiling .pio/build/fnk0099-host/console/argtable3/arg_lit.c.o
+Compiling .pio/build/fnk0099-host/console/argtable3/arg_rem.c.o
+Compiling .pio/build/fnk0099-host/console/argtable3/arg_rex.c.o
+Compiling .pio/build/fnk0099-host/console/argtable3/arg_str.c.o
+Compiling .pio/build/fnk0099-host/console/argtable3/arg_utils.c.o
+Compiling .pio/build/fnk0099-host/console/argtable3/argtable3.c.o
+Compiling .pio/build/fnk0099-host/cxx/cxx_exception_stubs.cpp.o
+Compiling .pio/build/fnk0099-host/cxx/cxx_guards.cpp.o
+Compiling .pio/build/fnk0099-host/cxx/cxx_init.cpp.o
+Compiling .pio/build/fnk0099-host/driver/deprecated/adc_legacy.c.o
+Compiling .pio/build/fnk0099-host/driver/deprecated/adc_dma_legacy.c.o
+Archiving .pio/build/fnk0099-host/esp-idf/console/libconsole.a
+Compiling .pio/build/fnk0099-host/driver/deprecated/timer_legacy.c.o
+Compiling .pio/build/fnk0099-host/driver/i2c/i2c.c.o
+Indexing .pio/build/fnk0099-host/esp-idf/console/libconsole.a
+Compiling .pio/build/fnk0099-host/driver/deprecated/i2s_legacy.c.o
+Compiling .pio/build/fnk0099-host/driver/deprecated/mcpwm_legacy.c.o
+Compiling .pio/build/fnk0099-host/driver/deprecated/pcnt_legacy.c.o
+Compiling .pio/build/fnk0099-host/driver/deprecated/rmt_legacy.c.o
+Compiling .pio/build/fnk0099-host/driver/deprecated/sigma_delta_legacy.c.o
+Archiving .pio/build/fnk0099-host/esp-idf/cxx/libcxx.a
+Compiling .pio/build/fnk0099-host/driver/deprecated/rtc_temperature_legacy.c.o
+Indexing .pio/build/fnk0099-host/esp-idf/cxx/libcxx.a
+Compiling .pio/build/fnk0099-host/driver/touch_sensor/touch_sensor_common.c.o
+Compiling .pio/build/fnk0099-host/driver/touch_sensor/esp32s3/touch_sensor.c.o
+Compiling .pio/build/fnk0099-host/driver/twai/twai.c.o
+Compiling .pio/build/fnk0099-host/efuse/esp32s3/esp_efuse_table.c.o
+Compiling .pio/build/fnk0099-host/efuse/esp32s3/esp_efuse_fields.c.o
+Compiling .pio/build/fnk0099-host/efuse/esp32s3/esp_efuse_rtc_calib.c.o
+Compiling .pio/build/fnk0099-host/efuse/esp32s3/esp_efuse_utility.c.o
+Compiling .pio/build/fnk0099-host/efuse/src/esp_efuse_api.c.o
+Compiling .pio/build/fnk0099-host/efuse/src/esp_efuse_fields.c.o
+Compiling .pio/build/fnk0099-host/efuse/src/esp_efuse_utility.c.o
+Compiling .pio/build/fnk0099-host/efuse/src/efuse_controller/keys/with_key_purposes/esp_efuse_api_key.c.o
+Compiling .pio/build/fnk0099-host/efuse/src/esp_efuse_startup.c.o
+Compiling .pio/build/fnk0099-host/esp-tls/esp_tls.c.o
+Archiving .pio/build/fnk0099-host/esp-idf/driver/libdriver.a
+Archiving .pio/build/fnk0099-host/esp-idf/efuse/libefuse.a
+Compiling .pio/build/fnk0099-host/esp-tls/esp-tls-crypto/esp_tls_crypto.c.o
+Compiling .pio/build/fnk0099-host/esp-tls/esp_tls_error_capture.c.o
+Indexing .pio/build/fnk0099-host/esp-idf/driver/libdriver.a
+Compiling .pio/build/fnk0099-host/esp-tls/esp_tls_platform_port.c.o
+Indexing .pio/build/fnk0099-host/esp-idf/efuse/libefuse.a
+Compiling .pio/build/fnk0099-host/esp-tls/esp_tls_mbedtls.c.o
+Compiling .pio/build/fnk0099-host/esp_adc/adc_oneshot.c.o
+Compiling .pio/build/fnk0099-host/esp_adc/adc_common.c.o
+Compiling .pio/build/fnk0099-host/esp_adc/adc_cali.c.o
+Compiling .pio/build/fnk0099-host/esp_adc/adc_cali_curve_fitting.c.o
+Compiling .pio/build/fnk0099-host/esp_adc/deprecated/esp_adc_cal_common_legacy.c.o
+Compiling .pio/build/fnk0099-host/esp_adc/adc_continuous.c.o
+Compiling .pio/build/fnk0099-host/esp_adc/adc_monitor.c.o
+Compiling .pio/build/fnk0099-host/esp_adc/gdma/adc_dma.c.o
+Compiling .pio/build/fnk0099-host/esp_adc/adc_filter.c.o
+Compiling .pio/build/fnk0099-host/esp_adc/esp32s3/curve_fitting_coefficients.c.o
+Compiling .pio/build/fnk0099-host/esp_adc/deprecated/esp32s3/esp_adc_cal_legacy.c.o
+Compiling .pio/build/fnk0099-host/esp_app_format/esp_app_desc.c.o
+Compiling .pio/build/fnk0099-host/esp_bootloader_format/esp_bootloader_desc.c.o
+Compiling .pio/build/fnk0099-host/esp_coex/esp32s3/esp_coex_adapter.c.o
+Archiving .pio/build/fnk0099-host/esp-idf/esp-tls/libesp-tls.a
+Compiling .pio/build/fnk0099-host/esp_coex/src/coexist_debug_diagram.c.o
+Compiling .pio/build/fnk0099-host/esp_coex/src/coexist_debug.c.o
+Indexing .pio/build/fnk0099-host/esp-idf/esp-tls/libesp-tls.a
+Archiving .pio/build/fnk0099-host/esp-idf/esp_bootloader_format/libesp_bootloader_format.a
+Archiving .pio/build/fnk0099-host/esp-idf/esp_app_format/libesp_app_format.a
+Archiving .pio/build/fnk0099-host/esp-idf/esp_adc/libesp_adc.a
+Indexing .pio/build/fnk0099-host/esp-idf/esp_bootloader_format/libesp_bootloader_format.a
+Indexing .pio/build/fnk0099-host/esp-idf/esp_app_format/libesp_app_format.a
+Indexing .pio/build/fnk0099-host/esp-idf/esp_adc/libesp_adc.a
+Compiling .pio/build/fnk0099-host/esp_common/src/esp_err_to_name.c.o
+Archiving .pio/build/fnk0099-host/esp-idf/esp_coex/libesp_coex.a
+Compiling .pio/build/fnk0099-host/esp_driver_cam/esp_cam_ctlr.c.o
+Indexing .pio/build/fnk0099-host/esp-idf/esp_coex/libesp_coex.a
+Compiling .pio/build/fnk0099-host/esp_driver_cam/dvp_share_ctrl.c.o
+Compiling .pio/build/fnk0099-host/esp_driver_gpio/src/gpio.c.o
+Compiling .pio/build/fnk0099-host/esp_driver_gpio/src/gpio_glitch_filter_ops.c.o
+Compiling .pio/build/fnk0099-host/esp_driver_gpio/src/rtc_io.c.o
+Compiling .pio/build/fnk0099-host/esp_driver_gpio/src/dedic_gpio.c.o
+Compiling .pio/build/fnk0099-host/esp_driver_gpio/src/gpio_pin_glitch_filter.c.o
+Archiving .pio/build/fnk0099-host/esp-idf/esp_driver_cam/libesp_driver_cam.a
+Compiling .pio/build/fnk0099-host/esp_driver_gptimer/src/gptimer.c.o
+Indexing .pio/build/fnk0099-host/esp-idf/esp_driver_cam/libesp_driver_cam.a
+Compiling .pio/build/fnk0099-host/esp_driver_gptimer/src/gptimer_common.c.o
+Archiving .pio/build/fnk0099-host/esp-idf/esp_common/libesp_common.a
+Indexing .pio/build/fnk0099-host/esp-idf/esp_common/libesp_common.a
+Compiling .pio/build/fnk0099-host/esp_driver_i2c/i2c_master.c.o
+Compiling .pio/build/fnk0099-host/esp_driver_i2c/i2c_common.c.o
+Compiling .pio/build/fnk0099-host/esp_driver_i2c/i2c_slave.c.o
+Compiling .pio/build/fnk0099-host/esp_driver_i2s/i2s_common.c.o
+Compiling .pio/build/fnk0099-host/esp_driver_i2s/i2s_std.c.o
+Archiving .pio/build/fnk0099-host/esp-idf/esp_driver_gptimer/libesp_driver_gptimer.a
+Compiling .pio/build/fnk0099-host/esp_driver_i2s/i2s_pdm.c.o
+Compiling .pio/build/fnk0099-host/esp_driver_i2s/i2s_tdm.c.o
+Archiving .pio/build/fnk0099-host/esp-idf/esp_driver_gpio/libesp_driver_gpio.a
+Indexing .pio/build/fnk0099-host/esp-idf/esp_driver_gptimer/libesp_driver_gptimer.a
+Compiling .pio/build/fnk0099-host/esp_driver_i2s/i2s_platform.c.o
+Indexing .pio/build/fnk0099-host/esp-idf/esp_driver_gpio/libesp_driver_gpio.a
+Compiling .pio/build/fnk0099-host/esp_driver_ledc/src/ledc.c.o
+Compiling .pio/build/fnk0099-host/esp_driver_mcpwm/src/mcpwm_cap.c.o
+Compiling .pio/build/fnk0099-host/esp_driver_mcpwm/src/mcpwm_cmpr.c.o
+Compiling .pio/build/fnk0099-host/esp_driver_mcpwm/src/mcpwm_com.c.o
+Archiving .pio/build/fnk0099-host/esp-idf/esp_driver_i2s/libesp_driver_i2s.a
+Archiving .pio/build/fnk0099-host/esp-idf/esp_driver_i2c/libesp_driver_i2c.a
+Compiling .pio/build/fnk0099-host/esp_driver_mcpwm/src/mcpwm_fault.c.o
+Compiling .pio/build/fnk0099-host/esp_driver_mcpwm/src/mcpwm_gen.c.o
+Indexing .pio/build/fnk0099-host/esp-idf/esp_driver_i2s/libesp_driver_i2s.a
+Indexing .pio/build/fnk0099-host/esp-idf/esp_driver_i2c/libesp_driver_i2c.a
+Compiling .pio/build/fnk0099-host/esp_driver_mcpwm/src/mcpwm_oper.c.o
+Compiling .pio/build/fnk0099-host/esp_driver_mcpwm/src/mcpwm_sync.c.o
+Compiling .pio/build/fnk0099-host/esp_driver_mcpwm/src/mcpwm_timer.c.o
+Compiling .pio/build/fnk0099-host/esp_driver_pcnt/src/pulse_cnt.c.o
+Compiling .pio/build/fnk0099-host/esp_driver_rmt/src/rmt_common.c.o
+Compiling .pio/build/fnk0099-host/esp_driver_rmt/src/rmt_encoder.c.o
+Compiling .pio/build/fnk0099-host/esp_driver_rmt/src/rmt_encoder_bytes.c.o
+Compiling .pio/build/fnk0099-host/esp_driver_rmt/src/rmt_encoder_copy.c.o
+Compiling .pio/build/fnk0099-host/esp_driver_rmt/src/rmt_encoder_simple.c.o
+Compiling .pio/build/fnk0099-host/esp_driver_rmt/src/rmt_rx.c.o
+Archiving .pio/build/fnk0099-host/esp-idf/esp_driver_ledc/libesp_driver_ledc.a
+Compiling .pio/build/fnk0099-host/esp_driver_rmt/src/rmt_tx.c.o
+Archiving .pio/build/fnk0099-host/esp-idf/esp_driver_mcpwm/libesp_driver_mcpwm.a
+Indexing .pio/build/fnk0099-host/esp-idf/esp_driver_ledc/libesp_driver_ledc.a
+Archiving .pio/build/fnk0099-host/esp-idf/esp_driver_pcnt/libesp_driver_pcnt.a
+Indexing .pio/build/fnk0099-host/esp-idf/esp_driver_mcpwm/libesp_driver_mcpwm.a
+Compiling .pio/build/fnk0099-host/esp_driver_sdm/src/sdm.c.o
+Indexing .pio/build/fnk0099-host/esp-idf/esp_driver_pcnt/libesp_driver_pcnt.a
+Compiling .pio/build/fnk0099-host/esp_driver_sdmmc/src/sdmmc_transaction.c.o
+Compiling .pio/build/fnk0099-host/esp_driver_sdmmc/src/sdmmc_host.c.o
+Compiling .pio/build/fnk0099-host/esp_driver_sdspi/src/sdspi_crc.c.o
+Compiling .pio/build/fnk0099-host/esp_driver_sdspi/src/sdspi_host.c.o
+Archiving .pio/build/fnk0099-host/esp-idf/esp_driver_rmt/libesp_driver_rmt.a
+Archiving .pio/build/fnk0099-host/esp-idf/esp_driver_sdm/libesp_driver_sdm.a
+Compiling .pio/build/fnk0099-host/esp_driver_sdspi/src/sdspi_transaction.c.o
+Indexing .pio/build/fnk0099-host/esp-idf/esp_driver_rmt/libesp_driver_rmt.a
+Indexing .pio/build/fnk0099-host/esp-idf/esp_driver_sdm/libesp_driver_sdm.a
+Compiling .pio/build/fnk0099-host/esp_driver_spi/src/gpspi/spi_common.c.o
+Compiling .pio/build/fnk0099-host/esp_driver_spi/src/gpspi/spi_master.c.o
+Compiling .pio/build/fnk0099-host/esp_driver_spi/src/gpspi/spi_slave.c.o
+Compiling .pio/build/fnk0099-host/esp_driver_spi/src/gpspi/spi_slave_hd.c.o
+Archiving .pio/build/fnk0099-host/esp-idf/esp_driver_sdmmc/libesp_driver_sdmmc.a
+Indexing .pio/build/fnk0099-host/esp-idf/esp_driver_sdmmc/libesp_driver_sdmmc.a
+Compiling .pio/build/fnk0099-host/esp_driver_touch_sens/common/touch_sens_common.c.o
+Archiving .pio/build/fnk0099-host/esp-idf/esp_driver_sdspi/libesp_driver_sdspi.a
+Compiling .pio/build/fnk0099-host/esp_driver_touch_sens/hw_ver2/touch_version_specific.c.o
+Indexing .pio/build/fnk0099-host/esp-idf/esp_driver_sdspi/libesp_driver_sdspi.a
+Compiling .pio/build/fnk0099-host/esp_driver_tsens/src/temperature_sensor.c.o
+Compiling .pio/build/fnk0099-host/esp_driver_twai/esp_twai.c.o
+Compiling .pio/build/fnk0099-host/esp_driver_twai/esp_twai_onchip.c.o
+Compiling .pio/build/fnk0099-host/esp_driver_uart/src/uart.c.o
+Compiling .pio/build/fnk0099-host/esp_driver_uart/src/uart_wakeup.c.o
+Compiling .pio/build/fnk0099-host/esp_driver_uart/src/uhci.c.o
+Archiving .pio/build/fnk0099-host/esp-idf/esp_driver_touch_sens/libesp_driver_touch_sens.a
+Archiving .pio/build/fnk0099-host/esp-idf/esp_driver_tsens/libesp_driver_tsens.a
+Archiving .pio/build/fnk0099-host/esp-idf/esp_driver_spi/libesp_driver_spi.a
+Compiling .pio/build/fnk0099-host/esp_driver_uart/src/uart_vfs.c.o
+Indexing .pio/build/fnk0099-host/esp-idf/esp_driver_touch_sens/libesp_driver_touch_sens.a
+Indexing .pio/build/fnk0099-host/esp-idf/esp_driver_tsens/libesp_driver_tsens.a
+Indexing .pio/build/fnk0099-host/esp-idf/esp_driver_spi/libesp_driver_spi.a
+Compiling .pio/build/fnk0099-host/esp_driver_usb_serial_jtag/src/usb_serial_jtag.c.o
+Compiling .pio/build/fnk0099-host/esp_driver_usb_serial_jtag/src/usb_serial_jtag_connection_monitor.c.o
+Archiving .pio/build/fnk0099-host/esp-idf/esp_driver_twai/libesp_driver_twai.a
+Indexing .pio/build/fnk0099-host/esp-idf/esp_driver_twai/libesp_driver_twai.a
+Compiling .pio/build/fnk0099-host/esp_eth/src/esp_eth.c.o
+Compiling .pio/build/fnk0099-host/esp_eth/src/phy/esp_eth_phy_802_3.c.o
+Compiling .pio/build/fnk0099-host/esp_eth/src/esp_eth_netif_glue.c.o
+Compiling .pio/build/fnk0099-host/esp_event/default_event_loop.c.o
+Archiving .pio/build/fnk0099-host/esp-idf/esp_driver_usb_serial_jtag/libesp_driver_usb_serial_jtag.a
+Compiling .pio/build/fnk0099-host/esp_event/esp_event.c.o
+Compiling .pio/build/fnk0099-host/esp_event/esp_event_private.c.o
+Indexing .pio/build/fnk0099-host/esp-idf/esp_driver_usb_serial_jtag/libesp_driver_usb_serial_jtag.a
+Compiling .pio/build/fnk0099-host/esp_gdbstub/src/gdbstub.c.o
+Archiving .pio/build/fnk0099-host/esp-idf/esp_driver_uart/libesp_driver_uart.a
+Compiling .pio/build/fnk0099-host/esp_gdbstub/src/gdbstub_transport.c.o
+Compiling .pio/build/fnk0099-host/esp_gdbstub/src/packet.c.o
+Indexing .pio/build/fnk0099-host/esp-idf/esp_driver_uart/libesp_driver_uart.a
+Compiling .pio/build/fnk0099-host/esp_gdbstub/src/port/xtensa/gdbstub_xtensa.c.o
+Archiving .pio/build/fnk0099-host/esp-idf/esp_eth/libesp_eth.a
+Compiling .pio/build/fnk0099-host/esp_gdbstub/src/port/xtensa/gdbstub-entry.S.o
+Compiling .pio/build/fnk0099-host/esp_gdbstub/src/port/xtensa/xt_debugexception.S.o
+Indexing .pio/build/fnk0099-host/esp-idf/esp_eth/libesp_eth.a
+Compiling .pio/build/fnk0099-host/esp_hid/src/esp_hidd.c.o
+Archiving .pio/build/fnk0099-host/esp-idf/esp_event/libesp_event.a
+Compiling .pio/build/fnk0099-host/esp_hid/src/esp_hidh.c.o
+Indexing .pio/build/fnk0099-host/esp-idf/esp_event/libesp_event.a
+Compiling .pio/build/fnk0099-host/esp_hid/src/esp_hid_common.c.o
+Archiving .pio/build/fnk0099-host/esp-idf/esp_gdbstub/libesp_gdbstub.a
+Indexing .pio/build/fnk0099-host/esp-idf/esp_gdbstub/libesp_gdbstub.a
+Compiling .pio/build/fnk0099-host/esp_http_client/esp_http_client.c.o
+Compiling .pio/build/fnk0099-host/esp_http_client/lib/http_auth.c.o
+Compiling .pio/build/fnk0099-host/esp_http_client/lib/http_header.c.o
+Compiling .pio/build/fnk0099-host/esp_http_client/lib/http_utils.c.o
+Compiling .pio/build/fnk0099-host/esp_http_server/src/httpd_main.c.o
+Archiving .pio/build/fnk0099-host/esp-idf/esp_hid/libesp_hid.a
+Compiling .pio/build/fnk0099-host/esp_http_server/src/httpd_parse.c.o
+Compiling .pio/build/fnk0099-host/esp_http_server/src/httpd_sess.c.o
+Compiling .pio/build/fnk0099-host/esp_http_server/src/httpd_txrx.c.o
+Indexing .pio/build/fnk0099-host/esp-idf/esp_hid/libesp_hid.a
+Compiling .pio/build/fnk0099-host/esp_http_server/src/httpd_uri.c.o
+Compiling .pio/build/fnk0099-host/esp_http_server/src/httpd_ws.c.o
+Compiling .pio/build/fnk0099-host/esp_http_server/src/util/ctrl_sock.c.o
+Compiling .pio/build/fnk0099-host/esp_https_ota/src/esp_https_ota.c.o
+Compiling .pio/build/fnk0099-host/esp_https_server/src/https_server.c.o
+Compiling .pio/build/fnk0099-host/esp_hw_support/cpu.c.o
+Compiling .pio/build/fnk0099-host/esp_hw_support/port/esp32s3/esp_cpu_intr.c.o
+Compiling .pio/build/fnk0099-host/esp_hw_support/esp_memory_utils.c.o
+Archiving .pio/build/fnk0099-host/esp-idf/esp_http_client/libesp_http_client.a
+Archiving .pio/build/fnk0099-host/esp-idf/esp_http_server/libesp_http_server.a
+Compiling .pio/build/fnk0099-host/esp_hw_support/port/esp32s3/cpu_region_protect.c.o
+Compiling .pio/build/fnk0099-host/esp_hw_support/esp_clk.c.o
+Indexing .pio/build/fnk0099-host/esp-idf/esp_http_client/libesp_http_client.a
+Indexing .pio/build/fnk0099-host/esp-idf/esp_http_server/libesp_http_server.a
+Compiling .pio/build/fnk0099-host/esp_hw_support/clk_ctrl_os.c.o
+Compiling .pio/build/fnk0099-host/esp_hw_support/hw_random.c.o
+Compiling .pio/build/fnk0099-host/esp_hw_support/intr_alloc.c.o
+Compiling .pio/build/fnk0099-host/esp_hw_support/mac_addr.c.o
+Compiling .pio/build/fnk0099-host/esp_hw_support/periph_ctrl.c.o
+Archiving .pio/build/fnk0099-host/esp-idf/esp_https_server/libesp_https_server.a
+Archiving .pio/build/fnk0099-host/esp-idf/esp_https_ota/libesp_https_ota.a
+Compiling .pio/build/fnk0099-host/esp_hw_support/revision.c.o
+Indexing .pio/build/fnk0099-host/esp-idf/esp_https_server/libesp_https_server.a
+Compiling .pio/build/fnk0099-host/esp_hw_support/rtc_module.c.o
+Indexing .pio/build/fnk0099-host/esp-idf/esp_https_ota/libesp_https_ota.a
+Compiling .pio/build/fnk0099-host/esp_hw_support/regi2c_ctrl.c.o
+Compiling .pio/build/fnk0099-host/esp_hw_support/esp_gpio_reserve.c.o
+Compiling .pio/build/fnk0099-host/esp_hw_support/sar_periph_ctrl_common.c.o
+Compiling .pio/build/fnk0099-host/esp_hw_support/port/esp32s3/io_mux.c.o
+Compiling .pio/build/fnk0099-host/esp_hw_support/port/esp32s3/esp_clk_tree.c.o
+Compiling .pio/build/fnk0099-host/esp_hw_support/dma/esp_dma_utils.c.o
+Compiling .pio/build/fnk0099-host/esp_hw_support/dma/gdma_link.c.o
+Compiling .pio/build/fnk0099-host/esp_hw_support/spi_bus_lock.c.o
+Compiling .pio/build/fnk0099-host/esp_hw_support/clk_utils.c.o
+Compiling .pio/build/fnk0099-host/esp_hw_support/port/esp_clk_tree_common.c.o
+Compiling .pio/build/fnk0099-host/esp_hw_support/spi_share_hw_ctrl.c.o
+Compiling .pio/build/fnk0099-host/esp_hw_support/adc_share_hw_ctrl.c.o
+Compiling .pio/build/fnk0099-host/esp_hw_support/sleep_modem.c.o
+Compiling .pio/build/fnk0099-host/esp_hw_support/sleep_modes.c.o
+Compiling .pio/build/fnk0099-host/esp_hw_support/sleep_console.c.o
+Compiling .pio/build/fnk0099-host/esp_hw_support/sleep_usb.c.o
+Compiling .pio/build/fnk0099-host/esp_hw_support/sleep_gpio.c.o
+Compiling .pio/build/fnk0099-host/esp_hw_support/sleep_event.c.o
+Compiling .pio/build/fnk0099-host/esp_hw_support/dma/gdma.c.o
+Compiling .pio/build/fnk0099-host/esp_hw_support/deprecated/gdma_legacy.c.o
+Compiling .pio/build/fnk0099-host/esp_hw_support/dma/esp_async_memcpy.c.o
+Compiling .pio/build/fnk0099-host/esp_hw_support/dma/async_memcpy_gdma.c.o
+Compiling .pio/build/fnk0099-host/esp_hw_support/port/esp32s3/systimer.c.o
+Compiling .pio/build/fnk0099-host/esp_hw_support/mspi_timing_tuning/mspi_timing_tuning.c.o
+Compiling .pio/build/fnk0099-host/esp_hw_support/sleep_wake_stub.c.o
+Compiling .pio/build/fnk0099-host/esp_hw_support/esp_clock_output.c.o
+Compiling .pio/build/fnk0099-host/esp_hw_support/power_supply/brownout.c.o
+Compiling .pio/build/fnk0099-host/esp_hw_support/port/esp32s3/rtc_clk.c.o
+Compiling .pio/build/fnk0099-host/esp_hw_support/port/esp32s3/rtc_clk_init.c.o
+Compiling .pio/build/fnk0099-host/esp_hw_support/port/esp32s3/rtc_init.c.o
+Compiling .pio/build/fnk0099-host/esp_hw_support/port/esp32s3/rtc_sleep.c.o
+Compiling .pio/build/fnk0099-host/esp_hw_support/port/esp32s3/rtc_time.c.o
+Compiling .pio/build/fnk0099-host/esp_hw_support/port/esp32s3/chip_info.c.o
+Compiling .pio/build/fnk0099-host/esp_hw_support/port/esp32s3/sar_periph_ctrl.c.o
+Compiling .pio/build/fnk0099-host/esp_hw_support/port/esp32s3/esp_memprot.c.o
+Compiling .pio/build/fnk0099-host/esp_hw_support/port/esp_memprot_conv.c.o
+Compiling .pio/build/fnk0099-host/esp_hw_support/mspi_timing_tuning/port/esp32s3/mspi_timing_config.c.o
+Compiling .pio/build/fnk0099-host/esp_hw_support/mspi_timing_tuning/port/esp32s3/mspi_timing_by_mspi_delay.c.o
+Compiling .pio/build/fnk0099-host/esp_hw_support/lowpower/port/esp32s3/sleep_cpu.c.o
+Compiling .pio/build/fnk0099-host/esp_lcd/src/esp_lcd_common.c.o
+Compiling .pio/build/fnk0099-host/esp_lcd/src/esp_lcd_panel_io.c.o
+Compiling .pio/build/fnk0099-host/esp_lcd/src/esp_lcd_panel_nt35510.c.o
+Compiling .pio/build/fnk0099-host/esp_lcd/src/esp_lcd_panel_ssd1306.c.o
+Compiling .pio/build/fnk0099-host/esp_lcd/src/esp_lcd_panel_st7789.c.o
+Compiling .pio/build/fnk0099-host/esp_lcd/src/esp_lcd_panel_ops.c.o
+Compiling .pio/build/fnk0099-host/esp_lcd/i2c/esp_lcd_panel_io_i2c_v1.c.o
+Compiling .pio/build/fnk0099-host/esp_lcd/i2c/esp_lcd_panel_io_i2c_v2.c.o
+Compiling .pio/build/fnk0099-host/esp_lcd/spi/esp_lcd_panel_io_spi.c.o
+Compiling .pio/build/fnk0099-host/esp_lcd/i80/esp_lcd_panel_io_i80.c.o
+Compiling .pio/build/fnk0099-host/esp_lcd/rgb/esp_lcd_panel_rgb.c.o
+Archiving .pio/build/fnk0099-host/esp-idf/esp_hw_support/libesp_hw_support.a
+Compiling .pio/build/fnk0099-host/esp_local_ctrl/src/esp_local_ctrl.c.o
+Indexing .pio/build/fnk0099-host/esp-idf/esp_hw_support/libesp_hw_support.a
+Compiling .pio/build/fnk0099-host/esp_local_ctrl/src/esp_local_ctrl_handler.c.o
+Compiling .pio/build/fnk0099-host/esp_local_ctrl/proto-c/esp_local_ctrl.pb-c.c.o
+Compiling .pio/build/fnk0099-host/esp_local_ctrl/src/esp_local_ctrl_transport_httpd.c.o
+Compiling .pio/build/fnk0099-host/esp_mm/esp_mmu_map.c.o
+Compiling .pio/build/fnk0099-host/esp_mm/port/esp32s3/ext_mem_layout.c.o
+Compiling .pio/build/fnk0099-host/esp_mm/esp_cache_msync.c.o
+Compiling .pio/build/fnk0099-host/esp_mm/esp_cache_utils.c.o
+Compiling .pio/build/fnk0099-host/esp_mm/heap_align_hw.c.o
+Compiling .pio/build/fnk0099-host/esp_netif/esp_netif_handlers.c.o
+Archiving .pio/build/fnk0099-host/esp-idf/esp_local_ctrl/libesp_local_ctrl.a
+Compiling .pio/build/fnk0099-host/esp_netif/esp_netif_objects.c.o
+Compiling .pio/build/fnk0099-host/esp_netif/esp_netif_defaults.c.o
+Archiving .pio/build/fnk0099-host/esp-idf/esp_lcd/libesp_lcd.a
+Indexing .pio/build/fnk0099-host/esp-idf/esp_local_ctrl/libesp_local_ctrl.a
+Indexing .pio/build/fnk0099-host/esp-idf/esp_lcd/libesp_lcd.a
+Compiling .pio/build/fnk0099-host/esp_netif/lwip/esp_netif_lwip.c.o
+Archiving .pio/build/fnk0099-host/esp-idf/esp_mm/libesp_mm.a
+Compiling .pio/build/fnk0099-host/esp_netif/lwip/esp_netif_sntp.c.o
+Indexing .pio/build/fnk0099-host/esp-idf/esp_mm/libesp_mm.a
+Compiling .pio/build/fnk0099-host/esp_netif/lwip/esp_netif_lwip_defaults.c.o
+Compiling .pio/build/fnk0099-host/esp_netif/lwip/netif/wlanif.c.o
+Compiling .pio/build/fnk0099-host/esp_netif/lwip/netif/ethernetif.c.o
+Compiling .pio/build/fnk0099-host/esp_netif/lwip/netif/esp_pbuf_ref.c.o
+Compiling .pio/build/fnk0099-host/esp_partition/partition.c.o
+Compiling .pio/build/fnk0099-host/esp_partition/partition_target.c.o
+Compiling .pio/build/fnk0099-host/esp_phy/src/phy_override.c.o
+Compiling .pio/build/fnk0099-host/esp_phy/src/lib_printf.c.o
+Compiling .pio/build/fnk0099-host/esp_phy/src/phy_common.c.o
+Compiling .pio/build/fnk0099-host/esp_phy/src/phy_init.c.o
+Compiling .pio/build/fnk0099-host/esp_phy/esp32s3/phy_init_data.c.o
+Compiling .pio/build/fnk0099-host/esp_phy/src/btbb_init.c.o
+Compiling .pio/build/fnk0099-host/esp_pm/pm_locks.c.o
+Archiving .pio/build/fnk0099-host/esp-idf/esp_partition/libesp_partition.a
+Compiling .pio/build/fnk0099-host/esp_pm/pm_trace.c.o
+Archiving .pio/build/fnk0099-host/esp-idf/esp_netif/libesp_netif.a
+Indexing .pio/build/fnk0099-host/esp-idf/esp_partition/libesp_partition.a
+Compiling .pio/build/fnk0099-host/esp_pm/pm_impl.c.o
+Archiving .pio/build/fnk0099-host/esp-idf/esp_phy/libesp_phy.a
+Indexing .pio/build/fnk0099-host/esp-idf/esp_netif/libesp_netif.a
+Indexing .pio/build/fnk0099-host/esp-idf/esp_phy/libesp_phy.a
+Compiling .pio/build/fnk0099-host/esp_ringbuf/ringbuf.c.o
+Compiling .pio/build/fnk0099-host/esp_rom/patches/esp_rom_sys.c.o
+Compiling .pio/build/fnk0099-host/esp_rom/patches/esp_rom_print.c.o
+Compiling .pio/build/fnk0099-host/esp_rom/patches/esp_rom_crc.c.o
+Compiling .pio/build/fnk0099-host/esp_rom/patches/esp_rom_uart.c.o
+Compiling .pio/build/fnk0099-host/esp_rom/patches/esp_rom_spiflash.c.o
+Compiling .pio/build/fnk0099-host/esp_rom/patches/esp_rom_efuse.c.o
+Compiling .pio/build/fnk0099-host/esp_rom/patches/esp_rom_gpio.c.o
+Compiling .pio/build/fnk0099-host/esp_rom/patches/esp_rom_longjmp.S.o
+Archiving .pio/build/fnk0099-host/esp-idf/esp_pm/libesp_pm.a
+Compiling .pio/build/fnk0099-host/esp_rom/patches/esp_rom_systimer.c.o
+Indexing .pio/build/fnk0099-host/esp-idf/esp_pm/libesp_pm.a
+Compiling .pio/build/fnk0099-host/esp_rom/patches/esp_rom_wdt.c.o
+Compiling .pio/build/fnk0099-host/esp_rom/patches/esp_rom_cache_esp32s2_esp32s3.c.o
+Compiling .pio/build/fnk0099-host/esp_rom/patches/esp_rom_cache_writeback_esp32s3.S.o
+Compiling .pio/build/fnk0099-host/esp_security/src/init.c.o
+Archiving .pio/build/fnk0099-host/esp-idf/esp_ringbuf/libesp_ringbuf.a
+Compiling .pio/build/fnk0099-host/esp_security/src/esp_hmac.c.o
+Indexing .pio/build/fnk0099-host/esp-idf/esp_ringbuf/libesp_ringbuf.a
+Compiling .pio/build/fnk0099-host/esp_security/src/esp_ds.c.o
+Archiving .pio/build/fnk0099-host/esp-idf/esp_rom/libesp_rom.a
+Compiling .pio/build/fnk0099-host/esp_security/src/esp_crypto_lock.c.o
+Compiling .pio/build/fnk0099-host/esp_security/src/esp_crypto_periph_clk.c.o
+Indexing .pio/build/fnk0099-host/esp-idf/esp_rom/libesp_rom.a
+Compiling .pio/build/fnk0099-host/esp_system/esp_err.c.o
+Compiling .pio/build/fnk0099-host/esp_system/crosscore_int.c.o
+Compiling .pio/build/fnk0099-host/esp_system/esp_ipc.c.o
+Compiling .pio/build/fnk0099-host/esp_system/esp_system_console.c.o
+Compiling .pio/build/fnk0099-host/esp_system/freertos_hooks.c.o
+Archiving .pio/build/fnk0099-host/esp-idf/esp_security/libesp_security.a
+Compiling .pio/build/fnk0099-host/esp_system/int_wdt.c.o
+Indexing .pio/build/fnk0099-host/esp-idf/esp_security/libesp_security.a
+Compiling .pio/build/fnk0099-host/esp_system/panic.c.o
+Compiling .pio/build/fnk0099-host/esp_system/esp_system.c.o
+Compiling .pio/build/fnk0099-host/esp_system/startup.c.o
+Compiling .pio/build/fnk0099-host/esp_system/startup_funcs.c.o
+Compiling .pio/build/fnk0099-host/esp_system/system_time.c.o
+Compiling .pio/build/fnk0099-host/esp_system/stack_check.c.o
+Compiling .pio/build/fnk0099-host/esp_system/ubsan.c.o
+Compiling .pio/build/fnk0099-host/esp_system/xt_wdt.c.o
+Compiling .pio/build/fnk0099-host/esp_system/task_wdt/task_wdt.c.o
+Compiling .pio/build/fnk0099-host/esp_system/task_wdt/task_wdt_impl_timergroup.c.o
+Compiling .pio/build/fnk0099-host/esp_system/port/cpu_start.c.o
+Compiling .pio/build/fnk0099-host/esp_system/port/panic_handler.c.o
+Compiling .pio/build/fnk0099-host/esp_system/port/esp_system_chip.c.o
+Compiling .pio/build/fnk0099-host/esp_system/port/image_process.c.o
+Compiling .pio/build/fnk0099-host/esp_system/port/esp_ipc_isr.c.o
+Compiling .pio/build/fnk0099-host/esp_system/port/arch/xtensa/esp_ipc_isr_port.c.o
+Compiling .pio/build/fnk0099-host/esp_system/port/arch/xtensa/esp_ipc_isr_handler.S.o
+Compiling .pio/build/fnk0099-host/esp_system/port/arch/xtensa/esp_ipc_isr_routines.S.o
+Compiling .pio/build/fnk0099-host/esp_system/port/arch/xtensa/panic_arch.c.o
+Compiling .pio/build/fnk0099-host/esp_system/port/arch/xtensa/panic_handler_asm.S.o
+Compiling .pio/build/fnk0099-host/esp_system/port/arch/xtensa/expression_with_stack.c.o
+Compiling .pio/build/fnk0099-host/esp_system/port/arch/xtensa/expression_with_stack_asm.S.o
+Compiling .pio/build/fnk0099-host/esp_system/port/arch/xtensa/debug_helpers.c.o
+Compiling .pio/build/fnk0099-host/esp_system/port/arch/xtensa/debug_helpers_asm.S.o
+Compiling .pio/build/fnk0099-host/esp_system/port/arch/xtensa/debug_stubs.c.o
+Compiling .pio/build/fnk0099-host/esp_system/port/arch/xtensa/trax.c.o
+Compiling .pio/build/fnk0099-host/esp_system/port/soc/esp32s3/highint_hdl.S.o
+Compiling .pio/build/fnk0099-host/esp_system/port/soc/esp32s3/clk.c.o
+Compiling .pio/build/fnk0099-host/esp_system/port/soc/esp32s3/reset_reason.c.o
+Compiling .pio/build/fnk0099-host/esp_system/port/soc/esp32s3/system_internal.c.o
+Compiling .pio/build/fnk0099-host/esp_system/port/soc/esp32s3/cache_err_int.c.o
+Compiling .pio/build/fnk0099-host/esp_system/port/soc/esp32s3/apb_backup_dma.c.o
+Compiling .pio/build/fnk0099-host/esp_timer/src/esp_timer.c.o
+Compiling .pio/build/fnk0099-host/esp_timer/src/esp_timer_init.c.o
+Compiling .pio/build/fnk0099-host/esp_timer/src/ets_timer_legacy.c.o
+Compiling .pio/build/fnk0099-host/esp_timer/src/system_time.c.o
+Compiling .pio/build/fnk0099-host/esp_timer/src/esp_timer_impl_common.c.o
+Compiling .pio/build/fnk0099-host/esp_timer/src/esp_timer_impl_systimer.c.o
+Archiving .pio/build/fnk0099-host/esp-idf/esp_system/libesp_system.a
+Compiling .pio/build/fnk0099-host/esp_vfs_console/vfs_console.c.o
+Compiling .pio/build/fnk0099-host/esp_wifi/src/lib_printf.c.o
+Indexing .pio/build/fnk0099-host/esp-idf/esp_system/libesp_system.a
+Compiling .pio/build/fnk0099-host/esp_wifi/src/mesh_event.c.o
+Compiling .pio/build/fnk0099-host/esp_wifi/src/smartconfig.c.o
+Compiling .pio/build/fnk0099-host/esp_wifi/src/wifi_init.c.o
+Archiving .pio/build/fnk0099-host/esp-idf/esp_timer/libesp_timer.a
+Compiling .pio/build/fnk0099-host/esp_wifi/src/wifi_default.c.o
+Archiving .pio/build/fnk0099-host/esp-idf/esp_vfs_console/libesp_vfs_console.a
+Indexing .pio/build/fnk0099-host/esp-idf/esp_timer/libesp_timer.a
+Compiling .pio/build/fnk0099-host/esp_wifi/src/wifi_netif.c.o
+Compiling .pio/build/fnk0099-host/esp_wifi/src/wifi_default_ap.c.o
+Indexing .pio/build/fnk0099-host/esp-idf/esp_vfs_console/libesp_vfs_console.a
+Compiling .pio/build/fnk0099-host/esp_wifi/esp32s3/esp_adapter.c.o
+Compiling .pio/build/fnk0099-host/esp_wifi/regulatory/esp_wifi_regulatory.c.o
+Compiling .pio/build/fnk0099-host/esp_wifi/src/smartconfig_ack.c.o
+Compiling .pio/build/fnk0099-host/espcoredump/src/core_dump_init.c.o
+Compiling .pio/build/fnk0099-host/espcoredump/src/core_dump_common.c.o
+Compiling .pio/build/fnk0099-host/espcoredump/src/core_dump_flash.c.o
+Compiling .pio/build/fnk0099-host/espcoredump/src/core_dump_uart.c.o
+Compiling .pio/build/fnk0099-host/espcoredump/src/core_dump_elf.c.o
+Compiling .pio/build/fnk0099-host/espcoredump/src/core_dump_binary.c.o
+Compiling .pio/build/fnk0099-host/espcoredump/src/core_dump_sha.c.o
+Compiling .pio/build/fnk0099-host/espcoredump/src/core_dump_crc.c.o
+Compiling .pio/build/fnk0099-host/espcoredump/src/port/xtensa/core_dump_port.c.o
+Archiving .pio/build/fnk0099-host/esp-idf/esp_wifi/libesp_wifi.a
+Compiling .pio/build/fnk0099-host/managed_components/espressif__usb_host_hid/hid_host.c.o
+Indexing .pio/build/fnk0099-host/esp-idf/esp_wifi/libesp_wifi.a
+Compiling .pio/build/fnk0099-host/fatfs/diskio/diskio.c.o
+Compiling .pio/build/fnk0099-host/fatfs/diskio/diskio_rawflash.c.o
+Archiving .pio/build/fnk0099-host/esp-idf/espcoredump/libespcoredump.a
+Compiling .pio/build/fnk0099-host/fatfs/diskio/diskio_wl.c.o
+Compiling .pio/build/fnk0099-host/fatfs/src/ff.c.o
+Indexing .pio/build/fnk0099-host/esp-idf/espcoredump/libespcoredump.a
+Compiling .pio/build/fnk0099-host/fatfs/src/ffunicode.c.o
+Compiling .pio/build/fnk0099-host/fatfs/port/freertos/ffsystem.c.o
+Compiling .pio/build/fnk0099-host/fatfs/diskio/diskio_sdmmc.c.o
+Compiling .pio/build/fnk0099-host/fatfs/vfs/vfs_fat.c.o
+Compiling .pio/build/fnk0099-host/fatfs/vfs/vfs_fat_sdmmc.c.o
+Compiling .pio/build/fnk0099-host/fatfs/vfs/vfs_fat_spiflash.c.o
+Compiling .pio/build/fnk0099-host/freertos/heap_idf.c.o
+Compiling .pio/build/fnk0099-host/freertos/app_startup.c.o
+Archiving .pio/build/fnk0099-host/esp-idf/espressif__usb_host_hid/libespressif__usb_host_hid.a
+Compiling .pio/build/fnk0099-host/freertos/port_common.c.o
+Compiling .pio/build/fnk0099-host/freertos/port_systick.c.o
+Indexing .pio/build/fnk0099-host/esp-idf/espressif__usb_host_hid/libespressif__usb_host_hid.a
+Compiling .pio/build/fnk0099-host/freertos/FreeRTOS-Kernel/list.c.o
+Compiling .pio/build/fnk0099-host/freertos/FreeRTOS-Kernel/queue.c.o
+Compiling .pio/build/fnk0099-host/freertos/FreeRTOS-Kernel/tasks.c.o
+Compiling .pio/build/fnk0099-host/freertos/FreeRTOS-Kernel/timers.c.o
+Compiling .pio/build/fnk0099-host/freertos/FreeRTOS-Kernel/event_groups.c.o
+Compiling .pio/build/fnk0099-host/freertos/FreeRTOS-Kernel/stream_buffer.c.o
+Archiving .pio/build/fnk0099-host/esp-idf/fatfs/libfatfs.a
+Compiling .pio/build/fnk0099-host/freertos/FreeRTOS-Kernel/portable/xtensa/port.c.o
+Compiling .pio/build/fnk0099-host/freertos/FreeRTOS-Kernel/portable/xtensa/portasm.S.o
+Compiling .pio/build/fnk0099-host/freertos/FreeRTOS-Kernel/portable/xtensa/xtensa_init.c.o
+Indexing .pio/build/fnk0099-host/esp-idf/fatfs/libfatfs.a
+Compiling .pio/build/fnk0099-host/freertos/FreeRTOS-Kernel/portable/xtensa/xtensa_overlay_os_hook.c.o
+Compiling .pio/build/fnk0099-host/freertos/esp_additions/freertos_compatibility.c.o
+Compiling .pio/build/fnk0099-host/freertos/esp_additions/idf_additions_event_groups.c.o
+Compiling .pio/build/fnk0099-host/freertos/esp_additions/idf_additions.c.o
+Compiling .pio/build/fnk0099-host/hal/hal_utils.c.o
+Compiling .pio/build/fnk0099-host/hal/mpu_hal.c.o
+Compiling .pio/build/fnk0099-host/hal/efuse_hal.c.o
+Compiling .pio/build/fnk0099-host/hal/esp32s3/efuse_hal.c.o
+Compiling .pio/build/fnk0099-host/hal/mmu_hal.c.o
+Compiling .pio/build/fnk0099-host/hal/cache_hal.c.o
+Compiling .pio/build/fnk0099-host/hal/color_hal.c.o
+Compiling .pio/build/fnk0099-host/hal/spi_flash_hal.c.o
+Archiving .pio/build/fnk0099-host/esp-idf/freertos/libfreertos.a
+Compiling .pio/build/fnk0099-host/hal/spi_flash_hal_iram.c.o
+Compiling .pio/build/fnk0099-host/hal/spi_flash_encrypt_hal_iram.c.o
+Indexing .pio/build/fnk0099-host/esp-idf/freertos/libfreertos.a
+Compiling .pio/build/fnk0099-host/hal/esp32s3/clk_tree_hal.c.o
+Compiling .pio/build/fnk0099-host/hal/systimer_hal.c.o
+Compiling .pio/build/fnk0099-host/hal/uart_hal.c.o
+Compiling .pio/build/fnk0099-host/hal/uart_hal_iram.c.o
+Compiling .pio/build/fnk0099-host/hal/gpio_hal.c.o
+Compiling .pio/build/fnk0099-host/hal/rtc_io_hal.c.o
+Compiling .pio/build/fnk0099-host/hal/timer_hal.c.o
+Compiling .pio/build/fnk0099-host/hal/ledc_hal.c.o
+Compiling .pio/build/fnk0099-host/hal/ledc_hal_iram.c.o
+Compiling .pio/build/fnk0099-host/hal/i2c_hal.c.o
+Compiling .pio/build/fnk0099-host/hal/i2c_hal_iram.c.o
+Compiling .pio/build/fnk0099-host/hal/rmt_hal.c.o
+Compiling .pio/build/fnk0099-host/hal/pcnt_hal.c.o
+Compiling .pio/build/fnk0099-host/hal/mcpwm_hal.c.o
+Compiling .pio/build/fnk0099-host/hal/uhci_hal.c.o
+Compiling .pio/build/fnk0099-host/hal/twai_hal_sja1000.c.o
+Compiling .pio/build/fnk0099-host/hal/gdma_hal_top.c.o
+Compiling .pio/build/fnk0099-host/hal/gdma_hal_ahb_v1.c.o
+Compiling .pio/build/fnk0099-host/hal/i2s_hal.c.o
+Compiling .pio/build/fnk0099-host/hal/sdm_hal.c.o
+Compiling .pio/build/fnk0099-host/hal/sdmmc_hal.c.o
+Compiling .pio/build/fnk0099-host/hal/adc_hal_common.c.o
+Compiling .pio/build/fnk0099-host/hal/adc_oneshot_hal.c.o
+Compiling .pio/build/fnk0099-host/hal/adc_hal.c.o
+Compiling .pio/build/fnk0099-host/hal/lcd_hal.c.o
+Compiling .pio/build/fnk0099-host/hal/mpi_hal.c.o
+Compiling .pio/build/fnk0099-host/hal/sha_hal.c.o
+Compiling .pio/build/fnk0099-host/hal/aes_hal.c.o
+Compiling .pio/build/fnk0099-host/hal/brownout_hal.c.o
+Compiling .pio/build/fnk0099-host/hal/spi_hal.c.o
+Compiling .pio/build/fnk0099-host/hal/spi_hal_iram.c.o
+Compiling .pio/build/fnk0099-host/hal/spi_slave_hal.c.o
+Compiling .pio/build/fnk0099-host/hal/spi_slave_hal_iram.c.o
+Compiling .pio/build/fnk0099-host/hal/spi_slave_hd_hal.c.o
+Compiling .pio/build/fnk0099-host/hal/spi_flash_hal_gpspi.c.o
+Compiling .pio/build/fnk0099-host/hal/hmac_hal.c.o
+Compiling .pio/build/fnk0099-host/hal/ds_hal.c.o
+Compiling .pio/build/fnk0099-host/hal/usb_serial_jtag_hal.c.o
+Compiling .pio/build/fnk0099-host/hal/usb_dwc_hal.c.o
+Compiling .pio/build/fnk0099-host/hal/usb_wrap_hal.c.o
+Compiling .pio/build/fnk0099-host/hal/esp32s3/touch_sensor_hal.c.o
+Compiling .pio/build/fnk0099-host/hal/touch_sensor_hal.c.o
+Compiling .pio/build/fnk0099-host/hal/touch_sens_hal.c.o
+Compiling .pio/build/fnk0099-host/hal/xt_wdt_hal.c.o
+Compiling .pio/build/fnk0099-host/hal/esp32s3/rtc_cntl_hal.c.o
+Compiling .pio/build/fnk0099-host/heap/heap_caps_base.c.o
+Compiling .pio/build/fnk0099-host/heap/heap_caps.c.o
+Compiling .pio/build/fnk0099-host/heap/heap_caps_init.c.o
+Compiling .pio/build/fnk0099-host/heap/multi_heap.c.o
+Compiling .pio/build/fnk0099-host/heap/tlsf/tlsf.c.o
+Compiling .pio/build/fnk0099-host/heap/port/memory_layout_utils.c.o
+Archiving .pio/build/fnk0099-host/esp-idf/hal/libhal.a
+Compiling .pio/build/fnk0099-host/heap/port/esp32s3/memory_layout.c.o
+Compiling .pio/build/fnk0099-host/http_parser/http_parser.c.o
+Compiling .pio/build/fnk0099-host/json/cJSON/cJSON.c.o
+Compiling .pio/build/fnk0099-host/json/cJSON/cJSON_Utils.c.o
+Indexing .pio/build/fnk0099-host/esp-idf/hal/libhal.a
+Compiling .pio/build/fnk0099-host/log/src/os/log_timestamp.c.o
+Compiling .pio/build/fnk0099-host/log/src/log_timestamp_common.c.o
+Compiling .pio/build/fnk0099-host/log/src/os/log_lock.c.o
+Compiling .pio/build/fnk0099-host/log/src/buffer/log_buffers.c.o
+Compiling .pio/build/fnk0099-host/log/src/os/util.c.o
+Compiling .pio/build/fnk0099-host/log/src/util.c.o
+Compiling .pio/build/fnk0099-host/log/src/log_format_text.c.o
+Compiling .pio/build/fnk0099-host/log/src/log_print.c.o
+Compiling .pio/build/fnk0099-host/log/src/log.c.o
+Compiling .pio/build/fnk0099-host/log/src/os/log_write.c.o
+Archiving .pio/build/fnk0099-host/esp-idf/heap/libheap.a
+Compiling .pio/build/fnk0099-host/log/src/log_level/log_level.c.o
+Compiling .pio/build/fnk0099-host/log/src/log_level/tag_log_level/tag_log_level.c.o
+Archiving .pio/build/fnk0099-host/esp-idf/json/libjson.a
+Indexing .pio/build/fnk0099-host/esp-idf/heap/libheap.a
+Compiling .pio/build/fnk0099-host/log/src/log_level/tag_log_level/linked_list/log_linked_list.c.o
+Indexing .pio/build/fnk0099-host/esp-idf/json/libjson.a
+Archiving .pio/build/fnk0099-host/esp-idf/http_parser/libhttp_parser.a
+Compiling .pio/build/fnk0099-host/log/src/log_level/tag_log_level/cache/log_binary_heap.c.o
+Indexing .pio/build/fnk0099-host/esp-idf/http_parser/libhttp_parser.a
+Compiling .pio/build/fnk0099-host/lwip/apps/sntp/sntp.c.o
+Compiling .pio/build/fnk0099-host/lwip/lwip/src/api/api_lib.c.o
+Compiling .pio/build/fnk0099-host/lwip/lwip/src/api/api_msg.c.o
+Archiving .pio/build/fnk0099-host/esp-idf/log/liblog.a
+Compiling .pio/build/fnk0099-host/lwip/lwip/src/api/err.c.o
+Compiling .pio/build/fnk0099-host/lwip/lwip/src/api/if_api.c.o
+Compiling .pio/build/fnk0099-host/lwip/lwip/src/api/netbuf.c.o
+Indexing .pio/build/fnk0099-host/esp-idf/log/liblog.a
+Compiling .pio/build/fnk0099-host/lwip/lwip/src/api/netdb.c.o
+Compiling .pio/build/fnk0099-host/lwip/lwip/src/api/netifapi.c.o
+Compiling .pio/build/fnk0099-host/lwip/lwip/src/api/sockets.c.o
+Compiling .pio/build/fnk0099-host/lwip/lwip/src/api/tcpip.c.o
+Compiling .pio/build/fnk0099-host/lwip/lwip/src/apps/sntp/sntp.c.o
+Compiling .pio/build/fnk0099-host/lwip/lwip/src/apps/netbiosns/netbiosns.c.o
+Compiling .pio/build/fnk0099-host/lwip/lwip/src/core/def.c.o
+Compiling .pio/build/fnk0099-host/lwip/lwip/src/core/dns.c.o
+Compiling .pio/build/fnk0099-host/lwip/lwip/src/core/inet_chksum.c.o
+Compiling .pio/build/fnk0099-host/lwip/lwip/src/core/init.c.o
+Compiling .pio/build/fnk0099-host/lwip/lwip/src/core/ip.c.o
+Compiling .pio/build/fnk0099-host/lwip/lwip/src/core/mem.c.o
+Compiling .pio/build/fnk0099-host/lwip/lwip/src/core/memp.c.o
+Compiling .pio/build/fnk0099-host/lwip/lwip/src/core/netif.c.o
+Compiling .pio/build/fnk0099-host/lwip/lwip/src/core/pbuf.c.o
+Compiling .pio/build/fnk0099-host/lwip/lwip/src/core/raw.c.o
+Compiling .pio/build/fnk0099-host/lwip/lwip/src/core/stats.c.o
+Compiling .pio/build/fnk0099-host/lwip/lwip/src/core/sys.c.o
+Compiling .pio/build/fnk0099-host/lwip/lwip/src/core/tcp.c.o
+Compiling .pio/build/fnk0099-host/lwip/lwip/src/core/tcp_in.c.o
+Compiling .pio/build/fnk0099-host/lwip/lwip/src/core/tcp_out.c.o
+Compiling .pio/build/fnk0099-host/lwip/lwip/src/core/timeouts.c.o
+Compiling .pio/build/fnk0099-host/lwip/lwip/src/core/udp.c.o
+Compiling .pio/build/fnk0099-host/lwip/lwip/src/core/ipv4/autoip.c.o
+Compiling .pio/build/fnk0099-host/lwip/lwip/src/core/ipv4/dhcp.c.o
+Compiling .pio/build/fnk0099-host/lwip/lwip/src/core/ipv4/etharp.c.o
+Compiling .pio/build/fnk0099-host/lwip/lwip/src/core/ipv4/icmp.c.o
+Compiling .pio/build/fnk0099-host/lwip/lwip/src/core/ipv4/igmp.c.o
+Compiling .pio/build/fnk0099-host/lwip/lwip/src/core/ipv4/ip4.c.o
+Compiling .pio/build/fnk0099-host/lwip/lwip/src/core/ipv4/ip4_napt.c.o
+Compiling .pio/build/fnk0099-host/lwip/lwip/src/core/ipv4/ip4_addr.c.o
+Compiling .pio/build/fnk0099-host/lwip/lwip/src/core/ipv4/ip4_frag.c.o
+Compiling .pio/build/fnk0099-host/lwip/lwip/src/core/ipv6/dhcp6.c.o
+Compiling .pio/build/fnk0099-host/lwip/lwip/src/core/ipv6/ethip6.c.o
+Compiling .pio/build/fnk0099-host/lwip/lwip/src/core/ipv6/icmp6.c.o
+Compiling .pio/build/fnk0099-host/lwip/lwip/src/core/ipv6/inet6.c.o
+Compiling .pio/build/fnk0099-host/lwip/lwip/src/core/ipv6/ip6.c.o
+Compiling .pio/build/fnk0099-host/lwip/lwip/src/core/ipv6/ip6_addr.c.o
+Compiling .pio/build/fnk0099-host/lwip/lwip/src/core/ipv6/ip6_frag.c.o
+Compiling .pio/build/fnk0099-host/lwip/lwip/src/core/ipv6/mld6.c.o
+Compiling .pio/build/fnk0099-host/lwip/lwip/src/core/ipv6/nd6.c.o
+Compiling .pio/build/fnk0099-host/lwip/lwip/src/netif/ethernet.c.o
+Compiling .pio/build/fnk0099-host/lwip/lwip/src/netif/bridgeif.c.o
+Compiling .pio/build/fnk0099-host/lwip/lwip/src/netif/bridgeif_fdb.c.o
+Compiling .pio/build/fnk0099-host/lwip/lwip/src/netif/slipif.c.o
+Compiling .pio/build/fnk0099-host/lwip/lwip/src/netif/ppp/auth.c.o
+Compiling .pio/build/fnk0099-host/lwip/lwip/src/netif/ppp/ccp.c.o
+Compiling .pio/build/fnk0099-host/lwip/lwip/src/netif/ppp/chap-md5.c.o
+Compiling .pio/build/fnk0099-host/lwip/lwip/src/netif/ppp/chap-new.c.o
+Compiling .pio/build/fnk0099-host/lwip/lwip/src/netif/ppp/chap_ms.c.o
+Compiling .pio/build/fnk0099-host/lwip/lwip/src/netif/ppp/demand.c.o
+Compiling .pio/build/fnk0099-host/lwip/lwip/src/netif/ppp/eap.c.o
+Compiling .pio/build/fnk0099-host/lwip/lwip/src/netif/ppp/ecp.c.o
+Compiling .pio/build/fnk0099-host/lwip/lwip/src/netif/ppp/eui64.c.o
+Compiling .pio/build/fnk0099-host/lwip/lwip/src/netif/ppp/fsm.c.o
+Compiling .pio/build/fnk0099-host/lwip/lwip/src/netif/ppp/ipcp.c.o
+Compiling .pio/build/fnk0099-host/lwip/lwip/src/netif/ppp/ipv6cp.c.o
+Compiling .pio/build/fnk0099-host/lwip/lwip/src/netif/ppp/lcp.c.o
+Compiling .pio/build/fnk0099-host/lwip/lwip/src/netif/ppp/magic.c.o
+Compiling .pio/build/fnk0099-host/lwip/lwip/src/netif/ppp/mppe.c.o
+Compiling .pio/build/fnk0099-host/lwip/lwip/src/netif/ppp/multilink.c.o
+Compiling .pio/build/fnk0099-host/lwip/lwip/src/netif/ppp/ppp.c.o
+Compiling .pio/build/fnk0099-host/lwip/lwip/src/netif/ppp/pppapi.c.o
+Compiling .pio/build/fnk0099-host/lwip/lwip/src/netif/ppp/pppcrypt.c.o
+Compiling .pio/build/fnk0099-host/lwip/lwip/src/netif/ppp/pppoe.c.o
+Compiling .pio/build/fnk0099-host/lwip/lwip/src/netif/ppp/pppol2tp.c.o
+Compiling .pio/build/fnk0099-host/lwip/lwip/src/netif/ppp/pppos.c.o
+Compiling .pio/build/fnk0099-host/lwip/lwip/src/netif/ppp/upap.c.o
+Compiling .pio/build/fnk0099-host/lwip/lwip/src/netif/ppp/utils.c.o
+Compiling .pio/build/fnk0099-host/lwip/lwip/src/netif/ppp/vj.c.o
+Compiling .pio/build/fnk0099-host/lwip/port/hooks/tcp_isn_default.c.o
+Compiling .pio/build/fnk0099-host/lwip/port/hooks/lwip_default_hooks.c.o
+Compiling .pio/build/fnk0099-host/lwip/port/debug/lwip_debug.c.o
+Compiling .pio/build/fnk0099-host/lwip/port/sockets_ext.c.o
+Compiling .pio/build/fnk0099-host/lwip/port/freertos/sys_arch.c.o
+Compiling .pio/build/fnk0099-host/lwip/port/if_index.c.o
+Compiling .pio/build/fnk0099-host/lwip/port/acd_dhcp_check.c.o
+Compiling .pio/build/fnk0099-host/lwip/port/esp32xx/vfs_lwip.c.o
+Compiling .pio/build/fnk0099-host/lwip/apps/ping/esp_ping.c.o
+Compiling .pio/build/fnk0099-host/lwip/apps/ping/ping.c.o
+Compiling .pio/build/fnk0099-host/lwip/apps/ping/ping_sock.c.o
+Compiling .pio/build/fnk0099-host/lwip/lwip/src/netif/ppp/polarssl/arc4.c.o
+Compiling .pio/build/fnk0099-host/lwip/lwip/src/netif/ppp/polarssl/des.c.o
+Compiling .pio/build/fnk0099-host/lwip/lwip/src/netif/ppp/polarssl/md4.c.o
+Compiling .pio/build/fnk0099-host/lwip/lwip/src/netif/ppp/polarssl/md5.c.o
+Compiling .pio/build/fnk0099-host/lwip/lwip/src/netif/ppp/polarssl/sha1.c.o
+Compiling .pio/build/fnk0099-host/lwip/apps/dhcpserver/dhcpserver.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/esp_crt_bundle/esp_crt_bundle.c.o
+Compiling .pio/build/fnk0099-host/.pio/build/fnk0099-host/x509_crt_bundle.S.o
+Compiling .pio/build/fnk0099-host/mqtt/esp-mqtt/mqtt_client.c.o
+Compiling .pio/build/fnk0099-host/mqtt/esp-mqtt/lib/mqtt_msg.c.o
+Compiling .pio/build/fnk0099-host/mqtt/esp-mqtt/lib/mqtt_outbox.c.o
+Compiling .pio/build/fnk0099-host/mqtt/esp-mqtt/lib/platform_esp32_idf.c.o
+Compiling .pio/build/fnk0099-host/newlib/src/init.c.o
+Archiving .pio/build/fnk0099-host/esp-idf/mbedtls/libmbedtls.a
+Archiving .pio/build/fnk0099-host/esp-idf/lwip/liblwip.a
+Compiling .pio/build/fnk0099-host/newlib/src/abort.c.o
+Indexing .pio/build/fnk0099-host/esp-idf/mbedtls/libmbedtls.a
+Compiling .pio/build/fnk0099-host/newlib/src/assert.c.o
+Compiling .pio/build/fnk0099-host/newlib/src/heap.c.o
+Compiling .pio/build/fnk0099-host/newlib/src/locks.c.o
+Compiling .pio/build/fnk0099-host/newlib/src/poll.c.o
+Indexing .pio/build/fnk0099-host/esp-idf/lwip/liblwip.a
+Compiling .pio/build/fnk0099-host/newlib/src/pthread.c.o
+Compiling .pio/build/fnk0099-host/newlib/src/random.c.o
+Compiling .pio/build/fnk0099-host/newlib/src/getentropy.c.o
+Compiling .pio/build/fnk0099-host/newlib/src/termios.c.o
+Compiling .pio/build/fnk0099-host/newlib/src/stdatomic.c.o
+Compiling .pio/build/fnk0099-host/newlib/src/time.c.o
+Compiling .pio/build/fnk0099-host/newlib/src/sysconf.c.o
+Compiling .pio/build/fnk0099-host/newlib/src/realpath.c.o
+Compiling .pio/build/fnk0099-host/newlib/src/scandir.c.o
+Compiling .pio/build/fnk0099-host/newlib/src/syscalls.c.o
+Compiling .pio/build/fnk0099-host/newlib/src/reent_syscalls.c.o
+Compiling .pio/build/fnk0099-host/newlib/src/port/esp_time_impl.c.o
+Compiling .pio/build/fnk0099-host/newlib/src/flockfile.c.o
+Compiling .pio/build/fnk0099-host/newlib/src/reent_init.c.o
+Archiving .pio/build/fnk0099-host/esp-idf/mqtt/libmqtt.a
+Compiling .pio/build/fnk0099-host/newlib/src/newlib_init.c.o
+Indexing .pio/build/fnk0099-host/esp-idf/mqtt/libmqtt.a
+Compiling .pio/build/fnk0099-host/nvs_flash/src/nvs_api.cpp.o
+Compiling .pio/build/fnk0099-host/nvs_flash/src/nvs_cxx_api.cpp.o
+Compiling .pio/build/fnk0099-host/nvs_flash/src/nvs_item_hash_list.cpp.o
+Compiling .pio/build/fnk0099-host/nvs_flash/src/nvs_page.cpp.o
+Compiling .pio/build/fnk0099-host/nvs_flash/src/nvs_pagemanager.cpp.o
+Archiving .pio/build/fnk0099-host/esp-idf/newlib/libnewlib.a
+Compiling .pio/build/fnk0099-host/nvs_flash/src/nvs_storage.cpp.o
+Compiling .pio/build/fnk0099-host/nvs_flash/src/nvs_handle_simple.cpp.o
+Compiling .pio/build/fnk0099-host/nvs_flash/src/nvs_handle_locked.cpp.o
+Compiling .pio/build/fnk0099-host/nvs_flash/src/nvs_partition.cpp.o
+Indexing .pio/build/fnk0099-host/esp-idf/newlib/libnewlib.a
+Compiling .pio/build/fnk0099-host/nvs_flash/src/nvs_partition_lookup.cpp.o
+Compiling .pio/build/fnk0099-host/nvs_flash/src/nvs_partition_manager.cpp.o
+Compiling .pio/build/fnk0099-host/nvs_flash/src/nvs_types.cpp.o
+Compiling .pio/build/fnk0099-host/nvs_flash/src/nvs_platform.cpp.o
+Compiling .pio/build/fnk0099-host/nvs_flash/src/nvs_bootloader.c.o
+Compiling .pio/build/fnk0099-host/nvs_flash/src/nvs_encrypted_partition.cpp.o
+Compiling .pio/build/fnk0099-host/nvs_flash/src/nvs_bootloader_aes.c.o
+Compiling .pio/build/fnk0099-host/nvs_flash/src/nvs_bootloader_xts_aes.c.o
+Compiling .pio/build/fnk0099-host/nvs_sec_provider/nvs_sec_provider.c.o
+Compiling .pio/build/fnk0099-host/perfmon/xtensa_perfmon_access.c.o
+Compiling .pio/build/fnk0099-host/perfmon/xtensa_perfmon_apis.c.o
+Compiling .pio/build/fnk0099-host/perfmon/xtensa_perfmon_masks.c.o
+Compiling .pio/build/fnk0099-host/protobuf-c/protobuf-c/protobuf-c/protobuf-c.c.o
+Compiling .pio/build/fnk0099-host/protocomm/src/common/protocomm.c.o
+Archiving .pio/build/fnk0099-host/esp-idf/nvs_sec_provider/libnvs_sec_provider.a
+Compiling .pio/build/fnk0099-host/protocomm/proto-c/constants.pb-c.c.o
+Archiving .pio/build/fnk0099-host/esp-idf/perfmon/libperfmon.a
+Indexing .pio/build/fnk0099-host/esp-idf/nvs_sec_provider/libnvs_sec_provider.a
+Compiling .pio/build/fnk0099-host/protocomm/proto-c/sec0.pb-c.c.o
+Compiling .pio/build/fnk0099-host/protocomm/proto-c/sec1.pb-c.c.o
+Indexing .pio/build/fnk0099-host/esp-idf/perfmon/libperfmon.a
+Compiling .pio/build/fnk0099-host/protocomm/proto-c/sec2.pb-c.c.o
+Compiling .pio/build/fnk0099-host/protocomm/proto-c/session.pb-c.c.o
+Compiling .pio/build/fnk0099-host/protocomm/src/transports/protocomm_console.c.o
+Compiling .pio/build/fnk0099-host/protocomm/src/transports/protocomm_httpd.c.o
+Compiling .pio/build/fnk0099-host/protocomm/src/security/security0.c.o
+Compiling .pio/build/fnk0099-host/protocomm/src/security/security1.c.o
+Compiling .pio/build/fnk0099-host/protocomm/src/security/security2.c.o
+Compiling .pio/build/fnk0099-host/protocomm/src/crypto/srp6a/esp_srp.c.o
+Compiling .pio/build/fnk0099-host/protocomm/src/crypto/srp6a/esp_srp_mpi.c.o
+Compiling .pio/build/fnk0099-host/pthread/pthread.c.o
+Archiving .pio/build/fnk0099-host/esp-idf/protobuf-c/libprotobuf-c.a
+Compiling .pio/build/fnk0099-host/pthread/pthread_cond_var.c.o
+Compiling .pio/build/fnk0099-host/pthread/pthread_local_storage.c.o
+Indexing .pio/build/fnk0099-host/esp-idf/protobuf-c/libprotobuf-c.a
+Compiling .pio/build/fnk0099-host/pthread/pthread_rwlock.c.o
+Compiling .pio/build/fnk0099-host/pthread/pthread_semaphore.c.o
+Compiling .pio/build/fnk0099-host/rt/FreeRTOS_POSIX_mqueue.c.o
+Archiving .pio/build/fnk0099-host/esp-idf/protocomm/libprotocomm.a
+Compiling .pio/build/fnk0099-host/rt/FreeRTOS_POSIX_utils.c.o
+Compiling .pio/build/fnk0099-host/sdmmc/sdmmc_cmd.c.o
+Indexing .pio/build/fnk0099-host/esp-idf/protocomm/libprotocomm.a
+Compiling .pio/build/fnk0099-host/sdmmc/sdmmc_common.c.o
+Archiving .pio/build/fnk0099-host/esp-idf/pthread/libpthread.a
+Compiling .pio/build/fnk0099-host/sdmmc/sdmmc_init.c.o
+Compiling .pio/build/fnk0099-host/sdmmc/sdmmc_io.c.o
+Indexing .pio/build/fnk0099-host/esp-idf/pthread/libpthread.a
+Compiling .pio/build/fnk0099-host/sdmmc/sdmmc_mmc.c.o
+Archiving .pio/build/fnk0099-host/esp-idf/rt/librt.a
+Compiling .pio/build/fnk0099-host/sdmmc/sdmmc_sd.c.o
+Compiling .pio/build/fnk0099-host/sdmmc/sd_pwr_ctrl/sd_pwr_ctrl.c.o
+Indexing .pio/build/fnk0099-host/esp-idf/rt/librt.a
+Archiving .pio/build/fnk0099-host/esp-idf/nvs_flash/libnvs_flash.a
+Compiling .pio/build/fnk0099-host/soc/lldesc.c.o
+Compiling .pio/build/fnk0099-host/soc/dport_access_common.c.o
+Compiling .pio/build/fnk0099-host/soc/esp32s3/interrupts.c.o
+Indexing .pio/build/fnk0099-host/esp-idf/nvs_flash/libnvs_flash.a
+Compiling .pio/build/fnk0099-host/soc/esp32s3/gpio_periph.c.o
+Compiling .pio/build/fnk0099-host/soc/esp32s3/uart_periph.c.o
+Compiling .pio/build/fnk0099-host/soc/esp32s3/adc_periph.c.o
+Compiling .pio/build/fnk0099-host/soc/esp32s3/dedic_gpio_periph.c.o
+Compiling .pio/build/fnk0099-host/soc/esp32s3/gdma_periph.c.o
+Compiling .pio/build/fnk0099-host/soc/esp32s3/spi_periph.c.o
+Compiling .pio/build/fnk0099-host/soc/esp32s3/ledc_periph.c.o
+Compiling .pio/build/fnk0099-host/soc/esp32s3/pcnt_periph.c.o
+Archiving .pio/build/fnk0099-host/esp-idf/sdmmc/libsdmmc.a
+Compiling .pio/build/fnk0099-host/soc/esp32s3/rmt_periph.c.o
+Compiling .pio/build/fnk0099-host/soc/esp32s3/sdm_periph.c.o
+Indexing .pio/build/fnk0099-host/esp-idf/sdmmc/libsdmmc.a
+Compiling .pio/build/fnk0099-host/soc/esp32s3/i2s_periph.c.o
+Compiling .pio/build/fnk0099-host/soc/esp32s3/i2c_periph.c.o
+Compiling .pio/build/fnk0099-host/soc/esp32s3/temperature_sensor_periph.c.o
+Compiling .pio/build/fnk0099-host/soc/esp32s3/timer_periph.c.o
+Compiling .pio/build/fnk0099-host/soc/esp32s3/lcd_periph.c.o
+Compiling .pio/build/fnk0099-host/soc/esp32s3/mcpwm_periph.c.o
+Compiling .pio/build/fnk0099-host/soc/esp32s3/mpi_periph.c.o
+Compiling .pio/build/fnk0099-host/soc/esp32s3/sdmmc_periph.c.o
+Compiling .pio/build/fnk0099-host/soc/esp32s3/touch_sensor_periph.c.o
+Compiling .pio/build/fnk0099-host/soc/esp32s3/twai_periph.c.o
+Compiling .pio/build/fnk0099-host/soc/esp32s3/wdt_periph.c.o
+Compiling .pio/build/fnk0099-host/soc/esp32s3/usb_dwc_periph.c.o
+Compiling .pio/build/fnk0099-host/soc/esp32s3/rtc_io_periph.c.o
+Compiling .pio/build/fnk0099-host/soc/esp32s3/power_supply_periph.c.o
+Compiling .pio/build/fnk0099-host/spi_flash/flash_brownout_hook.c.o
+Compiling .pio/build/fnk0099-host/spi_flash/esp32s3/spi_flash_oct_flash_init.c.o
+Compiling .pio/build/fnk0099-host/spi_flash/spi_flash_hpm_enable.c.o
+Compiling .pio/build/fnk0099-host/spi_flash/spi_flash_chip_drivers.c.o
+Archiving .pio/build/fnk0099-host/esp-idf/soc/libsoc.a
+Compiling .pio/build/fnk0099-host/spi_flash/spi_flash_chip_generic.c.o
+Compiling .pio/build/fnk0099-host/spi_flash/spi_flash_chip_issi.c.o
+Compiling .pio/build/fnk0099-host/spi_flash/spi_flash_chip_mxic.c.o
+Indexing .pio/build/fnk0099-host/esp-idf/soc/libsoc.a
+Compiling .pio/build/fnk0099-host/spi_flash/spi_flash_chip_gd.c.o
+Compiling .pio/build/fnk0099-host/spi_flash/spi_flash_chip_winbond.c.o
+Compiling .pio/build/fnk0099-host/spi_flash/spi_flash_chip_boya.c.o
+Compiling .pio/build/fnk0099-host/spi_flash/spi_flash_chip_mxic_opi.c.o
+Compiling .pio/build/fnk0099-host/spi_flash/spi_flash_chip_th.c.o
+Compiling .pio/build/fnk0099-host/spi_flash/memspi_host_driver.c.o
+Compiling .pio/build/fnk0099-host/spi_flash/cache_utils.c.o
+Compiling .pio/build/fnk0099-host/spi_flash/flash_mmap.c.o
+Compiling .pio/build/fnk0099-host/spi_flash/flash_ops.c.o
+Compiling .pio/build/fnk0099-host/spi_flash/spi_flash_wrap.c.o
+Compiling .pio/build/fnk0099-host/spi_flash/esp_flash_api.c.o
+Compiling .pio/build/fnk0099-host/spi_flash/esp_flash_spi_init.c.o
+Compiling .pio/build/fnk0099-host/spi_flash/spi_flash_os_func_app.c.o
+Compiling .pio/build/fnk0099-host/spi_flash/spi_flash_os_func_noos.c.o
+Compiling .pio/build/fnk0099-host/spiffs/spiffs_api.c.o
+Compiling .pio/build/fnk0099-host/spiffs/spiffs/src/spiffs_cache.c.o
+Compiling .pio/build/fnk0099-host/spiffs/spiffs/src/spiffs_check.c.o
+Compiling .pio/build/fnk0099-host/spiffs/spiffs/src/spiffs_gc.c.o
+Compiling .pio/build/fnk0099-host/spiffs/spiffs/src/spiffs_hydrogen.c.o
+Compiling .pio/build/fnk0099-host/spiffs/spiffs/src/spiffs_nucleus.c.o
+Compiling .pio/build/fnk0099-host/spiffs/esp_spiffs.c.o
+Compiling .pio/build/fnk0099-host/tcp_transport/transport.c.o
+Archiving .pio/build/fnk0099-host/esp-idf/spi_flash/libspi_flash.a
+Compiling .pio/build/fnk0099-host/tcp_transport/transport_ssl.c.o
+Compiling .pio/build/fnk0099-host/tcp_transport/transport_internal.c.o
+Compiling .pio/build/fnk0099-host/tcp_transport/transport_socks_proxy.c.o
+Indexing .pio/build/fnk0099-host/esp-idf/spi_flash/libspi_flash.a
+Compiling .pio/build/fnk0099-host/tcp_transport/transport_ws.c.o
+Compiling .pio/build/fnk0099-host/touch_element/touch_element.c.o
+Compiling .pio/build/fnk0099-host/touch_element/touch_button.c.o
+Compiling .pio/build/fnk0099-host/touch_element/touch_slider.c.o
+Compiling .pio/build/fnk0099-host/touch_element/touch_matrix.c.o
+Compiling .pio/build/fnk0099-host/unity/unity/src/unity.c.o
+Compiling .pio/build/fnk0099-host/unity/unity_compat.c.o
+Compiling .pio/build/fnk0099-host/unity/unity_runner.c.o
+Compiling .pio/build/fnk0099-host/unity/unity_utils_freertos.c.o
+Archiving .pio/build/fnk0099-host/esp-idf/spiffs/libspiffs.a
+Compiling .pio/build/fnk0099-host/unity/unity_utils_cache.c.o
+Indexing .pio/build/fnk0099-host/esp-idf/spiffs/libspiffs.a
+Compiling .pio/build/fnk0099-host/unity/unity_utils_memory.c.o
+Compiling .pio/build/fnk0099-host/unity/unity_port_esp32.c.o
+Compiling .pio/build/fnk0099-host/unity/port/esp/unity_utils_memory_esp.c.o
+Compiling .pio/build/fnk0099-host/usb/hcd_dwc.c.o
+Archiving .pio/build/fnk0099-host/esp-idf/touch_element/libtouch_element.a
+Archiving .pio/build/fnk0099-host/esp-idf/tcp_transport/libtcp_transport.a
+Compiling .pio/build/fnk0099-host/usb/enum.c.o
+Indexing .pio/build/fnk0099-host/esp-idf/touch_element/libtouch_element.a
+Indexing .pio/build/fnk0099-host/esp-idf/tcp_transport/libtcp_transport.a
+Compiling .pio/build/fnk0099-host/usb/hub.c.o
+Archiving .pio/build/fnk0099-host/esp-idf/unity/libunity.a
+Compiling .pio/build/fnk0099-host/usb/usb_helpers.c.o
+Compiling .pio/build/fnk0099-host/usb/usb_host.c.o
+Indexing .pio/build/fnk0099-host/esp-idf/unity/libunity.a
+Compiling .pio/build/fnk0099-host/usb/usb_private.c.o
+Compiling .pio/build/fnk0099-host/usb/usbh.c.o
+Compiling .pio/build/fnk0099-host/usb/usb_phy.c.o
+Compiling .pio/build/fnk0099-host/vfs/vfs.c.o
+Compiling .pio/build/fnk0099-host/vfs/vfs_eventfd.c.o
+Compiling .pio/build/fnk0099-host/vfs/vfs_semihost.c.o
+Compiling .pio/build/fnk0099-host/vfs/nullfs.c.o
+Compiling .pio/build/fnk0099-host/wear_levelling/Partition.cpp.o
+Compiling .pio/build/fnk0099-host/wear_levelling/SPI_Flash.cpp.o
+Compiling .pio/build/fnk0099-host/wear_levelling/WL_Ext_Perf.cpp.o
+Compiling .pio/build/fnk0099-host/wear_levelling/WL_Ext_Safe.cpp.o
+Compiling .pio/build/fnk0099-host/wear_levelling/WL_Flash.cpp.o
+Compiling .pio/build/fnk0099-host/wear_levelling/crc32.cpp.o
+Compiling .pio/build/fnk0099-host/wear_levelling/wear_levelling.cpp.o
+Compiling .pio/build/fnk0099-host/wifi_provisioning/src/wifi_config.c.o
+Archiving .pio/build/fnk0099-host/esp-idf/usb/libusb.a
+Compiling .pio/build/fnk0099-host/wifi_provisioning/src/wifi_scan.c.o
+Indexing .pio/build/fnk0099-host/esp-idf/usb/libusb.a
+Compiling .pio/build/fnk0099-host/wifi_provisioning/src/wifi_ctrl.c.o
+Compiling .pio/build/fnk0099-host/wifi_provisioning/src/manager.c.o
+Archiving .pio/build/fnk0099-host/esp-idf/vfs/libvfs.a
+Compiling .pio/build/fnk0099-host/wifi_provisioning/src/handlers.c.o
+Compiling .pio/build/fnk0099-host/wifi_provisioning/src/scheme_console.c.o
+Indexing .pio/build/fnk0099-host/esp-idf/vfs/libvfs.a
+Compiling .pio/build/fnk0099-host/wifi_provisioning/proto-c/wifi_config.pb-c.c.o
+Compiling .pio/build/fnk0099-host/wifi_provisioning/proto-c/wifi_scan.pb-c.c.o
+Archiving .pio/build/fnk0099-host/esp-idf/wear_levelling/libwear_levelling.a
+Compiling .pio/build/fnk0099-host/wifi_provisioning/proto-c/wifi_ctrl.pb-c.c.o
+Compiling .pio/build/fnk0099-host/wifi_provisioning/proto-c/wifi_constants.pb-c.c.o
+Indexing .pio/build/fnk0099-host/esp-idf/wear_levelling/libwear_levelling.a
+Compiling .pio/build/fnk0099-host/wifi_provisioning/src/scheme_softap.c.o
+Compiling .pio/build/fnk0099-host/wpa_supplicant/port/os_xtensa.c.o
+Compiling .pio/build/fnk0099-host/wpa_supplicant/port/eloop.c.o
+Compiling .pio/build/fnk0099-host/wpa_supplicant/src/ap/ap_config.c.o
+Compiling .pio/build/fnk0099-host/wpa_supplicant/src/ap/ieee802_1x.c.o
+Compiling .pio/build/fnk0099-host/wpa_supplicant/src/ap/wpa_auth.c.o
+Archiving .pio/build/fnk0099-host/esp-idf/wifi_provisioning/libwifi_provisioning.a
+Compiling .pio/build/fnk0099-host/wpa_supplicant/src/ap/wpa_auth_ie.c.o
+Compiling .pio/build/fnk0099-host/wpa_supplicant/src/ap/pmksa_cache_auth.c.o
+Indexing .pio/build/fnk0099-host/esp-idf/wifi_provisioning/libwifi_provisioning.a
+Compiling .pio/build/fnk0099-host/wpa_supplicant/src/ap/sta_info.c.o
+Compiling .pio/build/fnk0099-host/wpa_supplicant/src/ap/ieee802_11.c.o
+Compiling .pio/build/fnk0099-host/wpa_supplicant/src/ap/comeback_token.c.o
+Compiling .pio/build/fnk0099-host/wpa_supplicant/src/common/sae.c.o
+Compiling .pio/build/fnk0099-host/wpa_supplicant/src/common/dragonfly.c.o
+Compiling .pio/build/fnk0099-host/wpa_supplicant/src/common/wpa_common.c.o
+Compiling .pio/build/fnk0099-host/wpa_supplicant/src/utils/bitfield.c.o
+Compiling .pio/build/fnk0099-host/wpa_supplicant/src/crypto/aes-siv.c.o
+Compiling .pio/build/fnk0099-host/wpa_supplicant/src/crypto/sha256-kdf.c.o
+Compiling .pio/build/fnk0099-host/wpa_supplicant/src/crypto/ccmp.c.o
+Compiling .pio/build/fnk0099-host/wpa_supplicant/src/crypto/aes-gcm.c.o
+Compiling .pio/build/fnk0099-host/wpa_supplicant/src/crypto/crypto_ops.c.o
+Compiling .pio/build/fnk0099-host/wpa_supplicant/src/crypto/dh_group5.c.o
+Compiling .pio/build/fnk0099-host/wpa_supplicant/src/crypto/dh_groups.c.o
+Compiling .pio/build/fnk0099-host/wpa_supplicant/src/crypto/ms_funcs.c.o
+Compiling .pio/build/fnk0099-host/wpa_supplicant/src/crypto/sha1-tlsprf.c.o
+Compiling .pio/build/fnk0099-host/wpa_supplicant/src/crypto/sha256-tlsprf.c.o
+Compiling .pio/build/fnk0099-host/wpa_supplicant/src/crypto/sha384-tlsprf.c.o
+Compiling .pio/build/fnk0099-host/wpa_supplicant/src/crypto/sha256-prf.c.o
+Compiling .pio/build/fnk0099-host/wpa_supplicant/src/crypto/sha1-prf.c.o
+Compiling .pio/build/fnk0099-host/wpa_supplicant/src/crypto/sha384-prf.c.o
+Compiling .pio/build/fnk0099-host/wpa_supplicant/src/crypto/md4-internal.c.o
+Compiling .pio/build/fnk0099-host/wpa_supplicant/src/crypto/sha1-tprf.c.o
+Compiling .pio/build/fnk0099-host/wpa_supplicant/src/eap_common/eap_wsc_common.c.o
+Compiling .pio/build/fnk0099-host/wpa_supplicant/src/common/ieee802_11_common.c.o
+Compiling .pio/build/fnk0099-host/wpa_supplicant/src/eap_peer/chap.c.o
+Compiling .pio/build/fnk0099-host/wpa_supplicant/src/eap_peer/eap.c.o
+Compiling .pio/build/fnk0099-host/wpa_supplicant/src/eap_peer/eap_common.c.o
+Compiling .pio/build/fnk0099-host/wpa_supplicant/src/eap_peer/eap_mschapv2.c.o
+Compiling .pio/build/fnk0099-host/wpa_supplicant/src/eap_peer/eap_peap.c.o
+Compiling .pio/build/fnk0099-host/wpa_supplicant/src/eap_peer/eap_peap_common.c.o
+Compiling .pio/build/fnk0099-host/wpa_supplicant/src/eap_peer/eap_tls.c.o
+Compiling .pio/build/fnk0099-host/wpa_supplicant/src/eap_peer/eap_tls_common.c.o
+Compiling .pio/build/fnk0099-host/wpa_supplicant/src/eap_peer/eap_ttls.c.o
+Compiling .pio/build/fnk0099-host/wpa_supplicant/src/eap_peer/mschapv2.c.o
+Compiling .pio/build/fnk0099-host/wpa_supplicant/src/eap_peer/eap_fast.c.o
+Compiling .pio/build/fnk0099-host/wpa_supplicant/src/eap_peer/eap_fast_common.c.o
+Compiling .pio/build/fnk0099-host/wpa_supplicant/src/eap_peer/eap_fast_pac.c.o
+Compiling .pio/build/fnk0099-host/wpa_supplicant/src/rsn_supp/pmksa_cache.c.o
+Compiling .pio/build/fnk0099-host/wpa_supplicant/src/rsn_supp/wpa.c.o
+Compiling .pio/build/fnk0099-host/wpa_supplicant/src/rsn_supp/wpa_ie.c.o
+Compiling .pio/build/fnk0099-host/wpa_supplicant/src/utils/base64.c.o
+Compiling .pio/build/fnk0099-host/wpa_supplicant/src/utils/common.c.o
+Compiling .pio/build/fnk0099-host/wpa_supplicant/src/utils/ext_password.c.o
+Compiling .pio/build/fnk0099-host/wpa_supplicant/src/utils/uuid.c.o
+Compiling .pio/build/fnk0099-host/wpa_supplicant/src/utils/wpabuf.c.o
+Compiling .pio/build/fnk0099-host/wpa_supplicant/src/utils/wpa_debug.c.o
+Compiling .pio/build/fnk0099-host/wpa_supplicant/src/utils/json.c.o
+Compiling .pio/build/fnk0099-host/wpa_supplicant/src/wps/wps.c.o
+Compiling .pio/build/fnk0099-host/wpa_supplicant/src/wps/wps_attr_build.c.o
+Compiling .pio/build/fnk0099-host/wpa_supplicant/src/wps/wps_attr_parse.c.o
+Compiling .pio/build/fnk0099-host/wpa_supplicant/src/wps/wps_attr_process.c.o
+Compiling .pio/build/fnk0099-host/wpa_supplicant/src/wps/wps_common.c.o
+Compiling .pio/build/fnk0099-host/wpa_supplicant/src/wps/wps_dev_attr.c.o
+Compiling .pio/build/fnk0099-host/wpa_supplicant/src/wps/wps_enrollee.c.o
+Compiling .pio/build/fnk0099-host/wpa_supplicant/src/common/sae_pk.c.o
+Compiling .pio/build/fnk0099-host/wpa_supplicant/esp_supplicant/src/esp_eap_client.c.o
+Compiling .pio/build/fnk0099-host/wpa_supplicant/esp_supplicant/src/esp_wpa2_api_port.c.o
+Compiling .pio/build/fnk0099-host/wpa_supplicant/esp_supplicant/src/esp_wpa_main.c.o
+Compiling .pio/build/fnk0099-host/wpa_supplicant/esp_supplicant/src/esp_wpas_glue.c.o
+Compiling .pio/build/fnk0099-host/wpa_supplicant/esp_supplicant/src/esp_common.c.o
+Compiling .pio/build/fnk0099-host/wpa_supplicant/esp_supplicant/src/esp_wps.c.o
+Compiling .pio/build/fnk0099-host/wpa_supplicant/esp_supplicant/src/esp_wpa3.c.o
+Compiling .pio/build/fnk0099-host/wpa_supplicant/esp_supplicant/src/esp_owe.c.o
+Compiling .pio/build/fnk0099-host/wpa_supplicant/esp_supplicant/src/esp_hostap.c.o
+Compiling .pio/build/fnk0099-host/wpa_supplicant/esp_supplicant/src/crypto/tls_mbedtls.c.o
+Compiling .pio/build/fnk0099-host/wpa_supplicant/esp_supplicant/src/crypto/crypto_mbedtls.c.o
+Compiling .pio/build/fnk0099-host/wpa_supplicant/esp_supplicant/src/crypto/crypto_mbedtls-bignum.c.o
+Compiling .pio/build/fnk0099-host/wpa_supplicant/esp_supplicant/src/crypto/crypto_mbedtls-rsa.c.o
+Compiling .pio/build/fnk0099-host/wpa_supplicant/esp_supplicant/src/crypto/crypto_mbedtls-ec.c.o
+Compiling .pio/build/fnk0099-host/wpa_supplicant/esp_supplicant/src/crypto/fastpsk.c.o
+Compiling .pio/build/fnk0099-host/wpa_supplicant/src/crypto/rc4.c.o
+Compiling .pio/build/fnk0099-host/wpa_supplicant/src/crypto/des-internal.c.o
+Compiling .pio/build/fnk0099-host/wpa_supplicant/esp_supplicant/src/crypto/fastpbkdf2.c.o
+Compiling .pio/build/fnk0099-host/wpa_supplicant/src/crypto/aes-wrap.c.o
+Compiling .pio/build/fnk0099-host/wpa_supplicant/src/crypto/aes-unwrap.c.o
+Compiling .pio/build/fnk0099-host/wpa_supplicant/src/crypto/aes-ccm.c.o
+Compiling .pio/build/fnk0099-host/xtensa/eri.c.o
+Compiling .pio/build/fnk0099-host/xtensa/xt_trax.c.o
+Compiling .pio/build/fnk0099-host/xtensa/xtensa_context.S.o
+Compiling .pio/build/fnk0099-host/xtensa/xtensa_intr_asm.S.o
+Compiling .pio/build/fnk0099-host/xtensa/xtensa_intr.c.o
+Compiling .pio/build/fnk0099-host/xtensa/xtensa_vectors.S.o
+Archiving .pio/build/fnk0099-host/esp-idf/wpa_supplicant/libwpa_supplicant.a
+Compiling .pio/build/fnk0099-host/mbedtls/mbedtls/3rdparty/everest/library/everest.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/mbedtls/3rdparty/everest/library/x25519.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/mbedtls/3rdparty/everest/library/Hacl_Curve25519_joined.c.o
+Archiving .pio/build/fnk0099-host/esp-idf/xtensa/libxtensa.a
+Compiling .pio/build/fnk0099-host/mbedtls/mbedtls/library/aes.c.o
+Indexing .pio/build/fnk0099-host/esp-idf/wpa_supplicant/libwpa_supplicant.a
+Indexing .pio/build/fnk0099-host/esp-idf/xtensa/libxtensa.a
+Compiling .pio/build/fnk0099-host/mbedtls/mbedtls/library/aesni.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/mbedtls/library/aesce.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/mbedtls/library/aria.c.o
+Archiving .pio/build/fnk0099-host/esp-idf/mbedtls/mbedtls/3rdparty/everest/libeverest.a
+Compiling .pio/build/fnk0099-host/mbedtls/mbedtls/library/asn1parse.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/mbedtls/library/asn1write.c.o
+Indexing .pio/build/fnk0099-host/esp-idf/mbedtls/mbedtls/3rdparty/everest/libeverest.a
+Compiling .pio/build/fnk0099-host/mbedtls/mbedtls/library/base64.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/mbedtls/library/bignum.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/mbedtls/library/bignum_core.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/mbedtls/library/bignum_mod.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/mbedtls/library/bignum_mod_raw.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/mbedtls/library/block_cipher.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/mbedtls/library/camellia.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/mbedtls/library/ccm.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/mbedtls/library/chacha20.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/mbedtls/library/chachapoly.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/mbedtls/library/cipher.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/mbedtls/library/cipher_wrap.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/mbedtls/library/constant_time.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/mbedtls/library/cmac.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/mbedtls/library/ctr_drbg.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/mbedtls/library/des.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/mbedtls/library/dhm.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/mbedtls/library/ecdh.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/mbedtls/library/ecdsa.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/mbedtls/library/ecjpake.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/mbedtls/library/ecp.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/mbedtls/library/ecp_curves.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/mbedtls/library/ecp_curves_new.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/mbedtls/library/entropy.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/mbedtls/library/entropy_poll.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/mbedtls/library/error.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/mbedtls/library/gcm.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/mbedtls/library/hkdf.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/mbedtls/library/hmac_drbg.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/mbedtls/library/lmots.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/mbedtls/library/lms.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/mbedtls/library/md.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/mbedtls/library/md5.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/mbedtls/library/memory_buffer_alloc.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/mbedtls/library/nist_kw.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/mbedtls/library/oid.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/mbedtls/library/padlock.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/mbedtls/library/pem.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/mbedtls/library/pk.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/mbedtls/library/pk_ecc.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/mbedtls/library/pk_wrap.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/mbedtls/library/pkcs12.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/mbedtls/library/pkcs5.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/mbedtls/library/pkparse.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/mbedtls/library/pkwrite.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/mbedtls/library/platform.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/mbedtls/library/platform_util.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/mbedtls/library/poly1305.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/mbedtls/library/psa_crypto.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/mbedtls/library/psa_crypto_aead.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/mbedtls/library/psa_crypto_cipher.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/mbedtls/library/psa_crypto_client.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/mbedtls/library/psa_crypto_driver_wrappers_no_static.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/mbedtls/library/psa_crypto_ecp.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/mbedtls/library/psa_crypto_ffdh.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/mbedtls/library/psa_crypto_hash.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/mbedtls/library/psa_crypto_mac.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/mbedtls/library/psa_crypto_pake.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/mbedtls/library/psa_crypto_rsa.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/mbedtls/library/psa_crypto_se.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/mbedtls/library/psa_crypto_slot_management.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/mbedtls/library/psa_crypto_storage.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/mbedtls/library/psa_its_file.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/mbedtls/library/psa_util.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/mbedtls/library/ripemd160.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/mbedtls/library/rsa.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/mbedtls/library/rsa_alt_helpers.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/mbedtls/library/sha1.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/mbedtls/library/sha256.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/mbedtls/library/sha512.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/mbedtls/library/sha3.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/mbedtls/library/threading.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/mbedtls/library/timing.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/mbedtls/library/version.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/mbedtls/library/version_features.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/port/sha/core/esp_sha_gdma_impl.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/port/aes/dma/esp_aes_gdma_impl.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/port/aes/dma/esp_aes_dma_core.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/port/crypto_shared_gdma/esp_crypto_shared_gdma.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/port/esp_hardware.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/port/esp_mem.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/port/esp_timing.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/port/aes/esp_aes_xts.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/port/aes/esp_aes_common.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/port/aes/dma/esp_aes.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/port/sha/esp_sha.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/port/sha/core/sha.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/port/esp_ds/esp_rsa_sign_alt.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/port/bignum/esp_bignum.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/port/bignum/bignum_alt.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/port/sha/core/esp_sha1.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/port/sha/core/esp_sha256.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/port/sha/core/esp_sha512.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/port/aes/esp_aes_gcm.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/port/md/esp_md.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/mbedtls/library/debug.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/mbedtls/library/mps_reader.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/mbedtls/library/mps_trace.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/mbedtls/library/ssl_cache.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/mbedtls/library/ssl_ciphersuites.c.o
+Archiving .pio/build/fnk0099-host/esp-idf/mbedtls/mbedtls/library/libmbedcrypto.a
+Compiling .pio/build/fnk0099-host/mbedtls/mbedtls/library/ssl_client.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/mbedtls/library/ssl_cookie.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/mbedtls/library/ssl_debug_helpers_generated.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/mbedtls/library/ssl_msg.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/mbedtls/library/ssl_ticket.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/mbedtls/library/ssl_tls.c.o
+Indexing .pio/build/fnk0099-host/esp-idf/mbedtls/mbedtls/library/libmbedcrypto.a
+Compiling .pio/build/fnk0099-host/mbedtls/mbedtls/library/ssl_tls12_client.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/mbedtls/library/ssl_tls12_server.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/mbedtls/library/ssl_tls13_keys.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/mbedtls/library/ssl_tls13_server.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/mbedtls/library/ssl_tls13_client.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/mbedtls/library/ssl_tls13_generic.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/port/mbedtls_debug.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/port/esp_platform_time.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/port/net_sockets.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/mbedtls/library/pkcs7.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/mbedtls/library/x509.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/mbedtls/library/x509_create.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/mbedtls/library/x509_crl.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/mbedtls/library/x509_crt.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/mbedtls/library/x509_csr.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/mbedtls/library/x509write.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/mbedtls/library/x509write_crt.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/mbedtls/library/x509write_csr.c.o
+Archiving .pio/build/fnk0099-host/esp-idf/mbedtls/mbedtls/library/libmbedtls.a
+Compiling .pio/build/fnk0099-host/mbedtls/mbedtls/3rdparty/p256-m/p256-m_driver_entrypoints.c.o
+Compiling .pio/build/fnk0099-host/mbedtls/mbedtls/3rdparty/p256-m/p256-m/p256-m.c.o
+Indexing .pio/build/fnk0099-host/esp-idf/mbedtls/mbedtls/library/libmbedtls.a
+Compiling .pio/build/fnk0099-host/bootloader/xtensa/eri.c.o
+Compiling .pio/build/fnk0099-host/bootloader/xtensa/xt_trax.c.o
+Compiling .pio/build/fnk0099-host/bootloader/bootloader/subproject/main/bootloader_start.c.o
+Compiling .pio/build/fnk0099-host/bootloader/bootloader_support/src/bootloader_common.c.o
+Archiving .pio/build/fnk0099-host/esp-idf/mbedtls/mbedtls/3rdparty/p256-m/libp256m.a
+Compiling .pio/build/fnk0099-host/bootloader/bootloader_support/src/bootloader_common_loader.c.o
+Archiving .pio/build/fnk0099-host/bootloader/esp-idf/xtensa/libxtensa.a
+Compiling .pio/build/fnk0099-host/bootloader/bootloader_support/src/bootloader_clock_init.c.o
+Indexing .pio/build/fnk0099-host/esp-idf/mbedtls/mbedtls/3rdparty/p256-m/libp256m.a
+Compiling .pio/build/fnk0099-host/bootloader/bootloader_support/src/bootloader_mem.c.o
+Archiving .pio/build/fnk0099-host/bootloader/esp-idf/main/libmain.a
+Indexing .pio/build/fnk0099-host/bootloader/esp-idf/xtensa/libxtensa.a
+Compiling .pio/build/fnk0099-host/bootloader/bootloader_support/src/bootloader_random.c.o
+Compiling .pio/build/fnk0099-host/bootloader/bootloader_support/src/bootloader_efuse.c.o
+Compiling .pio/build/fnk0099-host/bootloader/bootloader_support/src/flash_encrypt.c.o
+Indexing .pio/build/fnk0099-host/bootloader/esp-idf/main/libmain.a
+Archiving .pio/build/fnk0099-host/esp-idf/mbedtls/mbedtls/library/libmbedx509.a
+Compiling .pio/build/fnk0099-host/bootloader/bootloader_support/src/secure_boot.c.o
+Compiling .pio/build/fnk0099-host/bootloader/bootloader_support/src/bootloader_random_esp32s3.c.o
+Compiling .pio/build/fnk0099-host/bootloader/bootloader_support/bootloader_flash/src/bootloader_flash.c.o
+Indexing .pio/build/fnk0099-host/esp-idf/mbedtls/mbedtls/library/libmbedx509.a
+Compiling .pio/build/fnk0099-host/bootloader/bootloader_support/bootloader_flash/src/flash_qio_mode.c.o
+Compiling .pio/build/fnk0099-host/bootloader/bootloader_support/bootloader_flash/src/bootloader_flash_config_esp32s3.c.o
+Compiling .pio/build/fnk0099-host/bootloader/bootloader_support/src/bootloader_utility.c.o
+Compiling .pio/build/fnk0099-host/bootloader/bootloader_support/src/flash_partitions.c.o
+Generating project linker script .pio/build/fnk0099-host/sections.ld
+Compiling .pio/build/fnk0099-host/bootloader/bootloader_support/src/esp_image_format.c.o
+Compiling .pio/build/fnk0099-host/bootloader/bootloader_support/src/bootloader_sha.c.o
+Compiling .pio/build/fnk0099-host/bootloader/bootloader_support/src/bootloader_init.c.o
+Compiling .pio/build/fnk0099-host/bootloader/bootloader_support/src/bootloader_clock_loader.c.o
+Compiling .pio/build/fnk0099-host/bootloader/bootloader_support/src/bootloader_console.c.o
+Compiling .pio/build/fnk0099-host/bootloader/bootloader_support/src/bootloader_console_loader.c.o
+Compiling .pio/build/fnk0099-host/bootloader/bootloader_support/src/esp32s3/bootloader_soc.c.o
+Compiling .pio/build/fnk0099-host/bootloader/bootloader_support/src/esp32s3/bootloader_esp32s3.c.o
+Compiling .pio/build/fnk0099-host/bootloader/bootloader_support/src/bootloader_panic.c.o
+Compiling .pio/build/fnk0099-host/bootloader/efuse/esp32s3/esp_efuse_table.c.o
+Compiling .pio/build/fnk0099-host/bootloader/efuse/esp32s3/esp_efuse_fields.c.o
+Compiling .pio/build/fnk0099-host/bootloader/efuse/esp32s3/esp_efuse_rtc_calib.c.o
+Compiling .pio/build/fnk0099-host/bootloader/efuse/esp32s3/esp_efuse_utility.c.o
+Compiling .pio/build/fnk0099-host/bootloader/efuse/src/esp_efuse_api.c.o
+Compiling .pio/build/fnk0099-host/bootloader/efuse/src/esp_efuse_fields.c.o
+Compiling .pio/build/fnk0099-host/bootloader/efuse/src/esp_efuse_utility.c.o
+Compiling .pio/build/fnk0099-host/bootloader/efuse/src/efuse_controller/keys/with_key_purposes/esp_efuse_api_key.c.o
+Compiling .pio/build/fnk0099-host/bootloader/esp_bootloader_format/esp_bootloader_desc.c.o
+Compiling .pio/build/fnk0099-host/bootloader/esp_common/src/esp_err_to_name.c.o
+Compiling .pio/build/fnk0099-host/bootloader/esp_hw_support/cpu.c.o
+Compiling .pio/build/fnk0099-host/bootloader/esp_hw_support/port/esp32s3/esp_cpu_intr.c.o
+Archiving .pio/build/fnk0099-host/bootloader/esp-idf/bootloader_support/libbootloader_support.a
+Compiling .pio/build/fnk0099-host/bootloader/esp_hw_support/esp_memory_utils.c.o
+Archiving .pio/build/fnk0099-host/bootloader/esp-idf/esp_bootloader_format/libesp_bootloader_format.a
+Compiling .pio/build/fnk0099-host/bootloader/esp_hw_support/port/esp32s3/cpu_region_protect.c.o
+Indexing .pio/build/fnk0099-host/bootloader/esp-idf/bootloader_support/libbootloader_support.a
+Compiling .pio/build/fnk0099-host/bootloader/esp_hw_support/port/esp32s3/rtc_clk.c.o
+Indexing .pio/build/fnk0099-host/bootloader/esp-idf/esp_bootloader_format/libesp_bootloader_format.a
+Archiving .pio/build/fnk0099-host/bootloader/esp-idf/efuse/libefuse.a
+Archiving .pio/build/fnk0099-host/bootloader/esp-idf/esp_common/libesp_common.a
+Compiling .pio/build/fnk0099-host/bootloader/esp_hw_support/port/esp32s3/rtc_clk_init.c.o
+Compiling .pio/build/fnk0099-host/bootloader/esp_hw_support/port/esp32s3/rtc_init.c.o
+Compiling .pio/build/fnk0099-host/bootloader/esp_hw_support/port/esp32s3/rtc_sleep.c.o
+Indexing .pio/build/fnk0099-host/bootloader/esp-idf/efuse/libefuse.a
+Indexing .pio/build/fnk0099-host/bootloader/esp-idf/esp_common/libesp_common.a
+Compiling .pio/build/fnk0099-host/bootloader/esp_hw_support/port/esp32s3/rtc_time.c.o
+Compiling .pio/build/fnk0099-host/bootloader/esp_hw_support/port/esp32s3/chip_info.c.o
+Compiling .pio/build/fnk0099-host/bootloader/esp_rom/patches/esp_rom_sys.c.o
+Compiling .pio/build/fnk0099-host/bootloader/esp_rom/patches/esp_rom_print.c.o
+Compiling .pio/build/fnk0099-host/bootloader/esp_rom/patches/esp_rom_crc.c.o
+Compiling .pio/build/fnk0099-host/bootloader/esp_rom/patches/esp_rom_uart.c.o
+Compiling .pio/build/fnk0099-host/bootloader/esp_rom/patches/esp_rom_spiflash.c.o
+Compiling .pio/build/fnk0099-host/bootloader/esp_rom/patches/esp_rom_efuse.c.o
+Compiling .pio/build/fnk0099-host/bootloader/esp_rom/patches/esp_rom_gpio.c.o
+Archiving .pio/build/fnk0099-host/bootloader/esp-idf/esp_hw_support/libesp_hw_support.a
+Compiling .pio/build/fnk0099-host/bootloader/esp_rom/patches/esp_rom_longjmp.S.o
+Compiling .pio/build/fnk0099-host/bootloader/esp_rom/patches/esp_rom_systimer.c.o
+Compiling .pio/build/fnk0099-host/bootloader/esp_rom/patches/esp_rom_wdt.c.o
+Compiling .pio/build/fnk0099-host/bootloader/esp_rom/patches/esp_rom_cache_esp32s2_esp32s3.c.o
+Indexing .pio/build/fnk0099-host/bootloader/esp-idf/esp_hw_support/libesp_hw_support.a
+Compiling .pio/build/fnk0099-host/bootloader/esp_rom/patches/esp_rom_cache_writeback_esp32s3.S.o
+Compiling .pio/build/fnk0099-host/bootloader/esp_system/esp_err.c.o
+Compiling .pio/build/fnk0099-host/bootloader/hal/hal_utils.c.o
+Compiling .pio/build/fnk0099-host/bootloader/hal/mpu_hal.c.o
+Compiling .pio/build/fnk0099-host/bootloader/hal/efuse_hal.c.o
+Compiling .pio/build/fnk0099-host/bootloader/hal/esp32s3/efuse_hal.c.o
+Archiving .pio/build/fnk0099-host/bootloader/esp-idf/esp_rom/libesp_rom.a
+Compiling .pio/build/fnk0099-host/bootloader/hal/mmu_hal.c.o
+Compiling .pio/build/fnk0099-host/bootloader/hal/cache_hal.c.o
+Archiving .pio/build/fnk0099-host/bootloader/esp-idf/esp_system/libesp_system.a
+Indexing .pio/build/fnk0099-host/bootloader/esp-idf/esp_rom/libesp_rom.a
+Compiling .pio/build/fnk0099-host/bootloader/log/src/noos/log_timestamp.c.o
+Compiling .pio/build/fnk0099-host/bootloader/log/src/log_timestamp_common.c.o
+Compiling .pio/build/fnk0099-host/bootloader/log/src/noos/log_lock.c.o
+Indexing .pio/build/fnk0099-host/bootloader/esp-idf/esp_system/libesp_system.a
+Compiling .pio/build/fnk0099-host/bootloader/log/src/buffer/log_buffers.c.o
+Compiling .pio/build/fnk0099-host/bootloader/log/src/noos/util.c.o
+Compiling .pio/build/fnk0099-host/bootloader/log/src/util.c.o
+Archiving .pio/build/fnk0099-host/bootloader/esp-idf/hal/libhal.a
+Compiling .pio/build/fnk0099-host/bootloader/log/src/log_format_text.c.o
+Compiling .pio/build/fnk0099-host/bootloader/log/src/log_print.c.o
+Compiling .pio/build/fnk0099-host/bootloader/log/src/log.c.o
+Indexing .pio/build/fnk0099-host/bootloader/esp-idf/hal/libhal.a
+Compiling .pio/build/fnk0099-host/bootloader/bootloader/subproject/components/micro-ecc/uECC_verify_antifault.c.o
+Compiling .pio/build/fnk0099-host/bootloader/soc/lldesc.c.o
+Compiling .pio/build/fnk0099-host/bootloader/soc/dport_access_common.c.o
+Compiling .pio/build/fnk0099-host/bootloader/soc/esp32s3/interrupts.c.o
+Compiling .pio/build/fnk0099-host/bootloader/soc/esp32s3/gpio_periph.c.o
+Compiling .pio/build/fnk0099-host/bootloader/soc/esp32s3/uart_periph.c.o
+Archiving .pio/build/fnk0099-host/bootloader/esp-idf/log/liblog.a
+Compiling .pio/build/fnk0099-host/bootloader/soc/esp32s3/adc_periph.c.o
+Compiling .pio/build/fnk0099-host/bootloader/soc/esp32s3/dedic_gpio_periph.c.o
+Compiling .pio/build/fnk0099-host/bootloader/soc/esp32s3/gdma_periph.c.o
+Compiling .pio/build/fnk0099-host/bootloader/soc/esp32s3/spi_periph.c.o
+Compiling .pio/build/fnk0099-host/bootloader/soc/esp32s3/ledc_periph.c.o
+Indexing .pio/build/fnk0099-host/bootloader/esp-idf/log/liblog.a
+Compiling .pio/build/fnk0099-host/bootloader/soc/esp32s3/pcnt_periph.c.o
+Compiling .pio/build/fnk0099-host/bootloader/soc/esp32s3/rmt_periph.c.o
+Compiling .pio/build/fnk0099-host/bootloader/soc/esp32s3/sdm_periph.c.o
+Compiling .pio/build/fnk0099-host/bootloader/soc/esp32s3/i2s_periph.c.o
+Compiling .pio/build/fnk0099-host/bootloader/soc/esp32s3/i2c_periph.c.o
+Compiling .pio/build/fnk0099-host/bootloader/soc/esp32s3/temperature_sensor_periph.c.o
+Compiling .pio/build/fnk0099-host/bootloader/soc/esp32s3/timer_periph.c.o
+Compiling .pio/build/fnk0099-host/bootloader/soc/esp32s3/lcd_periph.c.o
+Compiling .pio/build/fnk0099-host/bootloader/soc/esp32s3/mcpwm_periph.c.o
+Compiling .pio/build/fnk0099-host/bootloader/soc/esp32s3/mpi_periph.c.o
+Compiling .pio/build/fnk0099-host/bootloader/soc/esp32s3/sdmmc_periph.c.o
+Compiling .pio/build/fnk0099-host/bootloader/soc/esp32s3/touch_sensor_periph.c.o
+Compiling .pio/build/fnk0099-host/bootloader/soc/esp32s3/twai_periph.c.o
+Compiling .pio/build/fnk0099-host/bootloader/soc/esp32s3/wdt_periph.c.o
+Compiling .pio/build/fnk0099-host/bootloader/soc/esp32s3/usb_dwc_periph.c.o
+Compiling .pio/build/fnk0099-host/bootloader/soc/esp32s3/rtc_io_periph.c.o
+Compiling .pio/build/fnk0099-host/bootloader/soc/esp32s3/power_supply_periph.c.o
+Compiling .pio/build/fnk0099-host/bootloader/spi_flash/spi_flash_wrap.c.o
+Generating partitions .pio/build/fnk0099-host/partitions.bin
+Archiving .pio/build/fnk0099-host/bootloader/esp-idf/micro-ecc/libmicro-ecc.a
+Archiving .pio/build/fnk0099-host/bootloader/esp-idf/soc/libsoc.a
+Indexing .pio/build/fnk0099-host/bootloader/esp-idf/micro-ecc/libmicro-ecc.a
+Indexing .pio/build/fnk0099-host/bootloader/esp-idf/soc/libsoc.a
+Archiving .pio/build/fnk0099-host/bootloader/esp-idf/spi_flash/libspi_flash.a
+Indexing .pio/build/fnk0099-host/bootloader/esp-idf/spi_flash/libspi_flash.a
+Linking .pio/build/fnk0099-host/bootloader.elf
+Building .pio/build/fnk0099-host/bootloader.bin
+esptool.py v4.9.0
+Creating esp32s3 image...
+Merged 2 ELF sections
+Successfully created esp32s3 image.
+Linking .pio/build/fnk0099-host/firmware.elf
+Retrieving maximum program size .pio/build/fnk0099-host/firmware.elf
+Checking size .pio/build/fnk0099-host/firmware.elf
+Advanced Memory Usage is available via "PlatformIO Home > Project Inspect"
+RAM:   [          ]   4.0% (used 13224 bytes from 327680 bytes)
+Flash: [==        ]  24.8% (used 259713 bytes from 1048576 bytes)
+Building .pio/build/fnk0099-host/firmware.bin with action:
+  "$PYTHONEXE" "$OBJCOPY" --chip esp32s3 elf2image --flash_mode ${__get_board_flash_mode(__env__)} --flash_freq ${__get_board_f_image(__env__)} --flash_size 16MB --elf-sha256-offset 0xb0 -o $TARGET $SOURCES
+Building .pio/build/fnk0099-host/firmware.bin
+esptool.py v4.9.0
+Creating esp32s3 image...
+Merged 2 ELF sections
+Successfully created esp32s3 image.
+======================== [SUCCESS] Took 139.51 seconds ========================

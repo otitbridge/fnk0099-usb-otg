@@ -1,0 +1,14 @@
+/.pio/
+/managed_components/
+/sdkconfig.fnk0099-host
+/sdkconfig.fnk0099-host.old
+/.local/
+
+# Local editor, OS, Python and credential files
+.DS_Store
+/.vscode/
+__pycache__/
+*.py[cod]
+/.venv/
+.env
+.env.*
