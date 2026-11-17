@@ -22,7 +22,7 @@ USB認識・全4IFの記述子取得と受信開始、入力解釈のホスト�
 | [bolt-reset-cycle3-attempt1-2026-11-17.json](bolt-reset-cycle3-attempt1-2026-11-17.json) | 3回目の初回試行は操作不明。RESET起動を観測せず切断時診断で停止、合格回数に含めず再試験 |
 | [bolt-reset-cycle3-attempt2-2026-11-17.json](bolt-reset-cycle3-attempt2-2026-11-17.json) | 3回目の再試験に合格。4IF・A・左クリック復帰、警告・エラー0を確認し、RESET合格は合計3回 |
 
-## SFC：HID更新後の回帰（C to C直結でも列挙失敗、2026-11-17）
+## SFC：HID更新後の回帰（接続済み起動は失敗、Host先行接続で1台目の12ボタン合格、2026-11-17）
 
 現在の実機状態・条件比較・成果物・再開手順は[引き継ぎ資料](../sfc-troubleshooting.md)、試行時点の詳細は[調査履歴](../history/sfc-troubleshooting-2026-11-17.md)を参照してください。
 
@@ -45,6 +45,8 @@ USB認識・全4IFの記述子取得と受信開始、入力解釈のホスト�
 | [crane-game-usb-reference-review-2026-11-17.json](crane-game-usb-reference-review-2026-11-17.json) | 成功実績はArduino／IDF 4.4.7。従来の比較は5.5.0のままと判明。USBだけの隔離比較版ビルド済み・未書き込み |
 | [crane-game-usb-probe-comparison-2026-11-17.json](crane-game-usb-probe-comparison-2026-11-17.json) | Arduino／IDF 4.4.7のUSB専用版でもCHECK_SHORT_DEV_DESC失敗。元の先頭64KiB・SFC用1.1.0アプリを復元・検証済み |
 | [sfc-controller2-c-to-c-startup-2026-11-17.json](sfc-controller2-c-to-c-startup-2026-11-17.json) | 同じ2台目・元HostのままC to C直結へ交換。接続済み起動でもCHECK_SHORT_DEV_DESCのエラー3行、入力未開始 |
+| [sfc-controller1-connection-order-comparison-2026-11-17.json](sfc-controller1-connection-order-comparison-2026-11-17.json) | 1台目・C to Cで元Host→IDF 4.4.7比較版→復元Hostを比較。接続済み起動は両版9/9失敗、Host先行接続は両版1/1認識。0x0〜0x5DFFFの退避・全範囲読み戻し一致 |
+| [sfc-controller1-hid110-host-first-buttons-2026-11-17.json](sfc-controller1-hid110-host-first-buttons-2026-11-17.json) | Host 1.1.0・1台目のHost先行接続で認識、12ボタン単独入力24遷移に合格。保持・部分解放・切断復帰は未実施 |
 
 ## MSC：カードリーダー・microSD（2026-11-17）
 

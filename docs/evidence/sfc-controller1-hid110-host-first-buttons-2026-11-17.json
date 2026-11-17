@@ -1,0 +1,81 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-17",
+  "phase": "SFC HID 1.1.0 regression stage 1 on the first controller after host-first insertion (trial R4 of the A/B/A comparison)",
+  "result": "enumeration_and_twelve_button_single_input_passed",
+  "comparison_record": "sfc-controller1-connection-order-comparison-2026-11-17.json",
+  "controller": {
+    "label": "first physical SFC",
+    "firmware": "not rewritten; actual binary not established",
+    "connection": "user-reported direct USB-C to USB-C, orientation kept unchanged but not established"
+  },
+  "firmware": {
+    "environment": "fnk0099-host",
+    "application_version": "07e005a",
+    "esp_idf": "5.5.0",
+    "usb_host_hid": "1.1.0",
+    "app_bin_bytes": 270256,
+    "app_bin_sha256": "aefa9acd1775727ec0009e85c1b8deb31669895a06fbd26827fb70f617446f6c",
+    "state": "restored from the pre-comparison backup and byte-verified over 0x0-0x5DFFF"
+  },
+  "method": "Controller unplugged; opened UART (one ROM POWERON boot) and confirmed HOST_READY with no errors; user then inserted the released controller and pressed Right, B, A, followed in the same UART session by B, Y, SELECT, START, Up, Down, Left, Right, A, X, L, R, each pressed and released once. Capture 300 seconds, never reopened.",
+  "rom_boots": 1,
+  "host_ready_uptime_ms": 55,
+  "enumeration": {
+    "device_log_ms": 16660,
+    "vid_pid": "1209:d004",
+    "speed": "Low Speed (1.5 Mbps)",
+    "device_descriptor_bytes": "12 01 10 01 00 00 00 08 09 12 04 d0 01 00 01 02 03 01",
+    "interfaces": [
+      {"number": 0, "class": 3, "subclass": 1, "protocol": 2, "endpoint": "0x81", "max_packet_bytes": 4, "interval_ms": 10},
+      {"number": 1, "class": 3, "subclass": 1, "protocol": 1, "endpoint": "0x82", "max_packet_bytes": 8, "interval_ms": 10}
+    ],
+    "keyboard_open": "ESP_OK",
+    "set_protocol_boot": "ESP_OK",
+    "set_idle_0": "ESP_OK",
+    "keyboard_start": "ESP_OK",
+    "keyboard_start_log_ms": 16750,
+    "released_report": {"log_ms": 16760, "raw": "00 00 00 00 00 00 00 00", "mask": "0x000"}
+  },
+  "initial_buttons": [
+    {"button": "Right", "usage": "0x4f", "mask": "0x080", "press_ms": 21990, "release_ms": 22540},
+    {"button": "B", "usage": "0x1d", "mask": "0x001", "press_ms": 23030, "release_ms": 23550},
+    {"button": "A", "usage": "0x1b", "mask": "0x100", "press_ms": 24030, "release_ms": 24440}
+  ],
+  "twelve_button_sequence": {
+    "requested_order": "B, Y, SELECT, START, Up, Down, Left, Right, A, X, L, R",
+    "transitions_expected": 24,
+    "transitions_observed": 24,
+    "all_releases_returned_to_zero": true,
+    "modifier_and_reserved_bytes_zero": true,
+    "buttons": [
+      {"button": "B", "usage": "0x1d", "mask": "0x001", "press_ms": 80220, "release_ms": 81260},
+      {"button": "Y", "usage": "0x04", "mask": "0x002", "press_ms": 81770, "release_ms": 82720},
+      {"button": "SELECT", "usage": "0x2b", "mask": "0x004", "press_ms": 83420, "release_ms": 84030},
+      {"button": "START", "usage": "0x28", "mask": "0x008", "press_ms": 84760, "release_ms": 85410},
+      {"button": "Up", "usage": "0x52", "mask": "0x010", "press_ms": 85940, "release_ms": 86560},
+      {"button": "Down", "usage": "0x51", "mask": "0x020", "press_ms": 86920, "release_ms": 87520},
+      {"button": "Left", "usage": "0x50", "mask": "0x040", "press_ms": 88020, "release_ms": 88460},
+      {"button": "Right", "usage": "0x4f", "mask": "0x080", "press_ms": 88870, "release_ms": 89450},
+      {"button": "A", "usage": "0x1b", "mask": "0x100", "press_ms": 90120, "release_ms": 90610},
+      {"button": "X", "usage": "0x16", "mask": "0x200", "press_ms": 91090, "release_ms": 91530},
+      {"button": "L", "usage": "0x14", "mask": "0x400", "press_ms": 94440, "release_ms": 94730},
+      {"button": "R", "usage": "0x1a", "mask": "0x800", "press_ms": 95980, "release_ms": 96350}
+    ],
+    "timestamps": "ESP log timestamps of the RAW/mask lines"
+  },
+  "select_mode": "SELECT sent Tab (0x2b), the usage FNK0099 converts; Backspace mode not observed",
+  "session": {
+    "last_heartbeat_uptime_ms": 295055,
+    "free_heap_bytes_after_connect": 360572,
+    "error_lines": 0,
+    "warning_lines": 0,
+    "disconnects": 0,
+    "extra_boots": 0,
+    "panic": false,
+    "uart_closed": true
+  },
+  "scope": "Single host-first session on one controller. Not stable enumeration, and not attached-startup or cold-power-on behaviour (attached startup failed 6/6 on this image in the same comparison). Hold, simultaneous/partial release, disconnect/reconnect and physical RESET stages were not run.",
+  "privacy": "Fixed button operations and selected technical fields only. Raw UART, device strings and serials, UART port, MAC and local paths remain outside Git.",
+  "next_step": "Stop at milestone; regression stages 2 and 3 and attached-startup investigation remain."
+}

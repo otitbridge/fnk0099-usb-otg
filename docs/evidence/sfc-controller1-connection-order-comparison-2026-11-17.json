@@ -1,0 +1,120 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-17",
+  "phase": "First-controller A/B/A comparison: original Host HID 1.1.0, crane USB-only Arduino / ESP-IDF 4.4.7 probe, restored Host; attached-at-startup versus host-first insertion",
+  "result": "attached_startup_failed_9_of_9_host_first_enumerated_2_of_2",
+  "controller": {
+    "label": "first physical SFC (user-distinguished unit; the unit the user reports working with crane_game)",
+    "firmware": "not rewritten; actual binary not established",
+    "observed_usages": "B 0x1d, Y 0x04, SELECT 0x2b (Tab), START 0x28, Up 0x52, Down 0x51, Left 0x50, Right 0x4f, A 0x1b, X 0x16, L 0x14, R 0x1a; see the button record"
+  },
+  "connection": {
+    "cable": "direct USB-C to USB-C, user-reported; identity with the cable of the previous second-controller C-to-C trial not established",
+    "plug_orientation": "not established; user asked to keep it unchanged for all phases",
+    "fnk0099_power": "USB-UART connector from the Mac, same path as recorded by crane_game",
+    "data_capability_vbus_or_signal_measured": false
+  },
+  "method": {
+    "summary": "Same controller and cable throughout. Only the FNK0099 image changed: A (original Host), B (USB-only probe), R (Host restored from backup). Attached startup = controller connected while opening the UART, which resets FNK0099 (each capture showed one ROM POWERON boot). Host-first = controller unplugged, capture started, Host ready confirmed, then user plugged it in and pressed buttons.",
+    "attached_startup_captures_per_phase": 3,
+    "attached_startup_capture_seconds": 20,
+    "host_first_capture_seconds": 300,
+    "stop_rule": "Any enumeration in phase A would stop the comparison before writing the probe; none occurred.",
+    "controller_power_cycled_by_uart_reset": "not established"
+  },
+  "flash_handling": {
+    "backup": {
+      "range": "0x0-0x5DFFF",
+      "bytes": 385024,
+      "baud": 115200,
+      "covers_every_probe_write": true,
+      "original_host_bootloader_partition_and_app_matched_preserved_images": true,
+      "first_64kib_identical_to_previous_prefix_backup": true,
+      "content_and_hash_private": true
+    },
+    "probe_upload": {
+      "rebuilt": false,
+      "regions": [
+        {"offset": "0x0", "file": "bootloader.bin", "bytes": 15104, "sha256": "1776e4dd896a69d0a5c2e79957b0e2a88aa4129b1381d6478683515a1f6af343"},
+        {"offset": "0x8000", "file": "partitions.bin", "bytes": 3072, "sha256": "1d9cca96de0fe07ad7fc0648b9878ddecd9ce565e38b589ad20fea698ed4c80c"},
+        {"offset": "0xe000", "file": "boot_app0.bin", "bytes": 8192, "sha256": "f94c5d786a7a8fab06ac5d10e33bf37711a6697636dc037559ea19cc410a17f0"},
+        {"offset": "0x10000", "file": "firmware.bin", "bytes": 318096, "sha256": "4ac0ccecb412406014816a83919b88512c19a80e9b267a048c1ecf26c9d8a7af"}
+      ],
+      "flash_args": "dio / 80m / 8MB, identical to the earlier PlatformIO upload of the same probe",
+      "exit_code": 0,
+      "verified_regions": 4
+    },
+    "restore": {
+      "written_range": "0x0-0x5DFFF from the backup, flash mode/frequency/size kept",
+      "exit_code": 0,
+      "verified_regions": 1,
+      "full_range_readback_matches_backup": true,
+      "scope": "Every byte the probe wrote was restored and compared; not a full-chip snapshot."
+    }
+  },
+  "images": {
+    "host": {
+      "environment": "fnk0099-host",
+      "application_version": "07e005a",
+      "esp_idf": "5.5.0",
+      "hid_driver": "1.1.0",
+      "app_bin_bytes": 270256,
+      "app_bin_sha256": "aefa9acd1775727ec0009e85c1b8deb31669895a06fbd26827fb70f617446f6c"
+    },
+    "probe": {
+      "runtime_header": "CRANE_USB_PROBE sdk=v4.4.7-dirty cpu_mhz=240 tick_hz=1000 hid=1.0.1",
+      "preparation_record": "crane-game-usb-reference-review-2026-11-17.json"
+    }
+  },
+  "trials": [
+    {"label": "A1", "image": "host", "order": "attached_startup", "result": "enumeration_failed", "stage": "CHECK_SHORT_DEV_DESC", "log_timestamp_ms": 600, "error_lines": 3},
+    {"label": "A2", "image": "host", "order": "attached_startup", "result": "enumeration_failed", "stage": "CHECK_SHORT_DEV_DESC", "log_timestamp_ms": 600, "error_lines": 3},
+    {"label": "A3", "image": "host", "order": "attached_startup", "result": "enumeration_failed", "stage": "CHECK_SHORT_DEV_DESC", "log_timestamp_ms": 600, "error_lines": 3},
+    {"label": "B1", "image": "probe", "order": "attached_startup", "result": "enumeration_failed", "stage": "CHECK_SHORT_DEV_DESC", "log_timestamp_ms": 1284, "error_lines": 2, "status_connected": 0},
+    {"label": "B2", "image": "probe", "order": "attached_startup", "result": "enumeration_failed", "stage": "CHECK_SHORT_DEV_DESC", "log_timestamp_ms": 1284, "error_lines": 2, "status_connected": 0},
+    {"label": "B3", "image": "probe", "order": "attached_startup", "result": "enumeration_failed", "stage": "CHECK_SHORT_DEV_DESC", "log_timestamp_ms": 1284, "error_lines": 2, "status_connected": 0},
+    {
+      "label": "B4",
+      "image": "probe",
+      "order": "host_first_insertion",
+      "result": "enumerated_and_input_received",
+      "hid_interfaces": ["1209:d004 interface 0 protocol 2", "1209:d004 interface 1 protocol 1"],
+      "keyboard_start": "ESP_OK",
+      "released_report_uptime_ms": 19083,
+      "transitions": [
+        {"uptime_ms": 187218, "mask": "0x080"}, {"uptime_ms": 188423, "mask": "0x000"},
+        {"uptime_ms": 189058, "mask": "0x001"}, {"uptime_ms": 190193, "mask": "0x000"},
+        {"uptime_ms": 190793, "mask": "0x040"}, {"uptime_ms": 191738, "mask": "0x000"},
+        {"uptime_ms": 192128, "mask": "0x010"}, {"uptime_ms": 193088, "mask": "0x000"},
+        {"uptime_ms": 193673, "mask": "0x008"}, {"uptime_ms": 194963, "mask": "0x000"},
+        {"uptime_ms": 196348, "mask": "0x400"}, {"uptime_ms": 197268, "mask": "0x000"}
+      ],
+      "operator_reconciliation": "User confirmed the first requested Right/B was not performed and the third button pressed was Left, not A. Recorded Right, B, Left, Up, START, L match the buttons actually pressed. A was not exercised on the probe.",
+      "status_samples_after_connect": 281,
+      "status_samples_not_fresh_or_invalid": 0,
+      "final_status": {"uptime_ms": 300003, "connected": 1, "valid": 1, "reports": 35110, "changes": 12, "app_input_errors": 0, "generation": 1},
+      "error_lines": 0,
+      "warning_lines": 0,
+      "disconnects": 0
+    },
+    {"label": "R1", "image": "restored_host", "order": "attached_startup", "result": "enumeration_failed", "stage": "CHECK_ADDR", "log_timestamp_ms": 660, "error_lines": 3},
+    {"label": "R2", "image": "restored_host", "order": "attached_startup", "result": "enumeration_failed", "stage": "CHECK_SHORT_DEV_DESC", "log_timestamp_ms": 600, "error_lines": 3},
+    {"label": "R3", "image": "restored_host", "order": "attached_startup", "result": "enumeration_failed", "stage": "CHECK_SHORT_DEV_DESC", "log_timestamp_ms": 600, "error_lines": 3},
+    {"label": "R4", "image": "restored_host", "order": "host_first_insertion", "result": "enumerated_and_twelve_button_single_input_passed", "record": "sfc-controller1-hid110-host-first-buttons-2026-11-17.json"}
+  ],
+  "summary": {
+    "attached_startup": {"host_hid110": "0/6 enumerated", "probe_idf447": "0/3 enumerated"},
+    "host_first_insertion": {"host_hid110": "1/1 enumerated", "probe_idf447": "1/1 enumerated"},
+    "all_captures": "one ROM boot each, expected runtime version, no warnings, no panic"
+  },
+  "interpretation": "Within this session, the outcome followed connection order rather than ESP-IDF version: both images failed every attached-startup trial at the device-descriptor or address stage and both enumerated once on host-first insertion. Each host-first success is a single trial, not stable enumeration. Earlier host-first insertions failed with other cable/controller combinations (second controller with the C-to-A cable plus adapter: CHECK_FULL_DEV_DESC and CHECK_ADDR; first controller: CHECK_ADDR), so order alone is not established as the cause and cable or unit differences remain open. Why attached startup fails, and whether the UART-triggered reset leaves the controller powered, is not established.",
+  "final_state": {
+    "fnk0099": "Original SFC Host HID 1.1.0 restored and byte-verified over 0x0-0x5DFFF",
+    "controller": "First SFC retained, firmware unchanged, user-reported C-to-C",
+    "uart_monitor_active": false,
+    "main_source_or_dependencies_modified": false,
+    "external_projects_modified": false
+  },
+  "privacy": "Selected build, flash-handling and diagnostic fields only. Backup content and hash, raw UART and esptool logs, UART port, MAC, absolute local paths and device serials remain outside Git.",
+  "next_step": "Stop at milestone. Candidates: full power-off cold start with the controller attached, hold/partial-release/disconnect stages via host-first insertion, and the second controller with C-to-C host-first insertion."
+}
