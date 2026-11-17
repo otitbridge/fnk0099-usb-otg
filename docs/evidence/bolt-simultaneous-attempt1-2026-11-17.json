@@ -1,0 +1,131 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-17",
+  "phase": "simultaneous hold and partial release, attempt 1",
+  "result": "criteria_not_met",
+  "reason": "Observed simultaneous hold was 24380ms, below the predeclared 30000ms requirement. A repeat is required; no firmware error was observed.",
+  "receiver_vid_pid": "046d:c548",
+  "firmware": {
+    "environment": "fnk0099-hid",
+    "base_commit": "39b1264",
+    "source_state": "uncommitted input decoder changes",
+    "esp_idf": "5.5.0",
+    "usb_host_hid": "1.1.0",
+    "bin_bytes": 291168,
+    "bin_sha256": "0fbb220495fb7d25249281ec0d95ffb41516dc4151a7a6fff96fa368e92fa24b",
+    "matching_source_commit": "47e9e31"
+  },
+  "preparation": {
+    "key_transitions_before_first_right_arrow_press": 22,
+    "handling": "Excluded from the main operation sequence after independent raw-log review. Their key values are not published. The live monitor counted them as unexpected events."
+  },
+  "trial_key_events": [
+    {
+      "uptime_ms": 151774,
+      "usage": "0x4f",
+      "down": true,
+      "modifiers": 0,
+      "reason": "report"
+    },
+    {
+      "uptime_ms": 177694,
+      "usage": "0x4f",
+      "down": false,
+      "modifiers": 0,
+      "reason": "report"
+    },
+    {
+      "uptime_ms": 197824,
+      "usage": "0x04",
+      "down": true,
+      "modifiers": 0,
+      "reason": "report"
+    },
+    {
+      "uptime_ms": 198284,
+      "usage": "0x04",
+      "down": false,
+      "modifiers": 0,
+      "reason": "report"
+    }
+  ],
+  "button_events": [
+    {
+      "uptime_ms": 153314,
+      "buttons": 1,
+      "reason": "button"
+    },
+    {
+      "uptime_ms": 195854,
+      "buttons": 0,
+      "reason": "button"
+    },
+    {
+      "uptime_ms": 198934,
+      "buttons": 2,
+      "reason": "button"
+    },
+    {
+      "uptime_ms": 199454,
+      "buttons": 0,
+      "reason": "button"
+    }
+  ],
+  "both_held_ms": 24380,
+  "mouse_only_after_key_release_ms": 18160,
+  "both_held_motion": {
+    "entries": 517,
+    "positive_x_counts": 7828,
+    "negative_x_counts": 8066,
+    "absolute_y_counts": 2335,
+    "first_uptime_ms": 153424,
+    "last_uptime_ms": 177694
+  },
+  "mouse_only_motion": {
+    "entries": 434,
+    "absolute_x_counts": 4187,
+    "absolute_y_counts": 1703,
+    "first_uptime_ms": 177724,
+    "last_uptime_ms": 195764
+  },
+  "checks": {
+    "both_held_at_least_30s": false,
+    "both_held_mouse_both_x_directions": true,
+    "both_held_motion_spans_20s": true,
+    "key_released_with_mouse_held": true,
+    "mouse_held_alone_at_least_3s": true,
+    "mouse_moves_after_key_release": true,
+    "a_after_left_release": true,
+    "right_click_after_a": true
+  },
+  "warning_lines": 0,
+  "error_lines": 0,
+  "panic": false,
+  "queue_overflow": false,
+  "final_status": {
+    "keyboard": {
+      "supported": 1,
+      "decoded": 421,
+      "ignored": 0,
+      "invalid": 0,
+      "rollover": 0,
+      "buttons": 0
+    },
+    "mouse": {
+      "supported": 1,
+      "decoded": 2787,
+      "ignored": 0,
+      "invalid": 0,
+      "rollover": 0,
+      "buttons": 0
+    },
+    "capture_enabled": false,
+    "dropped_reports": 0,
+    "held_key_count": 0,
+    "buttons": 0,
+    "free_heap_bytes": 329576
+  },
+  "uart_closed": true,
+  "next_step": "Repeat with at least 45 seconds of user-measured simultaneous holding; keep the pass threshold at 30 seconds.",
+  "privacy": "Only the approved fixed trial inputs and technical aggregates are included. Preparation key values, raw logs, actual UART port names, local paths and device identifiers remain untracked."
+}

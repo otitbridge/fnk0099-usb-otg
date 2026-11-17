@@ -4,7 +4,7 @@
 
 ## Bolt：K950・M750（開発中、2026-11-17）
 
-USB認識・全4IFの記述子取得と受信開始、入力解釈のホストテスト、コマンド過多の修正・再試験を確認しています。K950の固定キー操作、M750の3ボタン・4方向移動・縦ホイール両方向は合格です。[Bolt検証記録](../bolt-validation.md)を参照してください。
+USB認識・全4IFの記述子取得と受信開始、入力解釈のホストテスト、コマンド過多の修正・再試験を確認しています。K950の固定キー操作、M750の3ボタン・4方向移動・縦ホイール両方向、同時保持・片側解放は合格です。[Bolt検証記録](../bolt-validation.md)を参照してください。
 
 | ファイル | 内容 |
 |---|---|
@@ -12,6 +12,8 @@ USB認識・全4IFの記述子取得と受信開始、入力解釈のホスト�
 | [bolt-decoder-preparation-2026-11-17.json](bolt-decoder-preparation-2026-11-17.json) | 入力解釈のホストテスト、実機BIN、監視時の失敗・コマンド過多の修正後の再試験。物理入力は未検証 |
 | [bolt-keyboard-input-2026-11-17.json](bolt-keyboard-input-2026-11-17.json) | K950のA・左Shift＋A・右矢印、固定8遷移の実機照合 |
 | [bolt-mouse-input-2026-11-17.json](bolt-mouse-input-2026-11-17.json) | M750の3ボタン・4方向移動・縦ホイール両方向、最終状態の実機照合 |
+| [bolt-simultaneous-attempt1-2026-11-17.json](bolt-simultaneous-attempt1-2026-11-17.json) | 初回は同時保持24.38秒で時間条件未達。後続の再試験で解消 |
+| [bolt-simultaneous-attempt2-2026-11-17.json](bolt-simultaneous-attempt2-2026-11-17.json) | 再試験で同時保持74.51秒・片側解放後5.34秒の保持と移動、入力復帰に合格 |
 
 ## MSC：カードリーダー・microSD（2026-11-17）
 

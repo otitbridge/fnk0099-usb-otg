@@ -1,0 +1,145 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-17",
+  "phase": "simultaneous hold and partial release, attempt 2",
+  "result": "passed",
+  "receiver_vid_pid": "046d:c548",
+  "firmware": {
+    "environment": "fnk0099-hid",
+    "base_commit": "39b1264",
+    "source_state": "uncommitted input decoder changes",
+    "esp_idf": "5.5.0",
+    "usb_host_hid": "1.1.0",
+    "bin_bytes": 291168,
+    "bin_sha256": "0fbb220495fb7d25249281ec0d95ffb41516dc4151a7a6fff96fa368e92fa24b",
+    "matching_source_commit": "47e9e31"
+  },
+  "method": "One continuous UART capture. Arm at Right Arrow down with all other keys/buttons released; then hold Right Arrow and left mouse button while moving, release only Right Arrow and keep moving with left held, release left, press/release A and right-click/release. Renew capture before each 30-second deadline and automatically stop after all final transitions.",
+  "previous_attempt": "bolt-simultaneous-attempt1-2026-11-17.json",
+  "preparation": {
+    "key_transitions_excluded": 2,
+    "mouse_log_entries_excluded": 90,
+    "handling": "Before the first valid Right Arrow press; input details not published."
+  },
+  "trial_start_uptime_ms": 50014,
+  "key_events": [
+    {
+      "uptime_ms": 50014,
+      "usage": "0x4f",
+      "down": true,
+      "modifiers": 0,
+      "reason": "report"
+    },
+    {
+      "uptime_ms": 124994,
+      "usage": "0x4f",
+      "down": false,
+      "modifiers": 0,
+      "reason": "report"
+    },
+    {
+      "uptime_ms": 132074,
+      "usage": "0x04",
+      "down": true,
+      "modifiers": 0,
+      "reason": "report"
+    },
+    {
+      "uptime_ms": 132854,
+      "usage": "0x04",
+      "down": false,
+      "modifiers": 0,
+      "reason": "report"
+    }
+  ],
+  "button_events": [
+    {
+      "uptime_ms": 50484,
+      "buttons": 1,
+      "reason": "button"
+    },
+    {
+      "uptime_ms": 130334,
+      "buttons": 0,
+      "reason": "button"
+    },
+    {
+      "uptime_ms": 134364,
+      "buttons": 2,
+      "reason": "button"
+    },
+    {
+      "uptime_ms": 134624,
+      "buttons": 0,
+      "reason": "button"
+    }
+  ],
+  "both_held_ms": 74510,
+  "required_both_held_ms": 30000,
+  "mouse_only_after_key_release_ms": 5340,
+  "required_mouse_only_after_key_release_ms": 3000,
+  "both_held_motion": {
+    "entries": 3221,
+    "positive_x_counts": 84217,
+    "negative_x_counts": 83701,
+    "absolute_y_counts": 26063,
+    "first_uptime_ms": 50794,
+    "last_uptime_ms": 124904
+  },
+  "mouse_only_motion": {
+    "entries": 225,
+    "absolute_x_counts": 15867,
+    "absolute_y_counts": 1058,
+    "first_uptime_ms": 125104,
+    "last_uptime_ms": 130194
+  },
+  "checks": {
+    "both_held_at_least_30s": true,
+    "both_held_mouse_both_x_directions": true,
+    "both_held_motion_spans_20s": true,
+    "key_released_with_mouse_held": true,
+    "mouse_held_alone_at_least_3s": true,
+    "mouse_moves_after_key_release": true,
+    "a_after_left_release": true,
+    "right_click_after_a": true
+  },
+  "unexpected_key_events": 0,
+  "unexpected_button_events": 0,
+  "warning_lines": 0,
+  "error_lines": 0,
+  "panic": false,
+  "queue_overflow": false,
+  "final_status": {
+    "keyboard": {
+      "supported": 1,
+      "decoded": 272,
+      "ignored": 0,
+      "invalid": 0,
+      "rollover": 0,
+      "buttons": 0
+    },
+    "mouse": {
+      "supported": 1,
+      "decoded": 10438,
+      "ignored": 0,
+      "invalid": 0,
+      "rollover": 0,
+      "buttons": 0
+    },
+    "report_counter_scope": "Whole UART session including preparation",
+    "capture_enabled": false,
+    "dropped_reports": 0,
+    "held_key_count": 0,
+    "buttons": 0,
+    "free_heap_bytes": 329576
+  },
+  "uart_closed": true,
+  "scope_excludes": [
+    "receiver unplug/replug and RESET trials",
+    "long-duration endurance and latency guarantees",
+    "all-key coverage and character/layout conversion",
+    "horizontal wheel and side buttons",
+    "SFC hardware regression after HID driver update"
+  ],
+  "privacy": "Only approved fixed trial inputs and technical aggregates are included. Preparation key values, raw logs, actual UART port names, home paths, serial numbers and MAC addresses remain untracked."
+}
