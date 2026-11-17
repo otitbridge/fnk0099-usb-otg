@@ -1,4 +1,12 @@
 menu "FNK0099 probe"
+    config FNK0099_HID_PROBE
+        bool "Build the composite keyboard/mouse HID probe"
+        default n
+        depends on !FNK0099_MSC_PROBE
+        help
+            Inspect HID interfaces and report descriptors. Input capture is
+            enabled only by an explicit UART command and expires after 30 seconds.
+
     config FNK0099_MSC_PROBE
         bool "Build the USB MSC probe instead of the SFC HID probe"
         default n

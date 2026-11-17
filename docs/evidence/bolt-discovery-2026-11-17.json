@@ -1,0 +1,103 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-17",
+  "phase": "descriptor discovery",
+  "result": "passed",
+  "hardware": {
+    "host": "FNK0099 Rev1.1 N16R8",
+    "receiver_vid_pid": "046d:c548",
+    "peripherals_user_reported": [
+      "Logitech K950",
+      "Logitech M750"
+    ],
+    "pairing": "already paired by user",
+    "usb_speed": "FULL (12Mbps)"
+  },
+  "firmware": {
+    "environment": "fnk0099-hid",
+    "base_commit": "4348f79",
+    "source_state": "uncommitted Bolt discovery changes",
+    "esp_idf": "5.5.0",
+    "usb_host_hid": "1.1.0",
+    "bin_bytes": 286208,
+    "bin_sha256": "6f7a83836c44180a1f3b3075fd49b9c297875dfc2406dcd23d93ae2d2d9cb635"
+  },
+  "interfaces": [
+    {
+      "number": 0,
+      "class": 3,
+      "subclass": 1,
+      "protocol": 1,
+      "interrupt_in_endpoint": "0x81",
+      "max_packet_bytes": 64,
+      "interval_ms": 1,
+      "report_descriptor_bytes": 59,
+      "report_descriptor_sha256": "2af58aa07ae98325b2fb037284d7bee5999897f07c5800fa495625ce338fabda",
+      "open": "ESP_OK",
+      "start": "ESP_OK",
+      "role": "boot keyboard interface (Report protocol selected)"
+    },
+    {
+      "number": 1,
+      "class": 3,
+      "subclass": 1,
+      "protocol": 2,
+      "interrupt_in_endpoint": "0x82",
+      "max_packet_bytes": 64,
+      "interval_ms": 1,
+      "report_descriptor_bytes": 158,
+      "report_descriptor_sha256": "1cf61334d9ecc7aca098f9a279c08ff2b3d41eb0fb668212ab210473c3c9a5d4",
+      "open": "ESP_OK",
+      "start": "ESP_OK",
+      "role": "mouse/consumer/system reports (Report protocol selected)"
+    },
+    {
+      "number": 2,
+      "class": 3,
+      "subclass": 0,
+      "protocol": 0,
+      "interrupt_in_endpoint": "0x83",
+      "max_packet_bytes": 64,
+      "interval_ms": 1,
+      "report_descriptor_bytes": 54,
+      "report_descriptor_sha256": "d0eeed76ea11ef958a199263e9be1a5399e7365c45d5c2726d1e6778140912ee",
+      "open": "ESP_OK",
+      "start": "ESP_OK",
+      "role": "vendor HID++ interface; input payload suppressed"
+    },
+    {
+      "number": 3,
+      "class": 3,
+      "subclass": 0,
+      "protocol": 0,
+      "interrupt_in_endpoint": "0x84",
+      "max_packet_bytes": 64,
+      "interval_ms": 1,
+      "report_descriptor_bytes": 429,
+      "report_descriptor_sha256": "d86e564247497da50c4127ecb162f01b8ff6519f7d7a601c02ab2320c1dea583",
+      "open": "ESP_OK",
+      "start": "ESP_OK",
+      "role": "digitizer/extension interface; input payload suppressed"
+    }
+  ],
+  "observation": {
+    "capture_seconds": 20,
+    "input_capture_enabled": false,
+    "warning_lines": 0,
+    "error_lines": 0,
+    "panic": false,
+    "steady_free_heap_bytes": [
+      340384,
+      340384,
+      340384
+    ]
+  },
+  "scope_excludes": [
+    "physical key and mouse input verification",
+    "input semantic decoding",
+    "reconnect and RESET trials",
+    "long-duration operation",
+    "SFC hardware regression with HID 1.1.0"
+  ],
+  "privacy": "Only USB descriptor metadata and public report layouts are included. USB strings, serial numbers, actual UART names, home paths, MAC addresses and input payloads are excluded."
+}

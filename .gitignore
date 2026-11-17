@@ -2,6 +2,8 @@
 /managed_components/
 /sdkconfig.fnk0099-host
 /sdkconfig.fnk0099-host.old
+/sdkconfig.fnk0099-hid
+/sdkconfig.fnk0099-hid.old
 /sdkconfig.fnk0099-msc
 /sdkconfig.fnk0099-msc.old
 /.local/

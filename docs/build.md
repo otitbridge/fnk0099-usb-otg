@@ -8,10 +8,10 @@
 |---|---|
 | PlatformIO platform | espressif32 6.12.0 |
 | ESP-IDF | 5.5.0 |
-| espressif/usb_host_hid | 1.0.1 |
+| espressif/usb_host_hid | 1.1.0 |
 | espressif/usb_host_msc | 1.3.0 |
 
-`platformio.ini`、`src/idf_component.yml`、`dependencies.lock` で固定しています。初期調査の参照例はESP-IDF 5.5.2ですが、実装・検証は5.5.0です。
+`platformio.ini`、`src/idf_component.yml`、`dependencies.lock` で固定しています。HIDドライバーはBolt対応で1.0.1から1.1.0へ更新しました。過去のSFC・MSC実機試験は1.0.1の依存構成で行った記録で、更新後の実機回帰試験とは区別します。初期調査の参照例はESP-IDF 5.5.2ですが、実装・検証は5.5.0です。
 
 ビルド用の汎用定義 `esp32-s3-devkitc-1` に対してFlashを16MBに設定しています。FNK0099とDevKitCが同一基板という意味ではありません。UART0をコンソールに使用し、USBコンソールとPSRAMは無効です。
 
@@ -22,6 +22,7 @@ FNK0099のUSB-UART端子をPCへ接続します。USB-OTG端子はHIDコント�
 | 用途 | 環境 | 操作手順 |
 |---|---|---|
 | HID入力（既定） | `fnk0099-host` | [HID操作手順](hid-usage.md) |
+| Boltキーボード・マウス調査 | `fnk0099-hid` | [Bolt検証手順](bolt-validation.md) |
 | MSC読み書き | `fnk0099-msc` | [MSC操作手順](msc-usage.md) |
 
 以下はHID用の例です。MSC用ではビルド・書き込み両方の環境名を `fnk0099-msc` に置き換えます。環境ごとに生成sdkconfigと出力先は別ですが、依存マニフェストとロックは共有します。
