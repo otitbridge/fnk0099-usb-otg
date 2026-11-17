@@ -70,7 +70,19 @@ cc -Wall -Wextra -Werror tests/test_report.c -o .local/test-report
 
 12入力の対応、同時押し、部分・全解放、不正レポートを検査します。実機のUSB通信試験を代替するものではありません。
 
+## MSCファイル操作のホストテスト
+
+MSCの新規ファイル作成処理は、ホスト側の一時ディレクトリで同期・クローズ後の再オープン、既存ファイルを変更しないこと、親ディレクトリがない場合の失敗を検査できます。これはホストOSのファイル操作の検査で、ESP-IDFのFatFs・USB MSC・実機の書き込み試験は別途必要です。
+
+```sh
+mkdir -p .local
+cc -std=c11 -Wall -Wextra -Werror tests/test_msc_file_probe.c src/msc_file_probe.c -o .local/test-msc-file-probe
+.local/test-msc-file-probe
+```
+
 ## 実機試験の順序
+
+以下はHID環境の実機試験順序です。
 
 1. B → Y → SELECT → START → 上 → 下 → 左 → 右 → A → X → L → Rを単独押下・解放。
 2. 左右それぞれ35秒以上を目安に保持して解放。ログ上で各30秒以上を確認。

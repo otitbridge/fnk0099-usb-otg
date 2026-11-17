@@ -1,4 +1,4 @@
-// USB MSC media/read probe. No formatting or file-writing commands.
+// USB MSC file probe. New-file writes require an explicit UART command.
 #include <dirent.h>
 #include <errno.h>
 #include <inttypes.h>
@@ -18,19 +18,25 @@
 #include "usb/msc_host.h"
 #include "usb/msc_host_vfs.h"
 #include "usb/usb_host.h"
+#include "msc_file_probe.h"
 
 #define MOUNT_PATH "/usb"
 #define READ_PATH MOUNT_PATH "/PROBE.TXT"
+#define WRITE_PATH MOUNT_PATH "/WRITE.TXT"
 
 static const char *TAG = "MSC_PROBE";
 static const char read_expected[] = "FNK0099 USB MSC read probe v1\n";
+static const char write_expected[] = "FNK0099 USB MSC write probe v1\n";
 static QueueHandle_t events;
 static msc_host_device_handle_t device;
 static msc_host_vfs_handle_t volume;
 static uint8_t device_address;
 static bool cleanup_failed;
 
-typedef enum { CMD_HELP, CMD_STATUS, CMD_MOUNT, CMD_LS, CMD_READ, CMD_UNMOUNT } command_t;
+typedef enum {
+    CMD_HELP, CMD_STATUS, CMD_MOUNT, CMD_LS, CMD_READ, CMD_UNMOUNT,
+    CMD_WRITE, CMD_VERIFY_WRITE,
+} command_t;
 typedef struct {
     enum { CONNECTED, DISCONNECTED, COMMAND } kind;
     union {
@@ -163,51 +169,80 @@ static void count_root_entries(void)
              (unsigned)count, (esp_timer_get_time() - start) / 1000);
 }
 
-static void read_fixture(void)
+static void verify_file(const char *path, const char *expected, size_t expected_length,
+                        const char *label, int64_t start)
 {
     if (!volume || cleanup_failed) {
-        ESP_LOGW(TAG, "READ rejected; mount required");
+        ESP_LOGW(TAG, "%s rejected; mount required", label);
         return;
     }
-    int64_t start = esp_timer_get_time();
-    FILE *file = fopen(READ_PATH, "rb");
+    uint8_t data[128];
+    if (expected_length >= sizeof(data)) {
+        ESP_LOGE(TAG, "%s_FAILED; fixture exceeds verification buffer", label);
+        return;
+    }
+    FILE *file = fopen(path, "rb");
     if (!file) {
-        ESP_LOGE(TAG, "READ_NOT_VERIFIED open errno=%d; provision the public PROBE.TXT fixture", errno);
+        ESP_LOGE(TAG, "%s_NOT_VERIFIED open errno=%d; expected fixture required", label, errno);
         return;
     }
     // One byte beyond the expected length detects a longer file without reading it all.
-    uint8_t data[sizeof(read_expected)];
     errno = 0;
-    size_t length = fread(data, 1, sizeof(data), file);
+    size_t length = fread(data, 1, expected_length + 1, file);
     bool read_error = ferror(file) != 0;
     int read_errno = errno;
     int close_result = fclose(file);
     int close_errno = close_result ? errno : 0;
     if (read_error || close_result) {
-        ESP_LOGE(TAG, "READ_FAILED read_errno=%d close_errno=%d", read_errno, close_errno);
+        ESP_LOGE(TAG, "%s_FAILED read_errno=%d close_errno=%d", label, read_errno, close_errno);
         return;
     }
-    if (length != sizeof(read_expected) - 1 || memcmp(data, read_expected, length)) {
-        ESP_LOGE(TAG, "READ_MISMATCH; expected_bytes=%u; contents suppressed",
-                 (unsigned)(sizeof(read_expected) - 1));
+    if (length != expected_length || memcmp(data, expected, length)) {
+        ESP_LOGE(TAG, "%s_MISMATCH; expected_bytes=%u; contents suppressed",
+                 label, (unsigned)expected_length);
         return;
     }
     uint8_t digest[32];
     int hash_err = mbedtls_sha256(data, length, digest, 0);
     if (hash_err) {
-        ESP_LOGE(TAG, "sha256 failed code=%d", hash_err);
+        ESP_LOGE(TAG, "%s_FAILED sha256 code=%d", label, hash_err);
         return;
     }
     char hex[65];
     for (size_t i = 0; i < sizeof(digest); ++i) snprintf(hex + 2 * i, 3, "%02x", digest[i]);
-    ESP_LOGI(TAG, "READ_PASS bytes=%u sha256=%s elapsed_ms=%" PRId64,
-             (unsigned)length, hex, (esp_timer_get_time() - start) / 1000);
+    ESP_LOGI(TAG, "%s_PASS bytes=%u sha256=%s elapsed_ms=%" PRId64,
+             label, (unsigned)length, hex, (esp_timer_get_time() - start) / 1000);
+}
+
+static void write_fixture(void)
+{
+    if (!volume || cleanup_failed) {
+        ESP_LOGW(TAG, "WRITE rejected; mount required");
+        return;
+    }
+    int64_t start = esp_timer_get_time();
+    msc_file_write_result_t written = msc_create_synced_file(WRITE_PATH, write_expected,
+                                                          sizeof(write_expected) - 1);
+    if (written.error) {
+        if (written.error == EEXIST && strcmp(written.operation, "open") == 0) {
+            ESP_LOGW(TAG, "WRITE_EXISTS; no file changed; use verify-write to inspect the test file");
+        } else {
+            ESP_LOGE(TAG, "WRITE_FAILED operation=%s errno=%d close_errno=%d bytes_written=%u elapsed_ms=%" PRId64,
+                     written.operation, written.error, written.close_error,
+                     (unsigned)written.bytes_written, (esp_timer_get_time() - start) / 1000);
+            ESP_LOGE(TAG, "Stop testing; retain any partial file for investigation");
+        }
+        return;
+    }
+    ESP_LOGI(TAG, "WRITE_SYNC_OK bytes=%u fsync=OK close=OK", (unsigned)written.bytes_written);
+    verify_file(WRITE_PATH, write_expected, sizeof(write_expected) - 1, "WRITE", start);
 }
 
 static void show_help(void)
 {
-    ESP_LOGI(TAG, "COMMANDS help | status | mount | ls | read | unmount (CR or LF)");
-    ESP_LOGI(TAG, "ls counts root entries; read verifies PROBE.TXT; no file-write or format commands");
+    ESP_LOGI(TAG, "COMMANDS help | status | mount | ls | read | unmount | write | verify-write (CR or LF)");
+    ESP_LOGI(TAG, "read verifies PROBE.TXT; write exclusively creates WRITE.TXT and verifies it");
+    ESP_LOGI(TAG, "verify-write only reads WRITE.TXT; no automatic writes or formatting");
 }
 
 static void run_command(command_t command)
@@ -220,7 +255,13 @@ static void run_command(command_t command)
         break;
     case CMD_MOUNT: mount_media(); break;
     case CMD_LS: count_root_entries(); break;
-    case CMD_READ: read_fixture(); break;
+    case CMD_READ:
+        verify_file(READ_PATH, read_expected, sizeof(read_expected) - 1, "READ", esp_timer_get_time());
+        break;
+    case CMD_WRITE: write_fixture(); break;
+    case CMD_VERIFY_WRITE:
+        verify_file(WRITE_PATH, write_expected, sizeof(write_expected) - 1, "WRITE_VERIFY", esp_timer_get_time());
+        break;
     case CMD_UNMOUNT:
         if (cleanup_failed) {
             ESP_LOGE(TAG, "CLEANUP_FAILED; reset required");
@@ -234,7 +275,7 @@ static void run_command(command_t command)
 static void command_task(void *arg)
 {
     (void)arg;
-    const char *names[] = {"help", "status", "mount", "ls", "read", "unmount"};
+    const char *names[] = {"help", "status", "mount", "ls", "read", "unmount", "write", "verify-write"};
     char line[32];
     size_t length = 0;
     bool invalid = false;
@@ -314,7 +355,7 @@ static void host_events(void *arg)
 
 void app_main(void)
 {
-    ESP_LOGI(TAG, "FNK0099 MSC media/read probe; IDF %s; automatic_format=disabled", esp_get_idf_version());
+    ESP_LOGI(TAG, "FNK0099 MSC file probe; IDF %s; automatic_format=disabled; automatic_write=disabled", esp_get_idf_version());
     events = xQueueCreate(16, sizeof(probe_event_t));
     ESP_ERROR_CHECK(events ? ESP_OK : ESP_ERR_NO_MEM);
     ESP_ERROR_CHECK(uart_driver_install(UART_NUM_0, 1024, 0, 0, NULL, 0));

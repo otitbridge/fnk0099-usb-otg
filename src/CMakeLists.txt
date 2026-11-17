@@ -1,7 +1,7 @@
 # Keep dependencies unconditional: IDF also evaluates this file before sdkconfig
 # is available while collecting component requirements.
 if(CONFIG_FNK0099_MSC_PROBE)
-    set(probe_source "msc_main.c")
+    set(probe_source "msc_main.c" "msc_file_probe.c")
 else()
     set(probe_source "main.c")
 endif()
