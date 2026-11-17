@@ -1,0 +1,8 @@
+menu "FNK0099 probe"
+    config FNK0099_MSC_PROBE
+        bool "Build the USB MSC probe instead of the SFC HID probe"
+        default n
+        help
+            Select the dedicated USB card reader probe. The initial version
+            only reads media and does not format or create files.
+endmenu

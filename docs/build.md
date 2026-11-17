@@ -34,6 +34,8 @@ pio device monitor --port YOUR_UART_PORT --baud 115200
 
 ## 受信確認
 
+USBカードリーダーの検証には専用環境 `fnk0099-msc` を使用します。[MSC検証の操作・進捗](msc-validation.md)を参照してください。以下は既存の `fnk0099-host` によるSFC入力の確認手順です。
+
 SFCを全解放でUSB-OTGへ直結し、次を確認します。
 
 - `usb_host_install: ESP_OK` と `hid_host_install: ESP_OK; HOST_READY`

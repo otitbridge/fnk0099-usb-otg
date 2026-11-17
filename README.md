@@ -56,6 +56,7 @@ SFC mask=0x080 changed=0x001 reason=report
 
 ## 関連資料
 
+- [USBカードリーダー・microSDの検証計画と経過](docs/msc-validation.md)（実機書き込み・容量取得・マウント成功、ファイルの読み書きは未検証）
 - [ビルド・書き込み・ログ取得](docs/build.md)
 - [検証結果と試験経緯](docs/validation.md)
 - [既知の制約・問題の切り分け](docs/known-issues.md)
