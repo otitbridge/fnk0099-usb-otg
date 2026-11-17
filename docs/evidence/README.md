@@ -1,10 +1,18 @@
 # 検証証跡
 
-USB MSCによるSD読み書きの現在の結果は[MSC検証記録](../msc-validation.md)にまとめています。[再接続・RESET各3回の結果](msc-reconnect-reset-2026-11-17.json)はMSC用の公開証跡です。以下の既存記録はSFC/HID検証の経緯です。
+各JSON・ログはその試験時点の記録です。過去の `pending` や失敗判定は、後続試験で解消されている場合があります。現在の結果は用途別の検証結果を参照してください。公開ログはローカルパス・MACアドレスなどを除去しています。生ログ・機器固有情報はGit対象外の `.local/` に保持します。
 
-各JSONはその試験時点の判定です。過去の `pending` は後続試験で解消されている場合があります。現在の状態は[検証結果](../validation.md)を参照してください。ログはローカルパス・MACアドレスなどを除去し、行末空白を整えています。
+## MSC：カードリーダー・microSD（2026-11-17）
 
-修正版BINの識別情報は[p5-fix-firmware](p5-fix-firmware-2026-11-11.json)、最終版の機能確認は[regression-final](regression-final-2026-11-11.json)です。失敗記録と保留記録も追跡のため残しています。
+現在の[MSC検証結果](../msc-validation.md)に、当初計画7項目の結果、実機BIN、書き込み・再マウント・Mac照合をまとめています。各時点の詳細は[経過記録](../history/msc-validation-2026-11-17.md)を参照してください。
+
+| ファイル | 内容 |
+|---|---|
+| [msc-reconnect-reset-2026-11-17.json](msc-reconnect-reset-2026-11-17.json) | 再接続3回・RESET3回、各回の3ファイルのハッシュ・時間・ヒープ、最終状態 |
+
+## HID：SFCコントローラー（2026-11-11）
+
+現在の状態は[HID検証結果](../validation.md)を参照してください。修正版BINは[p5-fix-firmware](p5-fix-firmware-2026-11-11.json)、最終版の機能確認は[regression-final](regression-final-2026-11-11.json)で識別できます。失敗・保留記録も経過として保存しています。
 
 | ファイル | 種別 |
 |---|---|
@@ -46,3 +54,5 @@ USB MSCによるSD読み書きの現在の結果は[MSC検証記録](../msc-vali
 | [regression-hold-attempt1-2026-11-11.log](regression-hold-attempt1-2026-11-11.log) | ログ |
 | [usb-c-orientation-2026-11-11.json](usb-c-orientation-2026-11-11.json) | 判定・メタデータ |
 | [usb-c-orientation-2026-11-11.log](usb-c-orientation-2026-11-11.log) | ログ |
+
+[READMEへ戻る](../../README.md)

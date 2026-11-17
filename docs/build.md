@@ -9,6 +9,7 @@
 | PlatformIO platform | espressif32 6.12.0 |
 | ESP-IDF | 5.5.0 |
 | espressif/usb_host_hid | 1.0.1 |
+| espressif/usb_host_msc | 1.3.0 |
 
 `platformio.ini`、`src/idf_component.yml`、`dependencies.lock` で固定しています。初期調査の参照例はESP-IDF 5.5.2ですが、実装・検証は5.5.0です。
 
@@ -16,7 +17,14 @@
 
 ## ビルドと書き込み
 
-FNK0099のUSB-UART端子をPCへ接続します。USB-OTG端子はコントローラー接続用です。
+FNK0099のUSB-UART端子をPCへ接続します。USB-OTG端子はHIDコントローラーまたはMSCカードリーダーの接続用です。
+
+| 用途 | 環境 | 操作手順 |
+|---|---|---|
+| HID入力（既定） | `fnk0099-host` | [HID操作手順](hid-usage.md) |
+| MSC読み書き | `fnk0099-msc` | [MSC操作手順](msc-usage.md) |
+
+以下はHID用の例です。MSC用ではビルド・書き込み両方の環境名を `fnk0099-msc` に置き換えます。環境ごとに生成sdkconfigと出力先は別ですが、依存マニフェストとロックは共有します。
 
 ```sh
 pio run -e fnk0099-host
@@ -32,9 +40,9 @@ pio device monitor --port YOUR_UART_PORT --baud 115200
 
 書き込み時は他のシリアルモニターを終了します。今回の実機ではUART経由の自動リセットで書き込めました。書き込みのハッシュ検証成功を確認してください。モニターはCtrl+Cで終了します。
 
-## 受信確認
+## HID受信確認
 
-USBカードリーダーの検証には専用環境 `fnk0099-msc` を使用します。[MSC検証の操作・進捗](msc-validation.md)を参照してください。以下は既存の `fnk0099-host` によるSFC入力の確認手順です。
+USBカードリーダーの検証には専用環境 `fnk0099-msc` を使用します。[MSC操作手順](msc-usage.md)と[MSC検証結果](msc-validation.md)を参照してください。以下は既存の `fnk0099-host` によるSFC入力の確認手順です。
 
 SFCを全解放でUSB-OTGへ直結し、次を確認します。
 
@@ -86,7 +94,7 @@ cc -std=c11 -Wall -Wextra -Werror tests/test_msc_file_probe.c src/msc_file_probe
 python3 tests/test_msc_bulk_probe.py
 ```
 
-## 実機試験の順序
+## HID実機試験の順序
 
 以下はHID環境の実機試験順序です。
 
@@ -97,5 +105,7 @@ python3 tests/test_msc_bulk_probe.py
 5. 全解放で再接続3回と、両USBを保持したRESET再起動3回を確認。
 
 各試験はUARTログと照合します。30分試験は現在保留のため、上記を終えても連続稼働の合格とはしません。
+
+生ログはGit対象外の `.local/` に保存し、個人のパス・実UARTポート名・機器固有番号を含むログはそのまま公開しないでください。
 
 [READMEへ戻る](../README.md)

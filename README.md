@@ -1,65 +1,44 @@
-# FNK0099 USB Host — SFCコントローラー入力
+# FNK0099 USB Host — HID・USB MSC検証
 
-**Freenove FNK0099 USB-C OTG host tested — no additional power supply or hardware modifications required.**
+Freenove FNK0099（ESP32-S3-WROOM Board Lite）のUSB-OTG端子を使う、2種類の検証用ファームウェアです。USB-UART端子で給電・書き込み・ログ取得を行い、USB-OTG端子へ検証対象を接続します。
 
-Tested with a UIAPduino-based SNES controller acting as a USB HID keyboard. The FNK0099 was powered through its USB-UART port, with the controller connected directly to its USB-OTG port via a USB-C cable.
+**Freenove FNK0099 USB-C OTG host tested with a USB HID keyboard and a USB MSC card reader.** Separate PlatformIO environments select the firmware. The HID setup was tested with a direct USB-C connection, without an additional power supply, hub, or board modification.
 
-Freenove FNK0099（ESP32-S3-WROOM Board Lite）で、[UIAPduino内蔵SFCコントローラー](https://github.com/otitbridge/snes-controller-uiapduino)のUSB HIDキーボード入力を受信し、12ボタンの状態をUARTへ出力するファームウェアです。
+## ファームウェアを選ぶ
 
-既設USB-OTG端子へのUSB-C直結で動作確認済みです。追加給電・USBハブ・基板改造は使用していません。エミュレーターや無線送信機能は含みません。
+| 用途 | PlatformIO環境 | 確認済みの動作 | 操作手順・結果 |
+|---|---|---|---|
+| SFCコントローラーのHID入力 | `fnk0099-host`（既定） | 12ボタンのUART出力、保持・同時押し・切断復帰 | [HID操作](docs/hid-usage.md) / [HID検証結果](docs/validation.md) |
+| USBカードリーダー経由のmicroSD読み書き | `fnk0099-msc` | 30バイト読み取り、31バイト・1MiB新規書き込み、Mac照合、再接続3回・RESET3回 | [MSC操作](docs/msc-usage.md) / [MSC検証結果](docs/msc-validation.md) |
 
-## 接続構成
+環境ごとにファームを書き換えて使用します。環境指定のない `pio run` はHID用です。HIDとMSCを同時に処理する構成ではありません。
 
-```mermaid
-flowchart LR
-    PC["Mac / 開発・ログ用PC"] -->|"USB-UART：給電・書き込み・ログ"| HOST["FNK0099 / USB Host"]
-    HOST -->|"USB-OTG：USB-C直結"| PAD["UIAPduino内蔵SFCコントローラー"]
-```
+## 確認した機材
 
-| 必要なもの | 動作確認した構成 |
+| 項目 | 構成 |
 |---|---|
-| Hostボード | FNK0099 Rev 1.1、N16R8（16MB Flash / 8MB PSRAM） |
-| コントローラー | UIAPduino V1.4、USBキーボード版 v1.0.0（SELECT→Tab） |
-| OTG側ケーブル | AT-PDCASTCC08、コントローラーに内蔵 |
-| 開発環境 | Mac、PlatformIO Core、USB-UART通信ケーブル |
+| Host | FNK0099 Rev 1.1、N16R8（16MB Flash / 8MB PSRAM） |
+| 開発・照合PC | Mac、PlatformIO Core、USB-UART通信ケーブル |
+| HID | UIAPduino V1.4内蔵SFC、USBキーボード版 v1.0.0（SELECT→Tab）、AT-PDCASTCC08 |
+| MSC | カードリーダー `14cd:1212`、microSD 1GB、FAT16 |
 
-PSRAMは現行ファームでは使用しません。別の基板Rev・ケーブル・OSでの動作は個別に確認してください。
+PSRAMは使用していません。実績の範囲は上記の組合せです。HIDの30分連続稼働は保留、MSCの長時間稼働・電源断耐性・全容量書き込みは未検証です。
 
-## 使い方
+## 開始手順
 
-1. FNK0099の**USB-UART端子**を開発PCにつなぎます。
-2. [ビルド・書き込み手順](docs/build.md)に従ってファームを書き込み、115200 baudでUARTを開きます。
-3. SFCの全ボタンを離し、ケーブルをFNK0099の**USB-OTG端子**へ直接接続します。
-4. `1209:d004`、`keyboard start: ESP_OK`、`SFC mask` のログを確認します。
+1. FNK0099のUSB-UART端子をPCへ接続します。
+2. [ビルド・書き込み手順](docs/build.md)で使用する環境を指定して書き込み、115200 baudでUARTを開きます。
+3. USB-OTG端子に対象機器を接続し、上記の用途別手順で確認します。
 
-次は右＋BからBだけを離した場合の出力形式例です。時刻と他のログは省略しています。
+MSCは認識時にマウントを試みます。ファイル作成はUARTの明示的なコマンドで行い、既存ファイルの上書き・自動フォーマットは行いません。取り外し前に `unmount` を実行し、`SAFE_TO_REMOVE` を確認します。
 
-```text
-RAW: 00 00 1d 4f 00 00 00 00
-SFC mask=0x081 changed=0x081 reason=report
-RAW: 00 00 4f 00 00 00 00 00
-SFC mask=0x080 changed=0x001 reason=report
-```
+## 資料
 
-マスクのbit 0〜11は **B・Y・SELECT・START・上・下・左・右・A・X・L・R** に対応し、押下中が1です。`changed` は前回との差分（XOR）です。同一レポートの繰り返し出力は省略します。
-
-## 確認済みの動作と制約
-
-12ボタン、左右30秒以上の保持、3入力同時押しと部分解放、切断時の全解放、再接続3回、RESET再起動3回を確認済みです。給電を切って戻す試験とHost側USB-Cの反転も確認しています。詳細な条件は[検証結果](docs/validation.md)をご覧ください。
-
-- 受信対象は `1209:D004` のキーボードIF1です。汎用ゲームパッド用ではありません。
-- 元のキーボード版は最大6入力です。送られていない7個目以降の入力は復元できません。
-- 抜去時のEP／URBログは**軽微（暫定）**。原因未確定ですが、修正後の試験では再接続・入力復帰を確認しています。
-- **30分連続稼働試験は保留・未完了**です。
-
-[既知の制約・問題の切り分け](docs/known-issues.md)に、未確認項目と重要度を見直す条件をまとめています。
-
-## 関連資料
-
-- [USBカードリーダー・microSDの検証計画と経過](docs/msc-validation.md)（当初計画完了。31バイト・1MiBの書き込み、Macでの照合、再接続3回・RESET3回に成功）
-- [ビルド・書き込み・ログ取得](docs/build.md)
-- [検証結果と試験経緯](docs/validation.md)
+- [ビルド・書き込み・ホストテスト・ログ取得](docs/build.md)
 - [既知の制約・問題の切り分け](docs/known-issues.md)
-- [証跡一覧](docs/evidence/README.md)
-- [事前調査と設計方針](docs/design-notes.md)
+- [公開証跡一覧](docs/evidence/README.md)
+- [HIDの事前調査と設計方針](docs/design-notes.md)
+- [MSC検証の過去の経過](docs/history/msc-validation-2026-11-17.md)
 - [Freenove公式資料](https://docs.freenove.com/projects/fnk0099/en/latest/)
+
+生ログ・機器情報・生成物はGit対象外の `.local/` に置きます。公開証跡には必要な技術情報と公開検証データだけを記録します。
