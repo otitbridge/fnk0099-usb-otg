@@ -1,0 +1,110 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-17",
+  "phase": "K950 fixed keyboard input",
+  "result": "passed",
+  "receiver_vid_pid": "046d:c548",
+  "interface": 0,
+  "firmware": {
+    "environment": "fnk0099-hid",
+    "base_commit": "39b1264",
+    "source_state": "uncommitted input decoder changes",
+    "esp_idf": "5.5.0",
+    "usb_host_hid": "1.1.0",
+    "bin_bytes": 291168,
+    "bin_sha256": "0fbb220495fb7d25249281ec0d95ffb41516dc4151a7a6fff96fa368e92fa24b"
+  },
+  "method": "One continuous UART capture. User pressed/released A; held left Shift while pressing/releasing A, then released Shift; pressed/released Right Arrow. Capture renewed once before its 30-second deadline. Stopped after all eight expected transitions.",
+  "expected_transitions": 8,
+  "matched_transitions": 8,
+  "events": [
+    {
+      "uptime_ms": 36164,
+      "usage": "0x04",
+      "down": true,
+      "modifiers": "0x00",
+      "reason": "report"
+    },
+    {
+      "uptime_ms": 37434,
+      "usage": "0x04",
+      "down": false,
+      "modifiers": "0x00",
+      "reason": "report"
+    },
+    {
+      "uptime_ms": 39454,
+      "usage": "0xe1",
+      "down": true,
+      "modifiers": "0x02",
+      "reason": "report"
+    },
+    {
+      "uptime_ms": 40514,
+      "usage": "0x04",
+      "down": true,
+      "modifiers": "0x02",
+      "reason": "report"
+    },
+    {
+      "uptime_ms": 41824,
+      "usage": "0x04",
+      "down": false,
+      "modifiers": "0x02",
+      "reason": "report"
+    },
+    {
+      "uptime_ms": 42644,
+      "usage": "0xe1",
+      "down": false,
+      "modifiers": "0x00",
+      "reason": "report"
+    },
+    {
+      "uptime_ms": 45114,
+      "usage": "0x4f",
+      "down": true,
+      "modifiers": "0x00",
+      "reason": "report"
+    },
+    {
+      "uptime_ms": 46524,
+      "usage": "0x4f",
+      "down": false,
+      "modifiers": "0x00",
+      "reason": "report"
+    }
+  ],
+  "observed_key_hold_ms": {
+    "unmodified_a": 1270,
+    "left_shift": 3190,
+    "shifted_a": 1310,
+    "right_arrow": 1410
+  },
+  "final_status": {
+    "keyboard_reports": 96,
+    "keyboard_decoded": 96,
+    "keyboard_logged_transitions": 8,
+    "keyboard_invalid": 0,
+    "keyboard_rollovers": 0,
+    "keyboard_errors": 0,
+    "dropped_reports": 0,
+    "held_key_count": 0,
+    "capture_enabled": false,
+    "free_heap_bytes": 329576
+  },
+  "warning_lines": 0,
+  "error_lines": 0,
+  "panic": false,
+  "unexpected_key_events": 0,
+  "uart_closed": true,
+  "scope_excludes": [
+    "M750 physical input verification",
+    "all-key coverage and character/layout conversion",
+    "long hold/endurance testing",
+    "simultaneous keyboard and mouse actions",
+    "receiver reconnect and RESET trials",
+    "SFC hardware regression after HID driver update"
+  ],
+  "privacy": "Only approved fixed test keys and selected technical metadata are included. Raw UART, local paths, serial numbers, actual UART port names and MAC addresses remain untracked."
+}

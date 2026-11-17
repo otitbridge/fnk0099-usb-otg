@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-17",
+  "phase": "input decoder implementation and command-overload regression",
+  "result": "partial",
+  "firmware": {
+    "environment": "fnk0099-hid",
+    "base_commit": "39b1264",
+    "source_state": "uncommitted input decoder changes",
+    "esp_idf": "5.5.0",
+    "usb_host_hid": "1.1.0",
+    "bin_bytes": 291168,
+    "bin_sha256": "0fbb220495fb7d25249281ec0d95ffb41516dc4151a7a6fff96fa368e92fa24b"
+  },
+  "host_tests": {
+    "result": "passed",
+    "actual_descriptor_fixtures": true,
+    "address_sanitizer": true,
+    "undefined_behavior_sanitizer": true,
+    "checks": [
+      "keyboard modifiers, partial/full release and rollover",
+      "signed 16-bit mouse movement, 16 buttons and vertical/horizontal wheel",
+      "report IDs and exact report lengths",
+      "descriptor truncations and mutated item sizes/counts"
+    ]
+  },
+  "boot": {
+    "receiver_vid_pid": "046d:c548",
+    "interfaces_opened_and_started": 4,
+    "decoded_layouts": [
+      {
+        "interface": 0,
+        "input_reports": 1,
+        "fields": 9
+      },
+      {
+        "interface": 1,
+        "input_reports": 4,
+        "fields": 20
+      }
+    ],
+    "input_capture_enabled": false
+  },
+  "initial_failed_attempt": {
+    "result": "failed",
+    "cause": "The private monitor repeatedly sent status/capture before receiving CAPTURE_BEGIN. The command queue overflow triggered ESP_ERROR_CHECK and reset.",
+    "resolution": "Monitor sends the start commands once. Firmware rejects excess UART commands with COMMAND_BUSY instead of aborting."
+  },
+  "command_overload_regression": {
+    "commands_sent": 64,
+    "command_busy_warnings": 4,
+    "error_lines": 0,
+    "panic": false,
+    "host_ready_count": 1,
+    "final_status_received": true,
+    "dropped_reports": 0,
+    "passed": true,
+    "final_status_uptime_ms": 6244
+  },
+  "physical_keyboard_input": "pending",
+  "physical_mouse_input": "pending",
+  "privacy": "Selected technical metadata and fixed test definitions only. Raw logs, actual UART port, serial numbers, MAC addresses and local paths are excluded."
+}

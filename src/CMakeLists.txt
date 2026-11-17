@@ -3,7 +3,7 @@
 if(CONFIG_FNK0099_MSC_PROBE)
     set(probe_source "msc_main.c" "msc_file_probe.c")
 elseif(CONFIG_FNK0099_HID_PROBE)
-    set(probe_source "hid_main.c")
+    set(probe_source "hid_main.c" "hid_input.c")
 else()
     set(probe_source "main.c")
 endif()

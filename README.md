@@ -9,7 +9,7 @@ Freenove FNK0099（ESP32-S3-WROOM Board Lite）のUSB-OTG端子を使う、用�
 | 用途 | PlatformIO環境 | 確認済みの動作 | 操作手順・結果 |
 |---|---|---|---|
 | SFCコントローラーのHID入力 | `fnk0099-host`（既定） | 12ボタンのUART出力、保持・同時押し・切断復帰 | [HID操作](docs/hid-usage.md) / [HID検証結果](docs/validation.md) |
-| Bolt経由のキーボード・マウス（開発中） | `fnk0099-hid` | HID記述子調査・入力レポート取得。機種対応の判定は検証記録を参照 | [Bolt対応の手順・検証記録](docs/bolt-validation.md) |
+| Bolt経由のキーボード・マウス（開発中） | `fnk0099-hid` | K950固定キー、M750の3ボタン・4方向移動・縦ホイールを確認。再接続・同時操作は未検証 | [Bolt対応の手順・検証記録](docs/bolt-validation.md) |
 | USBカードリーダー経由のmicroSD読み書き | `fnk0099-msc` | 30バイト読み取り、31バイト・1MiB新規書き込み、Mac照合、再接続3回・RESET3回 | [MSC操作](docs/msc-usage.md) / [MSC検証結果](docs/msc-validation.md) |
 
 Bolt対応は別ブランチで開発中です。既存のSFC/MSC試験実績とは区別します。

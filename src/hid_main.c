@@ -1,7 +1,8 @@
-// Composite HID discovery probe. Never log USB strings or vendor input payloads.
+// Composite keyboard/mouse probe. Never log USB strings or vendor input payloads.
 #include <stdbool.h>
 #include <inttypes.h>
 #include <string.h>
+#include <stdatomic.h>
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 #include "freertos/queue.h"
@@ -12,6 +13,7 @@
 #include "esp_intr_alloc.h"
 #include "usb/usb_host.h"
 #include "usb/hid_host.h"
+#include "hid_input.h"
 
 #define MAX_INTERFACES 8
 #define REPORT_BYTES 64
@@ -19,11 +21,14 @@
 
 static const char *TAG = "HID_PROBE";
 static usb_host_client_handle_t observer;
-static QueueHandle_t events;
+static QueueHandle_t events, control_events;
+static atomic_uint dropped_reports;
+static uintptr_t generation;
 
 typedef enum { CONNECT, REPORT, DISCONNECT, TRANSFER_ERROR, STATUS, CAPTURE, STOP } event_kind_t;
 typedef struct {
     event_kind_t kind;
+    uintptr_t generation;
     hid_host_device_handle_t device;
     hid_host_dev_params_t params;
     size_t length;
@@ -32,7 +37,12 @@ typedef struct {
 typedef struct {
     hid_host_device_handle_t device;
     hid_host_dev_params_t params;
-    bool started;
+    uintptr_t generation;
+    bool started, decoded_layout, rollover;
+    hid_input_layout_t layout;
+    uint8_t keys[HID_INPUT_KEY_BYTES];
+    uint32_t buttons, decoded, ignored, invalid, rollovers, mouse_samples;
+    int64_t x, y, wheel, pan, last_mouse_log;
     uint32_t reports;
     uint32_t logged;
     uint32_t errors;
@@ -42,14 +52,21 @@ static int64_t capture_until;
 
 static void enqueue(const input_event_t *event)
 {
-    // A dropped release must not silently turn into a passing input trial.
-    ESP_ERROR_CHECK(xQueueSend(events, event, 0) == pdTRUE ? ESP_OK : ESP_ERR_NO_MEM);
+    if (event->kind == REPORT || event->kind == TRANSFER_ERROR) {
+        if (xQueueSend(events, event, 0) != pdTRUE) atomic_fetch_add(&dropped_reports, 1);
+    } else {
+        // Reserve a separate queue for disconnects and commands, even under mouse load.
+        if (xQueueSend(control_events, event, 0) != pdTRUE) {
+            if (event->kind == STATUS || event->kind == CAPTURE || event->kind == STOP)
+                ESP_LOGW(TAG, "COMMAND_BUSY; retry after current operation");
+            else ESP_ERROR_CHECK(ESP_ERR_NO_MEM);
+        }
+    }
 }
 
 static void interface_event(hid_host_device_handle_t device, hid_host_interface_event_t event, void *arg)
 {
-    (void)arg;
-    input_event_t e = {.device = device};
+    input_event_t e = {.device = device, .generation = (uintptr_t)arg};
     if (hid_host_device_get_params(device, &e.params) != ESP_OK) return;
     switch (event) {
     case HID_HOST_INTERFACE_EVENT_INPUT_REPORT:
@@ -134,13 +151,18 @@ static void descriptor_task(void *arg)
 
 static void show_status(void)
 {
-    ESP_LOGI(TAG, "STATUS capture=%u free_heap=%" PRIu32, capture_until != 0, esp_get_free_heap_size());
+    ESP_LOGI(TAG, "STATUS capture=%u dropped=%u free_heap=%" PRIu32,
+             capture_until != 0, atomic_load(&dropped_reports), esp_get_free_heap_size());
     for (size_t i = 0; i < MAX_INTERFACES; ++i) {
         interface_t *s = &interfaces[i];
         if (!s->device) continue;
         ESP_LOGI(TAG, "IF_STATUS addr=%u iface=%u subclass=%u protocol=%u started=%u reports=%" PRIu32
                  " logged=%" PRIu32 " errors=%" PRIu32, s->params.addr, s->params.iface_num,
                  s->params.sub_class, s->params.proto, s->started, s->reports, s->logged, s->errors);
+        ESP_LOGI(TAG, "DECODE_STATUS iface=%u supported=%u decoded=%" PRIu32 " ignored=%" PRIu32
+                 " invalid=%" PRIu32 " rollover=%" PRIu32 " buttons=0x%08" PRIx32,
+                 s->params.iface_num, s->decoded_layout, s->decoded, s->ignored,
+                 s->invalid, s->rollovers, s->buttons);
     }
 }
 
@@ -160,12 +182,16 @@ static void open_interface(hid_host_device_handle_t device)
         ESP_LOGE(TAG, "Interface limit reached; trial incomplete");
         return;
     }
-    const hid_host_device_config_t cfg = {.callback = interface_event};
+    uintptr_t next_generation = ++generation;
+    const hid_host_device_config_t cfg = {.callback = interface_event, .callback_arg = (void *)next_generation};
     esp_err_t err = hid_host_device_open(device, &cfg);
     ESP_LOGI(TAG, "HID_OPEN addr=%u iface=%u subclass=%u protocol=%u result=%s",
              params.addr, params.iface_num, params.sub_class, params.proto, esp_err_to_name(err));
     if (err != ESP_OK) return;
-    *slot = (interface_t){.device = device, .params = params};
+    memset(slot, 0, sizeof(*slot));
+    slot->device = device;
+    slot->params = params;
+    slot->generation = next_generation;
     size_t length = 0;
     const uint8_t *descriptor = hid_host_get_report_descriptor(device, &length);
     if (!descriptor || !length || length > 2048) {
@@ -175,6 +201,15 @@ static void open_interface(hid_host_device_handle_t device)
     ESP_LOGI(TAG, "REPORT_DESCRIPTOR_BEGIN addr=%u iface=%u bytes=%u", params.addr, params.iface_num, (unsigned)length);
     ESP_LOG_BUFFER_HEX_LEVEL("HID_REPORT_DESC", descriptor, length, ESP_LOG_INFO);
     ESP_LOGI(TAG, "REPORT_DESCRIPTOR_END iface=%u", params.iface_num);
+    if (params.sub_class == HID_SUBCLASS_BOOT_INTERFACE &&
+        (params.proto == HID_PROTOCOL_KEYBOARD || params.proto == HID_PROTOCOL_MOUSE)) {
+        slot->decoded_layout = hid_input_parse(descriptor, length, &slot->layout) && slot->layout.field_count != 0;
+        ESP_LOGI(TAG, "LAYOUT iface=%u supported=%u input_reports=%u fields=%u", params.iface_num,
+                 slot->decoded_layout, slot->layout.report_count, slot->layout.field_count);
+        if (!slot->decoded_layout) {
+            ESP_LOGW(TAG, "Layout unsupported; input payload remains suppressed");
+        }
+    }
     // Keep Report protocol to retain wheel, extra buttons and report IDs.
     if (params.sub_class == HID_SUBCLASS_BOOT_INTERFACE) {
         err = hid_class_request_set_protocol(device, HID_REPORT_PROTOCOL_REPORT);
@@ -186,13 +221,115 @@ static void open_interface(hid_host_device_handle_t device)
     slot->started = err == ESP_OK;
 }
 
+static uint8_t modifiers(const uint8_t *keys)
+{
+    return keys[0xe0 / 8];
+}
+
+static void keyboard_state(interface_t *s, const uint8_t *next, const char *reason)
+{
+    // Releases first; identical periodic reports produce no duplicate transitions.
+    for (unsigned down = 0; down <= 1; ++down) {
+        for (unsigned usage = 1; usage < 256; ++usage) {
+            bool was = hid_input_key(s->keys, usage), now = hid_input_key(next, usage);
+            if (was == now || now != (bool)down) continue;
+            if (capture_until) {
+                ESP_LOGI(TAG, "KEY addr=%u iface=%u usage=0x%02x down=%u modifiers=0x%02x reason=%s",
+                         s->params.addr, s->params.iface_num, usage, now, modifiers(next), reason);
+                ++s->logged;
+            }
+        }
+    }
+    memcpy(s->keys, next, sizeof(s->keys));
+}
+
+static void mouse_flush(interface_t *s, const char *reason, bool force)
+{
+    if (capture_until && (force || s->x || s->y || s->wheel || s->pan)) {
+        ESP_LOGI(TAG, "MOUSE addr=%u iface=%u buttons=0x%08" PRIx32 " dx=%" PRId64 " dy=%" PRId64
+                 " wheel=%" PRId64 " pan=%" PRId64 " samples=%" PRIu32 " reason=%s",
+                 s->params.addr, s->params.iface_num, s->buttons, s->x, s->y,
+                 s->wheel, s->pan, s->mouse_samples, reason);
+        ++s->logged;
+    }
+    s->x = s->y = s->wheel = s->pan = 0;
+    s->mouse_samples = 0;
+    s->last_mouse_log = esp_timer_get_time();
+}
+
+static void clear_state(interface_t *s, const char *reason)
+{
+    const uint8_t released[HID_INPUT_KEY_BYTES] = {0};
+    keyboard_state(s, released, reason);
+    mouse_flush(s, reason, false);
+    if (s->buttons) {
+        s->buttons = 0;
+        mouse_flush(s, reason, true);
+    }
+    s->rollover = false;
+}
+
+static void consume_report(interface_t *s, const input_event_t *e)
+{
+    ++s->reports;
+    // Vendor/HID++/digitizer payloads never reach the decoder or UART.
+    if (!s->decoded_layout) { ++s->ignored; return; }
+    hid_input_value_t value;
+    hid_input_result_t result = hid_input_decode(&s->layout, e->data, e->length, &value);
+    if (result == HID_INPUT_IGNORED) { ++s->ignored; return; }
+    if (result == HID_INPUT_ROLLOVER) {
+        ++s->rollovers;
+        if (!s->rollover) ESP_LOGW(TAG, "KEYBOARD_ROLLOVER iface=%u; retain last valid state", s->params.iface_num);
+        s->rollover = true;
+        return;
+    }
+    if (result != HID_INPUT_OK) {
+        ++s->invalid;
+        ++s->errors;
+        clear_state(s, "invalid_report");
+        ESP_LOGE(TAG, "INPUT_INVALID iface=%u bytes=%u", s->params.iface_num, (unsigned)e->length);
+        return;
+    }
+    ++s->decoded;
+    s->rollover = false;
+    if (value.kind == HID_INPUT_KEYBOARD) keyboard_state(s, value.keys, "report");
+    else if (value.kind == HID_INPUT_MOUSE) {
+        bool changed = value.buttons != s->buttons;
+        if (changed) mouse_flush(s, "before_button", false);
+        s->buttons = value.buttons;
+        s->x += value.x; s->y += value.y;
+        s->wheel += value.wheel; s->pan += value.pan;
+        ++s->mouse_samples;
+        if (changed) mouse_flush(s, "button", true);
+    }
+}
+
 static void input_task(void *arg)
 {
     (void)arg;
     input_event_t e;
+    unsigned last_dropped = 0;
     for (;;) {
-        bool received = xQueueReceive(events, &e, pdMS_TO_TICKS(100)) == pdTRUE;
-        if (capture_until && esp_timer_get_time() >= capture_until) {
+        bool received = xQueueReceive(control_events, &e, 0) == pdTRUE;
+        if (!received) received = xQueueReceive(events, &e, pdMS_TO_TICKS(10)) == pdTRUE;
+        unsigned dropped = atomic_load(&dropped_reports);
+        if (dropped != last_dropped) {
+            // Discard queued snapshots before clearing state: replaying an old
+            // press after a lost release would leave a key/button held.
+            xQueueReset(events);
+            if (received && (e.kind == REPORT || e.kind == TRANSFER_ERROR)) received = false;
+            for (size_t i = 0; i < MAX_INTERFACES; ++i)
+                if (interfaces[i].device) clear_state(&interfaces[i], "queue_overflow");
+            ESP_LOGE(TAG, "INPUT_DROPPED total=%u; trial invalid", dropped);
+            last_dropped = dropped;
+        }
+        int64_t now = esp_timer_get_time();
+        for (size_t i = 0; i < MAX_INTERFACES; ++i)
+            if (interfaces[i].device && now - interfaces[i].last_mouse_log >= 20000)
+                mouse_flush(&interfaces[i], "interval", false);
+        if (capture_until && now >= capture_until) {
+            for (size_t i = 0; i < MAX_INTERFACES; ++i)
+                if (interfaces[i].device) mouse_flush(&interfaces[i], "timeout", false);
             capture_until = 0;
             ESP_LOGI(TAG, "CAPTURE_END reason=timeout");
             show_status();
@@ -201,38 +338,41 @@ static void input_task(void *arg)
         if (e.kind == CONNECT) { open_interface(e.device); continue; }
         if (e.kind == STATUS) { show_status(); continue; }
         if (e.kind == STOP) {
+            for (size_t i = 0; i < MAX_INTERFACES; ++i)
+                if (interfaces[i].device) mouse_flush(&interfaces[i], "stop", false);
             capture_until = 0;
             ESP_LOGI(TAG, "CAPTURE_END reason=command");
             show_status();
             continue;
         }
         if (e.kind == CAPTURE) {
+            bool renew = capture_until != 0;
+            if (!renew) {
+                for (size_t i = 0; i < MAX_INTERFACES; ++i) {
+                    interface_t *s = &interfaces[i];
+                    mouse_flush(s, "before_capture", false);
+                    s->logged = 0;
+                    if (!s->device) continue;
+                    ESP_LOGI(TAG, "STATE_SYNC iface=%u modifiers=0x%02x buttons=0x%08" PRIx32,
+                             s->params.iface_num, modifiers(s->keys), s->buttons);
+                }
+            }
             capture_until = esp_timer_get_time() + CAPTURE_US;
-            for (size_t i = 0; i < MAX_INTERFACES; ++i) interfaces[i].logged = 0;
-            ESP_LOGI(TAG, "CAPTURE_BEGIN seconds=30; fixed test inputs only; max=40 reports/interface");
+            ESP_LOGI(TAG, "CAPTURE_%s seconds=30; decoded fixed test inputs only", renew ? "RENEW" : "BEGIN");
             continue;
         }
         for (size_t i = 0; i < MAX_INTERFACES; ++i) {
             interface_t *s = &interfaces[i];
-            if (s->device != e.device || s->params.addr != e.params.addr ||
-                s->params.iface_num != e.params.iface_num) continue;
+            if (s->device != e.device || s->generation != e.generation) continue;
             if (e.kind == DISCONNECT) {
+                clear_state(s, "disconnect");
                 ESP_LOGI(TAG, "STATE_CLEAR addr=%u iface=%u reason=disconnect", s->params.addr, s->params.iface_num);
                 memset(s, 0, sizeof(*s));
             } else if (e.kind == TRANSFER_ERROR) {
                 ++s->errors;
+                clear_state(s, "transfer_error");
                 ESP_LOGE(TAG, "INPUT_ERROR addr=%u iface=%u", s->params.addr, s->params.iface_num);
-            } else if (e.kind == REPORT) {
-                ++s->reports;
-                // Vendor/HID++ payloads may contain identifiers: do not dump them.
-                if (capture_until && s->logged < 40 && s->params.sub_class == HID_SUBCLASS_BOOT_INTERFACE &&
-                    (s->params.proto == HID_PROTOCOL_KEYBOARD || s->params.proto == HID_PROTOCOL_MOUSE)) {
-                    ++s->logged;
-                    ESP_LOGI(TAG, "RAW addr=%u iface=%u bytes=%u sample=%" PRIu32,
-                             s->params.addr, s->params.iface_num, (unsigned)e.length, s->logged);
-                    ESP_LOG_BUFFER_HEX_LEVEL("HID_INPUT", e.data, e.length, ESP_LOG_INFO);
-                }
-            }
+            } else if (e.kind == REPORT) consume_report(s, &e);
             break;
         }
     }
@@ -280,9 +420,10 @@ static void host_events(void *arg)
 
 void app_main(void)
 {
-    ESP_LOGI(TAG, "FNK0099 composite HID descriptor probe; IDF %s; input_capture=disabled", esp_get_idf_version());
+    ESP_LOGI(TAG, "FNK0099 composite HID keyboard/mouse probe; IDF %s; input_capture=disabled", esp_get_idf_version());
     events = xQueueCreate(64, sizeof(input_event_t));
-    ESP_ERROR_CHECK(events ? ESP_OK : ESP_ERR_NO_MEM);
+    control_events = xQueueCreate(16, sizeof(input_event_t));
+    ESP_ERROR_CHECK(events && control_events ? ESP_OK : ESP_ERR_NO_MEM);
     ESP_ERROR_CHECK(uart_driver_install(UART_NUM_0, 1024, 0, 0, NULL, 0));
     const usb_host_config_t host = {.skip_phy_setup = false, .intr_flags = ESP_INTR_FLAG_LEVEL1};
     ESP_ERROR_CHECK(usb_host_install(&host));

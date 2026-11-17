@@ -95,6 +95,18 @@ cc -std=c11 -Wall -Wextra -Werror tests/test_msc_file_probe.c src/msc_file_probe
 python3 tests/test_msc_bulk_probe.py
 ```
 
+## Bolt入力解釈のホストテスト
+
+リポジトリ直下で実行します。実機から取得したHID記述子をテスト入力として使用します。
+
+```sh
+mkdir -p .local
+cc -std=c11 -Wall -Wextra -Werror -fsanitize=address,undefined -g tests/test_hid_input.c src/hid_input.c -o .local/test-hid-input
+.local/test-hid-input
+```
+
+修飾キー・部分解放・ロールオーバー、16bit相対移動・ボタン・縦横ホイール、Report IDと入力長、不正な記述子を検査します。物理操作・USB通信・キュー負荷・再接続は実機で別途検証します。
+
 ## HID実機試験の順序
 
 以下はHID環境の実機試験順序です。

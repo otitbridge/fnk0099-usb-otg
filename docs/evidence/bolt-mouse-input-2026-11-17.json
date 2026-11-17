@@ -1,0 +1,205 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-17",
+  "phase": "M750 fixed mouse input",
+  "result": "passed",
+  "receiver_vid_pid": "046d:c548",
+  "interface": 1,
+  "mouse_report_id": "0x02",
+  "firmware": {
+    "environment": "fnk0099-hid",
+    "base_commit": "39b1264",
+    "source_state": "uncommitted input decoder changes",
+    "esp_idf": "5.5.0",
+    "usb_host_hid": "1.1.0",
+    "bin_bytes": 291168,
+    "bin_sha256": "0fbb220495fb7d25249281ec0d95ffb41516dc4151a7a6fff96fa368e92fa24b"
+  },
+  "method": "One continuous UART capture. User pressed/released left, right and middle buttons, moved right/left/away/toward in order, then rotated the vertical wheel away and toward. Capture was renewed before each 30-second deadline and automatically stopped after all required actions were observed.",
+  "button_transitions": [
+    {
+      "uptime_ms": 29234,
+      "buttons": 1,
+      "reason": "button"
+    },
+    {
+      "uptime_ms": 30394,
+      "buttons": 0,
+      "reason": "button"
+    },
+    {
+      "uptime_ms": 31544,
+      "buttons": 2,
+      "reason": "button"
+    },
+    {
+      "uptime_ms": 32674,
+      "buttons": 0,
+      "reason": "button"
+    },
+    {
+      "uptime_ms": 34804,
+      "buttons": 4,
+      "reason": "button"
+    },
+    {
+      "uptime_ms": 35484,
+      "buttons": 0,
+      "reason": "button"
+    }
+  ],
+  "button_hold_ms": {
+    "left": 1160,
+    "right": 1130,
+    "middle": 680
+  },
+  "movement": {
+    "expected_order": [
+      "right",
+      "left",
+      "away",
+      "toward"
+    ],
+    "criterion": "At least 50 counts per direction where the requested axis magnitude is at least twice the other axis magnitude. Counts are thresholds at detection, not full travel totals or distance calibration.",
+    "checkpoints": {
+      "right": {
+        "dominant_axis_counts": 85,
+        "completed_uptime_ms": 40974
+      },
+      "left": {
+        "dominant_axis_counts": 57,
+        "completed_uptime_ms": 42234
+      },
+      "away": {
+        "dominant_axis_counts": 84,
+        "completed_uptime_ms": 44144
+      },
+      "toward": {
+        "dominant_axis_counts": 51,
+        "completed_uptime_ms": 45234
+      }
+    }
+  },
+  "vertical_wheel": {
+    "observed_positive_units": 13,
+    "observed_negative_units": -2,
+    "entries": [
+      {
+        "uptime_ms": 50534,
+        "wheel": 1,
+        "pan": 0,
+        "samples": 1
+      },
+      {
+        "uptime_ms": 50884,
+        "wheel": 1,
+        "pan": 0,
+        "samples": 1
+      },
+      {
+        "uptime_ms": 50914,
+        "wheel": 1,
+        "pan": 0,
+        "samples": 1
+      },
+      {
+        "uptime_ms": 51234,
+        "wheel": 1,
+        "pan": 0,
+        "samples": 1
+      },
+      {
+        "uptime_ms": 51544,
+        "wheel": 1,
+        "pan": 0,
+        "samples": 1
+      },
+      {
+        "uptime_ms": 51784,
+        "wheel": 1,
+        "pan": 0,
+        "samples": 1
+      },
+      {
+        "uptime_ms": 52614,
+        "wheel": 1,
+        "pan": 0,
+        "samples": 1
+      },
+      {
+        "uptime_ms": 52694,
+        "wheel": 1,
+        "pan": 0,
+        "samples": 1
+      },
+      {
+        "uptime_ms": 52894,
+        "wheel": 1,
+        "pan": 0,
+        "samples": 1
+      },
+      {
+        "uptime_ms": 52984,
+        "wheel": 1,
+        "pan": 0,
+        "samples": 1
+      },
+      {
+        "uptime_ms": 53074,
+        "wheel": 1,
+        "pan": 0,
+        "samples": 1
+      },
+      {
+        "uptime_ms": 53164,
+        "wheel": 1,
+        "pan": 0,
+        "samples": 1
+      },
+      {
+        "uptime_ms": 53254,
+        "wheel": 1,
+        "pan": 0,
+        "samples": 3
+      },
+      {
+        "uptime_ms": 54914,
+        "wheel": -1,
+        "pan": 0,
+        "samples": 1
+      },
+      {
+        "uptime_ms": 54964,
+        "wheel": -1,
+        "pan": 0,
+        "samples": 1
+      }
+    ],
+    "note": "Observed signed report units until automatic capture stop; not the full number of physical detents performed."
+  },
+  "final_status": {
+    "mouse_reports_decoded": 1214,
+    "mouse_logged_entries": 525,
+    "samples_in_logged_entries": 1214,
+    "mouse_ignored": 0,
+    "mouse_invalid": 0,
+    "dropped_reports": 0,
+    "buttons": 0,
+    "capture_enabled": false,
+    "free_heap_bytes": 329576
+  },
+  "warning_lines": 0,
+  "error_lines": 0,
+  "panic": false,
+  "unexpected_button_transitions": 0,
+  "uart_closed": true,
+  "scope_excludes": [
+    "horizontal wheel and side buttons",
+    "DPI/distance/speed/latency calibration",
+    "simultaneous keyboard and mouse operation",
+    "receiver reconnect and RESET trials",
+    "long-duration operation",
+    "SFC hardware regression after HID driver update"
+  ],
+  "privacy": "Selected technical metadata and fixed test observations only. Raw logs, actual UART port, serial numbers, MAC addresses and local paths remain untracked."
+}
