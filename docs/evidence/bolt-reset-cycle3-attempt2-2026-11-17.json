@@ -1,0 +1,237 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-17",
+  "phase": "physical RESET, third cycle, second attempt",
+  "result": "passed",
+  "receiver_vid_pid": "046d:c548",
+  "firmware": {
+    "environment": "fnk0099-hid",
+    "base_commit": "39b1264",
+    "source_state": "uncommitted input decoder changes",
+    "esp_idf": "5.5.0",
+    "usb_host_hid": "1.1.0",
+    "bin_bytes": 291168,
+    "bin_sha256": "0fbb220495fb7d25249281ec0d95ffb41516dc4151a7a6fff96fa368e92fa24b",
+    "matching_source_commit": "47e9e31"
+  },
+  "method": "Bolt receiver and USB-UART remained connected. Initial UART-open boot was preparation and excluded. After monitoring was ready the user pressed/released physical RESET, waited, pressed/released A once and left-clicked/released once. UART remained open through the trial with no further DTR/RTS commands.",
+  "boot_observation": {
+    "total_boots_in_uart_session": 2,
+    "preparation_boots_excluded": 1,
+    "test_boots": 1,
+    "host_initializations": 2,
+    "reset_reasons": [
+      {
+        "boot": 1,
+        "code": "0x1",
+        "reason": "POWERON"
+      },
+      {
+        "boot": 2,
+        "code": "0x1",
+        "reason": "POWERON"
+      }
+    ],
+    "scope": "ROM reset reason alone does not identify the physical reset action; this is correlated with the user-reported instructed operation."
+  },
+  "round": 3,
+  "receiver_uptime_ms": 684,
+  "started_interfaces": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "all_started_uptime_ms": 1154,
+  "capture_started_uptime_ms": 1234,
+  "key_events": [
+    {
+      "uptime_ms": 5954,
+      "usage": "0x04",
+      "down": true,
+      "modifiers": 0,
+      "reason": "report"
+    },
+    {
+      "uptime_ms": 6504,
+      "usage": "0x04",
+      "down": false,
+      "modifiers": 0,
+      "reason": "report"
+    }
+  ],
+  "button_events": [
+    {
+      "uptime_ms": 7724,
+      "buttons": 1,
+      "reason": "button"
+    },
+    {
+      "uptime_ms": 8164,
+      "buttons": 0,
+      "reason": "button"
+    }
+  ],
+  "baseline_snapshot": {
+    "status": {
+      "capture": 0,
+      "dropped": 0,
+      "free_heap_bytes": 329576,
+      "uptime_ms": 1254
+    },
+    "interfaces": {
+      "0": {
+        "started": 1,
+        "reports": 1,
+        "logged": 0,
+        "errors": 0
+      },
+      "1": {
+        "started": 1,
+        "reports": 0,
+        "logged": 0,
+        "errors": 0
+      },
+      "2": {
+        "started": 1,
+        "reports": 0,
+        "logged": 0,
+        "errors": 0
+      },
+      "3": {
+        "started": 1,
+        "reports": 0,
+        "logged": 0,
+        "errors": 0
+      }
+    },
+    "decoders": {
+      "0": {
+        "supported": 1,
+        "decoded": 1,
+        "ignored": 0,
+        "invalid": 0,
+        "rollover": 0,
+        "buttons": 0
+      },
+      "1": {
+        "supported": 1,
+        "decoded": 0,
+        "ignored": 0,
+        "invalid": 0,
+        "rollover": 0,
+        "buttons": 0
+      },
+      "2": {
+        "supported": 0,
+        "decoded": 0,
+        "ignored": 0,
+        "invalid": 0,
+        "rollover": 0,
+        "buttons": 0
+      },
+      "3": {
+        "supported": 0,
+        "decoded": 0,
+        "ignored": 0,
+        "invalid": 0,
+        "rollover": 0,
+        "buttons": 0
+      }
+    }
+  },
+  "final_snapshot": {
+    "status": {
+      "capture": 0,
+      "dropped": 0,
+      "free_heap_bytes": 329576,
+      "uptime_ms": 8344
+    },
+    "interfaces": {
+      "0": {
+        "started": 1,
+        "reports": 17,
+        "logged": 2,
+        "errors": 0
+      },
+      "1": {
+        "started": 1,
+        "reports": 2,
+        "logged": 2,
+        "errors": 0
+      },
+      "2": {
+        "started": 1,
+        "reports": 0,
+        "logged": 0,
+        "errors": 0
+      },
+      "3": {
+        "started": 1,
+        "reports": 0,
+        "logged": 0,
+        "errors": 0
+      }
+    },
+    "decoders": {
+      "0": {
+        "supported": 1,
+        "decoded": 17,
+        "ignored": 0,
+        "invalid": 0,
+        "rollover": 0,
+        "buttons": 0
+      },
+      "1": {
+        "supported": 1,
+        "decoded": 2,
+        "ignored": 0,
+        "invalid": 0,
+        "rollover": 0,
+        "buttons": 0
+      },
+      "2": {
+        "supported": 0,
+        "decoded": 0,
+        "ignored": 0,
+        "invalid": 0,
+        "rollover": 0,
+        "buttons": 0
+      },
+      "3": {
+        "supported": 0,
+        "decoded": 0,
+        "ignored": 0,
+        "invalid": 0,
+        "rollover": 0,
+        "buttons": 0
+      }
+    }
+  },
+  "finished_uptime_ms": 8404,
+  "warning_lines": 0,
+  "error_lines": 0,
+  "diagnostics": [],
+  "unexpected_key_events": 0,
+  "unexpected_button_events": 0,
+  "panic": false,
+  "unexpected_reboot": false,
+  "dropped_reports": 0,
+  "final_held_key_count": 0,
+  "final_buttons": 0,
+  "final_capture_enabled": false,
+  "uart_closed": true,
+  "scope": "Third physical RESET recovery confirmed on the second attempt in a separate UART session. Initial UART-open boot excluded. Inputs were released before RESET; held-input reset and SFC hardware regression remain untested. This does not resolve earlier physical-unplug diagnostics.",
+  "remaining": [
+    "evaluate unplug diagnostics",
+    "SFC hardware regression after HID driver update"
+  ],
+  "privacy": "Only fixed test input and selected technical state are included. Raw UART, home paths, actual UART port, MAC addresses and device serial numbers remain untracked.",
+  "attempt": 2,
+  "previous_attempt": {
+    "evidence": "bolt-reset-cycle3-attempt1-2026-11-17.json",
+    "result": "inconclusive",
+    "counted_as_completed_reset_cycle": false,
+    "reason": "User operation uncertain; no test boot observed, receiver disconnect diagnostics stopped monitor."
+  }
+}

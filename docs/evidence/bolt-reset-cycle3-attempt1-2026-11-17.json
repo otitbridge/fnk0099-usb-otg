@@ -1,0 +1,202 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-17",
+  "phase": "physical RESET, third cycle, first attempt",
+  "result": "inconclusive",
+  "counted_as_completed_reset_cycle": false,
+  "firmware": {
+    "environment": "fnk0099-hid",
+    "base_commit": "39b1264",
+    "source_state": "uncommitted input decoder changes",
+    "esp_idf": "5.5.0",
+    "usb_host_hid": "1.1.0",
+    "bin_bytes": 291168,
+    "bin_sha256": "0fbb220495fb7d25249281ec0d95ffb41516dc4151a7a6fff96fa368e92fa24b",
+    "matching_source_commit": "47e9e31"
+  },
+  "receiver_vid_pid": "046d:c548",
+  "user_operation_confirmation": "User selected connection/operation mistake or uncertain; exact action not established.",
+  "observation": "Only the preparation ROM boot and Host initialization were observed. The monitor stopped after USB errors and four-interface disconnect; the same receiver then re-enumerated and all four interfaces restarted before UART closed. No post-RESET boot or approved input trial was observed within the recorded interval.",
+  "boot_count": 1,
+  "host_ready_count": 1,
+  "disconnected_interfaces": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "cleared_interfaces": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "restarted_interfaces_after_disconnect": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "receiver_reenumeration_uptime_ms": 42784,
+  "all_interfaces_restarted_uptime_ms": 43274,
+  "diagnostics": [
+    {
+      "level": "E",
+      "uptime_ms": 41694,
+      "boot": 1,
+      "message": "USB HOST: Enqueue URB error: ESP_ERR_INVALID_STATE"
+    },
+    {
+      "level": "E",
+      "uptime_ms": 41694,
+      "boot": 1,
+      "message": "USB HOST: Enqueue URB error: ESP_ERR_INVALID_STATE"
+    },
+    {
+      "level": "E",
+      "uptime_ms": 41694,
+      "boot": 1,
+      "message": "USB HOST: Enqueue URB error: ESP_ERR_INVALID_STATE"
+    },
+    {
+      "level": "E",
+      "uptime_ms": 41694,
+      "boot": 1,
+      "message": "USB HOST: Enqueue URB error: ESP_ERR_INVALID_STATE"
+    },
+    {
+      "level": "E",
+      "uptime_ms": 41704,
+      "boot": 1,
+      "message": "HID_PROBE: INPUT_INVALID iface=0 bytes=0"
+    },
+    {
+      "level": "E",
+      "uptime_ms": 41704,
+      "boot": 1,
+      "message": "HID_PROBE: INPUT_INVALID iface=1 bytes=0"
+    },
+    {
+      "level": "E",
+      "uptime_ms": 41714,
+      "boot": 1,
+      "message": "USB HOST: EP command error: ESP_ERR_INVALID_STATE"
+    },
+    {
+      "level": "E",
+      "uptime_ms": 41724,
+      "boot": 1,
+      "message": "USB HOST: EP command error: ESP_ERR_INVALID_STATE"
+    },
+    {
+      "level": "E",
+      "uptime_ms": 41734,
+      "boot": 1,
+      "message": "USB HOST: EP command error: ESP_ERR_INVALID_STATE"
+    },
+    {
+      "level": "E",
+      "uptime_ms": 41744,
+      "boot": 1,
+      "message": "USB HOST: EP command error: ESP_ERR_INVALID_STATE"
+    }
+  ],
+  "error_counts": {
+    "enqueue_urb_invalid_state": 4,
+    "keyboard_zero_byte_input_invalid": 1,
+    "mouse_zero_byte_input_invalid": 1,
+    "ep_invalid_state": 4
+  },
+  "warning_lines": 0,
+  "error_lines": 10,
+  "error_window_ms": 50,
+  "baseline_snapshot": {
+    "status": {
+      "capture": 0,
+      "dropped": 0,
+      "free_heap_bytes": 329576,
+      "uptime_ms": 1264
+    },
+    "interfaces": {
+      "0": {
+        "started": 1,
+        "reports": 1,
+        "logged": 0,
+        "errors": 0
+      },
+      "1": {
+        "started": 1,
+        "reports": 0,
+        "logged": 0,
+        "errors": 0
+      },
+      "2": {
+        "started": 1,
+        "reports": 0,
+        "logged": 0,
+        "errors": 0
+      },
+      "3": {
+        "started": 1,
+        "reports": 0,
+        "logged": 0,
+        "errors": 0
+      }
+    },
+    "decoders": {
+      "0": {
+        "supported": 1,
+        "decoded": 1,
+        "ignored": 0,
+        "invalid": 0,
+        "rollover": 0,
+        "buttons": 0
+      },
+      "1": {
+        "supported": 1,
+        "decoded": 0,
+        "ignored": 0,
+        "invalid": 0,
+        "rollover": 0,
+        "buttons": 0
+      },
+      "2": {
+        "supported": 0,
+        "decoded": 0,
+        "ignored": 0,
+        "invalid": 0,
+        "rollover": 0,
+        "buttons": 0
+      },
+      "3": {
+        "supported": 0,
+        "decoded": 0,
+        "ignored": 0,
+        "invalid": 0,
+        "rollover": 0,
+        "buttons": 0
+      }
+    }
+  },
+  "last_status": {
+    "capture": 0,
+    "dropped": 0,
+    "free_heap_bytes": 338640,
+    "uptime_ms": 41804
+  },
+  "last_status_scope": "Snapshot at uptime 41804 ms while receiver was disconnected. Heap 338640 is not the final post-reconnect heap. No complete final interface/decoder snapshot was requested after reconnect.",
+  "key_events": [],
+  "button_events": [],
+  "input_recovery_verified": false,
+  "panic": false,
+  "queue_overflow": false,
+  "final_capture_enabled": false,
+  "uart_closed": true,
+  "scope": "No further physical RESET cycle counted. The interval after UART closed was not observed. An ambiguous user operation and an unobserved test boot do not establish a RESET firmware regression. Earlier physical RESET cycles 1 and 2 remain passed.",
+  "remaining": [
+    "repeat third physical RESET cycle under monitoring",
+    "evaluate unplug diagnostics",
+    "SFC hardware regression after HID driver update"
+  ],
+  "privacy": "Selected technical diagnostics and fixed test state only. Raw UART, local paths, actual UART port, MAC addresses and device serial numbers remain untracked."
+}
