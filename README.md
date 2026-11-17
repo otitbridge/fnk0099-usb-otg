@@ -56,7 +56,7 @@ SFC mask=0x080 changed=0x001 reason=report
 
 ## 関連資料
 
-- [USBカードリーダー・microSDの検証計画と経過](docs/msc-validation.md)（31バイト・1MiBの書き込み、再マウント・Macでの独立照合に成功）
+- [USBカードリーダー・microSDの検証計画と経過](docs/msc-validation.md)（当初計画完了。31バイト・1MiBの書き込み、Macでの照合、再接続3回・RESET3回に成功）
 - [ビルド・書き込み・ログ取得](docs/build.md)
 - [検証結果と試験経緯](docs/validation.md)
 - [既知の制約・問題の切り分け](docs/known-issues.md)

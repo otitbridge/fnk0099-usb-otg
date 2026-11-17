@@ -1,5 +1,7 @@
 # 検証証跡
 
+USB MSCによるSD読み書きの現在の結果は[MSC検証記録](../msc-validation.md)にまとめています。[再接続・RESET各3回の結果](msc-reconnect-reset-2026-11-17.json)はMSC用の公開証跡です。以下の既存記録はSFC/HID検証の経緯です。
+
 各JSONはその試験時点の判定です。過去の `pending` は後続試験で解消されている場合があります。現在の状態は[検証結果](../validation.md)を参照してください。ログはローカルパス・MACアドレスなどを除去し、行末空白を整えています。
 
 修正版BINの識別情報は[p5-fix-firmware](p5-fix-firmware-2026-11-11.json)、最終版の機能確認は[regression-final](regression-final-2026-11-11.json)です。失敗記録と保留記録も追跡のため残しています。
