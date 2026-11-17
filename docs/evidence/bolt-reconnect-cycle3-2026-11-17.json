@@ -1,0 +1,291 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-17",
+  "phase": "receiver reconnect, third cycle",
+  "result": "needs_review",
+  "functional_observation": "All four interfaces recovered, A and left click received and released. User confirmed pressing A twice; all four observed key transitions match that operation.",
+  "strict_no_error_requirement": "not met",
+  "receiver_vid_pid": "046d:c548",
+  "firmware": {
+    "environment": "fnk0099-hid",
+    "base_commit": "39b1264",
+    "source_state": "uncommitted input decoder changes",
+    "esp_idf": "5.5.0",
+    "usb_host_hid": "1.1.0",
+    "bin_bytes": 291168,
+    "bin_sha256": "0fbb220495fb7d25249281ec0d95ffb41516dc4151a7a6fff96fa368e92fa24b",
+    "matching_source_commit": "47e9e31"
+  },
+  "method": "New UART session; initial UART-open startup treated as preparation. All inputs released before unplugging only Bolt. No additional RESET during the physical cycle.",
+  "cycle": {
+    "round": 3,
+    "disconnect_started_uptime_ms": 63704,
+    "disconnected_interfaces": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "cleared_interfaces": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "started_interfaces": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "key_matches": 2,
+    "button_matches": 2,
+    "key_events": [
+      {
+        "uptime_ms": 78564,
+        "usage": "0x04",
+        "down": true,
+        "modifiers": 0,
+        "reason": "report"
+      },
+      {
+        "uptime_ms": 79024,
+        "usage": "0x04",
+        "down": false,
+        "modifiers": 0,
+        "reason": "report"
+      }
+    ],
+    "button_events": [
+      {
+        "uptime_ms": 80454,
+        "buttons": 1,
+        "reason": "button"
+      },
+      {
+        "uptime_ms": 80944,
+        "buttons": 0,
+        "reason": "button"
+      }
+    ],
+    "unexpected_key_events": 2,
+    "unexpected_button_events": 0,
+    "warning_lines": 0,
+    "error_lines": 10,
+    "last_state_clear_uptime_ms": 63754,
+    "unplug_status_requested": true,
+    "unplugged_free_heap_bytes": 338640,
+    "receiver_vid_pid": "046d:c548",
+    "reconnected_device_uptime_ms": 71254,
+    "capture_requested": true,
+    "all_started_uptime_ms": 71744,
+    "capture_started_uptime_ms": 71944,
+    "final_snapshot": {
+      "status": {
+        "capture": 0,
+        "dropped": 0,
+        "free_heap_bytes": 329576,
+        "uptime_ms": 81114
+      },
+      "interfaces": {
+        "0": {
+          "started": 1,
+          "reports": 22,
+          "logged": 4,
+          "errors": 0
+        },
+        "1": {
+          "started": 1,
+          "reports": 18,
+          "logged": 9,
+          "errors": 0
+        },
+        "2": {
+          "started": 1,
+          "reports": 6,
+          "logged": 0,
+          "errors": 0
+        },
+        "3": {
+          "started": 1,
+          "reports": 0,
+          "logged": 0,
+          "errors": 0
+        }
+      },
+      "decoders": {
+        "0": {
+          "supported": 1,
+          "decoded": 22,
+          "ignored": 0,
+          "invalid": 0,
+          "rollover": 0,
+          "buttons": 0
+        },
+        "1": {
+          "supported": 1,
+          "decoded": 18,
+          "ignored": 0,
+          "invalid": 0,
+          "rollover": 0,
+          "buttons": 0
+        },
+        "2": {
+          "supported": 0,
+          "decoded": 0,
+          "ignored": 6,
+          "invalid": 0,
+          "rollover": 0,
+          "buttons": 0
+        },
+        "3": {
+          "supported": 0,
+          "decoded": 0,
+          "ignored": 0,
+          "invalid": 0,
+          "rollover": 0,
+          "buttons": 0
+        }
+      }
+    },
+    "finished_uptime_ms": 81174,
+    "diagnostics": [
+      {
+        "level": "E",
+        "uptime_ms": 63674,
+        "message": "USB HOST: Enqueue URB error: ESP_ERR_INVALID_STATE"
+      },
+      {
+        "level": "E",
+        "uptime_ms": 63674,
+        "message": "USB HOST: Enqueue URB error: ESP_ERR_INVALID_STATE"
+      },
+      {
+        "level": "E",
+        "uptime_ms": 63674,
+        "message": "USB HOST: Enqueue URB error: ESP_ERR_INVALID_STATE"
+      },
+      {
+        "level": "E",
+        "uptime_ms": 63684,
+        "message": "USB HOST: Enqueue URB error: ESP_ERR_INVALID_STATE"
+      },
+      {
+        "level": "E",
+        "uptime_ms": 63684,
+        "message": "HID_PROBE: INPUT_INVALID iface=0 bytes=0"
+      },
+      {
+        "level": "E",
+        "uptime_ms": 63694,
+        "message": "HID_PROBE: INPUT_INVALID iface=1 bytes=0"
+      },
+      {
+        "level": "E",
+        "uptime_ms": 63694,
+        "message": "USB HOST: EP command error: ESP_ERR_INVALID_STATE"
+      },
+      {
+        "level": "E",
+        "uptime_ms": 63704,
+        "message": "USB HOST: EP command error: ESP_ERR_INVALID_STATE"
+      },
+      {
+        "level": "E",
+        "uptime_ms": 63714,
+        "message": "USB HOST: EP command error: ESP_ERR_INVALID_STATE"
+      },
+      {
+        "level": "E",
+        "uptime_ms": 63724,
+        "message": "USB HOST: EP command error: ESP_ERR_INVALID_STATE"
+      }
+    ],
+    "unplug_diagnostics_only": true,
+    "errors_after_reenumeration": 0,
+    "functional_recovery_passed": false,
+    "passed": false,
+    "continue_allowed": false
+  },
+  "independent_key_events": [
+    {
+      "uptime_ms": 78564,
+      "usage": "0x04",
+      "down": true,
+      "modifiers": 0,
+      "reason": "report"
+    },
+    {
+      "uptime_ms": 79024,
+      "usage": "0x04",
+      "down": false,
+      "modifiers": 0,
+      "reason": "report"
+    },
+    {
+      "uptime_ms": 79124,
+      "usage": "0x04",
+      "down": true,
+      "modifiers": 0,
+      "reason": "report"
+    },
+    {
+      "uptime_ms": 79144,
+      "usage": "0x04",
+      "down": false,
+      "modifiers": 0,
+      "reason": "report"
+    }
+  ],
+  "input_sequence_review": {
+    "expected_A_press_release_pairs": 1,
+    "observed_A_press_release_pairs": 2,
+    "first_pair_duration_ms": 460,
+    "second_pair_duration_ms": 20,
+    "gap_between_pairs_ms": 100,
+    "user_operation_confirmation": "User confirmed two physical A presses, including a repeated press.",
+    "cause": "Additional A press/release pair matches the user-confirmed repeated physical operation.",
+    "review_result": "Actual operation and observed transitions agree. Original single-press procedure was not followed; original live-monitor mismatch and false verdict are retained."
+  },
+  "error_diagnostics": {
+    "whole_session_error_lines": 10,
+    "counts": {
+      "enqueue_urb_invalid_state": 4,
+      "keyboard_zero_byte_input_invalid": 1,
+      "mouse_zero_byte_input_invalid": 1,
+      "ep_invalid_state": 4
+    },
+    "first_error_uptime_ms": 63674,
+    "last_error_uptime_ms": 63724,
+    "window_ms": 50,
+    "after_reconnected_device_error_lines": 0,
+    "pattern": "Same diagnostic types and counts as cycle 2, confined to unplug window."
+  },
+  "baseline_free_heap_bytes": 329576,
+  "unplugged_free_heap_bytes": 338640,
+  "final_free_heap_bytes": 329576,
+  "warning_lines": 0,
+  "panic": false,
+  "unexpected_reboot": false,
+  "dropped_reports": 0,
+  "final_held_key_count": 0,
+  "final_buttons": 0,
+  "final_capture_enabled": false,
+  "uart_closed": true,
+  "scope": "Three functional recoveries observed in separate UART sessions; not an uninterrupted three-cycle pass. In cycle 3 the user confirmed two A presses rather than the specified one. Fresh post-reconnect counters exclude unplug errors. Held-input disconnect not tested.",
+  "remaining": [
+    "evaluate unplug diagnostics",
+    "three physical RESET cycles",
+    "SFC hardware regression after HID driver update"
+  ],
+  "privacy": "Only fixed test input and selected technical diagnostics are included. Raw UART, home paths, actual UART port, MAC addresses and device serial numbers remain untracked.",
+  "functional_recovery": "confirmed after user operation review",
+  "reviewed_assessment": {
+    "functional_recovery_confirmed": true,
+    "actual_input_matches_user_confirmation": true,
+    "original_single_press_procedure_met": false,
+    "strict_no_error_requirement_met": false,
+    "overall_result": "needs_review due to unplug diagnostics",
+    "monitor_verdict_preserved": true
+  }
+}

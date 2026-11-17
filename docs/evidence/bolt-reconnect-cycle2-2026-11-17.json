@@ -1,0 +1,293 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-17",
+  "phase": "receiver reconnect, second cycle",
+  "result": "needs_review",
+  "functional_recovery": "confirmed for second cycle",
+  "strict_no_error_requirement": "not met",
+  "receiver_vid_pid": "046d:c548",
+  "firmware": {
+    "environment": "fnk0099-hid",
+    "base_commit": "39b1264",
+    "source_state": "uncommitted input decoder changes",
+    "esp_idf": "5.5.0",
+    "usb_host_hid": "1.1.0",
+    "bin_bytes": 291168,
+    "bin_sha256": "0fbb220495fb7d25249281ec0d95ffb41516dc4151a7a6fff96fa368e92fa24b",
+    "matching_source_commit": "47e9e31"
+  },
+  "method": "A new UART session after cycle 1. Initial UART-open startup is preparation. All inputs released before unplugging only the Bolt receiver; after reconnection, A and left click pressed and released. No additional RESET during the physical cycle.",
+  "cycle": {
+    "round": 2,
+    "disconnect_started_uptime_ms": 35894,
+    "disconnected_interfaces": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "cleared_interfaces": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "started_interfaces": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "key_matches": 2,
+    "button_matches": 2,
+    "key_events": [
+      {
+        "uptime_ms": 59604,
+        "usage": "0x04",
+        "down": true,
+        "modifiers": 0,
+        "reason": "report"
+      },
+      {
+        "uptime_ms": 61094,
+        "usage": "0x04",
+        "down": false,
+        "modifiers": 0,
+        "reason": "report"
+      }
+    ],
+    "button_events": [
+      {
+        "uptime_ms": 62284,
+        "buttons": 1,
+        "reason": "button"
+      },
+      {
+        "uptime_ms": 63134,
+        "buttons": 0,
+        "reason": "button"
+      }
+    ],
+    "unexpected_key_events": 0,
+    "unexpected_button_events": 0,
+    "warning_lines": 0,
+    "error_lines": 10,
+    "last_state_clear_uptime_ms": 35954,
+    "unplug_status_requested": true,
+    "unplugged_free_heap_bytes": 338640,
+    "receiver_vid_pid": "046d:c548",
+    "reconnected_device_uptime_ms": 51704,
+    "capture_requested": true,
+    "all_started_uptime_ms": 52184,
+    "capture_started_uptime_ms": 52334,
+    "final_snapshot": {
+      "status": {
+        "capture": 0,
+        "dropped": 0,
+        "free_heap_bytes": 329576,
+        "uptime_ms": 63324
+      },
+      "interfaces": {
+        "0": {
+          "started": 1,
+          "reports": 24,
+          "logged": 2,
+          "errors": 0
+        },
+        "1": {
+          "started": 1,
+          "reports": 14,
+          "logged": 10,
+          "errors": 0
+        },
+        "2": {
+          "started": 1,
+          "reports": 4,
+          "logged": 0,
+          "errors": 0
+        },
+        "3": {
+          "started": 1,
+          "reports": 0,
+          "logged": 0,
+          "errors": 0
+        }
+      },
+      "decoders": {
+        "0": {
+          "supported": 1,
+          "decoded": 24,
+          "ignored": 0,
+          "invalid": 0,
+          "rollover": 0,
+          "buttons": 0
+        },
+        "1": {
+          "supported": 1,
+          "decoded": 14,
+          "ignored": 0,
+          "invalid": 0,
+          "rollover": 0,
+          "buttons": 0
+        },
+        "2": {
+          "supported": 0,
+          "decoded": 0,
+          "ignored": 4,
+          "invalid": 0,
+          "rollover": 0,
+          "buttons": 0
+        },
+        "3": {
+          "supported": 0,
+          "decoded": 0,
+          "ignored": 0,
+          "invalid": 0,
+          "rollover": 0,
+          "buttons": 0
+        }
+      }
+    },
+    "finished_uptime_ms": 63384,
+    "diagnostics": [
+      {
+        "level": "E",
+        "uptime_ms": 35874,
+        "message": "USB HOST: Enqueue URB error: ESP_ERR_INVALID_STATE"
+      },
+      {
+        "level": "E",
+        "uptime_ms": 35874,
+        "message": "USB HOST: Enqueue URB error: ESP_ERR_INVALID_STATE"
+      },
+      {
+        "level": "E",
+        "uptime_ms": 35874,
+        "message": "USB HOST: Enqueue URB error: ESP_ERR_INVALID_STATE"
+      },
+      {
+        "level": "E",
+        "uptime_ms": 35874,
+        "message": "USB HOST: Enqueue URB error: ESP_ERR_INVALID_STATE"
+      },
+      {
+        "level": "E",
+        "uptime_ms": 35884,
+        "message": "HID_PROBE: INPUT_INVALID iface=0 bytes=0"
+      },
+      {
+        "level": "E",
+        "uptime_ms": 35884,
+        "message": "HID_PROBE: INPUT_INVALID iface=1 bytes=0"
+      },
+      {
+        "level": "E",
+        "uptime_ms": 35894,
+        "message": "USB HOST: EP command error: ESP_ERR_INVALID_STATE"
+      },
+      {
+        "level": "E",
+        "uptime_ms": 35904,
+        "message": "USB HOST: EP command error: ESP_ERR_INVALID_STATE"
+      },
+      {
+        "level": "E",
+        "uptime_ms": 35914,
+        "message": "USB HOST: EP command error: ESP_ERR_INVALID_STATE"
+      },
+      {
+        "level": "E",
+        "uptime_ms": 35924,
+        "message": "USB HOST: EP command error: ESP_ERR_INVALID_STATE"
+      }
+    ],
+    "unplug_diagnostics_only": false,
+    "errors_after_reenumeration": 0,
+    "functional_recovery_passed": true,
+    "passed": false,
+    "continue_allowed": false
+  },
+  "error_diagnostics": {
+    "whole_session_error_lines": 10,
+    "counts": {
+      "enqueue_urb_invalid_state": 4,
+      "keyboard_zero_byte_input_invalid": 1,
+      "mouse_zero_byte_input_invalid": 1,
+      "ep_invalid_state": 4
+    },
+    "first_error_uptime_ms": 35874,
+    "last_error_uptime_ms": 35924,
+    "window_ms": 50,
+    "after_reconnected_device_error_lines": 0,
+    "pattern_change": "URB and zero-byte INPUT_INVALID diagnostics differ from the three patterns allowed after cycle 1. Monitoring stopped before cycle 3."
+  },
+  "source_review": {
+    "hid_driver_version": "1.1.0",
+    "zero_byte_path": "The HID raw-input API copies actual_num_bytes and may return ESP_OK with zero bytes. The application rejects zero-length input, clears held state and records INPUT_INVALID.",
+    "enqueue_path_inference": "For a COMPLETED transfer the driver notifies INPUT_REPORT then resubmits. A removed endpoint can reject enqueue. This code path is consistent with the diagnostics; runtime transfer status and physical root cause are not established."
+  },
+  "baseline_free_heap_bytes": 329576,
+  "unplugged_free_heap_bytes": 338640,
+  "final_free_heap_bytes": 329576,
+  "final_status": {
+    "capture": 0,
+    "dropped": 0,
+    "free_heap_bytes": 329576,
+    "uptime_ms": 63524
+  },
+  "last_decoder_status": {
+    "0": {
+      "uptime_ms": 63534,
+      "supported": 1,
+      "decoded": 24,
+      "ignored": 0,
+      "invalid": 0,
+      "rollover": 0,
+      "buttons": 0
+    },
+    "1": {
+      "uptime_ms": 63554,
+      "supported": 1,
+      "decoded": 39,
+      "ignored": 0,
+      "invalid": 0,
+      "rollover": 0,
+      "buttons": 0
+    },
+    "2": {
+      "uptime_ms": 63574,
+      "supported": 0,
+      "decoded": 0,
+      "ignored": 4,
+      "invalid": 0,
+      "rollover": 0,
+      "buttons": 0
+    },
+    "3": {
+      "uptime_ms": 63594,
+      "supported": 0,
+      "decoded": 0,
+      "ignored": 0,
+      "invalid": 0,
+      "rollover": 0,
+      "buttons": 0
+    }
+  },
+  "snapshot_scope": "The trial stop snapshot spans uptime 63324-63384 ms (keyboard 24, mouse 14 decoded). A second status spans 63524-63594 ms (keyboard 24, mouse 39); capture was disabled and normal report decoding continued. Fresh interface counters after reconnect do not include unplug errors.",
+  "warning_lines": 0,
+  "panic": false,
+  "unexpected_reboot": false,
+  "dropped_reports": 0,
+  "final_held_key_count": 0,
+  "final_buttons": 0,
+  "final_capture_enabled": false,
+  "uart_closed": true,
+  "remaining": [
+    "assess additional unplug diagnostics",
+    "third reconnect cycle",
+    "three physical RESET cycles",
+    "SFC hardware regression after HID driver update"
+  ],
+  "scope": "Two independently observed functional recoveries. The UART sessions were separated; this is not three cycles in one uninterrupted boot. Held-input disconnect has not been tested.",
+  "privacy": "Only fixed test input and selected technical diagnostics are included. Raw UART, home paths, actual UART port, MAC addresses and device serial numbers remain untracked."
+}
