@@ -1,0 +1,114 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-17",
+  "phase": "First-controller cold power-on with the SFC attached, observed through a non-resetting UART attach; same-day UART-reset control",
+  "result": "cold_power_on_enumerated_1_of_3_uart_reset_control_failed",
+  "previous_records": [
+    "sfc-controller1-connection-order-comparison-2026-11-17.json",
+    "sfc-controller1-hid110-host-first-buttons-2026-11-17.json"
+  ],
+  "controller": {
+    "label": "first physical SFC",
+    "firmware": "not rewritten; actual binary not established",
+    "connection": "user-reported direct USB-C to USB-C, unchanged since the A/B/A comparison; orientation not established but not changed"
+  },
+  "host": {
+    "environment": "fnk0099-host",
+    "application_version": "07e005a",
+    "esp_idf": "5.5.0",
+    "usb_host_hid": "1.1.0",
+    "app_bin_sha256": "aefa9acd1775727ec0009e85c1b8deb31669895a06fbd26827fb70f617446f6c",
+    "firmware_upload_during_test": false
+  },
+  "uart_attach_method": {
+    "finding": "Every earlier capture began with a ROM POWERON banner because opening the port reset FNK0099. pyserial applies DTR and then RTS after opening; with both requested off, the transient state DTR off / RTS on pulls EN low through the board's auto-reset circuit.",
+    "non_resetting_attach": "Open with DTR and RTS both requested on; on close release RTS before DTR. The EN-asserting combination never occurs; DTR on / RTS off only touches the IO0 strapping pin, which is sampled at reset.",
+    "validation": [
+      {"label": "V1", "seconds": 12, "rom_banner": false, "uptime_ms": "1135055-1140055"},
+      {"label": "V2", "seconds": 12, "rom_banner": false, "uptime_ms": "1145055-1155055", "meaning": "uptime continued across V1 close and V2 open"}
+    ],
+    "validation_side_observation": "free_heap 360572 during V1/V2 showed the host-first session from the previous record still enumerated about 19 minutes after insertion.",
+    "reset_detection": "Each trial estimates when the application clock started (heartbeat receive time minus reported uptime); a start after the port was opened would mark the trial invalid. None was invalid."
+  },
+  "judgement_inputs": {
+    "primary": "Enumeration log lines when captured; otherwise button masks after the user pressed Right then B.",
+    "auxiliary_free_heap_signatures_of_this_image": {
+      "364448": "no device activity yet (earlier host-first session before insertion)",
+      "363016": "after failed enumeration (earlier attached-startup failures)",
+      "360572": "enumerated (earlier successful sessions)"
+    },
+    "limitation": "The Mac exposes the USB-UART only after its bridge enumerates, so lines before roughly log time 650ms after power-on were not captured. Failure stages of C1 and C3 are therefore not recorded."
+  },
+  "method": "Controller left attached to the OTG port. User unplugged the FNK0099 USB-UART cable at the Mac end (FNK0099 and SFC unpowered), waited at least 10 seconds, plugged it back into the same port, waited about 10 seconds and pressed Right then B. The script waited for the serial device to disappear and return, attached without resetting, and recorded until the next unplug (last cycle 120 seconds). OTG cable and controller were not touched.",
+  "trials": [
+    {
+      "label": "C1",
+      "power_off_seconds": 16.485,
+      "attach_delay_after_port_returned_s": 0.019,
+      "board_started_before_attach": true,
+      "result": "not_enumerated",
+      "evidence": "No enumeration lines captured; no mask lines although the user pressed L (by mistake), then Right and B; free_heap 363016 in all 5 heartbeats (5055-25055 ms).",
+      "operator_note": "User first pressed L by mistake, then Right and B."
+    },
+    {
+      "label": "C2",
+      "power_off_seconds": 15.3,
+      "attach_delay_after_port_returned_s": 0.019,
+      "board_started_before_attach": true,
+      "result": "enumerated_and_input_received",
+      "first_captured_log_ms": 670,
+      "evidence": {
+        "device_log_ms": 670,
+        "vid_pid": "1209:d004",
+        "speed": "Low Speed (1.5 Mbps)",
+        "keyboard_interface": "IF1 subclass 1 protocol 1, EP 0x82, MPS 8, interval 10 ms",
+        "keyboard_open_set_protocol_set_idle_start": "ESP_OK",
+        "keyboard_start_log_ms": 760,
+        "released_report_log_ms": 770,
+        "presses": [
+          {"button": "Right", "mask": "0x080", "press_ms": 12380, "release_ms": 13320},
+          {"button": "B", "mask": "0x001", "press_ms": 14330, "release_ms": 14950}
+        ],
+        "free_heap": 360572
+      }
+    },
+    {
+      "label": "C3",
+      "power_off_seconds": 17.293,
+      "attach_delay_after_port_returned_s": 0.022,
+      "board_started_before_attach": true,
+      "result": "not_enumerated",
+      "evidence": "No enumeration lines captured; no mask lines although the user pressed Right and B; free_heap 363016 in all 24 heartbeats (5055-120055 ms)."
+    }
+  ],
+  "control": {
+    "label": "K1",
+    "method": "Usual resetting UART open with the controller attached, 20 seconds",
+    "rom_boots": 1,
+    "application_version": "07e005a",
+    "result": "enumeration_failed",
+    "stage": "CHECK_SHORT_DEV_DESC",
+    "log_timestamp_ms": 600,
+    "error_lines": 3,
+    "free_heap_after": 363016
+  },
+  "all_trials": {
+    "warning_lines": 0,
+    "panic": false,
+    "reboots_during_capture": 0,
+    "invalid_trials": 0
+  },
+  "summary_first_controller_c_to_c_host_hid110": {
+    "uart_reset_start_controller_kept_powered": "0/7 (A1-A3, R1-R3, K1); probe image also 0/3",
+    "cold_power_on_controller_attached": "1/3",
+    "host_first_insertion": "1/1 (probe image also 1/1)"
+  },
+  "interpretation": "Attached-at-startup failure is not limited to a reset of FNK0099 alone while the controller stays powered: with both powered on together, enumeration succeeded in 1 of 3 trials. Only insertion after the Host was running enumerated in every trial so far (2/2 across both images). Trial counts are small; the root cause is not established.",
+  "final_state": {
+    "fnk0099": "Original SFC Host HID 1.1.0, not reflashed; last boot (K1) failed enumeration",
+    "controller": "First SFC attached via user-reported C-to-C",
+    "uart_monitor_active": false
+  },
+  "privacy": "Selected timings and diagnostic fields only. Raw UART, UART port, MAC, absolute local paths and device serials remain outside Git.",
+  "next_step": "Stop at milestone. Candidate: Host-side recovery that power-cycles the root port when enumeration fails or no device appears, then the hold/partial-release/reconnect stages."
+}

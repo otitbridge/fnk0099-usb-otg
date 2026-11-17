@@ -37,7 +37,7 @@ HIDドライバー1.1.0のBolt再接続1回目で、抜去前後60msに転送失
 
 [詳細とソース確認](bolt-validation.md) / [再接続1回目](evidence/bolt-reconnect-cycle1-2026-11-17.json) / [再接続2回目](evidence/bolt-reconnect-cycle2-2026-11-17.json) / [再接続3回目](evidence/bolt-reconnect-cycle3-2026-11-17.json)。
 
-## SFC/HID回帰：SFCを挿したままの起動で列挙失敗
+## SFC/HID回帰：SFCを挿したままの起動で列挙が不安定
 
 2026-11-17の回帰確認で、デバイス記述子取得またはアドレス設定中にEP0転送が失敗しています。SFCを挿したまま起動した場合は、次のどの条件でも失敗しました。
 
@@ -46,11 +46,19 @@ HIDドライバー1.1.0のBolt再接続1回目で、抜去前後60msに転送失
 - 従来Host HID 1.0.1、Arduino／ESP-IDF 4.4.7のUSB専用版
 - C to Cケーブル直結
 
-1台目・C to Cの前後比較では、元Host 1.1.0と比較版の両方で、接続済み起動が9/9失敗しました。一方、Hostを起動してから挿すと、両版で各1/1認識しています。
+1台目・C to Cでの結果は次のとおりです。
 
-**回避手順：** SFCを抜いてHostを起動し、`HOST_READY` の後に全解放で挿します。この手順で、Host 1.1.0の12ボタン単独入力に合格しました。ただし成功は1回だけです。また、以前は旧ケーブル構成でHost先行接続も失敗しています。電源投入時に挿したままの起動、保持・部分解放・切断復帰は未確認です。根本原因は未確定で、接続順序・ケーブル・個体・電気的条件のどれかに断定できる結果ではありません。
+| 起動のしかた | 結果 |
+|---|---|
+| UARTを開いたときのリセットによる起動（SFCへの給電は続く） | 元Host 1.1.0とArduino／IDF 4.4.7比較版を合わせて10/10失敗 |
+| FNK0099とSFCの電源を完全に切ってからの起動 | 1/3認識 |
+| Hostを起動してから挿す | 両版で各1/1認識 |
 
-[現在の状態・条件比較・再開手順](sfc-troubleshooting.md) / [各試行の履歴](history/sfc-troubleshooting-2026-11-17.md) / [1台目のABA比較](evidence/sfc-controller1-connection-order-comparison-2026-11-17.json) / [12ボタン記録](evidence/sfc-controller1-hid110-host-first-buttons-2026-11-17.json)。
+**回避手順：** SFCを抜いてHostを起動し、`HOST_READY` の後に全解放で挿します。この手順で、Host 1.1.0の12ボタン単独入力に合格しました。ただし成功は計2回だけです。また、以前は旧ケーブル構成でHost先行接続も失敗しています。電源投入時にSFCが挿さっていると認識は安定せず、保持・部分解放・切断復帰も未確認です。根本原因は未確定で、接続順序・ケーブル・個体・電気的条件のどれかに断定できる結果ではありません。
+
+`tools/capture_uart.py` でUARTを開くと、FNK0099がENリセットされます（DTR→RTSの設定順による）。状態を保ったまま観測する方法は、[引き継ぎ資料](sfc-troubleshooting.md)を参照してください。
+
+[現在の状態・条件比較・再開手順](sfc-troubleshooting.md) / [各試行の履歴](history/sfc-troubleshooting-2026-11-17.md) / [1台目のABA比較](evidence/sfc-controller1-connection-order-comparison-2026-11-17.json) / [12ボタン記録](evidence/sfc-controller1-hid110-host-first-buttons-2026-11-17.json) / [電源断起動](evidence/sfc-controller1-cold-power-on-2026-11-17.json)。
 
 ## MSCの適用範囲と同期
 

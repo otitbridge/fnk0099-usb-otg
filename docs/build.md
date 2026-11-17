@@ -65,7 +65,14 @@ mkdir -p .local
 .venv/bin/python tools/capture_uart.py --port YOUR_UART_PORT --seconds 120 --output .local/uart.log
 ```
 
-指定秒数で終了します。USB-UART自体を抜くと、このスクリプトは自動再接続しません。UARTを開く際に基板が再起動する場合があります。電源断試験では取得開始時の影響と実際の電源断を区別してください。
+指定秒数で終了します。USB-UART自体を抜くと、このスクリプトは自動再接続しません。
+
+このスクリプトでUARTを開くと、FNK0099はENリセットで再起動します。原因は、pyserialがポートを開いた後にDTR、RTSの順で信号をオフにするため、途中で「DTRオフ・RTSオン」の状態が一瞬でき、自動リセット回路がENを下げることです。USB OTG側の機器には給電が続くため、電源断とは別の条件です。動作中の状態を保ったまま観測する場合は、次のように接続します。
+
+- DTR・RTSともオンを指定して開く。
+- 閉じるときは、RTS → DTRの順に下げる。
+
+詳細は[SFC引き継ぎ資料](sfc-troubleshooting.md)を参照してください。
 
 ## 変換ロジックのテスト
 
