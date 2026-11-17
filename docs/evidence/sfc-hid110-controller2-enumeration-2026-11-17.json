@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-17",
+  "phase": "SFC HID 1.1.0 regression, second physical controller enumeration",
+  "result": "enumeration_and_released_input_passed",
+  "controller_label": "second physical SFC controller, user-reported replacement",
+  "controller_firmware_revision": "not established",
+  "controller_cable_relation_to_first": "not established; user reported another controller, so cable/electrical/firmware differences are not isolated",
+  "firmware": {
+    "environment": "fnk0099-host",
+    "git_commit": "07e005a6488f2a2fb0b8f5fded6109040666f893",
+    "source_state": "clean at build and upload",
+    "esp_idf": "5.5.0",
+    "usb_host_hid": "1.1.0",
+    "bin_bytes": 270256,
+    "bin_sha256": "aefa9acd1775727ec0009e85c1b8deb31669895a06fbd26827fb70f617446f6c",
+    "build_passed": true,
+    "upload_passed": true,
+    "upload_verified_regions": 3,
+    "report_host_test_passed": true
+  },
+  "method": "User connected a second physical SFC to FNK0099. Preserved original SFC HID 1.1.0 build; opened UART and recorded startup and released input for 20 seconds. No button operation requested.",
+  "observation_seconds_requested": 20,
+  "runtime_application_version": "07e005a",
+  "boot_count": 1,
+  "host_initializations": 1,
+  "receiver_vid_pid": "1209:d004",
+  "usb_speed": "Low Speed (1.5 Mbps)",
+  "keyboard_interface": {
+    "number": 1,
+    "subclass": 1,
+    "protocol": 1,
+    "endpoint": "0x82",
+    "transfer": "Interrupt IN",
+    "max_packet_bytes": 8,
+    "interval_ms": 10
+  },
+  "keyboard_open_ok": true,
+  "set_protocol_boot_ok": true,
+  "set_idle_ok": true,
+  "keyboard_started": true,
+  "keyboard_started_uptime_ms": 760,
+  "initial_released_report": {
+    "bytes": 8,
+    "all_zero": true,
+    "mask": "0x000",
+    "changed": "0x000",
+    "reason": "report",
+    "uptime_ms": 770
+  },
+  "heartbeat_samples": [
+    {
+      "uptime_ms": 55,
+      "free_heap_bytes": 364448
+    },
+    {
+      "uptime_ms": 5055,
+      "free_heap_bytes": 360572
+    },
+    {
+      "uptime_ms": 10055,
+      "free_heap_bytes": 360572
+    },
+    {
+      "uptime_ms": 15055,
+      "free_heap_bytes": 360572
+    }
+  ],
+  "warning_lines": 0,
+  "error_lines": 0,
+  "panic": false,
+  "uart_closed": true,
+  "button_regression_completed": false,
+  "comparison_scope": "Same FNK0099 and same restored SFC HID 1.1.0 build recognize the second controller. First controller failed enumeration under both HID builds. This observation does not isolate which controller/cable/firmware/electrical difference caused the first failures.",
+  "remaining": [
+    "twelve-button physical input regression on second controller",
+    "held input and simultaneous/partial release",
+    "held disconnect/reconnect and RESET recovery",
+    "identify first-controller configuration differences"
+  ],
+  "privacy": "Only fixed released input and selected technical attributes. Raw UART, USB strings, serial numbers, local paths and actual UART port remain untracked."
+}

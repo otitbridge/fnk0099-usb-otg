@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-17",
+  "phase": "Second-controller startup enumeration after user-reported replacement of USB-C/USB-A cable and adapter with direct USB-C to USB-C cable",
+  "result": "enumeration_failed_CHECK_SHORT_DEV_DESC",
+  "controller": {
+    "label": "second physical SFC, retained per test instructions",
+    "firmware": "previously verified public v1.0.0; SELECT fixed to Tab",
+    "firmware_rewritten_during_test": false
+  },
+  "connection": {
+    "previous": "USB-C to USB-A cable plus USB-A to USB-C adapter, user-reported",
+    "current": "direct USB-C to USB-C cable, user reported connected after replacement instructions",
+    "data_capability_independently_verified": false,
+    "orientation_comparison_performed": false,
+    "vbus_or_signal_measurement_performed": false
+  },
+  "host": {
+    "environment": "fnk0099-host",
+    "application_version": "07e005a",
+    "esp_idf": "5.5.0",
+    "hid_driver": "1.1.0",
+    "bin_bytes": 270256,
+    "bin_sha256": "aefa9acd1775727ec0009e85c1b8deb31669895a06fbd26827fb70f617446f6c",
+    "firmware_upload_during_test": false,
+    "main_source_or_dependencies_modified": false
+  },
+  "method": "Opened UART and captured 20 seconds of startup with the controller already attached and all buttons requested released. Same preserved Host image and attached-at-startup method as the preceding restoration capture; user changed the cable/adapter assembly. UART opening is a preparation boot, not a physical RESET recovery trial.",
+  "observation_seconds_requested": 20,
+  "runtime_version_confirmed": true,
+  "rom_boots": 1,
+  "host_initializations": 1,
+  "diagnostics": [
+    {
+      "level": "E",
+      "log_timestamp_ms": 600,
+      "message": "USBH: Dev 0 EP 0 Error"
+    },
+    {
+      "level": "E",
+      "log_timestamp_ms": 600,
+      "message": "ENUM: Bad transfer status 1: CHECK_SHORT_DEV_DESC"
+    },
+    {
+      "level": "E",
+      "log_timestamp_ms": 600,
+      "message": "ENUM: [0:0] CHECK_SHORT_DEV_DESC FAILED"
+    }
+  ],
+  "error_lines": 3,
+  "warning_lines": 0,
+  "target_vid_pid_observed": false,
+  "keyboard_started": false,
+  "sfc_state_records": 0,
+  "heartbeat_samples": [
+    {
+      "uptime_ms": 55,
+      "free_heap_bytes": 364448
+    },
+    {
+      "uptime_ms": 5055,
+      "free_heap_bytes": 363016
+    },
+    {
+      "uptime_ms": 10055,
+      "free_heap_bytes": 363016
+    },
+    {
+      "uptime_ms": 15055,
+      "free_heap_bytes": 363016
+    }
+  ],
+  "panic": false,
+  "button_trial_started": false,
+  "uart_closed": true,
+  "previous_comparison_record": "crane-game-usb-probe-comparison-2026-11-17.json",
+  "comparison": "Previous restored Host startup with the cable/adapter assembly failed at CHECK_SHORT_DEV_DESC, log timestamp 600ms, three error lines. Direct C-to-C startup also fails at the same stage and timestamp with three error lines.",
+  "interpretation": "The reported direct cable replacement did not resolve this single startup trial. This does not establish adapter innocence or rule out cable data/role compatibility, connector orientation, power, electrical, timing or controller-specific causes. Reconnection itself also occurred and no repeated crossover or voltage/signal measurement was performed.",
+  "final_state": {
+    "fnk0099": "Original SFC Host HID 1.1.0 retained",
+    "controller": "Second SFC public v1.0.0 retained",
+    "connection": "User-reported direct C-to-C retained",
+    "uart_monitor_active": false
+  },
+  "privacy": "Selected build and fixed diagnostic fields only. Raw UART, device identifiers, absolute local paths and actual UART port remain ignored.",
+  "next_step": "Stop at milestone; enumeration stability and twelve-button regression remain unverified."
+}

@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-17",
+  "phase": "SFC HID 1.1.0 regression, second controller, Host-first connection",
+  "result": "enumeration_failed",
+  "controller_label": "second physical SFC",
+  "firmware": {
+    "environment": "fnk0099-host",
+    "git_commit": "07e005a6488f2a2fb0b8f5fded6109040666f893",
+    "source_state": "clean at build and upload",
+    "esp_idf": "5.5.0",
+    "usb_host_hid": "1.1.0",
+    "bin_bytes": 270256,
+    "bin_sha256": "aefa9acd1775727ec0009e85c1b8deb31669895a06fbd26827fb70f617446f6c",
+    "build_passed": true,
+    "upload_passed": true,
+    "upload_verified_regions": 3,
+    "report_host_test_passed": true
+  },
+  "method": "User disconnected SFC; UART opened with Host alone and HOST_READY confirmed without diagnostics. User then connected released SFC while UART stayed open. No UART reopen between HOST_READY and this connection.",
+  "diagnostics": [
+    {
+      "level": "E",
+      "uptime_ms": 36770,
+      "message": "USBH: Dev 1 EP 0 Error"
+    },
+    {
+      "level": "E",
+      "uptime_ms": 36770,
+      "message": "ENUM: Bad transfer status 1: CHECK_FULL_DEV_DESC"
+    },
+    {
+      "level": "E",
+      "uptime_ms": 36770,
+      "message": "ENUM: [0:0] CHECK_FULL_DEV_DESC FAILED"
+    }
+  ],
+  "warning_lines": 0,
+  "error_lines": 3,
+  "boot_count": 1,
+  "host_initializations": 1,
+  "target_vid_pid_observed": false,
+  "keyboard_started": false,
+  "button_trial_started": false,
+  "matched_transitions": 0,
+  "panic": false,
+  "uart_closed": true,
+  "last_heartbeat": {
+    "uptime_ms": 40055,
+    "free_heap_bytes": 363016
+  },
+  "interpretation": "Host-first hotplug also failed at full device descriptor acquisition. This does not isolate the cause. Initial success on the second controller remains a separate valid observation; reliable enumeration and physical input regression are unverified.",
+  "next_step": "Read-only review of user-supplied controller source project and build provenance. Actual flashed controller image remains unverified.",
+  "privacy": "Selected technical diagnostics only. Raw UART, local source path, actual UART port, USB strings and device identifiers remain untracked."
+}

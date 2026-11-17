@@ -1,0 +1,126 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-17",
+  "phase": "Read-only comparison with crane_game known-working SFC project and isolated USB-only probe preparation",
+  "result": "environment_difference_identified_probe_build_passed_not_uploaded",
+  "working_project": {
+    "name": "crane_game",
+    "head_commit": "9f2b6cd702c48511e68fdbef7bc18c50cb68b550",
+    "sfc_feature_commit": "500ca81",
+    "evidence": "Docs/FNK0099_SFC_USB操作.md records keyboard start, continuous input, directions/A/B and disconnect/reconnect recovery; user identifies physical controller 1 as having worked.",
+    "controller_identity_scope": "User-reported first controller; actual controller BIN at prior test is not established by this code review.",
+    "framework": "Arduino-ESP32 2.0.17",
+    "esp_idf": "4.4.7",
+    "hid_driver": "1.0.1",
+    "board": "freenove_esp32_s3_wroom",
+    "cpu_mhz": 240,
+    "freertos_tick_hz": 1000,
+    "flash_build_size_mb": 8,
+    "memory_type": "qio_opi",
+    "usb_console": "UART0; ARDUINO_USB_MODE=0, ARDUINO_USB_CDC_ON_BOOT=0",
+    "source_unchanged": true
+  },
+  "current_project": {
+    "framework": "ESP-IDF",
+    "esp_idf": "5.5.0",
+    "hid_driver": "1.1.0",
+    "historical_comparison_hid_driver": "1.0.1 under the same ESP-IDF 5.5.0",
+    "board": "esp32-s3-devkitc-1",
+    "cpu_mhz": 160,
+    "freertos_tick_hz": 100,
+    "flash_build_size_mb": 16,
+    "usb_console": "UART0; secondary USB console disabled"
+  },
+  "shared_configuration": {
+    "usb_host_interrupt_level": "ESP_INTR_FLAG_LEVEL1",
+    "target": "1209:d004 IF1 Boot keyboard",
+    "protocol": "SET_PROTOCOL(BOOT), SET_IDLE(0)",
+    "host_task": "core 0, priority 2",
+    "control_transfer_max_bytes": 256,
+    "hardware_buffer_bias": "balanced",
+    "debounce_ms": 250,
+    "reset_hold_ms": 30,
+    "reset_recovery_ms": 30,
+    "set_address_recovery_ms": 10,
+    "vendored_hid101_matches_prior_isolated_managed_hid101": true
+  },
+  "execution_differences": {
+    "working_project": "Manual HID event task at core 0 priority 4; input task priority 3; 20ms event waits; callback updates protected snapshot. No extra descriptor observer client.",
+    "current_project": "HID background task at core 0 priority 5; input task priority 4; separate descriptor observer client/task.",
+    "scope": "Multiple framework, scheduling, memory/flash and task differences are present; no individual cause established."
+  },
+  "interpretation": "Earlier HID-only 1.0.1 comparisons did not test ESP-IDF 4.4.7. The underlying Host stack and runtime are significant untested differences. This is a testable lead, not proof that ESP-IDF 5.5.0 is defective or the unique cause.",
+  "comparison_probe": {
+    "source_provenance": {
+      "repository": "crane_game",
+      "commit": "9f2b6cd702c48511e68fdbef7bc18c50cb68b550",
+      "copied_files": [
+        {
+          "source": "src/fnk0099/usb_sfc.cpp",
+          "sha256": "20cd71464fd65414700c13d7c28d3055b317d4c6556bf86246ae84b3900a4eb7"
+        },
+        {
+          "source": "src/fnk0099/usb_sfc.h",
+          "sha256": "0ae56f7c91d5a32b2d3880249309e809c38bc257fab60f5200ccafacd8829528"
+        },
+        {
+          "source": "src/fnk0099/sfc_input.h",
+          "sha256": "c4e4a7253aee926c501fb188d0e8fbefdba0adb4296f7898692ff7450b3d3685"
+        },
+        {
+          "source": "lib/usb_host_hid/LICENSE",
+          "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+        },
+        {
+          "source": "lib/usb_host_hid/README.md",
+          "sha256": "c792fd164074f794499e0e3a534f0675f0ad7a89690f3a5975aeee21ce6299e3"
+        },
+        {
+          "source": "lib/usb_host_hid/include/usb/hid.h",
+          "sha256": "3535845d68263676122129217bb4cf90ab34abe393892dc5306a7b8ba88b1391"
+        },
+        {
+          "source": "lib/usb_host_hid/include/usb/hid_host.h",
+          "sha256": "dbad8324b71811e5939d88f25483d7711c191fc248e8b7a8e5f0d440305143a7"
+        },
+        {
+          "source": "lib/usb_host_hid/include/usb/hid_usage_keyboard.h",
+          "sha256": "fd150ce45dfb9490f520cc8af2c81da8daa8a31adae9b4ed54115422e5feda37"
+        },
+        {
+          "source": "lib/usb_host_hid/include/usb/hid_usage_mouse.h",
+          "sha256": "9c61f2b7634541dbd5e2b32ee6f2955d56133cc83bef390eb4bc54c088b7cf6f"
+        },
+        {
+          "source": "lib/usb_host_hid/library.json",
+          "sha256": "2deb9020b6d507e25a0bf20b156dda3f9d62f27eb98b500e451eb84dd890fec5"
+        },
+        {
+          "source": "lib/usb_host_hid/src/hid_host.c",
+          "sha256": "acd7b9b9c76d98c3289986bc5b149c56b6834b8a923fa7a9923d6d1862d5d9c8"
+        }
+      ],
+      "wrapper": "New UART-only observation wrapper; USB module and vendored HID source copied unchanged.",
+      "configuration": "Arduino-ESP32 2.0.17 / ESP-IDF 4.4.7, successful-project board/USB/memory settings; networking and control application not included."
+    },
+    "wrapper": "New USB snapshot/transition/status UART wrapper only; selected crane USB source and driver unchanged.",
+    "environment": "crane-usb-probe",
+    "framework": "Arduino-ESP32 2.0.17 / ESP-IDF 4.4.7",
+    "bin_bytes": 318096,
+    "bin_sha256": "4ac0ccecb412406014816a83919b88512c19a80e9b267a048c1ecf26c9d8a7af",
+    "build_passed": true,
+    "build_warning_lines": 0,
+    "build_error_lines": 0,
+    "uploaded": false,
+    "runtime_verified": false,
+    "network_or_motor_control_application_included": false,
+    "scope": "Isolated comparison build, not the full crane application or its original tested binary. No main project configuration or physical firmware changed during review/build."
+  },
+  "hardware_state_unchanged": {
+    "fnk0099": "Original SFC Host HID 1.1.0 preserved",
+    "second_sfc": "Verified public v1.0.0 retained",
+    "uart_monitor_active": false
+  },
+  "next_decision": "Whether to temporarily run the USB-only Arduino/IDF4.4.7 comparison image; preserve and restore prior FNK0099 flash state.",
+  "privacy": "Project names, source hashes and selected technical settings only. Absolute local paths, original crane application configuration, device serials, raw logs and actual UART port excluded."
+}

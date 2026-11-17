@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-17",
+  "phase": "Second SFC controller flashed to known public v1.0.0 reference",
+  "result": "upload_readback_and_mac_enumeration_passed",
+  "authorization": "User approved replacing second-controller application with public v1.0.0, then reported bootloader connection. Prior running image backup not obtained.",
+  "controller_label": "second physical SFC, user-designated",
+  "preflight": {
+    "matching_bootloaders": 1,
+    "vid_pid": "1209:b803",
+    "bcd_device": "0x0141",
+    "reference_bytes": 5496,
+    "reference_sha256": "43a82eb36c7df4d298dd01f6b25460117fab0207c9206382b5eeaf92379a9079",
+    "uploader_sha256": "84381d22d24eb49c478a319ec6fb94af1702d718745757cd72d51eb476c29210"
+  },
+  "firmware": {
+    "version": "v1.0.0",
+    "select_key": "Tab fixed",
+    "bin_bytes": 5496,
+    "bin_sha256": "43a82eb36c7df4d298dd01f6b25460117fab0207c9206382b5eeaf92379a9079",
+    "matches_release_manifest": true
+  },
+  "upload": {
+    "started_at": "2026-11-17T20:07:39.576719+09:00",
+    "finished_at": "2026-11-17T20:07:46.652507+09:00",
+    "exit_code": 0,
+    "preflight_target_unchanged": true,
+    "flash_size_argument_bytes": 16384,
+    "padded_verified_bytes": 5504,
+    "all_sectors_readback_match": true,
+    "application_started": true,
+    "bootloader_write_requested": false
+  },
+  "after": {
+    "normal_vid_pid": "1209:d004",
+    "normal_device_count": 1,
+    "remaining_bootloader_count": 0,
+    "normal_bcd_device": 1,
+    "same_usb_location_as_preflight_bootloader": true
+  },
+  "fnk0099_firmware": "Preserved SFC fnk0099-host with HID 1.1.0, application source commit 07e005a; no FNK0099 rewrite in this step.",
+  "scope": "Controller application bytes are now established by verified reference upload. Mac recognition confirmed. This is not yet FNK0099 enumeration, stable operation or button regression success. Controller project source was not modified; its later SELECT-switch source differs from the flashed v1.0.0 reference.",
+  "next_step": "Start FNK0099 Host without SFC and connect the released second controller while keeping UART open.",
+  "privacy": "Selected firmware identity and boolean USB-location match only. Raw upload/USB inventories, absolute paths, USB location values, serials and actual UART port remain untracked."
+}

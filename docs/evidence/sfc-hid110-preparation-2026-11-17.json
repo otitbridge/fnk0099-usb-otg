@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-17",
+  "phase": "SFC regression after HID driver 1.1.0 update, preparation",
+  "result": "preparation_passed_hardware_input_pending",
+  "firmware": {
+    "environment": "fnk0099-host",
+    "git_commit": "07e005a6488f2a2fb0b8f5fded6109040666f893",
+    "source_state": "clean at build and upload",
+    "esp_idf": "5.5.0",
+    "usb_host_hid": "1.1.0",
+    "bin_bytes": 270256,
+    "bin_sha256": "aefa9acd1775727ec0009e85c1b8deb31669895a06fbd26827fb70f617446f6c",
+    "build_passed": true,
+    "upload_passed": true,
+    "upload_verified_regions": 3,
+    "report_host_test_passed": true
+  },
+  "build_warning_lines": 0,
+  "build_error_lines": 0,
+  "report_host_test": "12 mappings, simultaneous input, partial/full release and malformed reports passed with -Wall -Wextra -Werror",
+  "boot": {
+    "usb_host_install_ok": true,
+    "hid_host_install_ok": true,
+    "rom_boots": 1,
+    "host_initializations": 1,
+    "warning_lines": 0,
+    "error_lines": 0
+  },
+  "hardware_scope": "FNK0099 flashed with fnk0099-host. SFC connection and physical controller inputs have not yet been verified with this build. UART monitor remains active awaiting target 1209:d004.",
+  "remaining": [
+    "SFC enumeration and twelve single-button inputs",
+    "SFC held input and simultaneous/partial release regression",
+    "SFC held-input disconnect, reconnection and RESET recovery regression",
+    "assess retained physical-unplug diagnostics"
+  ],
+  "privacy": "Technical build and startup summary only. Raw build/upload/UART logs, home paths, actual UART port, MAC addresses and device serial numbers remain untracked."
+}

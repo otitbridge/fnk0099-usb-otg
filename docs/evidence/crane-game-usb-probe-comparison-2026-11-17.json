@@ -1,0 +1,136 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-17",
+  "phase": "Authorized USB-only Arduino / ESP-IDF 4.4.7 physical comparison, followed by original boot-prefix and application restoration",
+  "result": "comparison_enumeration_failed_original_boot_prefix_and_app_restored",
+  "preparation_record": "crane-game-usb-reference-review-2026-11-17.json",
+  "controller": {
+    "label": "second physical SFC",
+    "firmware": "verified public v1.0.0, SELECT fixed to Tab",
+    "bin_sha256": "43a82eb36c7df4d298dd01f6b25460117fab0207c9206382b5eeaf92379a9079",
+    "rewritten_during_this_comparison": false
+  },
+  "method_scope": "Controller remained connected for startup comparison; no cable/orientation change requested. The successful crane_game reference concerned controller 1, whereas this comparison uses controller 2. Only selected USB code and its vendored driver were copied; this is not the original full crane application or its prior tested binary. Multiple environment and task differences change together.",
+  "backup": {
+    "completed": true,
+    "prefix_offset": "0x0",
+    "prefix_bytes": 65536,
+    "original_bootloader_matches_preserved_build": true,
+    "original_partition_table_matches_preserved_build": true,
+    "raw_backup_and_hash_private": true,
+    "first_460800_baud_read_failed_with_invalid_packet_before_dump": true,
+    "retry_115200_baud_succeeded": true,
+    "interpretation": "This initial failure was esptool serial transport during backup, separate from subsequent USB enumeration diagnostics."
+  },
+  "comparison": {
+    "source_project": "crane_game",
+    "source_commit": "9f2b6cd702c48511e68fdbef7bc18c50cb68b550",
+    "environment": "crane-usb-probe",
+    "framework": "Arduino-ESP32 2.0.17 / ESP-IDF 4.4.7",
+    "hid_driver": "1.0.1",
+    "cpu_mhz": 240,
+    "freertos_tick_hz": 1000,
+    "network_or_motor_application_included": false,
+    "upload": {
+      "exit_code": 0,
+      "success_marker": true,
+      "verified_regions": 4,
+      "app_bytes": 318096,
+      "app_sha256": "4ac0ccecb412406014816a83919b88512c19a80e9b267a048c1ecf26c9d8a7af",
+      "upload_baud": 115200
+    },
+    "runtime": {
+      "capture_seconds": 20,
+      "runtime_header": [
+        "CRANE_USB_PROBE sdk=v4.4.7-dirty cpu_mhz=240 tick_hz=1000 hid=1.0.1"
+      ],
+      "usb_init_ok": true,
+      "keyboard_start_reached": false,
+      "input_transitions": 0,
+      "status_samples": 20,
+      "first_status": {
+        "uptime_ms": 1003,
+        "initialized": 1,
+        "connected": 0,
+        "valid": 0,
+        "fresh": 0,
+        "mask": 0,
+        "reports": 0,
+        "changes": 0,
+        "errors": 0,
+        "generation": 0,
+        "heap": 356084
+      },
+      "last_status": {
+        "uptime_ms": 20003,
+        "initialized": 1,
+        "connected": 0,
+        "valid": 0,
+        "fresh": 0,
+        "mask": 0,
+        "reports": 0,
+        "changes": 0,
+        "errors": 0,
+        "generation": 0,
+        "heap": 356084
+      },
+      "all_reports_zero": true,
+      "all_disconnected": true,
+      "host_error_lines": [
+        "E (1284) HUB: Bad transfer status 1: CHECK_SHORT_DEV_DESC",
+        "E (1284) HUB: Stage failed: CHECK_SHORT_DEV_DESC"
+      ],
+      "warning_lines": [],
+      "panic_detected": false,
+      "interpretation": "Host initialization succeeds, but USB enumeration fails before keyboard start. Application errors=0 counts post-enumeration input errors only and does not mean Host errors=0."
+    },
+    "result": "enumeration_failed_before_target_identification_and_keyboard_start",
+    "uart_closed": true
+  },
+  "restoration": {
+    "started_at": "2026-11-17T20:33:31.872108+09:00",
+    "restored_prefix_bytes": 65536,
+    "original_app_sha256": "aefa9acd1775727ec0009e85c1b8deb31669895a06fbd26827fb70f617446f6c",
+    "exit_code": 0,
+    "verified_regions": 2,
+    "prefix_readback_matches_backup": true,
+    "finished_at": "2026-11-17T20:33:54.795390+09:00",
+    "scope": "Restored original 64KiB boot/NVS/partition prefix byte-for-byte and original application image; not a full-chip flash snapshot or full-chip byte comparison.",
+    "host_hid_driver": "1.1.0",
+    "application_version": "07e005a",
+    "runtime_version_confirmed": true,
+    "host_ready_confirmed": true,
+    "capture_seconds": 12,
+    "diagnostics": [
+      {
+        "level": "E",
+        "log_timestamp_ms": 600,
+        "message": "USBH: Dev 0 EP 0 Error"
+      },
+      {
+        "level": "E",
+        "log_timestamp_ms": 600,
+        "message": "ENUM: Bad transfer status 1: CHECK_SHORT_DEV_DESC"
+      },
+      {
+        "level": "E",
+        "log_timestamp_ms": 600,
+        "message": "ENUM: [0:0] CHECK_SHORT_DEV_DESC FAILED"
+      }
+    ],
+    "warning_lines": 0,
+    "keyboard_started": false,
+    "result": "enumeration_failed_CHECK_SHORT_DEV_DESC",
+    "uart_closed": true
+  },
+  "interpretation": "The USB-only environment matching the successful project did not reproduce enumeration success with this second controller in the present connection. A simple switch to Arduino / IDF 4.4.7 did not resolve this trial. This does not isolate a single root cause or exclude stack/timing, connection, power, electrical or controller-specific causes. No twelve-button input test was started.",
+  "final_hardware_state": {
+    "fnk0099": "Original SFC Host HID 1.1.0 boot prefix and application restored and verified",
+    "second_sfc": "Verified public v1.0.0 retained",
+    "uart_monitor_active": false,
+    "main_source_or_dependencies_modified": false,
+    "external_projects_modified": false
+  },
+  "privacy": "Selected runtime/build diagnostics only. Raw prefix dumps and their hashes, raw logs, UART port, absolute local paths, MACs and device serials remain outside Git.",
+  "next_step": "Stop at comparison milestone. Choose the next physical connection or first-controller comparison before further flashing or input trials."
+}

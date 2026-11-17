@@ -22,6 +22,30 @@ USB認識・全4IFの記述子取得と受信開始、入力解釈のホスト�
 | [bolt-reset-cycle3-attempt1-2026-11-17.json](bolt-reset-cycle3-attempt1-2026-11-17.json) | 3回目の初回試行は操作不明。RESET起動を観測せず切断時診断で停止、合格回数に含めず再試験 |
 | [bolt-reset-cycle3-attempt2-2026-11-17.json](bolt-reset-cycle3-attempt2-2026-11-17.json) | 3回目の再試験に合格。4IF・A・左クリック復帰、警告・エラー0を確認し、RESET合格は合計3回 |
 
+## SFC：HID更新後の回帰（C to C直結でも列挙失敗、2026-11-17）
+
+現在の実機状態・条件比較・成果物・再開手順は[引き継ぎ資料](../sfc-troubleshooting.md)、試行時点の詳細は[調査履歴](../history/sfc-troubleshooting-2026-11-17.md)を参照してください。
+
+| ファイル | 内容 |
+|---|---|
+| [sfc-hid110-preparation-2026-11-17.json](sfc-hid110-preparation-2026-11-17.json) | 既存SFC変換テスト、1.1.0でのビルド・書き込み・Host起動。SFC実機入力は未検証 |
+| [sfc-hid110-connect-attempt1-2026-11-17.json](sfc-hid110-connect-attempt1-2026-11-17.json) | 接続切替後、CHECK_ADDRの列挙エラー3行で停止。機器識別・実機入力は未確認 |
+| [sfc-hid110-connect-attempt2-2026-11-17.json](sfc-hid110-connect-attempt2-2026-11-17.json) | 接続を維持した起動でもCHECK_SHORT_DEV_DESCのエラー3行。接続条件の確認待ち |
+| [sfc-hid110-mac-identity-2026-11-17.json](sfc-hid110-mac-identity-2026-11-17.json) | Macで1209:d004、Low-Speed、IF1 Boot Keyboard・8バイト入力を確認。FNK0099の認識失敗原因は未確定 |
+| [sfc-hid110-connect-attempt3-2026-11-17.json](sfc-hid110-connect-attempt3-2026-11-17.json) | Macから戻してもCHECK_ADDRのエラー3行。プラグ反転は未確認、向きの比較には数えず停止 |
+| [sfc-hid101-baseline-preparation-2026-11-17.json](sfc-hid101-baseline-preparation-2026-11-17.json) | 従来4348f79／HID 1.0.1の隔離ビルド成功。比較BINの識別情報、実機は未書き換え |
+| [sfc-hid101-comparison-2026-11-17.json](sfc-hid101-comparison-2026-11-17.json) | 1.0.1比較版でもCHECK_SHORT_DEV_DESC失敗。元の1.1.0全3領域を復元し、再確認でも失敗。原因未確定 |
+| [sfc-hid110-controller2-enumeration-2026-11-17.json](sfc-hid110-controller2-enumeration-2026-11-17.json) | 2台目のSFCは同じ1.1.0版で認識・全解放受信成功。警告・エラー0、ボタン回帰は未実施 |
+| [sfc-hid110-controller2-startup-attempt2-2026-11-17.json](sfc-hid110-controller2-startup-attempt2-2026-11-17.json) | 2台目も次の起動ではCHECK_FULL_DEV_DESC失敗。初回成功と併記し、入力回帰は未開始 |
+| [sfc-hid110-controller2-host-first-2026-11-17.json](sfc-hid110-controller2-host-first-2026-11-17.json) | Host起動後の接続でもCHECK_FULL_DEV_DESC失敗、ボタン試験未開始で停止 |
+| [sfc-controller-source-review-2026-11-17.json](sfc-controller-source-review-2026-11-17.json) | 起動時SELECT切り替えと既知v1.0.0 BINを確認。実機BINは未特定、SFC書き換えは未実施 |
+| [sfc-controller2-v100-upload-2026-11-17.json](sfc-controller2-v100-upload-2026-11-17.json) | 2台目を既知v1.0.0へ書き込み、読み戻し一致・起動・Mac認識成功。FNK0099での比較は接続待ち |
+| [sfc-controller2-v100-hid110-host-first-2026-11-17.json](sfc-controller2-v100-hid110-host-first-2026-11-17.json) | 検証済みSFC v1.0.0でもHost 1.1.0の接続でCHECK_ADDR失敗、入力未開始 |
+| [sfc-known-reference-pair-comparison-2026-11-17.json](sfc-known-reference-pair-comparison-2026-11-17.json) | 検証済みSFC v1.0.0＋従来Host 1.0.1でも失敗。元Host 1.1.0へ全領域復元済み、SFC回帰は保留 |
+| [crane-game-usb-reference-review-2026-11-17.json](crane-game-usb-reference-review-2026-11-17.json) | 成功実績はArduino／IDF 4.4.7。従来の比較は5.5.0のままと判明。USBだけの隔離比較版ビルド済み・未書き込み |
+| [crane-game-usb-probe-comparison-2026-11-17.json](crane-game-usb-probe-comparison-2026-11-17.json) | Arduino／IDF 4.4.7のUSB専用版でもCHECK_SHORT_DEV_DESC失敗。元の先頭64KiB・SFC用1.1.0アプリを復元・検証済み |
+| [sfc-controller2-c-to-c-startup-2026-11-17.json](sfc-controller2-c-to-c-startup-2026-11-17.json) | 同じ2台目・元HostのままC to C直結へ交換。接続済み起動でもCHECK_SHORT_DEV_DESCのエラー3行、入力未開始 |
+
 ## MSC：カードリーダー・microSD（2026-11-17）
 
 現在の[MSC検証結果](../msc-validation.md)に、当初計画7項目の結果、実機BIN、書き込み・再マウント・Mac照合をまとめています。各時点の詳細は[経過記録](../history/msc-validation-2026-11-17.md)を参照してください。

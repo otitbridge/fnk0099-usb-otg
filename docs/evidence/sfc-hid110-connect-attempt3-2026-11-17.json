@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-17",
+  "phase": "SFC HID 1.1.0 regression, third connection attempt",
+  "result": "enumeration_failed",
+  "firmware": {
+    "environment": "fnk0099-host",
+    "git_commit": "07e005a6488f2a2fb0b8f5fded6109040666f893",
+    "source_state": "clean at build and upload",
+    "esp_idf": "5.5.0",
+    "usb_host_hid": "1.1.0",
+    "bin_bytes": 270256,
+    "bin_sha256": "aefa9acd1775727ec0009e85c1b8deb31669895a06fbd26827fb70f617446f6c",
+    "build_passed": true,
+    "upload_passed": true,
+    "upload_verified_regions": 3,
+    "report_host_test_passed": true
+  },
+  "method": "After read-only Mac USB identity confirmation, user returned SFC to FNK0099. A 180-degree host-plug reversal was suggested but user said it might not have been reversed.",
+  "observation": "Control transfer failed at CHECK_ADDR. No target descriptor, interface, keyboard start or input trial observed. Mac previously recognized 1209:d004, but identity was not obtained from the failing FNK0099 enumeration.",
+  "diagnostics": [
+    {
+      "level": "E",
+      "uptime_ms": 212660,
+      "message": "USBH: Dev 0 EP 0 Error"
+    },
+    {
+      "level": "E",
+      "uptime_ms": 212660,
+      "message": "ENUM: Bad transfer status 1: CHECK_ADDR"
+    },
+    {
+      "level": "E",
+      "uptime_ms": 212660,
+      "message": "ENUM: [0:0] CHECK_ADDR FAILED"
+    }
+  ],
+  "warning_lines": 0,
+  "error_lines": 3,
+  "boot_count": 1,
+  "host_initializations": 1,
+  "input_trial_started": false,
+  "matched_transitions": 0,
+  "panic": false,
+  "uart_closed": true,
+  "root_cause": "not established",
+  "scope": "This is a failed enumeration observation during device replacement, not a completed SFC input regression. Physical connection, device identity and cause have not been established from this trace.",
+  "follow_up": "Prepare an isolated historical HID 1.0.1 baseline for review before deciding a hardware A/B comparison. No additional automatic retries.",
+  "privacy": "Selected technical diagnostics only; raw UART, home paths, actual UART port, MAC addresses and serial numbers remain untracked.",
+  "user_connection_confirmation": "User believes this is the same SFC controller and cable directly connected; controller firmware may differ slightly. Actual firmware revision and USB identity remain unverified.",
+  "connector_orientation": "unconfirmed; this is not a verified orientation comparison"
+}

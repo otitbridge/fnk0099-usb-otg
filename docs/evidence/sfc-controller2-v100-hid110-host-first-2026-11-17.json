@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-17",
+  "phase": "Second SFC controller with verified public v1.0.0, Host HID 1.1.0, Host-first connection",
+  "result": "enumeration_failed",
+  "controller_label": "second physical SFC",
+  "controller_firmware": {
+    "version": "v1.0.0",
+    "select_key": "Tab fixed",
+    "bin_bytes": 5496,
+    "bin_sha256": "43a82eb36c7df4d298dd01f6b25460117fab0207c9206382b5eeaf92379a9079",
+    "matches_release_manifest": true
+  },
+  "host_firmware": {
+    "environment": "fnk0099-host",
+    "git_commit": "07e005a6488f2a2fb0b8f5fded6109040666f893",
+    "source_state": "clean at build and upload",
+    "esp_idf": "5.5.0",
+    "usb_host_hid": "1.1.0",
+    "bin_bytes": 270256,
+    "bin_sha256": "aefa9acd1775727ec0009e85c1b8deb31669895a06fbd26827fb70f617446f6c",
+    "build_passed": true,
+    "upload_passed": true,
+    "upload_verified_regions": 3,
+    "report_host_test_passed": true
+  },
+  "method": "User returned the verified v1.0.0 controller from Mac to FNK0099, with Host started first and UART kept open.",
+  "diagnostics": [
+    {
+      "level": "E",
+      "uptime_ms": 79690,
+      "message": "USBH: Dev 0 EP 0 Error"
+    },
+    {
+      "level": "E",
+      "uptime_ms": 79690,
+      "message": "ENUM: Bad transfer status 1: CHECK_ADDR"
+    },
+    {
+      "level": "E",
+      "uptime_ms": 79690,
+      "message": "ENUM: [0:0] CHECK_ADDR FAILED"
+    }
+  ],
+  "warning_lines": 0,
+  "error_lines": 3,
+  "boot_count": 1,
+  "host_initializations": 1,
+  "target_vid_pid_observed": false,
+  "keyboard_started": false,
+  "button_trial_started": false,
+  "matched_transitions": 0,
+  "panic": false,
+  "uart_closed": true,
+  "last_heartbeat": {
+    "uptime_ms": 85055,
+    "free_heap_bytes": 363016
+  },
+  "interpretation": "Replacing controller application with the verified public Tab-fixed v1.0.0 did not resolve enumeration on this attempt. The SELECT-switch application change alone does not explain all observations; root cause remains unestablished. Earlier Host 1.0.1 comparisons used an unverified controller image, so the known-reference combination is a distinct test.",
+  "next_step": "One authorized historical Host HID 1.0.1 comparison with the now-verified controller v1.0.0; restore original Host HID 1.1.0 afterwards.",
+  "privacy": "Selected technical diagnostics and firmware hashes only; raw UART, device serials, USB location values, absolute paths and actual UART port remain untracked."
+}

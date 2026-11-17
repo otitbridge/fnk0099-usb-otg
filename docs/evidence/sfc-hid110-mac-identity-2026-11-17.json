@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-17",
+  "phase": "SFC Mac USB identity check after FNK0099 enumeration failures",
+  "result": "mac_enumeration_confirmed",
+  "method": "User moved the same reported SFC/controller cable from FNK0099 to Mac with all buttons released. Compared Mac USB registry before and after connection and read only standard USB/HID attributes; no input report capture or firmware modification.",
+  "usb": {
+    "vid_pid": "1209:d004",
+    "bcd_usb": "0x0110",
+    "bcd_device": "0x0001",
+    "device_class": 0,
+    "device_subclass": 0,
+    "device_protocol": 0,
+    "max_packet_size_ep0": 8,
+    "configuration_count": 1,
+    "speed": "Low Speed (1.5 Mbps)",
+    "speed_basis": "macOS Device Speed value 0, mapped to kUSBDeviceSpeedLow by the local Apple USB.h SDK definition."
+  },
+  "interfaces": [
+    {
+      "bInterfaceNumber": 0,
+      "bAlternateSetting": 0,
+      "bInterfaceClass": 3,
+      "bInterfaceSubClass": 1,
+      "bInterfaceProtocol": 2,
+      "bNumEndpoints": 1
+    },
+    {
+      "bInterfaceNumber": 1,
+      "bAlternateSetting": 0,
+      "bInterfaceClass": 3,
+      "bInterfaceSubClass": 1,
+      "bInterfaceProtocol": 1,
+      "bNumEndpoints": 1
+    }
+  ],
+  "unique_hid_descriptor_summaries": [
+    {
+      "VendorID": 4617,
+      "ProductID": 53252,
+      "VersionNumber": 1,
+      "PrimaryUsagePage": 1,
+      "PrimaryUsage": 2,
+      "MaxInputReportSize": 4,
+      "MaxOutputReportSize": 0,
+      "MaxFeatureReportSize": 0,
+      "ReportInterval": 8000,
+      "report_descriptor_bytes": 52,
+      "report_descriptor_sha256": "8aab9edd8276e0aac974708bba0ca02b3bcf5f289a1e521667ce21ebce03765c"
+    },
+    {
+      "VendorID": 4617,
+      "ProductID": 53252,
+      "VersionNumber": 1,
+      "PrimaryUsagePage": 1,
+      "PrimaryUsage": 6,
+      "MaxInputReportSize": 8,
+      "MaxOutputReportSize": 8,
+      "MaxFeatureReportSize": 0,
+      "ReportInterval": 8000,
+      "report_descriptor_bytes": 69,
+      "report_descriptor_sha256": "91599729573bf387e7dc5856383167fe162c36b1765cefa5ddbb4d1c1e0fcd3b"
+    }
+  ],
+  "interpretation": {
+    "matches_fnk0099_target_selection": true,
+    "target_selection": "VID/PID 1209:d004, IF1, HID Boot subclass, keyboard protocol",
+    "keyboard_max_input_report_bytes": 8,
+    "controller_firmware_revision": "not established; bcdDevice is a USB device release field, not proof of the application firmware revision",
+    "button_mapping_verified": false,
+    "fnk0099_regression_completed": false,
+    "root_cause_of_fnk0099_enumeration_failure": "not established",
+    "scope": "Mac recognition confirms USB enumeration in this Mac/cable connection. It does not establish FNK0099 compatibility, physical integrity under all conditions, identical controller firmware, or identical button assignments."
+  },
+  "privacy": "Only selected standard USB/HID attributes and descriptor hashes. Raw registries, USB strings, serial numbers, registry/location identifiers, home paths and actual UART port remain untracked."
+}

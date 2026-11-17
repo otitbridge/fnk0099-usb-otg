@@ -1,0 +1,161 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-17",
+  "phase": "SFC historical HID 1.0.1 comparison, unchanged physical connection",
+  "result": "enumeration_failed",
+  "authorization": "User selected uploading the prepared HID 1.0.1 comparison and checking the same SFC connection.",
+  "firmware": {
+    "source_commit": "4348f79",
+    "application_version": "4348f79-hid101-ab",
+    "esp_idf": "5.5.0",
+    "usb_host_hid": "1.0.1",
+    "bin_bytes": 269728,
+    "bin_sha256": "5f046537ca18f720f52fbf0e5ad3904cc0769314564ee910cbe66ab596dcfc75"
+  },
+  "upload_passed": true,
+  "upload_verified_regions": 3,
+  "observation_seconds_requested": 20,
+  "startup_application_version_confirmed": true,
+  "boot_count": 1,
+  "host_initializations": 1,
+  "diagnostics": [
+    {
+      "level": "E",
+      "uptime_ms": 601,
+      "message": "USBH: Dev 0 EP 0 Error"
+    },
+    {
+      "level": "E",
+      "uptime_ms": 601,
+      "message": "ENUM: Bad transfer status 1: CHECK_SHORT_DEV_DESC"
+    },
+    {
+      "level": "E",
+      "uptime_ms": 601,
+      "message": "ENUM: [0:0] CHECK_SHORT_DEV_DESC FAILED"
+    }
+  ],
+  "warning_lines": 0,
+  "error_lines": 3,
+  "target_vid_pid_observed": false,
+  "keyboard_started": false,
+  "input_trial_started": false,
+  "uart_closed": true,
+  "controller_firmware_modified": false,
+  "last_heartbeat": {
+    "uptime_ms": 15054,
+    "free_heap_bytes": 363100
+  },
+  "comparison": "HID 1.1.0 failed at CHECK_ADDR or CHECK_SHORT_DEV_DESC on three attempts; the isolated historical HID 1.0.1 build also failed at CHECK_SHORT_DEV_DESC with the same reported SFC connection. No cable/orientation change was requested during the comparison.",
+  "interpretation": "The observations do not isolate the HID 1.1.0 update as the sole cause. They do not establish a physical or controller-firmware root cause, or prove all software causes absent. A new baseline build with historical source is not the original historical tested binary.",
+  "privacy": "Selected technical diagnostics and build identity only. Raw UART/build/upload logs, local paths, actual UART port, device serials and Mac identifiers remain untracked.",
+  "restoration": {
+    "completed": true,
+    "application_firmware": {
+      "environment": "fnk0099-host",
+      "git_commit": "07e005a6488f2a2fb0b8f5fded6109040666f893",
+      "source_state": "clean at build and upload",
+      "esp_idf": "5.5.0",
+      "usb_host_hid": "1.1.0",
+      "bin_bytes": 270256,
+      "bin_sha256": "aefa9acd1775727ec0009e85c1b8deb31669895a06fbd26827fb70f617446f6c",
+      "build_passed": true,
+      "upload_passed": true,
+      "upload_verified_regions": 3,
+      "report_host_test_passed": true
+    },
+    "segments": [
+      {
+        "offset": "0x0",
+        "file": "bootloader.bin",
+        "bytes": 21088,
+        "sha256": "88f0e57b5f0351d1553c882213a879ddc12024fcceb776d50a6b9eb403384787"
+      },
+      {
+        "offset": "0x8000",
+        "file": "partitions.bin",
+        "bytes": 3072,
+        "sha256": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820"
+      },
+      {
+        "offset": "0x10000",
+        "file": "firmware.bin",
+        "bytes": 270256,
+        "sha256": "aefa9acd1775727ec0009e85c1b8deb31669895a06fbd26827fb70f617446f6c"
+      }
+    ],
+    "final_upload_verified_regions": 3,
+    "method": "PlatformIO nobuild first restored the original application only (one verified region). The comparison bootloader differed, so the original bootloader, partition table and application were then restored together with the original flash settings and no rebuild (three verified regions).",
+    "runtime_observations": [
+      {
+        "phase": "application_only_restore",
+        "observation_seconds_requested": 20,
+        "runtime_application_version": "07e005a",
+        "rom_boots": 1,
+        "host_initializations": 1,
+        "diagnostics": [
+          {
+            "level": "E",
+            "uptime_ms": 600,
+            "message": "USBH: Dev 0 EP 0 Error"
+          },
+          {
+            "level": "E",
+            "uptime_ms": 600,
+            "message": "ENUM: Bad transfer status 1: CHECK_SHORT_DEV_DESC"
+          },
+          {
+            "level": "E",
+            "uptime_ms": 600,
+            "message": "ENUM: [0:0] CHECK_SHORT_DEV_DESC FAILED"
+          }
+        ],
+        "error_lines": 3,
+        "target_vid_pid_observed": false,
+        "keyboard_started": false,
+        "input_trial_started": false,
+        "last_heartbeat": {
+          "uptime_ms": 15055,
+          "free_heap_bytes": 363016
+        },
+        "uart_closed": true
+      },
+      {
+        "phase": "full_three_segment_restore",
+        "observation_seconds_requested": 12,
+        "runtime_application_version": "07e005a",
+        "rom_boots": 1,
+        "host_initializations": 1,
+        "diagnostics": [
+          {
+            "level": "E",
+            "uptime_ms": 600,
+            "message": "USBH: Dev 0 EP 0 Error"
+          },
+          {
+            "level": "E",
+            "uptime_ms": 600,
+            "message": "ENUM: Bad transfer status 1: CHECK_SHORT_DEV_DESC"
+          },
+          {
+            "level": "E",
+            "uptime_ms": 600,
+            "message": "ENUM: [0:0] CHECK_SHORT_DEV_DESC FAILED"
+          }
+        ],
+        "error_lines": 3,
+        "target_vid_pid_observed": false,
+        "keyboard_started": false,
+        "input_trial_started": false,
+        "last_heartbeat": {
+          "uptime_ms": 10055,
+          "free_heap_bytes": 363016
+        },
+        "uart_closed": true
+      }
+    ],
+    "final_state": "Original SFC HID 1.1.0 build restored; same CHECK_SHORT_DEV_DESC failure; UART closed.",
+    "main_manifest_and_lock_changed": false
+  },
+  "next_step": "Confirm controller firmware revision and modifications or establish a known reference controller configuration before further physical/software changes."
+}

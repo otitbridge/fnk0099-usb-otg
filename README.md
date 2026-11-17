@@ -8,11 +8,13 @@ Freenove FNK0099（ESP32-S3-WROOM Board Lite）のUSB-OTG端子を使う、用�
 
 | 用途 | PlatformIO環境 | 確認済みの動作 | 操作手順・結果 |
 |---|---|---|---|
-| SFCコントローラーのHID入力 | `fnk0099-host`（既定） | 12ボタンのUART出力、保持・同時押し・切断復帰 | [HID操作](docs/hid-usage.md) / [HID検証結果](docs/validation.md) |
+| SFCコントローラーのHID入力 | `fnk0099-host`（既定） | 従来HID 1.0.1で12ボタン・保持・切断復帰を確認。現行版の回帰は保留 | [HID操作](docs/hid-usage.md) / [HID検証結果](docs/validation.md) |
 | Bolt経由のキーボード・マウス（開発中） | `fnk0099-hid` | 基本入力・同時保持・RESET3回の復帰を確認。再接続時の診断ログを評価中 | [Bolt対応の手順・検証記録](docs/bolt-validation.md) |
 | USBカードリーダー経由のmicroSD読み書き | `fnk0099-msc` | 30バイト読み取り、31バイト・1MiB新規書き込み、Mac照合、再接続3回・RESET3回 | [MSC操作](docs/msc-usage.md) / [MSC検証結果](docs/msc-validation.md) |
 
 Bolt対応は別ブランチで開発中です。既存のSFC/MSC試験実績とは区別します。
+
+SFCの現在の回帰確認は、USB列挙失敗のため保留です。2台目は一度認識しましたが、既知SFC版・従来HID・別SDK・C to C直結での比較でも安定認識には至っていません。実機は元のSFC用Host 1.1.0と2台目SFC公開v1.0.0の状態です。[別チーム向け引き継ぎ資料](docs/sfc-troubleshooting.md)に条件比較・成果物・再開手順をまとめています。
 
 環境ごとにファームを書き換えて使用します。環境指定のない `pio run` はHID用です。HIDとMSCを同時に処理する構成ではありません。
 
@@ -38,6 +40,7 @@ MSCは認識時にマウントを試みます。ファイル作成はUARTの明�
 ## 資料
 
 - [ビルド・書き込み・ホストテスト・ログ取得](docs/build.md)
+- [SFC列挙失敗の引き継ぎ・再開手順](docs/sfc-troubleshooting.md)
 - [既知の制約・問題の切り分け](docs/known-issues.md)
 - [公開証跡一覧](docs/evidence/README.md)
 - [HIDの事前調査と設計方針](docs/design-notes.md)

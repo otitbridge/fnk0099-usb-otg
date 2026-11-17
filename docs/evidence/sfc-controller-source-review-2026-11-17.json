@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-17",
+  "phase": "Read-only SFC controller source and local artifact review",
+  "result": "source_difference_identified_enumeration_root_cause_unresolved",
+  "source_repository": "otitbridge/snes-controller-uiapduino",
+  "worktree_head": "b5c17f920e09472848aad3f205ef8da63d94d5e7",
+  "firmware_feature_commit": "67a0a71a297b8063d91ab7894857931303801062",
+  "tracked_firmware_changes": false,
+  "firmware_source_diff_after_feature_commit": false,
+  "source_revision_vs_running_controller": "Actual flashed images in the two physical controllers are not established by this source review.",
+  "current_feature": {
+    "select_released_at_boot": "Tab usage 0x2b",
+    "select_held_at_boot": "Backspace usage 0x2a when held in all three startup samples",
+    "startup_check": "Three samples separated by 10 ms after the existing 20 ms reader settling wait, before UsbBackend::begin.",
+    "boot_select_suppression": "SELECT seen during boot is suppressed until released.",
+    "persistent_setting": false
+  },
+  "host_compatibility": {
+    "host_supported_select_usage": "0x2b (Tab)",
+    "host_maps_backspace_to_select": false,
+    "scope": "Input mapping difference applies after successful USB enumeration. It does not establish the cause of the earlier EP0 descriptor/address failures."
+  },
+  "usb_review": {
+    "upstream_core": "UIAP_HID:ch32v@1.2.15",
+    "local_patch_files_match_manifest": true,
+    "rv003usb_c_assembly_header_match_installed_upstream": true,
+    "project_core_patches_and_build_script_changed_since_known_tab_source": false,
+    "recorded_build_mode": "sfc-keyboard",
+    "recorded_build_flags": [
+      "SNES_HID_TEST_INPUT=0",
+      "SNES_SFC_DIAGNOSTIC=0",
+      "SNES_SFC_KEYBOARD=1"
+    ],
+    "trace_mode_selected": false,
+    "scope": "Source, manifest and build metadata inspected without executing project setup/build/upload scripts. Runtime packet timing and actual controller image remain unmeasured."
+  },
+  "local_latest_build": {
+    "bytes": 5628,
+    "sha256": "c773032defe8247469fc3cfef0a421c0a80f03d07beb4fd816fa36cabf3ecb10",
+    "matches_documented_select_boot_build": true,
+    "running_controller_match_verified": false
+  },
+  "known_reference": {
+    "version": "v1.0.0",
+    "select_key": "Tab fixed",
+    "bytes": 5496,
+    "sha256": "43a82eb36c7df4d298dd01f6b25460117fab0207c9206382b5eeaf92379a9079",
+    "matches_release_manifest": true,
+    "prepared_in_ignored_validation_workspace": true,
+    "uploaded_to_controller": false
+  },
+  "controller_flash_backup": {
+    "obtained": false,
+    "tool_review": "Available uiapflash help exposes upload/list/no-run, with no standalone flash-read command. No backup or controller write attempted."
+  },
+  "next_decision": "User authorized replacing the second-controller application with verified public v1.0.0; waiting for that controller to be connected to Mac in bootloader mode. Actual running controller image backup was not obtained.",
+  "root_cause": "not established",
+  "controller_project_modified": false,
+  "controller_firmware_written": false,
+  "privacy": "Public repository identifiers, selected code behavior and artifact hashes only. User-supplied absolute source path, build/cache paths, raw USB/UART identifiers and unrelated files remain excluded.",
+  "user_authorized_reference_upload": true
+}

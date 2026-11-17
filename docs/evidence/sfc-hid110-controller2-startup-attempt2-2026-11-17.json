@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-17",
+  "phase": "SFC HID 1.1.0 regression, second controller, basic-input monitor startup",
+  "result": "enumeration_failed",
+  "controller_label": "second physical SFC controller, user-reported replacement",
+  "firmware": {
+    "environment": "fnk0099-host",
+    "git_commit": "07e005a6488f2a2fb0b8f5fded6109040666f893",
+    "source_state": "clean at build and upload",
+    "esp_idf": "5.5.0",
+    "usb_host_hid": "1.1.0",
+    "bin_bytes": 270256,
+    "bin_sha256": "aefa9acd1775727ec0009e85c1b8deb31669895a06fbd26827fb70f617446f6c",
+    "build_passed": true,
+    "upload_passed": true,
+    "upload_verified_regions": 3,
+    "report_host_test_passed": true
+  },
+  "method": "After a successful 20-second startup/enumeration/released-input observation, UART was reopened to prepare the twelve-button monitor. No controller/cable/orientation change was requested between these observations.",
+  "previous_observation": "sfc-hid110-controller2-enumeration-2026-11-17.json",
+  "observation": "New boot failed during full device descriptor acquisition on address 1. No completed target descriptor, IF1, keyboard start or button trial observed.",
+  "diagnostics": [
+    {
+      "level": "E",
+      "uptime_ms": 670,
+      "message": "USBH: Dev 1 EP 0 Error"
+    },
+    {
+      "level": "E",
+      "uptime_ms": 670,
+      "message": "ENUM: Bad transfer status 1: CHECK_FULL_DEV_DESC"
+    },
+    {
+      "level": "E",
+      "uptime_ms": 670,
+      "message": "ENUM: [0:0] CHECK_FULL_DEV_DESC FAILED"
+    }
+  ],
+  "warning_lines": 0,
+  "error_lines": 3,
+  "boot_count": 1,
+  "host_initializations": 1,
+  "button_trial_started": false,
+  "matched_transitions": 0,
+  "panic": false,
+  "uart_closed": true,
+  "interpretation": "The second controller was recognized on one startup but not the next. This is an observed variation across startup attempts, not established reliable compatibility. The failure stage remains enumeration before HID class requests; physical, timing, power, controller-firmware and host software causes remain unisolated.",
+  "follow_up": "Stop; next control condition is Host startup with SFC disconnected, then SFC connection while UART remains open. Preserve both successful and failed observations.",
+  "privacy": "Selected technical diagnostics only. Raw UART, home paths, actual UART port, device serials and USB strings remain untracked."
+}

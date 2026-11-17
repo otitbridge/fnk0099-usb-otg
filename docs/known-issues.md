@@ -37,6 +37,14 @@ HIDドライバー1.1.0のBolt再接続1回目で、抜去前後60msに転送失
 
 [詳細とソース確認](bolt-validation.md) / [再接続1回目](evidence/bolt-reconnect-cycle1-2026-11-17.json) / [再接続2回目](evidence/bolt-reconnect-cycle2-2026-11-17.json) / [再接続3回目](evidence/bolt-reconnect-cycle3-2026-11-17.json)。
 
+## SFC/HID回帰：列挙失敗・安定認識は未確認
+
+2026-11-17の回帰確認で、デバイス記述子取得またはアドレス設定中にEP0転送が失敗しています。1台目はHID 1.1.0／1.0.1で失敗しました。2台目は一度認識・全解放受信に成功しましたが、次の起動以降は失敗しています。公開SFC v1.0.0への書き換え、従来Host HID 1.0.1、Arduino／ESP-IDF 4.4.7のUSB専用版、C to Cケーブル直結でも今回の条件では解消しませんでした。
+
+現在は元のSFC用Host 1.1.0へ復元済み、2台目SFCは公開v1.0.0です。直近のC to C接続済み起動でも600msにCHECK_SHORT_DEV_DESCのエラー3行で失敗し、12ボタン回帰は未開始です。根本原因は未確定で、HID更新・SFCのSELECT切り替え・ケーブルのいずれかに原因を断定／除外できる結果ではありません。過去の安定動作は別時点の構成での実績です。
+
+[現在の状態・条件比較・再開手順](sfc-troubleshooting.md) / [各試行の履歴](history/sfc-troubleshooting-2026-11-17.md) / [直近のC to C記録](evidence/sfc-controller2-c-to-c-startup-2026-11-17.json)。
+
 ## MSCの適用範囲と同期
 
 - 確認済みはカードリーダー `14cd:1212`、microSD 1GB、FAT16の組合せです。別機器・別ファイルシステムは未検証です。

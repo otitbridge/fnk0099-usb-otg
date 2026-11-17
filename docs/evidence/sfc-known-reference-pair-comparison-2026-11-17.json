@@ -1,0 +1,153 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-17",
+  "phase": "Known controller v1.0.0 with historical Host HID 1.0.1; then original Host restoration",
+  "controller_label": "second physical SFC with verified public v1.0.0",
+  "controller_firmware": {
+    "version": "v1.0.0",
+    "select_key": "Tab fixed",
+    "bin_bytes": 5496,
+    "bin_sha256": "43a82eb36c7df4d298dd01f6b25460117fab0207c9206382b5eeaf92379a9079",
+    "matches_release_manifest": true
+  },
+  "prior_host_hid110_result": "sfc-controller2-v100-hid110-host-first-2026-11-17.json",
+  "baseline": {
+    "application_version": "4348f79-hid101-ab",
+    "source_commit": "4348f79",
+    "hid_driver": "1.0.1",
+    "bin_sha256": "5f046537ca18f720f52fbf0e5ad3904cc0769314564ee910cbe66ab596dcfc75",
+    "upload": {
+      "started_at": "2026-11-17T20:12:06.413623+09:00",
+      "finished_at": "2026-11-17T20:12:13.164816+09:00",
+      "exit_code": 0,
+      "verified_regions": 3,
+      "segments": [
+        {
+          "offset": "0x0",
+          "file": "bootloader.bin",
+          "bytes": 21088,
+          "sha256": "872bd4f29a535408f6166167cd09b76031b4d5f11d3efd09e352a09d420c99c2"
+        },
+        {
+          "offset": "0x8000",
+          "file": "partitions.bin",
+          "bytes": 3072,
+          "sha256": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820"
+        },
+        {
+          "offset": "0x10000",
+          "file": "firmware.bin",
+          "bytes": 269728,
+          "sha256": "5f046537ca18f720f52fbf0e5ad3904cc0769314564ee910cbe66ab596dcfc75"
+        }
+      ]
+    },
+    "runtime_version_confirmed": true,
+    "observation_seconds_requested": 20,
+    "result": "enumeration_failed",
+    "diagnostics": [
+      {
+        "level": "E",
+        "uptime_ms": 601,
+        "message": "USBH: Dev 0 EP 0 Error"
+      },
+      {
+        "level": "E",
+        "uptime_ms": 601,
+        "message": "ENUM: Bad transfer status 1: CHECK_SHORT_DEV_DESC"
+      },
+      {
+        "level": "E",
+        "uptime_ms": 601,
+        "message": "ENUM: [0:0] CHECK_SHORT_DEV_DESC FAILED"
+      }
+    ],
+    "warning_lines": 0,
+    "error_lines": 3,
+    "rom_boots": 1,
+    "host_initializations": 1,
+    "target_vid_pid_observed": false,
+    "keyboard_started": false,
+    "button_trial_started": false,
+    "last_heartbeat": {
+      "uptime_ms": 15054,
+      "free_heap_bytes": 363100
+    },
+    "uart_closed": true
+  },
+  "method_scope": "Controller application, physical controller and current reported cable connection unchanged through Host flash/boot comparisons; no orientation change requested. Initial HID 1.1.0 observation used Host-first hotplug, while the baseline observation used startup with controller attached. Historical baseline was rebuilt from known source and is not the original old tested binary.",
+  "interpretation": "Known controller reference v1.0.0 also fails enumeration with historical Host HID 1.0.1. Neither changing only Host HID version nor reverting the SELECT-switch controller feature has produced stable enumeration in the tested conditions. Root cause remains unestablished; this does not prove all firmware, timing, electrical or connection causes absent.",
+  "privacy": "Selected diagnostic/build fields and firmware hashes only. Raw UART/upload logs, local paths, actual UART port, USB strings and physical identifiers excluded.",
+  "result": "known_reference_pair_enumeration_failed_original_host_restored",
+  "restoration": {
+    "completed": true,
+    "host_hid_driver": "1.1.0",
+    "application_version": "07e005a",
+    "upload": {
+      "started_at": "2026-11-17T20:13:16.498307+09:00",
+      "finished_at": "2026-11-17T20:13:23.201093+09:00",
+      "exit_code": 0,
+      "verified_regions": 3,
+      "segments": [
+        {
+          "offset": "0x0",
+          "file": "bootloader.bin",
+          "bytes": 21088,
+          "sha256": "88f0e57b5f0351d1553c882213a879ddc12024fcceb776d50a6b9eb403384787"
+        },
+        {
+          "offset": "0x8000",
+          "file": "partitions.bin",
+          "bytes": 3072,
+          "sha256": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820"
+        },
+        {
+          "offset": "0x10000",
+          "file": "firmware.bin",
+          "bytes": 270256,
+          "sha256": "aefa9acd1775727ec0009e85c1b8deb31669895a06fbd26827fb70f617446f6c"
+        }
+      ]
+    },
+    "runtime_version_confirmed": true,
+    "observation_seconds_requested": 12,
+    "result": "enumeration_failed",
+    "diagnostics": [
+      {
+        "level": "E",
+        "uptime_ms": 600,
+        "message": "USBH: Dev 0 EP 0 Error"
+      },
+      {
+        "level": "E",
+        "uptime_ms": 600,
+        "message": "ENUM: Bad transfer status 1: CHECK_SHORT_DEV_DESC"
+      },
+      {
+        "level": "E",
+        "uptime_ms": 600,
+        "message": "ENUM: [0:0] CHECK_SHORT_DEV_DESC FAILED"
+      }
+    ],
+    "warning_lines": 0,
+    "error_lines": 3,
+    "rom_boots": 1,
+    "host_initializations": 1,
+    "target_vid_pid_observed": false,
+    "keyboard_started": false,
+    "button_trial_started": false,
+    "last_heartbeat": {
+      "uptime_ms": 10055,
+      "free_heap_bytes": 363016
+    },
+    "uart_closed": true
+  },
+  "final_hardware_state": {
+    "fnk0099": "Original preserved SFC Host HID 1.1.0 image, all three segments restored and verified",
+    "second_controller": "Verified public v1.0.0 application retained, SELECT fixed to Tab",
+    "controller_project_source_modified": false,
+    "host_main_source_or_dependencies_modified": false,
+    "uart_monitor_active": false
+  },
+  "next_step": "Stop at milestone; decide further connection/signal/timing investigation. Stable SFC enumeration and twelve-button regression remain unverified."
+}
