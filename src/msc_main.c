@@ -4,6 +4,7 @@
 #include <inttypes.h>
 #include <stdbool.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include "driver/uart.h"
 #include "driver/uart_vfs.h"
@@ -23,6 +24,8 @@
 #define MOUNT_PATH "/usb"
 #define READ_PATH MOUNT_PATH "/PROBE.TXT"
 #define WRITE_PATH MOUNT_PATH "/WRITE.TXT"
+#define BULK_PATH MOUNT_PATH "/BULK1M.BIN"
+#define BULK_BUFFER_SIZE 4096u
 
 static const char *TAG = "MSC_PROBE";
 static const char read_expected[] = "FNK0099 USB MSC read probe v1\n";
@@ -35,7 +38,7 @@ static bool cleanup_failed;
 
 typedef enum {
     CMD_HELP, CMD_STATUS, CMD_MOUNT, CMD_LS, CMD_READ, CMD_UNMOUNT,
-    CMD_WRITE, CMD_VERIFY_WRITE,
+    CMD_WRITE, CMD_VERIFY_WRITE, CMD_WRITE_BULK, CMD_VERIFY_BULK,
 } command_t;
 typedef struct {
     enum { CONNECTED, DISCONNECTED, COMMAND } kind;
@@ -241,8 +244,105 @@ static void write_fixture(void)
 static void show_help(void)
 {
     ESP_LOGI(TAG, "COMMANDS help | status | mount | ls | read | unmount | write | verify-write (CR or LF)");
+    ESP_LOGI(TAG, "BULK COMMANDS write-1m | verify-1m (CR or LF)");
     ESP_LOGI(TAG, "read verifies PROBE.TXT; write exclusively creates WRITE.TXT and verifies it");
     ESP_LOGI(TAG, "verify-write only reads WRITE.TXT; no automatic writes or formatting");
+    ESP_LOGI(TAG, "write-1m exclusively creates BULK1M.BIN; verify-1m only reads it");
+}
+
+static void verify_bulk_file(uint8_t *buffer)
+{
+    int64_t start = esp_timer_get_time();
+    FILE *file = fopen(BULK_PATH, "rb");
+    if (!file) {
+        ESP_LOGE(TAG, "BULK_NOT_VERIFIED open errno=%d", errno);
+        return;
+    }
+    mbedtls_sha256_context hash;
+    mbedtls_sha256_init(&hash);
+    int hash_error = mbedtls_sha256_starts(&hash, 0);
+    int read_error = 0;
+    bool size_mismatch = false;
+    size_t total = 0;
+    while (!hash_error && !read_error && !size_mismatch && total < MSC_PATTERN_FILE_BYTES) {
+        size_t remaining = MSC_PATTERN_FILE_BYTES - total;
+        size_t length = remaining < BULK_BUFFER_SIZE ? remaining : BULK_BUFFER_SIZE;
+        errno = 0;
+        size_t count = fread(buffer, 1, length, file);
+        total += count;
+        if (ferror(file)) {
+            read_error = errno ? errno : EIO;
+        } else if (!count) {
+            size_mismatch = true;
+        } else {
+            hash_error = mbedtls_sha256_update(&hash, buffer, count);
+        }
+    }
+    if (!hash_error && !read_error && !size_mismatch) {
+        errno = 0;
+        int extra = fgetc(file);
+        if (ferror(file)) read_error = errno ? errno : EIO;
+        else if (extra != EOF) size_mismatch = true;
+    }
+    int close_result = fclose(file);
+    int close_error = close_result ? (errno ? errno : EIO) : 0;
+    uint8_t digest[32];
+    if (!hash_error && !read_error && !size_mismatch && !close_error) {
+        hash_error = mbedtls_sha256_finish(&hash, digest);
+    }
+    mbedtls_sha256_free(&hash);
+    if (hash_error || read_error || close_error) {
+        ESP_LOGE(TAG, "BULK_FAILED read_errno=%d close_errno=%d hash_code=%d bytes_read=%u",
+                 read_error, close_error, hash_error, (unsigned)total);
+        return;
+    }
+    if (size_mismatch) {
+        ESP_LOGE(TAG, "BULK_SIZE_MISMATCH expected_bytes=%u bytes_read=%u",
+                 MSC_PATTERN_FILE_BYTES, (unsigned)total);
+        return;
+    }
+    char hex[65];
+    for (size_t i = 0; i < sizeof(digest); ++i) snprintf(hex + 2 * i, 3, "%02x", digest[i]);
+    if (strcmp(hex, MSC_PATTERN_SHA256)) {
+        ESP_LOGE(TAG, "BULK_HASH_MISMATCH; contents suppressed");
+        return;
+    }
+    ESP_LOGI(TAG, "BULK_PASS bytes=%u sha256=%s read_ms=%" PRId64,
+             (unsigned)total, hex, (esp_timer_get_time() - start) / 1000);
+}
+
+static void bulk_file_command(bool create)
+{
+    if (!volume || cleanup_failed) {
+        ESP_LOGW(TAG, "BULK rejected; mount required");
+        return;
+    }
+    uint8_t *buffer = malloc(BULK_BUFFER_SIZE);
+    if (!buffer) {
+        ESP_LOGE(TAG, "BULK_FAILED operation=allocate buffer_bytes=%u", BULK_BUFFER_SIZE);
+        return;
+    }
+    if (create) {
+        int64_t start = esp_timer_get_time();
+        ESP_LOGI(TAG, "BULK_WRITE_BEGIN bytes=%u buffer_bytes=%u", MSC_PATTERN_FILE_BYTES, BULK_BUFFER_SIZE);
+        msc_file_write_result_t written = msc_create_pattern_file(BULK_PATH, buffer, BULK_BUFFER_SIZE);
+        if (written.error) {
+            if (written.error == EEXIST && strcmp(written.operation, "open") == 0) {
+                ESP_LOGW(TAG, "BULK_EXISTS; no file changed; stop before retrying");
+            } else {
+                ESP_LOGE(TAG, "BULK_WRITE_FAILED operation=%s errno=%d close_errno=%d bytes_written=%u elapsed_ms=%" PRId64,
+                         written.operation, written.error, written.close_error,
+                         (unsigned)written.bytes_written, (esp_timer_get_time() - start) / 1000);
+                ESP_LOGE(TAG, "Stop testing; retain any partial file for investigation");
+            }
+            free(buffer);
+            return;
+        }
+        ESP_LOGI(TAG, "BULK_SYNC_OK bytes=%u fsync=OK close=OK write_sync_ms=%" PRId64,
+                 (unsigned)written.bytes_written, (esp_timer_get_time() - start) / 1000);
+    }
+    verify_bulk_file(buffer);
+    free(buffer);
 }
 
 static void run_command(command_t command)
@@ -262,6 +362,8 @@ static void run_command(command_t command)
     case CMD_VERIFY_WRITE:
         verify_file(WRITE_PATH, write_expected, sizeof(write_expected) - 1, "WRITE_VERIFY", esp_timer_get_time());
         break;
+    case CMD_WRITE_BULK: bulk_file_command(true); break;
+    case CMD_VERIFY_BULK: bulk_file_command(false); break;
     case CMD_UNMOUNT:
         if (cleanup_failed) {
             ESP_LOGE(TAG, "CLEANUP_FAILED; reset required");
@@ -275,7 +377,10 @@ static void run_command(command_t command)
 static void command_task(void *arg)
 {
     (void)arg;
-    const char *names[] = {"help", "status", "mount", "ls", "read", "unmount", "write", "verify-write"};
+    const char *names[] = {
+        "help", "status", "mount", "ls", "read", "unmount", "write", "verify-write",
+        "write-1m", "verify-1m",
+    };
     char line[32];
     size_t length = 0;
     bool invalid = false;

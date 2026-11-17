@@ -80,6 +80,12 @@ cc -std=c11 -Wall -Wextra -Werror tests/test_msc_file_probe.c src/msc_file_probe
 .local/test-msc-file-probe
 ```
 
+1MiBのストリーム書き込み処理は次のコマンドで検査します。Cで4093バイトのバッファを使って最終チャンクの端数を発生させ、生成ファイル全体をPython側の基準SHA-256で確認します。同名ファイル拒否と無効バッファの拒否も検査します。生成物は `.local/` 内の一時ディレクトリに置き、終了時に削除します。
+
+```sh
+python3 tests/test_msc_bulk_probe.py
+```
+
 ## 実機試験の順序
 
 以下はHID環境の実機試験順序です。

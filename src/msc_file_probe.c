@@ -4,25 +4,25 @@
 #include <stdint.h>
 #include <unistd.h>
 
-msc_file_write_result_t msc_create_synced_file(const char *path, const void *data, size_t length)
+static void write_all(int fd, const void *data, size_t length, msc_file_write_result_t *result)
 {
-    msc_file_write_result_t result = {.operation = "open"};
-    int fd = open(path, O_WRONLY | O_CREAT | O_EXCL, 0666);
-    if (fd < 0) {
-        result.error = errno;
-        return result;
-    }
     const uint8_t *bytes = data;
-    result.operation = "write";
-    while (result.bytes_written < length) {
-        ssize_t written = write(fd, bytes + result.bytes_written, length - result.bytes_written);
+    size_t offset = 0;
+    result->operation = "write";
+    while (offset < length) {
+        ssize_t written = write(fd, bytes + offset, length - offset);
         if (written < 0 && errno == EINTR) continue;
         if (written <= 0) {
-            result.error = written < 0 ? errno : EIO;
+            result->error = written < 0 ? errno : EIO;
             break;
         }
-        result.bytes_written += (size_t)written;
+        offset += (size_t)written;
+        result->bytes_written += (size_t)written;
     }
+}
+
+static msc_file_write_result_t sync_and_close(int fd, msc_file_write_result_t result)
+{
     if (!result.error) {
         result.operation = "fsync";
         int rc;
@@ -40,4 +40,42 @@ msc_file_write_result_t msc_create_synced_file(const char *path, const void *dat
     }
     if (!result.error) result.operation = "complete";
     return result;
+}
+
+msc_file_write_result_t msc_create_synced_file(const char *path, const void *data, size_t length)
+{
+    msc_file_write_result_t result = {.operation = "open"};
+    int fd = open(path, O_WRONLY | O_CREAT | O_EXCL, 0666);
+    if (fd < 0) {
+        result.error = errno;
+        return result;
+    }
+    write_all(fd, data, length, &result);
+    return sync_and_close(fd, result);
+}
+
+msc_file_write_result_t msc_create_pattern_file(const char *path, void *buffer, size_t buffer_size)
+{
+    msc_file_write_result_t result = {.operation = "arguments"};
+    if (!buffer || !buffer_size) {
+        result.error = EINVAL;
+        return result;
+    }
+    result.operation = "open";
+    int fd = open(path, O_WRONLY | O_CREAT | O_EXCL, 0666);
+    if (fd < 0) {
+        result.error = errno;
+        return result;
+    }
+    while (result.bytes_written < MSC_PATTERN_FILE_BYTES && !result.error) {
+        size_t remaining = MSC_PATTERN_FILE_BYTES - result.bytes_written;
+        size_t length = remaining < buffer_size ? remaining : buffer_size;
+        uint8_t *bytes = buffer;
+        for (size_t j = 0; j < length; ++j) {
+            uint32_t i = (uint32_t)(result.bytes_written + j);
+            bytes[j] = (uint8_t)(i * 73u + (i >> 8) * 151u + (i >> 16) * 199u + 0x5au);
+        }
+        write_all(fd, buffer, length, &result);
+    }
+    return sync_and_close(fd, result);
 }
