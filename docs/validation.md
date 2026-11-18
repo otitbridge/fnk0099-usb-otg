@@ -4,7 +4,7 @@
 
 USBカードリーダー・microSDの結果は[MSC検証結果](msc-validation.md)に分けています。
 
-2026-11-17のHID 1.1.0更新後の実機回帰では、SFCを挿したままの起動でUSB列挙が不安定です（UARTリセットによる起動は0/8、電源を完全に切ってからの起動は2/8）。原因は最初の列挙が早すぎることで、約1秒遅らせる試作では10/10で認識しました（[記録](evidence/sfc-first-enumeration-timing-2026-11-18.json)、主ブランチには未統合）。Hostを起動してから1台目を挿す条件では、12ボタン単独入力に合格しました（[記録](evidence/sfc-controller1-hid110-host-first-buttons-2026-11-17.json)）。保持・部分解放・切断復帰は未実施です。以下は2026-11-11の合格実績として残しています。現在の状態は[SFC引き継ぎ資料](sfc-troubleshooting.md)を参照してください。
+2026-11-17のHID 1.1.0更新後の実機回帰では、SFCを挿したままの起動でUSB列挙が不安定です（UARTリセットによる起動は0/8、電源を完全に切ってからの起動は2/8）。原因は最初の列挙が早すぎることで、約1秒遅らせる試作では10/10で認識しました（[記録](evidence/sfc-first-enumeration-timing-2026-11-18.json)、主ブランチには未統合）。Hostを起動してから1台目を挿す条件では、12ボタン単独入力に合格しました（[記録](evidence/sfc-controller1-hid110-host-first-buttons-2026-11-17.json)）。遅延版の試作では、1台目が保持・部分解放・切断復帰・物理RESETを含む回帰項目に合格しています（[記録](evidence/sfc-delayed-enumeration-regression-2026-11-18.json)）。主ブランチの版では、これらの項目はまだ試していません。以下は2026-11-11の合格実績として残しています。現在の状態は[SFC引き継ぎ資料](sfc-troubleshooting.md)を参照してください。
 
 ## 2026-11-11の確認範囲
 

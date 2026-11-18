@@ -1,0 +1,109 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-18",
+  "phase": "SFC regression stages 1-3 on the delayed-first-enumeration prototype rcv1-pp-d1000 with the first controller",
+  "result": "attached_boot_12_buttons_holds_partial_release_disconnect_reset_3_of_3_and_host_first_passed",
+  "previous_records": [
+    "sfc-first-enumeration-timing-2026-11-18.json",
+    "sfc-root-port-recovery-prototype-2026-11-18.json"
+  ],
+  "image": {
+    "app_version": "rcv1-pp-d1000",
+    "branch": "proto/sfc-port-recovery (local, not merged)",
+    "source_commit": "721f972",
+    "app_bin_sha256": "89256b2b1cbfb7304d04a3bdb65c83ad001fc21b640661d50b71e89878738e9b",
+    "first_root_port_power_on_uptime_ms": 1155,
+    "esp_idf": "5.5.0",
+    "usb_host_hid": "1.1.0",
+    "note": "Prototype app at 0x10000 over the original 07e005a bootloader and partition table; not the main-branch build."
+  },
+  "controller_and_connection": {
+    "controller": "first physical SFC, firmware not rewritten (usages match public v1.0.0, SELECT=Tab)",
+    "cable": "user-reported direct USB-C to USB-C, orientation unchanged but not established",
+    "fnk0099_power": "USB-UART connector from the Mac"
+  },
+  "method": "R1-R3 in one capture opened with the usual resetting UART open (the board booted with the SFC attached); R4 in a second resetting capture started with the SFC unplugged. Button operations were requested in chat; times are ESP log timestamps of the mask lines (the Host logs only changes).",
+  "r1_attached_boot_and_stage_1_2": {
+    "boot": "ROM POWERON, initial attach at uptime 1154-1155 ms, DEVICE 1209:d004 at 1771 ms, keyboard start ESP_OK at 1871 ms, released report at 1881 ms; recovery note normal",
+    "twelve_buttons": {
+      "order": "B, Y, SELECT, START, Up, Down, Left, Right, A, X, L, R",
+      "transitions": 24,
+      "masks": ["0x001", "0x002", "0x004", "0x008", "0x010", "0x020", "0x040", "0x080", "0x100", "0x200", "0x400", "0x800"],
+      "first_press_ms": 46821,
+      "last_release_ms": 56211,
+      "all_releases_returned_to_zero": true
+    },
+    "holds": [
+      {"button": "Left", "mask": "0x040", "press_ms": 59421, "release_ms": 94931, "held_s": 35.51, "intermediate_changes": 0},
+      {"button": "Right", "mask": "0x080", "press_ms": 97021, "release_ms": 130401, "held_s": 33.38, "intermediate_changes": 0}
+    ],
+    "simultaneous_and_partial_release": [
+      {"ms": 133011, "mask": "0x080"},
+      {"ms": 133051, "mask": "0x081"},
+      {"ms": 133061, "mask": "0x083", "meaning": "Right+Y+B held 4.61 s"},
+      {"ms": 137671, "mask": "0x082", "meaning": "B only released; Right+Y held 4.91 s"},
+      {"ms": 142581, "mask": "0x080"},
+      {"ms": 142601, "mask": "0x000", "meaning": "all released"}
+    ],
+    "result": "passed"
+  },
+  "r2_disconnect_while_held": {
+    "held_before_unplug": "Right (0x080), with Up (0x010) appearing briefly several times while the controller was handled; mask 0x090 at the moment of unplug",
+    "unplug_ms": 216661,
+    "on_unplug": [
+      "E USB HOST: EP command error: ESP_ERR_INVALID_STATE (one line)",
+      "HID disconnect close: ESP_OK",
+      "SFC mask=0x000 reason=disconnect",
+      "HID disconnected; state cleared",
+      "USB library flags=0x2"
+    ],
+    "replug": "DEVICE address=2 at 232711 ms, keyboard start ESP_OK at 232811 ms, recovery note normal (no action)",
+    "after_replug_inputs": "Right 0x080 and B 0x001 (briefly overlapping 0x081), released to 0x000",
+    "result": "passed; all-release on unplug and recovery after replug",
+    "note": "The single E line at unplug did not affect disconnect handling or the replug; its cause was not investigated in this record."
+  },
+  "r3_physical_reset": {
+    "count": 3,
+    "each_boot": "ROM POWERON, App version rcv1-pp-d1000, initial attach at uptime 1155 ms, DEVICE 1209:d004 at 1771 ms, keyboard start ESP_OK at 1871 ms",
+    "inputs_after_each_reset": [
+      {"right_ms": [5141, 5381], "b_ms": [6051, 6301]},
+      {"right_ms": [4161, 4381], "b_ms": [4911, 5121]},
+      {"right_ms": [4431, 4691], "b_ms": [5061, 5301]}
+    ],
+    "enumerated": "3/3",
+    "result": "passed",
+    "note": "The SFC stays powered through the FNK0099 RESET (EN reset), the condition that failed 0/8 on the original Host."
+  },
+  "r4_boot_without_sfc_then_host_first": {
+    "boot_without_sfc": "Initial attach on an empty root port at uptime 1155 ms; no recovery action, no errors, free_heap constant (364432) for 34 s",
+    "insertion_ms": 35131,
+    "enumeration": "DEVICE 1209:d004 at 35201 ms, keyboard start ESP_OK at 35301 ms, recovery note normal",
+    "inputs": [
+      {"button": "Right", "mask": "0x080", "press_ms": 39601, "release_ms": 40091},
+      {"button": "B", "mask": "0x001", "press_ms": 40891, "release_ms": 41401},
+      {"button": "A", "mask": "0x100", "press_ms": 42121, "release_ms": 42611}
+    ],
+    "result": "passed"
+  },
+  "all_captures": {
+    "warning_lines": 0,
+    "error_lines": "1 (R2 unplug, see above)",
+    "panic": false,
+    "unexpected_reboots": 0,
+    "recovery_actions": 0
+  },
+  "interpretation": "With the first root-port power-on delayed to about 1.15 s, the first controller passed the stage 1-3 regression items on HID 1.1.0: attached-boot recognition, twelve single-button transitions, 30 s+ holds, simultaneous press with partial release, all-release on disconnect while held with recovery after replug, three physical RESETs with the SFC powered, and host-first insertion after a boot without the SFC. The recovery state machine never acted. Only one controller and the C-to-C cable were used, each item was run once (RESET three times), and the minimum sufficient delay is not known.",
+  "not_tested": [
+    "second controller and the older cable assembly",
+    "delays shorter than 1000 ms",
+    "a minimal main-branch change without the recovery state machine",
+    "hold through RESET, long-duration operation"
+  ],
+  "final_state": {
+    "fnk0099": "rcv1-pp-d1000 prototype app (not the main-branch build)",
+    "controller": "first SFC attached, enumerated",
+    "uart_monitor_active": false,
+    "main_branch_source_modified": false
+  },
+  "privacy": "Fixed button operations and selected diagnostic fields only. Raw UART, UART port, MAC, absolute local paths and device serials remain outside Git."
+}
