@@ -1,0 +1,109 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-18",
+  "phase": "Prototype Host-side recovery that power-cycles the root port when an attached SFC is stuck in enumeration; stage-1 physical trials on the first controller",
+  "result": "power_cycle_frees_device_but_does_not_recover_uart_reset_start_0_of_5_no_regression_found",
+  "previous_records": [
+    "sfc-controller1-connection-order-comparison-2026-11-17.json",
+    "sfc-controller1-cold-power-on-2026-11-17.json"
+  ],
+  "prototype": {
+    "branch": "proto/sfc-port-recovery (local, not merged)",
+    "base_commit": "cacf239",
+    "source_commit": "c77386c",
+    "env": "fnk0099-host-rcv-pp",
+    "app_version": "rcv1-pp",
+    "esp_idf": "5.5.0",
+    "usb_host_hid": "1.1.0",
+    "app_bin_bytes": 272976,
+    "app_bin_sha256": "653e6d394318129c2388ee0cbc58c2c4f24100c534f47a7287f6a48c5e892507",
+    "partitions_identical_to_07e005a": true,
+    "build_warnings": 0,
+    "sdkconfig_difference_from_original": "APP_PROJECT_VER* and FNK0099_HOST_RECOVERY/RECOVERY_* only; USB timing settings unchanged",
+    "design": {
+      "enable": "CONFIG_FNK0099_HOST_RECOVERY (default n); all main.c changes are inside this option, existing log lines unchanged",
+      "detection": "usb_host_lib_info().num_devices >= 1 while usb_host_device_addr_list_fill() reports no configured device and no NEW_DEV arrived, for STUCK_MS=2000",
+      "action": "usb_host_lib_set_root_port_power(false), wait until the device object is freed (num_devices 0 or ALL_FREE, timeout 1000 ms), hold 100/500/2000 ms, usb_host_lib_set_root_port_power(true)",
+      "limits": "3 attempts per connection, 9 per boot; never acts with no device present or while a keyboard is open; port left off if the device is not freed",
+      "execution_context": "usb_events task, usb_host_lib_handle_events with a 100 ms timeout",
+      "decision_logic": "plain C state machine src/host_recovery.c"
+    },
+    "source_facts_checked": [
+      "Enumeration cancel only closes the enumerator's handle; the device object is freed only when gone (components/usb/enum.c:849-880, usbh.c:1054-1061), so a failed device stays counted in num_devices.",
+      "usb_host_device_addr_list_fill lists only configured devices with a non-zero address (usbh.c:802-848).",
+      "Root-port power-off clears the DWC port power bit only (usb_host.c:728-738, hub.c:646-663, hcd_dwc.c:1202-1216); VBUS to the connector is not switched."
+    ],
+    "host_tests": {
+      "test_host_recovery": "15 scenarios, 4972 checks, ASan/UBSan, passed",
+      "existing_tests": "test_report and test_hid_input passed"
+    }
+  },
+  "flash_handling": {
+    "before_write": "Board flash 0x0-0x5DFFF read back and matched the original 07e005a backup byte-for-byte",
+    "write": "App image only at 0x10000, hash-verified (bootloader and partition table remain 07e005a)",
+    "restore_between_comparisons": "Before each later image change (11:09 and 11:27) the backup range 0x0-0x5DFFF was written back and the full-range readback matched the original"
+  },
+  "controller_and_connection": {
+    "controller": "first physical SFC, firmware not rewritten (observed usages match public v1.0.0, SELECT=Tab)",
+    "cable": "user-reported direct USB-C to USB-C, orientation unchanged but not established",
+    "fnk0099_power": "USB-UART connector from the Mac"
+  },
+  "trials": [
+    {
+      "label": "K0",
+      "image": "07e005a",
+      "condition": "UART-reset start with SFC attached (day-2 control)",
+      "result": "enumeration_failed",
+      "stage": "CHECK_ADDR",
+      "log_timestamp_ms": 660
+    },
+    {
+      "label": "T2-1..T2-5",
+      "image": "rcv1-pp",
+      "condition": "UART-reset start with SFC attached, 40 s each, no user action",
+      "result": "not_recovered_0_of_5",
+      "identical_sequence_in_all_5": [
+        {"log_ms": 601, "event": "first enumeration failed at CHECK_SHORT_DEV_DESC"},
+        {"log_ms": 2611, "event": "recovery attempt 1: port power off; device freed within about 10 ms (USB library flags=0x2)"},
+        {"log_ms": 2721, "event": "port power on after 100 ms hold"},
+        {"log_ms": 3031, "event": "re-enumeration failed at CHECK_SHORT_DEV_DESC"},
+        {"log_ms": 5951, "event": "attempt 2 (500 ms hold) failed at the same stage"},
+        {"log_ms": 10371, "event": "attempt 3 (2000 ms hold) failed at the same stage"},
+        {"log_ms": 12471, "event": "gave up; no further action"}
+      ],
+      "error_lines_per_run": 12,
+      "warnings": 0,
+      "panic_or_reboot": false
+    },
+    {
+      "label": "T4",
+      "image": "rcv1-pp",
+      "condition": "After T2-5 gave up: non-resetting UART attach, user physically unplugged and replugged the SFC, then pressed Right and B",
+      "result": "unplug freed the device (flags=0x2, recovery note unplugged); replug enumerated normally (DEVICE 1209:d004, keyboard start ESP_OK, recovery note normal, no action); Right 0x080 and B 0x001 pressed and released",
+      "errors": 0,
+      "panic_or_reboot": false
+    },
+    {
+      "label": "T0",
+      "image": "rcv1-pp",
+      "condition": "UART-reset start with no SFC attached, 60 s",
+      "result": "no recovery action, no errors, free_heap constant"
+    },
+    {
+      "label": "T1",
+      "image": "rcv1-pp",
+      "condition": "Same session as T0: user inserted the SFC after HOST_READY and pressed Right, B, A",
+      "result": "enumerated normally (recovery note normal, no action); Right 0x080, B 0x001, A 0x100 pressed and released; no errors"
+    },
+    {
+      "label": "T3-1..T3-3",
+      "image": "rcv1-pp",
+      "condition": "Cold power-on: USB-UART unplugged at the Mac for 14.7-15.8 s with SFC attached, non-resetting attach after the port returned, Right and B about 20 s later",
+      "result": "enumerated_3_of_3_on_first_attempt",
+      "evidence": "DEVICE 1209:d004 at log 671 ms, keyboard start ESP_OK at 771 ms, recovery note normal (no action), Right and B received"
+    }
+  ],
+  "interpretation": "Power-cycling the root port works mechanically without switching VBUS: the disconnect is detected and the stuck device object is freed every time, and later physical unplug/replug, host-first insertion and the no-device case are unaffected. It does not recover the UART-reset start: once the first enumeration has failed, the SFC does not answer GET_DESCRIPTOR on any later bus reset within about 10 s. Cold power-on enumerated 3/3 on this image without any recovery action; see sfc-first-enumeration-timing-2026-11-18.json for the comparison that explains this.",
+  "final_state_after_this_record": "Superseded by the timing record (board later carried rcv1-pp-d1000).",
+  "privacy": "Selected build, flash-handling and diagnostic fields only. Raw UART and esptool logs, flash backups and their hashes, UART port, MAC, absolute local paths and device serials remain outside Git."
+}

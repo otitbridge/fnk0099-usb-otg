@@ -1,0 +1,101 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-18",
+  "phase": "First-controller comparison of when the first enumeration starts: original Host, recovery prototype, and the prototype with the first root-port power-on delayed by 1000 ms",
+  "result": "delayed_first_enumeration_enumerated_cold_5_of_5_and_uart_reset_5_of_5",
+  "previous_records": [
+    "sfc-root-port-recovery-prototype-2026-11-18.json",
+    "sfc-controller1-cold-power-on-2026-11-17.json"
+  ],
+  "controller_and_connection": {
+    "controller": "first physical SFC, firmware not rewritten",
+    "cable": "user-reported direct USB-C to USB-C, orientation unchanged but not established",
+    "fnk0099_power": "USB-UART connector from the Mac"
+  },
+  "images": [
+    {
+      "app_version": "07e005a",
+      "role": "original SFC Host",
+      "app_bin_sha256": "aefa9acd1775727ec0009e85c1b8deb31669895a06fbd26827fb70f617446f6c",
+      "first_enumeration": "root port powered at usb_host_install; failures logged at about 600-660 ms"
+    },
+    {
+      "app_version": "rcv1-pp",
+      "role": "recovery prototype, source commit c77386c",
+      "app_bin_sha256": "653e6d394318129c2388ee0cbc58c2c4f24100c534f47a7287f6a48c5e892507",
+      "first_enumeration": "same as original, but the usb_events task starts about 10 ms later (one extra 'RECOVERY enabled' log line at 115200 baud before task creation; heartbeat 290 -> 301 ms)"
+    },
+    {
+      "app_version": "rcv1-pp-d1000",
+      "role": "recovery prototype with CONFIG_FNK0099_RECOVERY_START_DELAY_MS=1000, source commit 721f972",
+      "app_bin_bytes": 272992,
+      "app_bin_sha256": "89256b2b1cbfb7304d04a3bdb65c83ad001fc21b640661d50b71e89878738e9b",
+      "build_warnings": 0,
+      "sdkconfig_difference_from_rcv1_pp": "APP_PROJECT_VER and RECOVERY_START_DELAY_MS only",
+      "first_enumeration": "installed with root_port_unpowered; root port powered at uptime 1155 ms"
+    }
+  ],
+  "method": {
+    "cold_power_on": "SFC left attached to the OTG port; user unplugged the FNK0099 USB-UART at the Mac for 12.1-20.3 s and replugged; non-resetting UART attach 0.017-0.039 s after the port returned; user pressed Right then B about 20 s later. Judged by enumeration log lines when captured, otherwise by received button masks and the heartbeat free_heap (363016 after failed enumeration, 360556/360572 enumerated).",
+    "uart_reset_start": "SFC attached; opening the UART resets FNK0099 by EN while the SFC stays powered; 30-40 s per capture, no user action.",
+    "order": "rcv1-pp cold x3 (11:04-11:06), restore original, original cold x5 (11:11-11:15), rcv1-pp cold x5 (11:19-11:23), restore original, rcv1-pp-d1000 cold x5 (14:40-14:44), rcv1-pp-d1000 UART reset x5 (14:46-14:48). Every image change was preceded by a full-range verification against the original backup."
+  },
+  "cold_power_on": {
+    "07e005a": {
+      "enumerated": "2/8",
+      "runs": [
+        {"date": "2026-11-17", "labels": "C1-C3", "enumerated": "1/3"},
+        {"date": "2026-11-18", "labels": "A07-1..A07-5", "enumerated": "1/5", "details": "A07-1..3 no input after presses and free_heap 363016; A07-4 enumerated, Right/B received; A07-5 CHECK_ADDR at 660 ms captured"}
+      ]
+    },
+    "rcv1-pp": {
+      "enumerated": "8/8",
+      "runs": [
+        {"labels": "T3-1..T3-3", "enumerated": "3/3", "details": "DEVICE at 671 ms, keyboard start 771 ms, recovery note normal"},
+        {"labels": "Brcv-1..Brcv-5", "enumerated": "5/5", "details": "enumeration lines captured once (DEVICE 671 ms); otherwise Right/B received and free_heap 360556; no RECOVERY action line in any run"}
+      ],
+      "recovery_actions": 0
+    },
+    "rcv1-pp-d1000": {
+      "enumerated": "5/5",
+      "labels": "D1k-1..D1k-5",
+      "identical_sequence": [
+        {"log_ms": 1391, "event": "RECOVERY note=initial_attach; port_power_on ESP_OK (uptime 1155 ms)"},
+        {"log_ms": 1701, "event": "device object present (watch)"},
+        {"log_ms": 1771, "event": "DEVICE address=1 VID:PID=1209:d004"},
+        {"log_ms": 1871, "event": "keyboard start: ESP_OK"}
+      ],
+      "inputs": "Right 0x080 and B 0x001 pressed and released in every run",
+      "recovery_actions": 0
+    }
+  },
+  "uart_reset_start": {
+    "07e005a": "0/8 (A1-A3, R1-R3, K1 on 2026-11-17; K0 on 2026-11-18)",
+    "rcv1-pp": "0/5 (T2-1..T2-5); three root-port power-cycle retries each also failed",
+    "rcv1-pp-d1000": {
+      "enumerated": "5/5",
+      "labels": "D1kR-1..D1kR-5",
+      "evidence": "ROM POWERON boot, App version rcv1-pp-d1000, initial attach at uptime 1155 ms, DEVICE 1209:d004 at 1771 ms, keyboard start ESP_OK at 1871 ms, released report received, no recovery action"
+    }
+  },
+  "all_trials": {
+    "warnings": 0,
+    "panic": false,
+    "reboots_during_capture": 0,
+    "invalid_trials": 0
+  },
+  "interpretation": "On this controller and cable, failure depended on how early the first enumeration starts. When the host sends its first request roughly 0.6 s after FNK0099 starts, it often fails (cold) or always fails (EN reset with the SFC powered), and after one failure the SFC no longer answers on later bus resets. Starting the first enumeration about 1.5 s after boot enumerated every time in both conditions (10/10). The roughly 10 ms later start of rcv1-pp was enough for cold power-on (8/8) but not for the EN-reset case (0/5). Why the SFC is not ready around 0.6 s (for example the USB-Serial-JTAG D+ pull-up during ESP32 reset, or the UIAPduino bootloader-to-application handover) is not established. Sample sizes are small, only the first controller and the C-to-C cable were used, and the minimum sufficient delay was not measured.",
+  "not_tested": [
+    "rcv1-pp-d1000 host-first insertion, no-SFC idle, hold, partial release, disconnect/reconnect and physical RESET",
+    "second controller and the older cable assembly",
+    "delays shorter than 1000 ms",
+    "a minimal main-firmware change without the recovery state machine"
+  ],
+  "final_state": {
+    "fnk0099": "rcv1-pp-d1000 prototype app at 0x10000 over the original 07e005a bootloader and partition table (not the main-branch build)",
+    "controller": "first SFC attached, enumerated",
+    "uart_monitor_active": false,
+    "main_branch_source_modified": false
+  },
+  "privacy": "Selected build and diagnostic fields only. Raw UART and esptool logs, flash backups and their hashes, UART port, MAC, absolute local paths and device serials remain outside Git."
+}
