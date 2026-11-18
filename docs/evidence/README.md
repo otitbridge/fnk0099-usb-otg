@@ -22,7 +22,7 @@ USB認識・全4IFの記述子取得と受信開始、入力解釈のホスト�
 | [bolt-reset-cycle3-attempt1-2026-11-17.json](bolt-reset-cycle3-attempt1-2026-11-17.json) | 3回目の初回試行は操作不明。RESET起動を観測せず切断時診断で停止、合格回数に含めず再試験 |
 | [bolt-reset-cycle3-attempt2-2026-11-17.json](bolt-reset-cycle3-attempt2-2026-11-17.json) | 3回目の再試験に合格。4IF・A・左クリック復帰、警告・エラー0を確認し、RESET合格は合計3回 |
 
-## SFC：HID更新後の回帰（最初の列挙を遅らせた試作で接続済み起動10/10、2026-11-17〜18）
+## SFC：HID更新後の回帰（最初の列挙を遅らせて主ブランチ `b04693b` で合格、2026-11-17〜18）
 
 現在の実機状態・条件比較・成果物・再開手順は[引き継ぎ資料](../sfc-troubleshooting.md)を参照してください。試行時点の詳細は、[11-17の履歴](../history/sfc-troubleshooting-2026-11-17.md)と[11-18の履歴](../history/sfc-troubleshooting-2026-11-18.md)にあります。
 
@@ -52,6 +52,7 @@ USB認識・全4IFの記述子取得と受信開始、入力解釈のホスト�
 | [sfc-first-enumeration-timing-2026-11-18.json](sfc-first-enumeration-timing-2026-11-18.json) | 最初の列挙の時刻を比較。電源断起動は現行2/8・試作8/8、給電を1秒遅らせた `rcv1-pp-d1000` は電源断5/5・UARTリセット5/5 |
 | [sfc-delayed-enumeration-regression-2026-11-18.json](sfc-delayed-enumeration-regression-2026-11-18.json) | 遅延版 `rcv1-pp-d1000` の回帰確認。12ボタン、左35.5秒・右33.4秒の保持、同時押しと一部解放、押したまま抜いたときの全解放と再接続、物理RESET 3/3、SFCなしで起動後のHost先行接続に合格 |
 | [sfc-delayed-enumeration-controller2-cables-2026-11-18.json](sfc-delayed-enumeration-controller2-cables-2026-11-18.json) | 遅延版を2台目で確認。C to Cと旧ケーブル構成のどちらでも、UARTリセット起動・電源断起動が各3/3（計12/12）。右・Bを受信 |
+| [sfc-main-root-port-delay-2026-11-18.json](sfc-main-root-port-delay-2026-11-18.json) | 主ブランチ `b04693b`（uptime 1,150msでルートポートへ給電）。1台目・C to Cで接続済み起動6/6と回帰項目に合格、2台目・旧ケーブルで接続済み起動6/6 |
 
 ## MSC：カードリーダー・microSD（2026-11-17）
 

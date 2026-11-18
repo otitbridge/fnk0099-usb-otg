@@ -37,7 +37,15 @@ HIDドライバー1.1.0のBolt再接続1回目で、抜去前後60msに転送失
 
 [詳細とソース確認](bolt-validation.md) / [再接続1回目](evidence/bolt-reconnect-cycle1-2026-11-17.json) / [再接続2回目](evidence/bolt-reconnect-cycle2-2026-11-17.json) / [再接続3回目](evidence/bolt-reconnect-cycle3-2026-11-17.json)。
 
-## SFC/HID回帰：SFCを挿したままの起動で列挙が不安定（最初の列挙が早すぎる）
+## SFC/HID回帰：SFCを挿したままの起動で列挙が不安定（主ブランチ `b04693b` で対策済み）
+
+**現状：** `b04693b` 以降のSFC用Hostは、起動後uptime 1,150msまでルートポートへ給電しません（`CONFIG_FNK0099_SFC_ROOT_PORT_POWER_MS`）。SFCを挿したまま起動しても認識します。
+
+主ブランチ版での確認結果は次のとおりです（[記録](evidence/sfc-main-root-port-delay-2026-11-18.json)）。
+- 1台目・C to C：UARTリセット起動3/3・電源断起動3/3。回帰項目（12ボタン・保持・部分解放・切断復帰・物理RESET×3・SFCなしで起動してから挿す）に合格。
+- 2台目・旧ケーブル構成：UARTリセット起動3/3・電源断起動3/3。
+
+その代わり、SFCの認識は起動後約1.8秒になります。以下は、対策前の経緯です。
 
 2026-11-17の回帰確認で、デバイス記述子取得またはアドレス設定中にEP0転送が失敗しています。SFCを挿したまま起動した場合は、次のどの条件でも失敗しました。
 
@@ -48,7 +56,7 @@ HIDドライバー1.1.0のBolt再接続1回目で、抜去前後60msに転送失
 
 1台目・C to Cでの結果は次のとおりです（2026-11-17〜18）。
 
-| 起動のしかた | 主ブランチのHost（07e005a） | 試作：最初の列挙を約1秒遅らせる版 |
+| 起動のしかた | 対策前のHost（07e005a） | 試作：最初の列挙を約1秒遅らせる版 |
 |---|---|---|
 | UARTを開いたときのリセットによる起動（SFCへの給電は続く） | 0/8（IDF 4.4.7比較版も0/3） | **5/5** |
 | FNK0099とSFCの電源を完全に切ってからの起動 | 2/8 | **5/5** |
@@ -57,17 +65,15 @@ HIDドライバー1.1.0のBolt再接続1回目で、抜去前後60msに転送失
 
 **原因の見立て：** Hostが起動後約0.6秒で最初の列挙要求を送ると失敗しやすく、一度失敗するとSFCはその後のバスリセットに応答しなくなります。ルートポート電源の入れ直しでは回復しませんでした（0/5）。最初の列挙を約1.5秒まで遅らせると、10/10で認識しました。約0.6秒の時点でSFCの準備ができていない理由は未確定です。
 
-**回避手順：**
-- **主ブランチのHostの場合：** SFCを抜いてHostを起動し、`HOST_READY` の後に全解放で挿す。
-- **試作の遅延版の場合：** ローカルブランチ `proto/sfc-port-recovery` の `rcv1-pp-d1000`。SFCを挿したままの起動でも認識します。ただし、主ブランチには未統合です。
+**対策前の版（07e005aなど）を使う場合の回避手順：** SFCを抜いてHostを起動し、`HOST_READY` の後に全解放で挿す。
 
-遅延版では、1台目が回帰項目（段階1〜3）に合格しました。内容は、12ボタン、30秒以上の保持、同時押しと一部解放、押したまま抜いたときの全解放と再接続、物理RESET×3、SFCなしで起動してから挿す、です（[記録](evidence/sfc-delayed-enumeration-regression-2026-11-18.json)）。抜いた瞬間に `USB HOST: EP command error: ESP_ERR_INVALID_STATE` が1件出ましたが、動作には影響していません。
+遅延版では、1台目が回帰項目（段階1〜3）に合格しました。内容は、12ボタン、30秒以上の保持、同時押しと一部解放、押したまま抜いたときの全解放と再接続、物理RESET×3、SFCなしで起動してから挿す、です（[記録](evidence/sfc-delayed-enumeration-regression-2026-11-18.json)）。キーボードを開いたまま抜くと、そのたびに `USB HOST: EP command error: ESP_ERR_INVALID_STATE` が1件出ます（主ブランチ版でも同じ）。切断処理と再接続は正常に動いていて、原因は未調査です。
 
 2台目（公開v1.0.0）でも、遅延版はC to Cと旧ケーブル構成のどちらでも、UARTリセット起動と電源断起動が各3/3で認識しました（計12/12、[記録](evidence/sfc-delayed-enumeration-controller2-cables-2026-11-18.json)）。11-17には、2台目も旧ケーブル構成も、遅延なしでは失敗していました。試行回数は少数で、1台目＋旧ケーブルの組み合わせは試していません。
 
 `tools/capture_uart.py` でUARTを開くと、FNK0099がENリセットされます（DTR→RTSの設定順による）。状態を保ったまま観測する方法は、[引き継ぎ資料](sfc-troubleshooting.md)を参照してください。
 
-[現在の状態・条件比較・再開手順](sfc-troubleshooting.md) / [11-17の履歴](history/sfc-troubleshooting-2026-11-17.md) / [11-18の履歴](history/sfc-troubleshooting-2026-11-18.md) / [12ボタン記録](evidence/sfc-controller1-hid110-host-first-buttons-2026-11-17.json) / [回復処理の試作](evidence/sfc-root-port-recovery-prototype-2026-11-18.json) / [最初の列挙の時刻比較](evidence/sfc-first-enumeration-timing-2026-11-18.json)。
+[現在の状態・条件比較・再開手順](sfc-troubleshooting.md) / [11-17の履歴](history/sfc-troubleshooting-2026-11-17.md) / [11-18の履歴](history/sfc-troubleshooting-2026-11-18.md) / [12ボタン記録](evidence/sfc-controller1-hid110-host-first-buttons-2026-11-17.json) / [回復処理の試作](evidence/sfc-root-port-recovery-prototype-2026-11-18.json) / [最初の列挙の時刻比較](evidence/sfc-first-enumeration-timing-2026-11-18.json) / [主ブランチ版](evidence/sfc-main-root-port-delay-2026-11-18.json)。
 
 ## MSCの適用範囲と同期
 

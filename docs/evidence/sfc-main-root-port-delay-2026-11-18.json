@@ -1,0 +1,104 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-18",
+  "phase": "Main-branch fix: SFC host powers the USB root port at 1150 ms uptime; build checks and physical validation with both controllers",
+  "result": "main_build_enumerated_every_attached_start_and_passed_stage_1_3_regression",
+  "previous_records": [
+    "sfc-first-enumeration-timing-2026-11-18.json",
+    "sfc-delayed-enumeration-regression-2026-11-18.json",
+    "sfc-delayed-enumeration-controller2-cables-2026-11-18.json"
+  ],
+  "change": {
+    "branch": "feat/bolt-keyboard-mouse",
+    "commit": "b04693b",
+    "files": ["src/main.c", "src/Kconfig.projbuild"],
+    "summary": "usb_host_install() with root_port_unpowered = CONFIG_FNK0099_SFC_ROOT_PORT_POWER_MS > 0; the usb_events task waits until that uptime, calls usb_host_lib_set_root_port_power(true) and logs 'root port power on: <err> uptime_ms=<n>', then runs the unchanged event loop",
+    "config": "CONFIG_FNK0099_SFC_ROOT_PORT_POWER_MS, default 1150, range 0-5000, 0 = power at install as before; only for the SFC host image (depends on !FNK0099_HID_PROBE && !FNK0099_MSC_PROBE)",
+    "not_included": "The recovery state machine of the prototype branch (it never acted once the first enumeration was delayed)",
+    "existing_log_lines_changed": false
+  },
+  "build": {
+    "fnk0099-host": {
+      "app_version": "b04693b",
+      "app_bin_bytes": 270672,
+      "app_bin_sha256": "9ff6a9a8e6779fb8c2dd04f9de778de6d576799968648c14bbf7023b406e7487",
+      "bootloader_and_partitions_identical_to_07e005a": true,
+      "warnings": 0
+    },
+    "fnk0099-hid": "builds with 0 warnings; option not present in its sdkconfig",
+    "fnk0099-msc": "builds with 0 warnings; option not present in its sdkconfig",
+    "host_tests": "test_report, test_hid_input (ASan/UBSan) and test_msc_file_probe passed"
+  },
+  "flash_handling": "Board restored to the original 07e005a backup with full-range readback match, verified again, then the b04693b app written at 0x10000 and hash-verified (bootloader and partition table are byte-identical to the build output).",
+  "common_boot_sequence": [
+    {"log_ms": 1380, "event": "root port power on: ESP_OK uptime_ms=1145"},
+    {"log_ms": 1760, "event": "DEVICE address=1 VID:PID=1209:d004"},
+    {"log_ms": 1850, "event": "keyboard start: ESP_OK"},
+    {"log_ms": 1860, "event": "released report, mask 0x000"}
+  ],
+  "second_controller_older_cable": {
+    "controller": "second SFC, public v1.0.0",
+    "cable": "USB-C to USB-A cable plus USB-A to USB-C adapter, user-reported",
+    "uart_reset_start": {"labels": "m-c2old-R1..R3", "enumerated": "3/3"},
+    "cold_power_on": {"labels": "m-c2old-P1..P3", "enumerated": "3/3", "power_off_s": [17.387, 13.054, 12.984], "inputs": "Right and B pressed and released in every run"}
+  },
+  "first_controller_c_to_c": {
+    "controller": "first SFC, firmware not rewritten (usages match public v1.0.0, SELECT=Tab)",
+    "cable": "direct USB-C to USB-C, user-reported",
+    "uart_reset_start": {"labels": "m-c1cc-R1..R3", "enumerated": "3/3"},
+    "cold_power_on": {"labels": "m-c1cc-P1..P3", "enumerated": "3/3", "power_off_s": [17.074, 15.234, 12.697], "inputs": "Right and B pressed and released in every run"},
+    "regression_capture_m_RG1": {
+      "boot": "attached start via the resetting UART open, sequence as above",
+      "twelve_buttons": {"order": "B, Y, SELECT, START, Up, Down, Left, Right, A, X, L, R", "transitions": 24, "first_press_ms": 52170, "last_release_ms": 60600, "all_releases_returned_to_zero": true},
+      "holds": [
+        {"button": "Left", "press_ms": 61700, "release_ms": 100040, "held_s": 38.34, "intermediate_changes": 0},
+        {"button": "Right", "press_ms": 101720, "release_ms": 130190, "held_s": 28.47, "intermediate_changes": 0, "note": "below the 30 s criterion; repeated in m-RG4"}
+      ],
+      "simultaneous_and_partial_release": [
+        {"ms": 132760, "mask": "0x083", "meaning": "Right+Y+B held 4.62 s"},
+        {"ms": 137380, "mask": "0x082", "meaning": "B only released; Right+Y held 6.03 s"},
+        {"ms": 143410, "mask": "0x002"},
+        {"ms": 143440, "mask": "0x000", "meaning": "all released"}
+      ],
+      "disconnect_while_held": {
+        "held": "Right (0x080)",
+        "unplug_ms": 151580,
+        "on_unplug": ["E USB HOST: EP command error: ESP_ERR_INVALID_STATE", "HID disconnect close: ESP_OK", "SFC mask=0x000 reason=disconnect", "USB library flags=0x2"],
+        "replug": "DEVICE address=2 at 159260 ms, keyboard start ESP_OK at 159350 ms",
+        "inputs_after_replug": "Right 0x080 and B 0x001 (briefly overlapping), released to 0x000",
+        "result": "passed"
+      },
+      "physical_reset": {
+        "count": 3,
+        "enumerated": "3/3",
+        "each_boot": "root port power on at uptime 1145 ms, DEVICE at 1760 ms, keyboard start ESP_OK at 1850 ms; Right and B received after each reset",
+        "observation": "The third reset's ROM line reported boot:0x28 instead of boot:0x8 (still SPI_FAST_FLASH_BOOT); the boot proceeded normally."
+      },
+      "after_reset_3": "The SFC was unplugged for the next test while this capture was still running; the same single EP command error line appeared, followed by normal disconnect handling."
+    },
+    "boot_without_sfc_then_host_first_m_RG4": {
+      "boot": "root port power on with no device at uptime 1145 ms; no errors, free_heap constant (364448) for about 50 s",
+      "insertion": "DEVICE 1209:d004 at 51740 ms, keyboard start ESP_OK at 51830 ms",
+      "inputs": [
+        {"button": "Right", "mask": "0x080", "press_ms": 55650, "release_ms": 56690},
+        {"button": "B", "mask": "0x001", "press_ms": 57170, "release_ms": 57780},
+        {"button": "A", "mask": "0x100", "press_ms": 58150, "release_ms": 58590}
+      ],
+      "right_hold_repeat": {"press_ms": 59150, "release_ms": 111870, "held_s": 52.72, "intermediate_changes": 0},
+      "result": "passed"
+    }
+  },
+  "all_captures": {
+    "warning_lines": 0,
+    "error_lines": "only the single EP command error line at each unplug with the keyboard open (2 occurrences)",
+    "panic": false,
+    "unexpected_reboots": 0
+  },
+  "interpretation": "The minimal main-branch change reproduces the prototype result: with the first root-port power-on at about 1.15 s, every attached start enumerated for both controllers (12/12 plus 3/3 physical RESET), and the first controller passed the stage 1-3 regression items on HID 1.1.0 (the right hold passed on the repeat). Host-first insertion after a boot without the SFC still works. The unplug-time EP command error line is reproducible with the keyboard open and has not been investigated. The minimum sufficient delay and the root cause of the ~0.6 s failure are not established; sample sizes are small.",
+  "final_state": {
+    "fnk0099": "main-branch build b04693b (app at 0x10000 over byte-identical bootloader/partition table)",
+    "controller": "first SFC attached via C-to-C, enumerated",
+    "uart_monitor_active": false
+  },
+  "privacy": "Fixed button operations and selected diagnostic fields only. Raw UART, UART port, MAC, absolute local paths and device serials remain outside Git."
+}
