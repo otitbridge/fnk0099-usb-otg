@@ -14,4 +14,18 @@ menu "FNK0099 probe"
             Select the dedicated USB card reader probe. File creation requires
             an explicit UART command. Existing files are not overwritten and
             automatic formatting is disabled.
+
+    config FNK0099_SFC_ROOT_PORT_POWER_MS
+        int "Uptime at which the SFC host first powers the USB root port (ms, 0 = at install)"
+        default 1150
+        range 0 5000
+        depends on !FNK0099_HID_PROBE && !FNK0099_MSC_PROBE
+        help
+            A UIAPduino SFC that is already attached at power-on or across an EN
+            reset fails its first enumeration when the host starts it about
+            0.6 s after reset, and then stops answering until it is re-plugged.
+            Keeping the root port unpowered until this uptime lets the first
+            enumeration succeed (1150 ms validated on 2026-11-18; see
+            docs/sfc-troubleshooting.md). Devices plugged in later enumerate as
+            before. 0 restores powering the port at usb_host_install().
 endmenu

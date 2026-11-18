@@ -10,7 +10,12 @@
 #include "esp_intr_alloc.h"
 #include "usb/usb_host.h"
 #include "usb/hid_host.h"
+#include "sdkconfig.h"
 #include "sfc_report.h"
+
+#ifndef CONFIG_FNK0099_SFC_ROOT_PORT_POWER_MS
+#define CONFIG_FNK0099_SFC_ROOT_PORT_POWER_MS 0
+#endif
 
 static const char *TAG = "HOST";
 static usb_host_client_handle_t observer;
@@ -170,6 +175,15 @@ static void input_task(void *arg)
 static void host_events(void *arg)
 {
     (void)arg;
+#if CONFIG_FNK0099_SFC_ROOT_PORT_POWER_MS > 0
+    // An attached UIAPduino SFC fails a first enumeration started about 0.6 s after reset and then
+    // stops answering; power the root port later so the first enumeration finds it ready.
+    const int64_t wait_ms = CONFIG_FNK0099_SFC_ROOT_PORT_POWER_MS - esp_timer_get_time() / 1000;
+    if (wait_ms > 0) vTaskDelay(pdMS_TO_TICKS(wait_ms));
+    const esp_err_t power = usb_host_lib_set_root_port_power(true);
+    ESP_LOGI(TAG, "root port power on: %s uptime_ms=%" PRId64, esp_err_to_name(power), esp_timer_get_time() / 1000);
+    ESP_ERROR_CHECK(power);
+#endif
     for (;;) {
         uint32_t flags = 0;
         ESP_ERROR_CHECK(usb_host_lib_handle_events(portMAX_DELAY, &flags));
@@ -182,7 +196,9 @@ void app_main(void)
     ESP_LOGI(TAG, "FNK0099 Rev1.1 N16R8; P3/P4 keyboard probe; IDF %s", esp_get_idf_version());
     events = xQueueCreate(32, sizeof(input_event_t));
     ESP_ERROR_CHECK(events ? ESP_OK : ESP_ERR_NO_MEM);
-    const usb_host_config_t host = {.skip_phy_setup = false, .intr_flags = ESP_INTR_FLAG_LEVEL1};
+    // The usb_events task powers the root port at CONFIG_FNK0099_SFC_ROOT_PORT_POWER_MS (see host_events).
+    const usb_host_config_t host = {.skip_phy_setup = false, .intr_flags = ESP_INTR_FLAG_LEVEL1,
+                                    .root_port_unpowered = CONFIG_FNK0099_SFC_ROOT_PORT_POWER_MS > 0};
     ESP_ERROR_CHECK(usb_host_install(&host));
     ESP_LOGI(TAG, "usb_host_install: ESP_OK");
     ESP_ERROR_CHECK(xTaskCreatePinnedToCore(host_events, "usb_events", 4096, NULL, 2, NULL, 0) == pdPASS ? ESP_OK : ESP_ERR_NO_MEM);
