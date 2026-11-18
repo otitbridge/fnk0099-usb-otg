@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-18",
+  "phase": "Delayed-first-enumeration prototype rcv1-pp-d1000 with the second controller over the C-to-C cable and the older C-to-A cable plus A-to-C adapter",
+  "result": "second_controller_enumerated_12_of_12_attached_starts",
+  "previous_records": [
+    "sfc-first-enumeration-timing-2026-11-18.json",
+    "sfc-delayed-enumeration-regression-2026-11-18.json"
+  ],
+  "image": {
+    "app_version": "rcv1-pp-d1000",
+    "branch": "proto/sfc-port-recovery (local, not merged)",
+    "source_commit": "721f972",
+    "app_bin_sha256": "89256b2b1cbfb7304d04a3bdb65c83ad001fc21b640661d50b71e89878738e9b",
+    "first_root_port_power_on_uptime_ms": 1155,
+    "firmware_upload_during_test": false
+  },
+  "controller": {
+    "label": "second physical SFC",
+    "firmware": "verified public v1.0.0 (SELECT fixed to Tab), written and read back on 2026-11-17",
+    "earlier_results_without_delay": "On 2026-11-17, with the original Host and the HID 1.0.1 / IDF 4.4.7 comparison images: one early attached start enumerated, later attempts failed with the older cable assembly (CHECK_FULL_DEV_DESC on restart and host-first insertion, CHECK_ADDR on host-first insertion after v1.0.0, CHECK_SHORT_DEV_DESC on attached starts) and with C-to-C on an attached start (CHECK_SHORT_DEV_DESC); see the 2026-11-17 records"
+  },
+  "not_tested": {
+    "first_controller_with_older_cable": "user could not connect this combination",
+    "original_host_same_day_control": "not repeated; earlier failures of these combinations on the original Host are recorded on 2026-11-17"
+  },
+  "method": "Cable swaps done by the user with the FNK0099 USB-UART kept connected. For each cable: three UART-reset starts (the resetting UART open, SFC stays powered, 25 s each, no user action), then three cold power-ons (USB-UART unplugged at the Mac for 13.1-21.5 s, non-resetting attach 0.018-0.027 s after the port returned, user pressed Right then B about 20 s later).",
+  "results": [
+    {
+      "cable": "direct USB-C to USB-C (the same cable used with the first controller)",
+      "uart_reset_start": {"labels": "c2cc-R1..R3", "enumerated": "3/3"},
+      "cold_power_on": {
+        "labels": "c2cc-P1..P3",
+        "enumerated": "3/3",
+        "power_off_s": [14.246, 17.511, 13.06],
+        "inputs": "Right 0x080 and B 0x001 pressed and released in every run"
+      }
+    },
+    {
+      "cable": "USB-C to USB-A cable plus USB-A to USB-C adapter (the older assembly)",
+      "uart_reset_start": {"labels": "c2old-R1..R3", "enumerated": "3/3"},
+      "cold_power_on": {
+        "labels": "c2old-P1..P3",
+        "enumerated": "3/3",
+        "power_off_s": [20.409, 21.47, 21.452],
+        "inputs": "Right 0x080 and B 0x001 pressed and released in every run",
+        "observation": "In c2old-P3, B was recorded as three press/release pairs within about 0.4 s (held 20, 290 and 50 ms). This may be a light press or contact bounce on the second controller's B button; the Host logs the reports as received. Not investigated."
+      }
+    }
+  ],
+  "common_sequence_in_all_12_starts": [
+    {"log_ms": 1391, "event": "RECOVERY note=initial_attach; root port powered at uptime 1155 ms"},
+    {"log_ms": 1701, "event": "device object present"},
+    {"log_ms": 1771, "event": "DEVICE address=1 VID:PID=1209:d004"},
+    {"log_ms": 1871, "event": "keyboard start: ESP_OK"},
+    {"log_ms": 1881, "event": "released report, mask 0x000"}
+  ],
+  "unplug_observation": "When the user unplugged the second controller (keyboard open) to change cables after c2cc-P3, the same single line 'E USB HOST: EP command error: ESP_ERR_INVALID_STATE' appeared as in the first-controller R2 unplug, followed by HID disconnect close ESP_OK, mask 0x000 reason=disconnect and USB library flags=0x2.",
+  "all_starts": {
+    "warning_lines": 0,
+    "error_lines_during_starts": 0,
+    "panic": false,
+    "reboots_during_capture": 0,
+    "recovery_actions": 0
+  },
+  "interpretation": "The delayed first enumeration also enumerated the second controller on every attached start, with both cables and both start types (12/12), at the same timings as the first controller. Together with the first controller (C-to-C: 10/10 plus 3/3 physical RESET), the effect is not specific to one unit or cable among those tried. Sample sizes remain small, and the minimum sufficient delay is unknown.",
+  "final_state": {
+    "fnk0099": "rcv1-pp-d1000 prototype app (not the main-branch build)",
+    "controller": "second SFC attached via the older cable assembly, enumerated",
+    "uart_monitor_active": false,
+    "main_branch_source_modified": false
+  },
+  "privacy": "Selected diagnostic fields only. Raw UART, UART port, MAC, absolute local paths and device serials remain outside Git."
+}

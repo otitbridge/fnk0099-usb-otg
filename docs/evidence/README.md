@@ -51,6 +51,7 @@ USB認識・全4IFの記述子取得と受信開始、入力解釈のホスト�
 | [sfc-root-port-recovery-prototype-2026-11-18.json](sfc-root-port-recovery-prototype-2026-11-18.json) | 試作 `rcv1-pp`（ルートポート電源の入れ直し）。機器の解放は毎回成功するが、UARTリセット起動は0/5で回復せず。SFCなし・Host先行接続・抜き差しは正常 |
 | [sfc-first-enumeration-timing-2026-11-18.json](sfc-first-enumeration-timing-2026-11-18.json) | 最初の列挙の時刻を比較。電源断起動は現行2/8・試作8/8、給電を1秒遅らせた `rcv1-pp-d1000` は電源断5/5・UARTリセット5/5 |
 | [sfc-delayed-enumeration-regression-2026-11-18.json](sfc-delayed-enumeration-regression-2026-11-18.json) | 遅延版 `rcv1-pp-d1000` の回帰確認。12ボタン、左35.5秒・右33.4秒の保持、同時押しと一部解放、押したまま抜いたときの全解放と再接続、物理RESET 3/3、SFCなしで起動後のHost先行接続に合格 |
+| [sfc-delayed-enumeration-controller2-cables-2026-11-18.json](sfc-delayed-enumeration-controller2-cables-2026-11-18.json) | 遅延版を2台目で確認。C to Cと旧ケーブル構成のどちらでも、UARTリセット起動・電源断起動が各3/3（計12/12）。右・Bを受信 |
 
 ## MSC：カードリーダー・microSD（2026-11-17）
 

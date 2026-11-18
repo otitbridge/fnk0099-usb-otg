@@ -63,7 +63,7 @@ HIDドライバー1.1.0のBolt再接続1回目で、抜去前後60msに転送失
 
 遅延版では、1台目が回帰項目（段階1〜3）に合格しました。内容は、12ボタン、30秒以上の保持、同時押しと一部解放、押したまま抜いたときの全解放と再接続、物理RESET×3、SFCなしで起動してから挿す、です（[記録](evidence/sfc-delayed-enumeration-regression-2026-11-18.json)）。抜いた瞬間に `USB HOST: EP command error: ESP_ERR_INVALID_STATE` が1件出ましたが、動作には影響していません。
 
-確認できているのは1台目とC to Cケーブルだけで、試行回数も少数です。以前は旧ケーブル構成でHost先行接続が失敗した例もあります。
+2台目（公開v1.0.0）でも、遅延版はC to Cと旧ケーブル構成のどちらでも、UARTリセット起動と電源断起動が各3/3で認識しました（計12/12、[記録](evidence/sfc-delayed-enumeration-controller2-cables-2026-11-18.json)）。11-17には、2台目も旧ケーブル構成も、遅延なしでは失敗していました。試行回数は少数で、1台目＋旧ケーブルの組み合わせは試していません。
 
 `tools/capture_uart.py` でUARTを開くと、FNK0099がENリセットされます（DTR→RTSの設定順による）。状態を保ったまま観測する方法は、[引き継ぎ資料](sfc-troubleshooting.md)を参照してください。
 
